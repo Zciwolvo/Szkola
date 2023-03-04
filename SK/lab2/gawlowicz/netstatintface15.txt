@@ -1,0 +1,439 @@
+Interface Statistics
+
+                           Received            Sent
+
+Bytes                     246860064        91550868
+Unicast packets              272496          183888
+Non-unicast packets          195648            2430
+Discards                          0               0
+Errors                            0               0
+Unknown protocols                 0
+
+    Interface Index        = 1
+    Description            = Software Loopback Interface 1
+    Type                   = 24
+    Mtu                    = 1500
+    Speed                  = 1073741824
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 2
+    Description            = Microsoft 6to4 Adapter
+    Type                   = 131
+    Mtu                    = 0
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 2
+    Operational Status     = 6
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 3
+    Description            = Microsoft Kernel Debug Network Adapter
+    Type                   = 6
+    Mtu                    = 0
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 2
+    Operational Status     = 6
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 4
+    Description            = WAN Miniport (PPPOE)
+    Type                   = 23
+    Mtu                    = 1494
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 5
+    Description            = Microsoft IP-HTTPS Platform Adapter
+    Type                   = 131
+    Mtu                    = 0
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 2
+    Operational Status     = 6
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 6
+    Description            = Intel(R) Wireless-N 7260
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 48000000
+    Physical Address       = A0-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 7
+    Description            = WAN Miniport (PPTP)
+    Type                   = 131
+    Mtu                    = 1464
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 8
+    Description            = WAN Miniport (IP)
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 9
+    Description            = Microsoft Teredo Tunneling Adapter
+    Type                   = 131
+    Mtu                    = 0
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 2
+    Operational Status     = 6
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 10
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A0-A8-CD-08-8E-01
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 11
+    Description            = WAN Miniport (IPv6)
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 12
+    Description            = WAN Miniport (SSTP)
+    Type                   = 131
+    Mtu                    = 4091
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 13
+    Description            = Realtek(R) PCI(e) Ethernet Controller
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = F8-A9-63-52-54-64
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 14
+    Description            = WAN Miniport (IKEv2)
+    Type                   = 131
+    Mtu                    = 1480
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 15
+    Description            = WAN Miniport (Network Monitor)
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 16
+    Description            = WAN Miniport (L2TP)
+    Type                   = 131
+    Mtu                    = 1460
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 17
+    Description            = Realtek(R) PCI(e) Ethernet Controller-WFP Native MAC Layer LightWeight Filter-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = F8-A9-63-52-54-64
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 18
+    Description            = Realtek(R) PCI(e) Ethernet Controller-QoS Packet Scheduler-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = F8-A9-63-52-54-64
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 19
+    Description            = Realtek(R) PCI(e) Ethernet Controller-WFP 802.3 MAC Layer LightWeight Filter-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = F8-A9-63-52-54-64
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 20
+    Description            = Intel(R) Wireless-N 7260-WFP Native MAC Layer LightWeight Filter-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 48000000
+    Physical Address       = A0-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 21
+    Description            = Intel(R) Wireless-N 7260-Virtual WiFi Filter Driver-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 48000000
+    Physical Address       = A0-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 22
+    Description            = Intel(R) Wireless-N 7260-Native WiFi Filter Driver-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 48000000
+    Physical Address       = A0-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 23
+    Description            = Intel(R) Wireless-N 7260-QoS Packet Scheduler-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 48000000
+    Physical Address       = A0-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 24
+    Description            = Intel(R) Wireless-N 7260-WFP 802.3 MAC Layer LightWeight Filter-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 48000000
+    Physical Address       = A0-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 25
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter-WFP Native MAC Layer LightWeight Filter-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A0-A8-CD-08-8E-01
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 26
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter-Native WiFi Filter Driver-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A0-A8-CD-08-8E-01
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 27
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter-QoS Packet Scheduler-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A0-A8-CD-08-8E-01
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 28
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter-WFP 802.3 MAC Layer LightWeight Filter-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A0-A8-CD-08-8E-01
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 29
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter #2
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A2-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 30
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter #2-WFP Native MAC Layer LightWeight Filter-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A2-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 31
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter #2-Native WiFi Filter Driver-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A2-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 32
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter #2-QoS Packet Scheduler-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A2-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 33
+    Description            = Microsoft Wi-Fi Direct Virtual Adapter #2-WFP 802.3 MAC Layer LightWeight Filter-0000
+    Type                   = 71
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = A2-A8-CD-08-8E-00
+    Administrative Status  = 1
+    Operational Status     = 2
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 34
+    Description            = WAN Miniport (IP)-WFP Native MAC Layer LightWeight Filter-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 35
+    Description            = WAN Miniport (IP)-QoS Packet Scheduler-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 36
+    Description            = WAN Miniport (IPv6)-WFP Native MAC Layer LightWeight Filter-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 37
+    Description            = WAN Miniport (IPv6)-QoS Packet Scheduler-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 38
+    Description            = WAN Miniport (Network Monitor)-WFP Native MAC Layer LightWeight Filter-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0
+
+    Interface Index        = 39
+    Description            = WAN Miniport (Network Monitor)-QoS Packet Scheduler-0000
+    Type                   = 6
+    Mtu                    = 1500
+    Speed                  = 0
+    Physical Address       = 00-00-00-00-00-00
+    Administrative Status  = 1
+    Operational Status     = 1
+    Last Changed           = 0
+    Output Queue Length    = 0

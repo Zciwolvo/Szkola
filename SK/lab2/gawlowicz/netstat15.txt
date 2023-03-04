@@ -1,0 +1,29 @@
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    0.0.0.0:135            DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:445            DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:5040           DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:7680           DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49664          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49665          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49666          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49667          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49668          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49669          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    10.10.61.140:139       DESKTOP-6GVNM2J:0      LISTENING
+  TCP    10.10.61.140:52706     52.114.74.211:https    ESTABLISHED
+  TCP    10.10.61.140:52885     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52886     52.108.186.5:https     TIME_WAIT
+  TCP    10.10.61.140:52887     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52888     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52889     20.50.80.209:https     TIME_WAIT
+  TCP    10.10.61.140:52890     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52893     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52894     n29-03-09-vip.lb.opera.technology:https  TIME_WAIT
+  TCP    10.10.61.140:52896     52.108.186.5:https     TIME_WAIT
+  TCP    10.10.61.140:52898     13.107.6.156:https     TIME_WAIT
+  TCP    10.10.61.140:52900     waw02s22-in-f10.1e100.net:https  TIME_WAIT
+  TCP    10.10.61.140:52902     20.50.80.209:https     TIME_WAIT
+  TCP    10.10.61.140:52905     40.79.150.120:https    TIME_WAIT

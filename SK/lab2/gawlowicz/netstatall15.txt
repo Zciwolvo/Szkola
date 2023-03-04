@@ -1,0 +1,15 @@
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    0.0.0.0:135            DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:445            DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:5040           DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:7680           DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49664          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49665          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49666          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49667          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49668          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    0.0.0.0:49669          DESKTOP-6GVNM2J:0      LISTENING
+  TCP    10.10.61.140:139       DESKTOP-6GVNM2J:0      LISTENING

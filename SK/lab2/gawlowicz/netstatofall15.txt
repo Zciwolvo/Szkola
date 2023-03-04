@@ -1,0 +1,60 @@
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    0.0.0.0:135            DESKTOP-6GVNM2J:0      LISTENING
+  RpcSs
+ [svchost.exe]
+  TCP    0.0.0.0:445            DESKTOP-6GVNM2J:0      LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:5040           DESKTOP-6GVNM2J:0      LISTENING
+  CDPSvc
+ [svchost.exe]
+  TCP    0.0.0.0:49664          DESKTOP-6GVNM2J:0      LISTENING
+ [lsass.exe]
+  TCP    0.0.0.0:49665          DESKTOP-6GVNM2J:0      LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:49666          DESKTOP-6GVNM2J:0      LISTENING
+  EventLog
+ [svchost.exe]
+  TCP    0.0.0.0:49667          DESKTOP-6GVNM2J:0      LISTENING
+  Schedule
+ [svchost.exe]
+  TCP    0.0.0.0:49668          DESKTOP-6GVNM2J:0      LISTENING
+ [spoolsv.exe]
+  TCP    0.0.0.0:49669          DESKTOP-6GVNM2J:0      LISTENING
+ Can not obtain ownership information
+  TCP    10.10.61.140:139       DESKTOP-6GVNM2J:0      LISTENING
+ Can not obtain ownership information
+  TCP    10.10.61.140:52301     20.50.73.11:https      TIME_WAIT
+  TCP    10.10.61.140:52302     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52303     52.108.79.35:https     TIME_WAIT
+  TCP    10.10.61.140:52304     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52305     20.50.73.11:https      TIME_WAIT
+  TCP    10.10.61.140:52306     vip03:https            TIME_WAIT
+  TCP    10.10.61.140:52307     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52308     52.114.104.167:https   TIME_WAIT
+  TCP    10.10.61.140:52309     52.114.74.211:https    TIME_WAIT
+  TCP    10.10.61.140:52310     52.114.74.211:https    ESTABLISHED
+ [opera.exe]
+  TCP    10.10.61.140:52311     52.113.194.132:https   TIME_WAIT
+  TCP    10.10.61.140:52312     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52313     52.108.79.35:https     TIME_WAIT
+  TCP    10.10.61.140:52314     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52316     52.108.79.35:https     TIME_WAIT
+  TCP    10.10.61.140:52317     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52318     20.50.73.11:https      TIME_WAIT
+  TCP    10.10.61.140:52319     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52320     52.108.79.35:https     TIME_WAIT
+  TCP    10.10.61.140:52321     20.50.73.11:https      TIME_WAIT
+  TCP    10.10.61.140:52322     13.107.6.156:https     TIME_WAIT
+  TCP    10.10.61.140:52324     52.114.104.167:https   TIME_WAIT
+  TCP    10.10.61.140:52327     20.189.173.11:https    TIME_WAIT
+  TCP    10.10.61.140:52328     52.182.143.211:https   TIME_WAIT
+  TCP    10.10.61.140:52329     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52330     52.108.79.35:https     TIME_WAIT
+  TCP    10.10.61.140:52331     20.50.73.9:https       TIME_WAIT
+  TCP    10.10.61.140:52332     52.108.79.35:https     TIME_WAIT
+  TCP    10.10.61.140:52333     20.50.73.11:https      TIME_WAIT
+  TCP    10.10.61.140:52334     13.107.6.171:https     TIME_WAIT
+  TCP    10.10.61.140:52336     20.50.80.210:https     TIME_WAIT

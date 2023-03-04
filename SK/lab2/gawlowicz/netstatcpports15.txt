@@ -1,0 +1,27 @@
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State           Offload State
+
+  TCP    0.0.0.0:135            DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:445            DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:5040           DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:49664          DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:49665          DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:49666          DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:49667          DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:49668          DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    0.0.0.0:49669          DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    10.10.61.140:139       DESKTOP-6GVNM2J:0      LISTENING       InHost      
+  TCP    10.10.61.140:52310     52.114.74.211:https    ESTABLISHED     InHost      
+  TCP    10.10.61.140:52614     13.107.6.171:https     TIME_WAIT       InHost      
+  TCP    10.10.61.140:52615     52.108.79.33:https     TIME_WAIT       InHost      
+  TCP    10.10.61.140:52616     13.107.6.171:https     TIME_WAIT       InHost      
+  TCP    10.10.61.140:52617     20.50.80.209:https     TIME_WAIT       InHost      
+  TCP    10.10.61.140:52618     52.108.79.33:https     TIME_WAIT       InHost      
+  TCP    10.10.61.140:52619     20.50.201.200:https    TIME_WAIT       InHost      
+  TCP    10.10.61.140:52620     13.107.6.171:https     TIME_WAIT       InHost      
+  TCP    10.10.61.140:52621     20.50.201.200:https    TIME_WAIT       InHost      
+  TCP    10.10.61.140:52622     13.107.6.171:https     TIME_WAIT       InHost      
+  TCP    10.10.61.140:52623     20.50.201.200:https    TIME_WAIT       InHost      
+  TCP    10.10.61.140:52624     13.107.6.171:https     TIME_WAIT       InHost      

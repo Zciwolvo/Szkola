@@ -1,0 +1,116 @@
+
+IPv4 Statistics
+
+  Packets Received                   = 504726
+  Received Header Errors             = 0
+  Received Address Errors            = 5
+  Datagrams Forwarded                = 0
+  Unknown Protocols Received         = 0
+  Received Packets Discarded         = 41358
+  Received Packets Delivered         = 501195
+  Output Requests                    = 354387
+  Routing Discards                   = 0
+  Discarded Output Packets           = 5
+  Output Packet No Route             = 86
+  Reassembly Required                = 0
+  Reassembly Successful              = 0
+  Reassembly Failures                = 0
+  Datagrams Successfully Fragmented  = 0
+  Datagrams Failing Fragmentation    = 0
+  Fragments Created                  = 0
+
+IPv6 Statistics
+
+  Packets Received                   = 60000
+  Received Header Errors             = 0
+  Received Address Errors            = 0
+  Datagrams Forwarded                = 0
+  Unknown Protocols Received         = 350
+  Received Packets Discarded         = 3775
+  Received Packets Delivered         = 58504
+  Output Requests                    = 681
+  Routing Discards                   = 0
+  Discarded Output Packets           = 0
+  Output Packet No Route             = 0
+  Reassembly Required                = 0
+  Reassembly Successful              = 0
+  Reassembly Failures                = 0
+  Datagrams Successfully Fragmented  = 0
+  Datagrams Failing Fragmentation    = 0
+  Fragments Created                  = 0
+
+ICMPv4 Statistics
+
+                            Received    Sent
+  Messages                  25          271       
+  Errors                    0           0         
+  Destination Unreachable   11          259       
+  Time Exceeded             0           0         
+  Parameter Problems        0           0         
+  Source Quenches           0           0         
+  Redirects                 0           0         
+  Echo Replies              12          0         
+  Echos                     2           12        
+  Timestamps                0           0         
+  Timestamp Replies         0           0         
+  Address Masks             0           0         
+  Address Mask Replies      0           0         
+  Router Solicitations      0           0         
+  Router Advertisements     0           0         
+
+ICMPv6 Statistics
+
+                            Received    Sent
+  Messages                  3350        65        
+  Errors                    0           0         
+  Destination Unreachable   0           1         
+  Packet Too Big            0           0         
+  Time Exceeded             0           0         
+  Parameter Problems        0           0         
+  Echos                     0           0         
+  Echo Replies              0           0         
+  MLD Queries               0           0         
+  MLD Reports               736         0         
+  MLD Dones                 350         0         
+  Router Solicitations      0           15        
+  Router Advertisements     0           0         
+  Neighbor Solicitations    34          10        
+  Neighbor Advertisements   2230        39        
+  Redirects                 0           0         
+  Router Renumberings       0           0         
+
+TCP Statistics for IPv4
+
+  Active Opens                        = 4233
+  Passive Opens                       = 12
+  Failed Connection Attempts          = 86
+  Reset Connections                   = 158
+  Current Connections                 = 16
+  Segments Received                   = 380482
+  Segments Sent                       = 333232
+  Segments Retransmitted              = 1163
+
+TCP Statistics for IPv6
+
+  Active Opens                        = 17
+  Passive Opens                       = 3
+  Failed Connection Attempts          = 14
+  Reset Connections                   = 6
+  Current Connections                 = 0
+  Segments Received                   = 764
+  Segments Sent                       = 736
+  Segments Retransmitted              = 28
+
+UDP Statistics for IPv4
+
+  Datagrams Received    = 246064
+  No Ports              = 5517
+  Receive Errors        = 0
+  Datagrams Sent        = 18817
+
+UDP Statistics for IPv6
+
+  Datagrams Received    = 160582
+  No Ports              = 1455
+  Receive Errors        = 0
+  Datagrams Sent        = 388
