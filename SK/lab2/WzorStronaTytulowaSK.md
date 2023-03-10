@@ -38,7 +38,7 @@ row {
     justify-content: center; 
 }
  </style>
-<h1 >LABORATORIUM SIECI KOMPUTEROWYCH</h1>
+<h1>LABORATORIUM SIECI KOMPUTEROWYCH</h1>
 
 &nbsp;
 

@@ -1,0 +1,13 @@
+
+Windows IP Configuration
+
+    sdc.student.ath.edu.pl
+    ----------------------------------------
+    Record Name . . . . . : sdc.student.ath.edu.pl
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1529
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 10.10.10.17
+
+
