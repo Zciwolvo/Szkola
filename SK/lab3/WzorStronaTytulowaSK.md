@@ -130,37 +130,40 @@ row {
    <div style="text-align:center"><b>(ipconfig /allcompartments /all).</b></div>
 
    - Wypełnij poniższą tabelę otrzymanymi danymi.
-     <div style="text-align: right;">Tabela 1. Informacje o sieci dla sekcji</div>
+      <div style="text-align: right;">Tabela 1. Informacje o sieci dla sekcji</div>
 
      | Nazwa komputera | Podstawowy sufiks DNS | Typ węzła | Routing IP jest włączony | WINS Proxy jest włączony |
      | --------------- | --------------------- | --------- | ------------------------ | ------------------------ |
-     | DESKTOP-6GVNM2J | Potrzeba kabla        | Hybrid    | No                       | No                       |
+     | DESKTOP-6GVNM2J | None                  | Hybrid    | No                       | No                       |
+     | D               | None                  | Hybrid    | No                       | No                       |
 
      &nbsp;
 
-     <div style="text-align: right;">Tabela 2. Adapter Ethernet. Połączenie z siecią lokalną</div>
+      <div style="text-align: right;">Tabela 2. Adapter Ethernet. Połączenie z siecią lokalną</div>
 
-     <center>
+      <center>
 
-     | a   | a   | Sufiks połączenia DNS           |
-     | --- | --- | ------------------------------- |
-     | b   | b   | Opis                            |
-     | c   | c   | Adres fizyczny                  |
-     | d   | d   | DHCP jest włączony              |
-     | e   | e   | Autoconfiguration jest włączony |
-     | f   | f   | Adres IPv6 kanału               |
-     | g   | g   | Adres IPv4                      |
-     | h   | h   | Maska podsieci                  |
-     | i   | i   | Brama domyślna                  |
-     | j   | j   | DHCP server                     |
-     | K   | K   | IAID DHCPv6                     |
-     | l   | l   | Serwery DNS                     |
-     | m   | m   | NetBIOS over TCP/IP             |
-     | n   | n   | Ethernet Adapter                |
-     | o   | o   | Opis                            |
-     | p   | p   | Adres fizyczny                  |
+     |                                         |                                 |
+     | --------------------------------------- | ------------------------------- |
+     | None                                    | Sufiks połączenia DNS           |
+     | Intel(R) Ethernet Connection (7) I219-V | Opis                            |
+     | 00-D8-61-D6-2B-93                       | Adres fizyczny                  |
+     | Yes                                     | DHCP jest włączony              |
+     | Yes                                     | Autoconfiguration jest włączony |
+     | fe80::7050:a7f8:82fe:6e5e%13(Preferred) | Adres IPv6 kanału               |
+     | 192.168.88.19(Preferred)                | Adres IPv4                      |
+     | 255.255.255.0                           | Maska podsieci                  |
+     | 192.168.88.1                            | Brama domyślna                  |
+     | 192.168.88.1                            | DHCP server                     |
+     | 100718689                               | IAID DHCPv6                     |
+     | 192.168.88.1                            | Serwery DNS                     |
+     | Enabled                                 | NetBIOS over TCP/IP             |
+     |                                         | Ethernet Adapter                |
+     |                                         | Opis                            |
+     |                                         | Adres fizyczny                  |
 
-     </center>
+      </center>
+     <img src="zad1.png">
 
 &nbsp;
 
@@ -173,6 +176,9 @@ row {
 | No  | Adres serwera DNS (Przed wyczyszczeniem pamięci podręcznej DNS) | Adres serwera DNS (Powyczyszczeniem pamięci podręcznej DNS) |
 | --- | --------------------------------------------------------------- | ----------------------------------------------------------- |
 | 1.  | sdc.student.ath.edu.pl                                          | NULL                                                        |
+| 2.  | cache2-waw1.steamcontent.com                                    | NULL                                                        |
+| 3.  | ext2-fra1.steamserver.net                                       | NULL                                                        |
+| 4.  | ext1-fra2.steamserver.net                                       | NULL                                                        |
 
 Po wyczyszczeniu pamięci podręcznej DNS komenda nie zwraca żadnych wyników.
 
@@ -181,7 +187,7 @@ Po wyczyszczeniu pamięci podręcznej DNS komenda nie zwraca żadnych wyników.
 
 &nbsp;
 
-3. Sprawdź, czy protokół TCP/IP jest prawidłowo skonfigurowany w systemie operacyjnym komputera lokalnego. W tym celu wpisz w wierszu poleceń adres loopback.
+1. Sprawdź, czy protokół TCP/IP jest prawidłowo skonfigurowany w systemie operacyjnym komputera lokalnego. W tym celu wpisz w wierszu poleceń adres loopback.
 <div style="text-align:center"><b>(ping 127.0.0.1)</b></div>
 <div align="center">
 <img src="zad32.png">
@@ -202,4 +208,4 @@ Po wyczyszczeniu pamięci podręcznej DNS komenda nie zwraca żadnych wyników.
 3.5.
 | Publiczny adres IP | Domena |
 | --- | --- |
-| 1 | 2 |
+| 146.75.122.114 | ask.com |

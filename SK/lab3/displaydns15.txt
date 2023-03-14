@@ -1,13 +1,83 @@
 
 Windows IP Configuration
 
-    sdc.student.ath.edu.pl
+    cache2-waw1.steamcontent.com
     ----------------------------------------
-    Record Name . . . . . : sdc.student.ath.edu.pl
+    Record Name . . . . . : cache2-waw1.steamcontent.com
     Record Type . . . . . : 1
-    Time To Live  . . . . : 1529
+    Time To Live  . . . . : 1496
     Data Length . . . . . : 4
     Section . . . . . . . : Answer
-    A (Host) Record . . . : 10.10.10.17
+    A (Host) Record . . . : 155.133.230.19
+
+
+    ext2-fra1.steamserver.net
+    ----------------------------------------
+    Record Name . . . . . : ext2-fra1.steamserver.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1478
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 162.254.197.54
+
+
+    ext1-waw1.steamserver.net
+    ----------------------------------------
+    Record Name . . . . . : ext1-waw1.steamserver.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1143
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 155.133.230.34
+
+
+    cache2-rix-retn.steamcontent.com
+    ----------------------------------------
+    Record Name . . . . . : cache2-rix-retn.steamcontent.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 2277
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 139.45.206.19
+
+
+    cache1-waw1.steamcontent.com
+    ----------------------------------------
+    Record Name . . . . . : cache1-waw1.steamcontent.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1939
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 155.133.230.3
+
+
+    ext1-fra2.steamserver.net
+    ----------------------------------------
+    Record Name . . . . . : ext1-fra2.steamserver.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1848
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 155.133.226.75
+
+
+    ext2-sto2.steamserver.net
+    ----------------------------------------
+    Record Name . . . . . : ext2-sto2.steamserver.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1478
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 155.133.252.54
+
+
+    cache6-waw1.steamcontent.com
+    ----------------------------------------
+    Record Name . . . . . : cache6-waw1.steamcontent.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1444
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 155.133.230.21
 
 
