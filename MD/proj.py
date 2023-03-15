@@ -2,6 +2,8 @@ from random import randint
 
 from vertex import Vertex
 
+#TODO: Graphical desktop interface using Tkinter or web interface using Django, PyScript or niceGUI
+
 def generate_matrix(n: int, p: float) -> list[int]:
     """Generates [n]x[n] matrix with [p] chance of its elements being 1 and (1-[p]) chance of it being 0
 

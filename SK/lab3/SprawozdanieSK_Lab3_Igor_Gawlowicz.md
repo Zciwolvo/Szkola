@@ -52,7 +52,7 @@ row {
     <Ltext>Data wykonania ćwiczenia:</Ltext>
     <div align="center">
         <rectangle>
-            <Rtext>03.09.2023</Rtext>
+            <Rtext>09.03.2023</Rtext>
         </rectangle>
     </div>
 </centerer>
@@ -100,7 +100,7 @@ row {
 <row>
     <b>Ćwiczenie nr.</b>
     <rectangle>
-        <Rtext>2B</Rtext>
+        <Rtext>3</Rtext>
     </rectangle>
 </row>
 
@@ -187,7 +187,7 @@ Po wyczyszczeniu pamięci podręcznej DNS komenda nie zwraca żadnych wyników.
 
 &nbsp;
 
-1. Sprawdź, czy protokół TCP/IP jest prawidłowo skonfigurowany w systemie operacyjnym komputera lokalnego. W tym celu wpisz w wierszu poleceń adres loopback.
+3. Sprawdź, czy protokół TCP/IP jest prawidłowo skonfigurowany w systemie operacyjnym komputera lokalnego. W tym celu wpisz w wierszu poleceń adres loopback.
 <div style="text-align:center"><b>(ping 127.0.0.1)</b></div>
 <div align="center">
 <img src="zad32.png">
@@ -209,3 +209,6 @@ Po wyczyszczeniu pamięci podręcznej DNS komenda nie zwraca żadnych wyników.
 | Publiczny adres IP | Domena |
 | --- | --- |
 | 146.75.122.114 | ask.com |
+
+4. **Wnioski** \
+   **ipconfig** jest niezwykle przydatnym wbudowanym w konsole narzędziem umożliwiającym nam zdobycie informacji na temat każdej sieci połączonej do komputera.
