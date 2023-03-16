@@ -12,3 +12,23 @@ class Vertex:
             if (matrix[self.index][i]) == 1:
                 self.neighbours.append(i)
         self.degrees = len(self.neighbours)
+
+    def data_to_html(self):
+        return f"""
+            <div class="circle">{self.index}</div>
+
+            <style>
+            .circle {{
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              background-color: blue;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 32px;
+              color: white;
+              margin: 20px;
+            }}
+            </style>
+        """

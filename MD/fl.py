@@ -10,15 +10,15 @@ def generate_matrix(n: int, p: float) -> list[int]:
         list[int]: Matrix describing graph
     """
     A = []
-    p = p*100
-    for i in range(n):
+    p = int(p)*100
+    for i in range(int(n)):
         row = []
-        for j in range(n):
+        for j in range(int(n)):
             if i == j:
                 row.append(0)
             else:
                 r = randint(0,100)
-                if r <= p:
+                if r <= int(p):
                     row.append(1)
                 else:
                     row.append(0)
@@ -28,7 +28,7 @@ def generate_matrix(n: int, p: float) -> list[int]:
 def create_vertices(matrix: list[int]) -> list[Vertex]:
     """Creates list of vertices and based on given argument [matrix] assigns it's neighbours indexes"""
     Vertices: list[Vertex] = []
-    for v in range(n):
+    for v in range(len(matrix)):
         Vertices.append(Vertex(v))
         Vertices[v].get_neighbours(matrix)
     return Vertices
@@ -46,17 +46,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    n = int(request.args.get('n', 1))
-    A = generate_matrix(n, 0.6)
-    Vertices = create_vertices(A)
     circle_html = """
     <form method="POST" action="/process-form">
-        <label for="n">Enter something:</label>
+        <label for="n">Enter n:</label>
         <input type="text" name="n" id="n">
-        <input type="submit" value="Submit">
-    </form>
-    <form method="POST" action="/process-form">
-        <label for="p">Enter something:</label>
+        <label for="p">Enter p:</label>
         <input type="text" name="p" id="p">
         <input type="submit" value="Submit">
     </form>
@@ -67,15 +61,14 @@ def home():
 def process_form():
     n = request.form['n']
     p = request.form['p']
+    A = generate_matrix(n, p)
+    Vertices = create_vertices(A)
     # do something with input_value
     circle_html = """
     <form method="POST" action="/process-form">
-        <label for="n">Enter something:</label>
+        <label for="n">Enter n:</label>
         <input type="text" name="n" id="n">
-        <input type="submit" value="Submit">
-    </form>
-    <form method="POST" action="/process-form">
-        <label for="p">Enter something:</label>
+        <label for="p">Enter p:</label>
         <input type="text" name="p" id="p">
         <input type="submit" value="Submit">
     </form>
@@ -86,8 +79,8 @@ def process_form():
 
             <style>
             .circle {{
-              width: 100px;
-              height: 100px;
+              width: 50px;
+              height: 50px;
               border-radius: 50%;
               background-color: blue;
               display: flex;
@@ -99,22 +92,9 @@ def process_form():
             }}
             </style>
         """
-    return 'Input value: ' + input_value
+    return circle_html
 
 if __name__ == "__main__":
-    n = int(input("Matrix size: "))
-    p = float(input("Chance: "))
-    A = generate_matrix(n, p)
-    Vertices = create_vertices(A)
-    save_as_txt(A)
-    for i in A:
-        print(i)
-    for i in range(n):
-        print("Vertex:", i)
-        print(Vertices[i].neighbours)
-        print(Vertices[i].degrees)
-        print("=====================")
-    
-    app.run()
+   app.run()
 
 
