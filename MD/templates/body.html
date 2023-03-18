@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Circle</title>
+    <style>
+      /* Center the circle */
+
+      .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+      }
+      /* Style the elements */
+
+      .element {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        background-color: #ccc;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="circle">
+      {% for i in range(n) %}
+      <div
+        class="element"
+        style="transform: rotate({{ 360/n * i }}deg) translate(150px) rotate({{ 360/n * -i }}deg);"
+      >
+        {{ i+1 }}
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
