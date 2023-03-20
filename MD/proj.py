@@ -34,14 +34,18 @@ def create_vertices(matrix: list[int]) -> list[Vertex]:
         Vertices[v].get_neighbours(matrix)
     return Vertices
 
-def save_as_txt(matrix: list[int]) -> None:
+def save_as_txt(matrix: list[int], deg: dict) -> None:
     """Generates txt filled based on given matrix"""
-    with open("./output.txt", "w") as f:
+    with open("./Szkola/MD/output.txt", "w") as f:
         f.write("") #Clears file
-    with open("./output.txt", "a") as f:
+    with open("./Szkola/MD/output.txt", "a") as f:
         for a in matrix:
             f.writelines(str(a))
             f.write("\n")
+        f.write(str(deg))
+        f.write("\n")
+        f.write(str(sorted(deg.items(), reverse=True, key=lambda x: x[1])))
+    
 
 
 if __name__ == "__main__":
@@ -49,7 +53,12 @@ if __name__ == "__main__":
     p = float(input("Chance: "))
     A = generate_matrix(n, p)
     Vertices = create_vertices(A)
-    save_as_txt(A)
+    deg = {}
+    for v in Vertices:
+        deg[("index: " + str(v.index))] = v.degrees
+    print("Edges:", deg)
+    print("Edges sorted:", sorted(deg.items(), reverse=True, key=lambda x: x[1]))
+    save_as_txt(A, deg)
     for i in A:
         print(i)
     for i in range(n):
@@ -57,4 +66,3 @@ if __name__ == "__main__":
         print(Vertices[i].neighbours)
         print(Vertices[i].degrees)
         print("=====================")
-
