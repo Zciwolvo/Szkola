@@ -17,12 +17,14 @@ def generate_matrix(n: int, p: float) -> list[int]:
         for j in range(n):
             if i == j:
                 row.append(0)
-            else:
+            elif j > i:
                 r = randint(0,100)
                 if r <= p:
                     row.append(1)
                 else:
                     row.append(0)
+            else:
+                row.append(A[j][i])
         A.append(row)
     return A
 
