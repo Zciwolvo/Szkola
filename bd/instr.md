@@ -2,11 +2,11 @@
 
 1. Cel \
    Celem systemu jest \
-    **Celem systemu jest przechowywanie i zarządzanie danymi pomiarowymi dotyczącymi różnych parametrów meteorologicznych, zapewniając łatwy dostęp i analizę danych.** \
+    **przechowywanie i zarządzanie danymi pomiarowymi dotyczącymi różnych parametrów meteorologicznych, zapewniając łatwy dostęp i analizę danych.** \
    tak aby \
-   **System pozwoli na łatwe i efektywne zarządzanie, przechowywanie oraz udostępnianie danych meteorologicznych, umożliwiając ich dokładną analizę i wykorzystanie do podejmowania decyzji.** \
+   **łatwo i efektywnie zarządzać, przechowywać oraz udostępniać dane meteorologiczne, umożliwiając ich dokładną analizę i wykorzystanie do podejmowania decyzji.** \
    po to by \
-   **Celem systemu jest umożliwienie naukowcom, badaczom i decydentom dostępu do dokładnych i kompletnych danych meteorologicznych, co umożliwi podejmowanie lepszych decyzji dotyczących zarządzania i ochrony środowiska, zapobiegania skutkom klęsk żywiołowych oraz projektowania zrównoważonych działań gospodarczych.**
+   **umożliwić naukowcom, badaczom i decydentom dostępu do dokładnych i kompletnych danych meteorologicznych, co umożliwi podejmowanie lepszych decyzji dotyczących zarządzania i ochrony środowiska, zapobiegania skutkom klęsk żywiołowych oraz projektowania zrównoważonych działań gospodarczych.**
 
 2. Wymagania
 
