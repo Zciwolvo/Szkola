@@ -1,8 +1,8 @@
+from flask import Flask, render_template
 from random import randint
-import math
-from flask import Flask, request, render_template
-
 from vertex import Vertex
+
+app = Flask(__name__)
 
 def generate_matrix(n: int, p: float) -> list[int]:
     """Generates [n]x[n] matrix with [p] chance of its elements being 1 and (1-[p]) chance of it being 0
@@ -11,76 +11,40 @@ def generate_matrix(n: int, p: float) -> list[int]:
         list[int]: Matrix describing graph
     """
     A = []
-    p = float(p)*100
-    for i in range(int(n)):
+    p = p*100
+    for i in range(n):
         row = []
-        for j in range(int(n)):
+        for j in range(n):
             if i == j:
                 row.append(0)
-            else:
+            elif j > i:
                 r = randint(0,100)
-                if r <= int(p):
+                if r <= p:
                     row.append(1)
                 else:
                     row.append(0)
+            else:
+                row.append(A[j][i])
         A.append(row)
     return A
 
 def create_vertices(matrix: list[int]) -> list[Vertex]:
     """Creates list of vertices and based on given argument [matrix] assigns it's neighbours indexes"""
     Vertices: list[Vertex] = []
-    for v in range(len(matrix)):
+    for v in range(n):
         Vertices.append(Vertex(v))
         Vertices[v].get_neighbours(matrix)
     return Vertices
 
-def save_as_txt(matrix: list[int]) -> None:
-    """Generates txt filled based on given matrix"""
-    with open("./output.txt", "w") as f:
-        f.write("") #Clears file
-    with open("./output.txt", "a") as f:
-        for a in matrix:
-            f.writelines(str(a))
-            f.write("\n")
-
-app = Flask(__name__)
-
 @app.route('/')
-def home():
-    input_settings = """
-    <form method="POST" action="/process-settings">
-        <label for="n">Enter number of edges 'n':</label>
-        <input type="text" name="n" id="n">
-        <label for="p">Enter probability 'p':</label>
-        <input type="text" name="p" id="p">
-        <input type="submit" value="Submit">
-    </form>
-"""
-    return input_settings
-
-@app.route('/process-settings', methods=['POST'])
-def process_form():
-    n = int(request.form['n'])
-    p = float(request.form['p'])
+def index():
     A = generate_matrix(n, p)
     Vertices = create_vertices(A)
-    angles = [360/n*i for i in range(n)]
-    coordinates = [(50 + 40*math.cos(math.radians(angle)), 50 + 40*math.sin(math.radians(angle))) for angle in angles]
-    
-    # do something with input_value
-    circle_html = """
-    <form method="POST" action="/process-settings">
-        <label for="n">Enter number of edges 'n':</label>
-        <input type="text" name="n" id="n">
-        <label for="p">Enter probability 'p':</label>
-        <input type="text" name="p" id="p">
-        <input type="submit" value="Submit">
-    </form>
-"""
-    circle_html += render_template('body.html', n=n, coordinates=coordinates)
-    return circle_html
+    vertices = [{'id': v.index} for v in Vertices]
+    edges = [{'source': v.index, 'target': n} for v in Vertices for n in v.neighbours]
+    return render_template('index.html', vertices=vertices, edges=edges)
 
-if __name__ == "__main__":
-   app.run()
-
-
+if __name__ == '__main__':
+    n = 10
+    p = 0.5
+    app.run(debug=True)

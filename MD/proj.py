@@ -72,7 +72,6 @@ if __name__ == "__main__":
     A = generate_matrix(n, p)
     Vertices = create_vertices(A)
     print(generate_path(Vertices, s))
-    print(generate_paths(Vertices))
     deg = {}
     for v in Vertices:
         deg[("index: " + str(v.index))] = v.degrees
