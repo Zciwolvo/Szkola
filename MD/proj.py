@@ -28,17 +28,17 @@ def generate_matrix(n: int, p: float) -> list[int]:
         A.append(row)
     return A
 
-def generate_path(vertices: list[Vertex], start: int):
+def generate_path(vertices: list[Vertex], start: int) -> list[int]:
+    """Generates a path of vertices starting from the given vertex"""
     path = []
-    vertices[start].flag = 1
-    while (any(x.flag == 0 for x in vertices)):
-        subpath = []
-        for i in vertices[start].neighbours:
-            if vertices[i].flag == 0:
-                subpath.append(i)
-                vertices[i].flag = 1
-        start = subpath[0]
-        path.append(subpath)
+    visited = set()  # keep track of visited vertices
+    stack = [start]  # initialize stack with starting vertex
+    while stack:
+        v = stack.pop()
+        if v not in visited:
+            visited.add(v)
+            path.append(v)
+            stack.extend(vertices[v].neighbours)
     return path
 
 
@@ -60,25 +60,27 @@ def save_as_txt(matrix: list[int], deg: dict) -> None:
             f.write("\n")
         f.write(str(deg))
         f.write("\n")
-        f.write(str(sorted(deg.items(), reverse=True, key=lambda x: x[1])))
-    
-
+        f.write(str(sorted(deg.items(), reverse=True, key=lambda x: x[1])))    
 
 if __name__ == "__main__":
-    n = int(input("Matrix size: "))
-    p = float(input("Chance: "))
-    s = int(input("Choose initial point: "))
+    #n = int(input("Matrix size: "))
+    #p = float(input("Chance: "))
+    #s = int(input("Choose initial point: "))
+    n = 55
+    p = 0.6
+    s = 0
     A = generate_matrix(n, p)
     Vertices = create_vertices(A)
     print(generate_path(Vertices, s))
+    print(generate_paths(Vertices))
     deg = {}
     for v in Vertices:
         deg[("index: " + str(v.index))] = v.degrees
-    print("Vertices:", deg)
-    print("Vertices sorted:", sorted(deg.items(), reverse=True, key=lambda x: x[1]))
+    #print("Vertices:", deg)
+    #print("Vertices sorted:", sorted(deg.items(), reverse=True, key=lambda x: x[1]))
     save_as_txt(A, deg)
-    for i in A:
-        print(i)
+    #for i in A:
+    #    print(i)
     for i in range(n):
         print("Vertex:", i)
         print(Vertices[i].neighbours)

@@ -6,7 +6,6 @@ class Vertex:
         self.neighbours = []
         self.degrees = 0
         self.flag = 0
-
     
     def get_neighbours(self, matrix: list[int]) -> None:
         for i in range(len(matrix)):
