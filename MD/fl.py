@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from random import randint
-from vertex import Vertex
+from flVertex import Vertex
 
 app = Flask(__name__)
 
@@ -30,21 +30,20 @@ def generate_matrix(n: int, p: float) -> list[int]:
 
 def create_vertices(matrix: list[int]) -> list[Vertex]:
     """Creates list of vertices and based on given argument [matrix] assigns it's neighbours indexes"""
-    Vertices: list[Vertex] = []
-    for v in range(n):
-        Vertices.append(Vertex(v))
-        Vertices[v].get_neighbours(matrix)
-    return Vertices
+    vertices: list[Vertex] = []
+    for v in range(len(matrix)):
+        vertices.append(Vertex(v))
+        vertices[v].get_neighbours(matrix)
+    return vertices
 
 @app.route('/')
 def index():
+    n = 10
+    p = 0.5
     A = generate_matrix(n, p)
-    Vertices = create_vertices(A)
-    vertices = [{'id': v.index} for v in Vertices]
-    edges = [{'source': v.index, 'target': n} for v in Vertices for n in v.neighbours]
+    vertices = [{'id': i} for i in range(n)]
+    edges = [{'source': i, 'target': j} for i in range(n) for j in range(i+1, n) if A[i][j] == 1]
     return render_template('index.html', vertices=vertices, edges=edges)
 
 if __name__ == '__main__':
-    n = 10
-    p = 0.5
     app.run(debug=True)
