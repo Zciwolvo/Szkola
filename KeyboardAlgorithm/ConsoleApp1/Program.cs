@@ -12,7 +12,7 @@ namespace msi2
     {
         static Random random = new Random();
         static char[] chars = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        static int size = 100, charactersLength = chars.Length;
+        static int size = 100, numberKeys = chars.Length;
         static Dictionary<char, double> letterFrequency = CreateDict();
         static double[][] KeyDistances;
 
@@ -54,8 +54,8 @@ namespace msi2
         "zxcvbnm,./"
             };
 
-            int[] keyCoordsX = new int[charactersLength];
-            int[] keyCoordsY = new int[charactersLength];
+            int[] keyCoordsX = new int[numberKeys];
+            int[] keyCoordsY = new int[numberKeys];
 
             for (int i = 0; i < QWERTY.Length; i++)
             {
@@ -63,7 +63,7 @@ namespace msi2
                 {
                     int index = QWERTY[i][j] - 'a';
 
-                    if (index >= 0 && index < charactersLength)
+                    if (index >= 0 && index < numberKeys)
                     {
                         keyCoordsX[index] = j;
                         keyCoordsY[index] = i;
@@ -71,13 +71,13 @@ namespace msi2
                 }
             }
 
-            double[][] distances = new double[charactersLength][];
+            double[][] distances = new double[numberKeys][];
 
-            for (int i = 0; i < charactersLength; i++)
+            for (int i = 0; i < numberKeys; i++)
             {
-                distances[i] = new double[charactersLength];
+                distances[i] = new double[numberKeys];
 
-                for (int j = 0; j < charactersLength; j++)
+                for (int j = 0; j < numberKeys; j++)
                 {
                     distances[i][j] = Math.Sqrt(Math.Pow(keyCoordsX[i] - keyCoordsX[j], 2) + Math.Pow(keyCoordsY[i] - keyCoordsY[j], 2));
                 }
@@ -92,7 +92,7 @@ namespace msi2
 
             for (int i = 0; i < size; i++)
             {
-                population[i] = Enumerable.Range(0, charactersLength).OrderBy(x => random.Next()).ToArray();
+                population[i] = Enumerable.Range(0, numberKeys).OrderBy(x => random.Next()).ToArray();
             }
 
             return population;
@@ -106,10 +106,10 @@ namespace msi2
             {
                 double totalEffort = 0;
                 int[] pop = population[s];
-                for (int i = 0; i < charactersLength; i++)
+                for (int i = 0; i < numberKeys; i++)
                 {
                     
-                    for (int j = 0; j < charactersLength; j++)
+                    for (int j = 0; j < numberKeys; j++)
                     {
                         totalEffort += letterFrequency[chars[i]] * letterFrequency[chars[j]] * KeyDistances[pop[i]][pop[j]];
                     }
@@ -137,10 +137,10 @@ namespace msi2
 
         static int[] Crossover(int[] parent1, int[] parent2)
         {
-            int point1 = random.Next(1, charactersLength - 2);
-            int point2 = random.Next(point1, charactersLength - 1);
+            int point1 = random.Next(1, numberKeys - 2);
+            int point2 = random.Next(point1, numberKeys - 1);
 
-            int[] child = new int[charactersLength];
+            int[] child = new int[numberKeys];
 
             for (int i = point1; i < point2; i++)
             {
@@ -148,7 +148,7 @@ namespace msi2
             }
 
             int index = 0;
-            for (int i = 0; i < charactersLength; i++)
+            for (int i = 0; i < numberKeys; i++)
             {
                 if (!child.Contains(parent2[i]))
                 {
@@ -162,7 +162,7 @@ namespace msi2
             }
 
             return child;
-        }
+        }//Gawłowicz Igor
 
 
         public static Dictionary<char, double> CreateDict()

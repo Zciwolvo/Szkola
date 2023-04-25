@@ -30,12 +30,13 @@ def generate_matrix(n: int, p: float) -> list[int]:
     return A
 
 
-def generate_path(vertices: list[Vertex], start: int) -> list[int]:
+def generate_main_path(vertices: list[Vertex], start: int) -> list[int]:
     """Generates a path of vertices starting from the given vertex"""
+    path = [start]
     current = start
     vertices[current].flag = 1
     path = [start]
-    while any(flag == 0 for flag in vertices[current].neighbours):
+    while any(vertices[vertex].flag == 0 for vertex in vertices[current].neighbours):
         for neighbour in vertices[current].neighbours:
             if vertices[neighbour].flag == 0:
                 disable_neighbours(current)
@@ -44,9 +45,40 @@ def generate_path(vertices: list[Vertex], start: int) -> list[int]:
     return path
 
 
-def disable_neighbours(vertex) -> None:
+def generate_paths(main_path) -> list[list[int]]:
+    print(main_path)
+    paths: list[list[int]] = [main_path]
+    for i in range(1, len(main_path) + 1):
+        enable_path(paths)
+        path: list[int] = []
+        if any(
+            Vertices[vertex].flag == 0 for vertex in Vertices[main_path[-i]].neighbours
+        ):
+            print(paths)
+            for v in Vertices[main_path[-i]].neighbours:
+                if Vertices[v].flag == 0 and main_path[-i] != main_path[0]:
+                    if Vertices[main_path[-i - 1]].index not in Vertices[v].neighbours:
+                        temp_path = generate_main_path(Vertices, v)
+                        print(temp_path)
+                        path = main_path[0 : len(main_path) - i + 1]
+                        for e in temp_path:
+                            path.append(e)
+                    paths.append(path)
+                elif main_path[-i] != main_path[0]:
+                    path = generate_main_path(Vertices, main_path[0])
+    return paths
+
+
+def disable_neighbours(vertex: int) -> None:
     for neighbour in Vertices[vertex].neighbours:
         Vertices[neighbour].flag = 1
+
+
+def enable_path(exception: list[list[int]]):
+    flat_list = [item for sublist in exception for item in sublist]
+    for vertex in Vertices:
+        if vertex.index not in flat_list:
+            vertex.flag = 0
 
 
 def create_vertices(matrix: list[int]) -> list[Vertex]:
@@ -80,15 +112,17 @@ if __name__ == "__main__":
     s = 1
     A = generate_matrix(n, p)
     A = [
-        [1, 1, 1, 0, 1, 0],
-        [1, 1, 1, 0, 0, 0],
-        [1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 1, 1, 0],
-        [1, 0, 0, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1],
+        [0, 1, 1, 0, 1, 0],
+        [1, 0, 1, 0, 0, 0],
+        [1, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0],
+        [1, 0, 0, 1, 0, 1],
+        [0, 0, 0, 0, 1, 0],
     ]
     Vertices = create_vertices(A)
-    print(generate_path(Vertices, s))
+    main_path = generate_main_path(Vertices, s)
+    paths = generate_paths(main_path)
+    print(paths)
     deg = {}
     for v in Vertices:
         deg[("index: " + str(v.index))] = v.degrees
