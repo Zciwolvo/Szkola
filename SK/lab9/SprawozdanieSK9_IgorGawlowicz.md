@@ -52,7 +52,7 @@ row {
     <Ltext>Data wykonania ćwiczenia:</Ltext>
     <div align="center">
         <rectangle>
-            <Rtext></Rtext>
+            <Rtext>27.04.2023</Rtext>
         </rectangle>
     </div>
 </centerer>
@@ -100,7 +100,7 @@ row {
 <row>
     <b>Ćwiczenie nr.</b>
     <rectangle>
-        <Rtext>2B</Rtext>
+        <Rtext>9</Rtext>
     </rectangle>
 </row>
 
@@ -108,7 +108,7 @@ row {
 
 &nbsp;
 
-<b>Temat: </b> {Temat}
+<b>Temat: </b> Badanie modeli TCP/IP i OSI w działaniu
 
 &nbsp;
 
