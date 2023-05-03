@@ -125,3 +125,15 @@ row {
 <h2 >Katedra Informatyki i Automatyki</h1>
 
 <div style="page-break-after: always;"></div>
+
+1. Zbadaj ruch internetowy HTTP. \
+   Pierwszym krokiem jest przełączenie do trybu symulacji, w którym czas zostanie zatrzymany a następne polecenia będą wysyłane w momencie w którym będziemy tego chcieli. \
+   Dokładniej polecenia będą wysyłane wtedy kiedy naciśniemy przycisk następnego wydarzenia w panelu symulacji. W aktualnym zadaniu będą nas interesować tylko wydarzenia HTTP dlatego też właśnie je ustawimy w filtrach. \
+   Aktualnie nasz panel wydarzeń jest pusty tak więc pobudzimy go wysyłając zapytanie do przeglądarki. Po wpisaniu adresu strony w przeglądarkę zobaczymy, że będziemy mogli przeklikać 4 wydarzenia. W zależności od tego na który z tych 4 wydarzeń spojrzymy zobaczymy warstwy informacji przychodzących lub wychodzących. Możemy zauważyć tutaj informacje takie jak nazwa protokołu, port źródła i celu, a także adres ip źródła i celu. Dodatkowo z zakładce PDU możemy zobaczyć wiele więcej różnych informacji.
+
+2. Wyświetlenie elementów zestawu protokołów TCP/IP \
+   Tym razem klikając na przycisk **Show All/None** możemy zobaczyć odpowiedzi serwera/klienta dotyczące także innych protokołów takich jak właśnie TCP/IP lub DNS \
+   Po zbadaniu pierwszego sygnału typu DNS możemy zauważyć, że w 7 warstwie zawsze wyświetlany jest typ sygnału. W szczegółach PDU możemy też zauważyć, że w panelu DNS jest obecna rzeczywista nazwa strony jaką wpisaliśmy w przeglądarkę pokazuje to nam sposób działania protokołu DNS.
+
+3. Wnioski \
+   Symulowanie zdarzeń sieciowych w programie Cisco Packet Tracer może być niesamowicie przydatne przy nauce i eksperymentowaniu, a w porównaniu do programu WireShark program zapewnia nam o wiele więcej informacji zapisanych w czytelniejszy sposób.

@@ -4,15 +4,15 @@ class Vertex:
         self.neighbours = []
         self.degrees = 0
         self.flag = 0
+        self.final = False
 
     def get_neighbours(self, matrix: list[int]) -> None:
         for i in range(len(matrix)):
             if (matrix[self.index][i]) or (matrix[i][self.index]):
                 self.neighbours.append(i)
         self.degrees = len(self.neighbours)
-
-    def reset_path(self) -> None:
-        self.flag = 0
+        if self.degrees == 1:
+            self.final = True
 
     def data_to_html(self):
         return f"""

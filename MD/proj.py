@@ -1,4 +1,5 @@
 from random import randint
+from collections import deque
 
 from vertex import Vertex
 
@@ -30,55 +31,51 @@ def generate_matrix(n: int, p: float) -> list[int]:
     return A
 
 
-def generate_main_path(vertices: list[Vertex], start: int) -> list[int]:
-    """Generates a path of vertices starting from the given vertex"""
-    path = [start]
-    current = start
-    vertices[current].flag = 1
-    path = [start]
-    while any(vertices[vertex].flag == 0 for vertex in vertices[current].neighbours):
-        for neighbour in vertices[current].neighbours:
-            if vertices[neighbour].flag == 0:
-                disable_neighbours(current)
-                current = neighbour
-                path.append(current)
-    return path
 
+def generate_path(vertices: list[Vertex], source: int, destination: int, path=[]) -> list[int]:
+    queue = deque([[source]])
+    visited = set([source])
 
-def generate_paths(main_path) -> list[list[int]]:
-    print(main_path)
-    paths: list[list[int]] = [main_path]
-    for i in range(1, len(main_path) + 1):
-        enable_path(paths)
-        path: list[int] = []
-        if any(
-            Vertices[vertex].flag == 0 for vertex in Vertices[main_path[-i]].neighbours
-        ):
-            print(paths)
-            for v in Vertices[main_path[-i]].neighbours:
-                if Vertices[v].flag == 0 and main_path[-i] != main_path[0]:
-                    if Vertices[main_path[-i - 1]].index not in Vertices[v].neighbours:
-                        temp_path = generate_main_path(Vertices, v)
-                        print(temp_path)
-                        path = main_path[0 : len(main_path) - i + 1]
-                        for e in temp_path:
-                            path.append(e)
-                    paths.append(path)
-                elif main_path[-i] != main_path[0]:
-                    path = generate_main_path(Vertices, main_path[0])
+    while queue:
+        path = queue.popleft()
+        node = path[-1]
+        if node == destination:
+            return path
+
+        for neighbor in vertices[node].neighbours:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                new_path = list(path)
+                new_path.append(neighbor)
+                queue.append(new_path)
+
+    return None
+
+def generate_paths(vertices: list[Vertex], source):
+    paths = []
+    for vertex in vertices:
+        if vertex.final == True:
+            paths.append(generate_path(vertices, source, vertex.index))
     return paths
 
+def generate_neighbours(vertices: list[Vertex]):
+    neighbours = {}
+    for i in range(len(vertices)):
+        neighbours[i] = vertices[i].neighbours
+    return neighbours
 
-def disable_neighbours(vertex: int) -> None:
-    for neighbour in Vertices[vertex].neighbours:
-        Vertices[neighbour].flag = 1
+def generate_tree(vertices: list[Vertex], source: int):
+    neighbours = generate_neighbours(vertices)
+    tree = {0: [source]}
+    curr = source
+    i = 1
+    for v in vertices[curr].neighbours:
+        tree[i] += neighbours[curr]
 
+    return tree
+    
+     
 
-def enable_path(exception: list[list[int]]):
-    flat_list = [item for sublist in exception for item in sublist]
-    for vertex in Vertices:
-        if vertex.index not in flat_list:
-            vertex.flag = 0
 
 
 def create_vertices(matrix: list[int]) -> list[Vertex]:
@@ -108,8 +105,8 @@ if __name__ == "__main__":
     # p = float(input("Chance: "))
     # s = int(input("Choose initial point: "))
     n = 6
-    p = 0.6
-    s = 1
+    p = 0.4
+    s = 0
     A = generate_matrix(n, p)
     A = [
         [0, 1, 1, 0, 1, 0],
@@ -120,19 +117,25 @@ if __name__ == "__main__":
         [0, 0, 0, 0, 1, 0],
     ]
     Vertices = create_vertices(A)
-    main_path = generate_main_path(Vertices, s)
-    paths = generate_paths(main_path)
+
+    paths = generate_paths(Vertices, s)
     print(paths)
-    deg = {}
-    for v in Vertices:
-        deg[("index: " + str(v.index))] = v.degrees
+
+    neigh = generate_neighbours(Vertices)
+    print(neigh)
+
+
+
+    #deg = {}
+    #for v in Vertices:
+    #    deg[("index: " + str(v.index))] = v.degrees
     # print("Vertices:", deg)
     # print("Vertices sorted:", sorted(deg.items(), reverse=True, key=lambda x: x[1]))
-    save_as_txt(A, deg)
+    #save_as_txt(A, deg)
     # for i in A:
     #    print(i)
-    for i in range(n):
-        print("Vertex:", i)
-        print(Vertices[i].neighbours)
-        print(Vertices[i].degrees)
-        print("=====================")
+    #for i in range(n):
+    #    print("Vertex:", i)
+    #   print(Vertices[i].neighbours)
+    #    print(Vertices[i].degrees)
+    #    print("=====================")
