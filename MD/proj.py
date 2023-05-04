@@ -67,15 +67,26 @@ def generate_neighbours(vertices: list[Vertex]):
 def generate_tree(vertices: list[Vertex], source: int):
     neighbours = generate_neighbours(vertices)
     tree = {0: [source]}
-    curr = source
+    used = []
     i = 1
-    for v in vertices[curr].neighbours:
-        tree[i] += neighbours[curr]
-
+    print(used)
     return tree
     
      
-
+def dfs(vertices: list[Vertex], start):
+    visited = set()
+    layers = []
+    stack = [(start, 0)]
+    while stack:
+        vertex, depth = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            if depth >= len(layers):
+                layers.append([])
+            layers[depth].append(vertex)
+            for neighbor in vertices[vertex].neighbours:
+                stack.append((neighbor, depth + 1))
+    return layers
 
 
 def create_vertices(matrix: list[int]) -> list[Vertex]:
@@ -121,8 +132,9 @@ if __name__ == "__main__":
     paths = generate_paths(Vertices, s)
     print(paths)
 
-    neigh = generate_neighbours(Vertices)
-    print(neigh)
+    tree = dfs(Vertices, s)
+    print(tree)
+
 
 
 
@@ -134,8 +146,8 @@ if __name__ == "__main__":
     #save_as_txt(A, deg)
     # for i in A:
     #    print(i)
-    #for i in range(n):
-    #    print("Vertex:", i)
-    #   print(Vertices[i].neighbours)
-    #    print(Vertices[i].degrees)
-    #    print("=====================")
+    for i in range(n):
+        print("Vertex:", i)
+        print(Vertices[i].neighbours)
+        print(Vertices[i].degrees)
+        print("=====================")
