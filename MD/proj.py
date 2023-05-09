@@ -73,21 +73,48 @@ def generate_tree(vertices: list[Vertex], source: int):
     return tree
     
      
-def dfs(vertices: list[Vertex], start):
+def dfs(graph, start):
     visited = set()
-    layers = []
-    stack = [(start, 0)]
-    while stack:
-        vertex, depth = stack.pop()
-        if vertex not in visited:
-            visited.add(vertex)
-            if depth >= len(layers):
-                layers.append([])
-            layers[depth].append(vertex)
-            for neighbor in vertices[vertex].neighbours:
-                stack.append((neighbor, depth + 1))
+    layers = [[start]]
+    while layers[-1]:
+        curr_layer = []
+        for node in layers[-1]:
+            if node not in visited:
+                visited.add(node)
+                curr_layer.extend([i for i, x in enumerate(graph[node]) if x])
+        new_nodes = [node for node in curr_layer if node not in visited]
+        if new_nodes:
+            layers.append(new_nodes)
+            visited.update(new_nodes)
+        elif len(visited) < len(graph):
+            unvisited_nodes = set(range(len(graph))) - visited
+            layers.append(list(unvisited_nodes))
+            visited.update(unvisited_nodes)
+        else:
+            break
     return layers
 
+def dfs_layers(matrix, start):
+    visited = set()
+    layers = [[start]]
+    next_layer = []
+    while layers[-1]:
+        for node in layers[-1]:
+            if node not in visited:
+                visited.add(node)
+                for neighbor, connected in enumerate(matrix[node]):
+                    if connected and neighbor not in visited:
+                        next_layer.append(neighbor)
+        layers.append(next_layer)
+        next_layer = []
+    layers.pop()  # remove empty layer at the end
+    connections = [[] for _ in range(len(layers))]
+    for i, layer in enumerate(layers[:-1]):
+        for node in layer:
+            for neighbor, connected in enumerate(matrix[node]):
+                if connected and neighbor in layers[i+1]:
+                    connections[i].append(layers[i+1].index(neighbor))
+    return layers, connections
 
 def create_vertices(matrix: list[int]) -> list[Vertex]:
     """Creates list of vertices and based on given argument [matrix] assigns it's neighbours indexes"""
@@ -132,9 +159,10 @@ if __name__ == "__main__":
     paths = generate_paths(Vertices, s)
     print(paths)
 
-    tree = dfs(Vertices, s)
-    print(tree)
 
+    layers, connections = dfs_layers(A, s)
+    print(layers)
+    print(connections)
 
 
 
@@ -146,8 +174,8 @@ if __name__ == "__main__":
     #save_as_txt(A, deg)
     # for i in A:
     #    print(i)
-    for i in range(n):
-        print("Vertex:", i)
-        print(Vertices[i].neighbours)
-        print(Vertices[i].degrees)
-        print("=====================")
+    #for i in range(n):
+    #    print("Vertex:", i)
+    #    print(Vertices[i].neighbours)
+    #    print(Vertices[i].degrees)
+    #    print("=====================")
