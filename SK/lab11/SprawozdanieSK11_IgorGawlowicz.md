@@ -126,79 +126,89 @@ row {
 
 <div style="page-break-after: always;"></div>
 
-1. Określenie właściwości fizycznych urządzeń pracujących w intersieci \
-   Po wciśnięciu na router o nazwie **East** możemy zobaczyć jego fizyczną formę, z której jesteśmy w stanie wyczytać wszystkie dostępne porty na tylnym panelu urządzenia takie jak: \
-   Ethernet, Serial czy Vlan \
-   Następnie z konsoli CLI możemy otrzymać dokładne dane: \
+## Określenie właściwości fizycznych urządzeń pracujących w intersieci
 
-   ```
-       East>show ip interface brief
-       Interface              IP-Address      OK? Method Status                Protocol
-       GigabitEthernet0/0     172.30.1.1      YES NVRAM  up                    down
-       GigabitEthernet0/1     172.31.1.1      YES NVRAM  up                    down
-       Serial0/0/0            10.10.10.1      YES NVRAM  down                  down
-       Serial0/0/1            unassigned      YES NVRAM  down                  down
-       Vlan1                  172.29.1.1      YES NVRAM  up                    down
-   ```
+Po wciśnięciu na router o nazwie **East** możemy zobaczyć jego fizyczną formę, z której jesteśmy w stanie wyczytać wszystkie dostępne porty na tylnym panelu urządzenia takie jak: \
+ Ethernet, Serial czy Vlan \
+ Następnie z konsoli CLI możemy otrzymać dokładne dane:
 
-   Po wprowadzeniu polecenia **show interface gigabitethernet 0/0** _alternatywnie dla każdego z powyższych_ \
-   Dla portu z powyższego polecenia możemy odczytać że domyślna szerokość pasma dla tego portu to 1000000 Kbit. \
-   Dla portu seryjnego domyślna szerokość to 1544 Kbit \
-   Jest jeszcze jedna wyróżniająca się rzecz w naszym routerze, którą są złącza rozszerzeń w tym przypadku mamy je 4.
-   Dla porównania w Switchu 2 mamy 5 portów rozszerzeń. \
+```
+    East>show ip interface brief
+    Interface              IP-Address      OK? Method Status                Protocol
+    GigabitEthernet0/0     172.30.1.1      YES NVRAM  up                    down
+    GigabitEthernet0/1     172.31.1.1      YES NVRAM  up                    down
+    Serial0/0/0            10.10.10.1      YES NVRAM  down                  down
+    Serial0/0/1            unassigned      YES NVRAM  down                  down
+    Vlan1                  172.29.1.1      YES NVRAM  up                    down
+```
 
-2. Wybierz poprawne moduły dla połączeń \
-   W sytuacji w której mamy połączyć 3 komputery do naszego routera bez możliwości użycia switcha możemy
-   wykorzystać nasze wejścia rozszerzeniowe HWIC-4ESW. W ten sposób moglibyśmy podłączyć 4 hostów. \
-   Aby zapewnić gigabitowe połączenie optyczne pomiędzy switchem 2 i 3 możemy wykorzystać moduł PT-SWITCH-NM-1CGE. \
-   Wracając do routera możemy sprawdzić nasz wybór poprzez dodanie naszego modułu do urządzenia przeciągając go.
-   Jednak najpierw powinniśmy wyłączyć router. Po podłączeniu nasz router powinien wyglądać w sposób następująćy.
+Po wprowadzeniu polecenia **show interface gigabitethernet 0/0** _alternatywnie dla każdego z powyższych_ \
+ Dla portu z powyższego polecenia możemy odczytać że domyślna szerokość pasma dla tego portu to 1000000 Kbit. \
+ Dla portu seryjnego domyślna szerokość to 1544 Kbit \
+ Jest jeszcze jedna wyróżniająca się rzecz w naszym routerze, którą są złącza rozszerzeń w tym przypadku mamy je 4.
+Dla porównania w Switchu 2 mamy 5 portów rozszerzeń. \
+
+## Wybierz poprawne moduły dla połączeń
+
+W sytuacji w której mamy połączyć 3 komputery do naszego routera bez możliwości użycia switcha możemy
+wykorzystać nasze wejścia rozszerzeniowe HWIC-4ESW. W ten sposób moglibyśmy podłączyć 4 hostów. \
+ Aby zapewnić gigabitowe połączenie optyczne pomiędzy switchem 2 i 3 możemy wykorzystać moduł PT-SWITCH-NM-1CGE. \
+ Wracając do routera możemy sprawdzić nasz wybór poprzez dodanie naszego modułu do urządzenia przeciągając go.
+Jednak najpierw powinniśmy wyłączyć router. Po podłączeniu nasz router powinien wyglądać w sposób następująćy.
 
    <div align="center">
    <img src="z1.png"/>
    </div>
 
-   Taka sama sytuacja z naszym switchem.
+Taka sama sytuacja z naszym switchem.
 
    <div align="center">
    <img src="z2.png"/>
    </div>
 
-   Możemy teraz zobaczyć że nasz moduł został umieszczony w 5 złączu
+Możemy teraz zobaczyć że nasz moduł został umieszczony w 5 złączu
 
-   ```
-    Switch2>show ip interface brief
-        Interface              IP-Address      OK? Method Status                Protocol
-        FastEthernet0/1        unassigned      YES manual down                  down
-        FastEthernet1/1        unassigned      YES manual down                  down
-        FastEthernet2/1        unassigned      YES manual down                  down
-        GigabitEthernet3/1     unassigned      YES manual down                  down
-        FastEthernet4/1        unassigned      YES manual down                  down
-        GigabitEthernet5/1     unassigned      YES manual down                  down
-        Vlan1                  unassigned      YES manual administratively down down
-   ```
+```
+ Switch2>show ip interface brief
+     Interface              IP-Address      OK? Method Status                Protocol
+     FastEthernet0/1        unassigned      YES manual down                  down
+     FastEthernet1/1        unassigned      YES manual down                  down
+     FastEthernet2/1        unassigned      YES manual down                  down
+     GigabitEthernet3/1     unassigned      YES manual down                  down
+     FastEthernet4/1        unassigned      YES manual down                  down
+     GigabitEthernet5/1     unassigned      YES manual down                  down
+     Vlan1                  unassigned      YES manual administratively down down
+```
 
-3. Łączenie urządzeń \
+## Łączenie urządzeń
+
     Po połączeniu całej sieci urządzeń powiniśmy otrzymać coś takiego:
 
     <div align="center">
+
    <img src="z3.png"/>
    </div>
 
-   ```
-   East>show ip interface brief
-    Interface              IP-Address      OK? Method Status                Protocol
-    GigabitEthernet0/0     172.30.1.1      YES NVRAM  up                    up
-    GigabitEthernet0/1     172.31.1.1      YES NVRAM  up                    up
-    Serial0/0/0            10.10.10.1      YES NVRAM  up                    up
-    Serial0/0/1            unassigned      YES NVRAM  down                  down
-    FastEthernet0/1/0      unassigned      YES unset  up                    up
-    FastEthernet0/1/1      unassigned      YES unset  up                    up
-    FastEthernet0/1/2      unassigned      YES unset  up                    up
-    FastEthernet0/1/3      unassigned      YES unset  up                    down
-    Vlan1                  172.29.1.1      YES NVRAM  up                    up
-   ```
+<div style="page-break-after: always;"></div>
 
-   Następnie przejdziemy do podłączania urządzeń bezprzewodowych, zaczynając od laptopa możemy zauważyć że po
-   uruchomieniu sieci bezprzewodowej, połączenie działa bez zarzutów. Jednakowo postąpimy z tabletem. \
-    Możemy też zmienić ustawienia łączności na 3g/4g obie opcje dają nam dostęp do internetu.
+```
+East>show ip interface brief
+ Interface              IP-Address      OK? Method Status                Protocol
+ GigabitEthernet0/0     172.30.1.1      YES NVRAM  up                    up
+ GigabitEthernet0/1     172.31.1.1      YES NVRAM  up                    up
+ Serial0/0/0            10.10.10.1      YES NVRAM  up                    up
+ Serial0/0/1            unassigned      YES NVRAM  down                  down
+ FastEthernet0/1/0      unassigned      YES unset  up                    up
+ FastEthernet0/1/1      unassigned      YES unset  up                    up
+ FastEthernet0/1/2      unassigned      YES unset  up                    up
+ FastEthernet0/1/3      unassigned      YES unset  up                    down
+ Vlan1                  172.29.1.1      YES NVRAM  up                    up
+```
+
+Następnie przejdziemy do podłączania urządzeń bezprzewodowych, zaczynając od laptopa możemy zauważyć że po
+uruchomieniu sieci bezprzewodowej, połączenie działa bez zarzutów. Jednakowo postąpimy z tabletem. \
+ Możemy też zmienić ustawienia łączności na 3g/4g obie opcje dają nam dostęp do internetu.
+
+## Wnioski
+
+W programie **Cisco Packet Tracer** możemy symulować połączenia nawet dla większych sieci w bardzo realistyczny sposób.
