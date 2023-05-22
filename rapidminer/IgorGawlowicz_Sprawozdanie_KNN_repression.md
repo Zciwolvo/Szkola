@@ -13,8 +13,8 @@
   - [california](#california)
   - [compactiv](#compactiv)
   - [concrete](#concrete)
-  - [delta_ail](#delta_ail)
-  - [delta_elv](#delta_elv)
+  - [delta ail](#delta-ail)
+  - [delta elv](#delta-elv)
   - [elevators](#elevators)
   - [friedman](#friedman)
   - [machineCPU](#machinecpu)
@@ -174,7 +174,7 @@ Dla zestawu danych **Concrete** optymalna liczba sąsiadów k wynosiła 3 a wart
 
 <div style="page-break-after: always;"></div>
 
-## delta_ail
+## delta ail
 
 Dla zestawu danych **Delta_ail** optymalna liczba sąsiadów k wynosiła 19 a wartość RMSE wynosiła 0.00017136252456243889. Zestaw zawierał dane z zakresu: (-0.0019, 0.0014), a ilość wierszy w tym zbiorze to 7129. Bardzo niski błąd RMSE wynika z tego że nasz przedział danych jest niesamowicie niski przez co o wiele ciężej zestawić ze sobą dane w czytelny sposób.
 
@@ -182,7 +182,7 @@ Dla zestawu danych **Delta_ail** optymalna liczba sąsiadów k wynosiła 19 a wa
 
 <div style="page-break-after: always;"></div>
 
-## delta_elv
+## delta elv
 
 Dla zestawu danych **Delta_elv** optymalna liczba sąsiadów k wynosiła 20 a wartość RMSE wynosiła 0.001416365462707129. Zestaw zawierał dane z zakresu: (-0.008, 0.008), a ilość wierszy w tym zbiorze to 9517. Ponownie jest on niemalże identyczny do swojego poprzednika [delta_ail](#delta_ail) jedyna znacząca różnica to że zakres danych jest nieco mniejszy mamy tam tylko zaokrąglenie do częsci tysięcznej w odróżnieniu do części dziesięciotysięcznej swojego poprzednika.
 
