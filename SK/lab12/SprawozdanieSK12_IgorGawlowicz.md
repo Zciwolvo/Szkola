@@ -265,15 +265,30 @@ _Po ustaleniu, która maska podsieci spełnia wszystkie podane wymagania sieciow
 | 192.168.0.0    | /26     | 255.255.255.192 |
 | 192.168.0.64   | /26     | 255.255.255.192 |
 | 192.168.0.128  | /26     | 255.255.255.192 |
-| 192.168.0.292  | /26     | 255.255.255.192 |
+| 192.168.0.192  | /26     | 255.255.255.192 |
 
 ### Krok 2: Wypełnij brakujące adresy IP w tabeli
+
+| Urządzenie      | Interfejs      | Adres IP        | Maska podsieci  | Brama domyślna  |
+| --------------- | -------------- | --------------- | --------------- | --------------- |
+| Customer Router | G0/0           | 192.168.0.1     | 255.255.255.192 | ND              |
+|                 | G0/1           | 192.168.0.65    | 255.255.255.192 | ND              |
+|                 | S0/1/0         | 209.165.201.2   | 255.255.255.252 | ND              |
+| LAN-A Switch    | VLAN1          | 192.168.0.2     | 255.255.255.192 | 192.168.0.1     |
+| LAN-B Switch    | VLAN1          | 192.168.0.66    | 255.255.255.192 | 192.168.0.65    |
+| PC-A            | karta sieciowa | 192.168.0.62    | 255.255.255.192 | 192.168.0.1     |
+| PC-B            | karta sieciowa | 192.168.0.126   | 255.255.255.192 | 192.168.0.65    |
+| ISPRouter       | G0/0           | 209.165.200.225 | 255.255.255.224 | ND              |
+|                 | S0/1/0         | 209.165.201.1   | 255.255.255.252 | ND              |
+| ISPSwitch       | VLAN1          | 209.165.200.226 | 255.255.255.224 | 209.165.200.225 |
+| ISP Workstation | karta sieciowa | 209.165.200.235 | 255.255.255.224 | 209.165.200.255 |
+| ISP Server      | karta sieciowa | 209.165.200.240 | 255.255.255.224 | 209.165.200.255 |
 
 ## Część 2: Skonfiguruj urządzenia
 
 ### Krok 1 Skonfiguruj CustomerRouter.
 
-```bash
+```s
 enable
 configure terminal
 hostname CustomerRouter
@@ -293,7 +308,11 @@ no shutdown
 end
 ```
 
-```bash
+<div style="page-break-after: always;"></div>
+
+### Krok 2: Skonfiguruj dwa przełączniki LAN klienta.
+
+```s
 enable
 configure terminal
 interface Vlan1
@@ -303,7 +322,7 @@ ip default-gateway 192.168.0.1
 end
 ```
 
-```bash
+```s
 enable
 configure terminal
 interface Vlan1
@@ -311,4 +330,66 @@ ip address 192.168.0.66 255.255.255.192
 no shutdown
 ip default-gateway 192.168.0.65
 end
+```
+
+### Krok 3: Skonfiguruj interfejsy komputerów PC.
+
+Ustawiamy adresy według wypełnionej wcześniej tabeli.
+
+## Część 3: Przetestuj działanie sieci
+
+Ping bramy domyślnej PC A:
+
+```s
+C:\>ping 192.168.0.1
+
+Pinging 192.168.0.1 with 32 bytes of data:
+
+Reply from 192.168.0.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.0.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.0.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.0.1: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.0.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+```
+
+<div style="page-break-after: always;"></div>
+
+Ping bramy domyślnej PC B:
+
+```s
+C:\>ping 192.168.0.65
+
+Pinging 192.168.0.65 with 32 bytes of data:
+
+Reply from 192.168.0.65: bytes=32 time<1ms TTL=255
+Reply from 192.168.0.65: bytes=32 time<1ms TTL=255
+Reply from 192.168.0.65: bytes=32 time<3ms TTL=255
+Reply from 192.168.0.65: bytes=32 time<3ms TTL=255
+
+Ping statistics for 192.168.0.65:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 4ms, Average = 1ms
+```
+
+Ping komputera B z komputera A:
+
+```s
+C:\>ping 192.168.0.126
+
+Pinging 192.168.0.126 with 32 bytes of data:
+
+Reply from 192.168.0.126: bytes=32 time<1ms TTL=127
+Reply from 192.168.0.126: bytes=32 time<3ms TTL=127
+Reply from 192.168.0.126: bytes=32 time<48ms TTL=127
+Reply from 192.168.0.126: bytes=32 time<23ms TTL=127
+
+Ping statistics for 192.168.0.126:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 48ms, Average = 18ms
 ```
