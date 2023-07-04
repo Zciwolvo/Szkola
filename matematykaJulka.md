@@ -76,7 +76,7 @@ Wynik końcowy możnaby w teorii jeszcze uprościć ale myślę, że jest to nie
 
 Ponownie musimy wykorzystać operacje poznane na przykładzie z pierwszego stopnia.
 
-$$ e^{-x} \times -x' + (x-1)' \_ e^{-x} + (x-1) \times (e^{-x})' $$
+$$ e^{-x} \times -x' + (x-1)' \times e^{-x} + (x-1) \times (e^{-x})' $$
 
 $$ -e^{-x} + e^{-x} + (x-1) + e^{-x} \times -x' $$
 
