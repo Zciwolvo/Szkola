@@ -30,16 +30,22 @@ $$ 2x^5 - { 4 \over x} + { 1 \over 3x^3}$$
 $$ 10x^4 - { -4 \over x^2} + x^2 $$
 
 $$ 10x^4 $$
+
 Ponieważ wykorzystaliśmy wcześniejszy wzór
 
 Do
+
 $$ { 4 \over x} $$
-Wykorzystaliśmy wzór z listy oraz wiedzę że 
+
+Wykorzystaliśmy wzór z listy oraz wiedzę że
+
 $$ {1 \over x} = x^{-1} $$
 
 No i do
 $$ { 1 \over 3x^3} $$
-Ponownie użyliśmy naszej umiejętności do przekształacania wzorów aby zmienić tą postać na 
+
+Ponownie użyliśmy naszej umiejętności do przekształacania wzorów aby zmienić tą postać na
+
 $$ {x^3 \over 3}' = {1 \over 3} _ {x^3}' = {1 \over 3} _ 3x^2 = x^2 $$
 
 ### Drugi stopień
@@ -95,12 +101,15 @@ $$ (3 - x)sin(x) $$
 Ponownie przykład z ilorazem także rozdzielamy go na sumę dwóch osobnych pochodnych.
 
 $$ (3-x)' \times sin(x) + (3-x) \times sin(x)' $$
+
 $$ -sin(x) + (3-x) \times cos(x) $$
 
 ### Drugi stopień
 
 $$ -cos(x) + (3-x)' \times cos(x) + (3-x) \times cos(x)' $$
+
 $$ -cos(x) + -cos(x) + (3-x) \times -sin(x) $$
+
 $$ -2cos(x) + -(3-x) \times sin(x) $$
 
 ### Czwarty przykład
@@ -116,7 +125,9 @@ $$ ln(u(x))' = {1 \over u(x)} \times u(x)' $$
 A teraz musimy podstawić ten wzór do przykładu:
 
 $$ {1 \over {x^3 + 3}} \times (x^3 +3)' $$
+
 $$ {1 \over {x^3 + 3}} \times 3x^2 $$
+
 $$ {3x^2 \over {x^3 + 3}} $$
 
 ### Drugi stopień
@@ -132,6 +143,7 @@ $$ {3x^2 \over {x^3 + 3}}' = {{{(3x^2)}' \times {(x^3 + 3)} - (3x^2) \times {(x^
 $$ {6x \times (x^3 + 3)-3x^2 \times 3x^2} \over {x^6 + 6x^3 + 9} $$
 
 $$ 6x^4 + 18x - 9x^4 \over {x^6 + 6x^3 + 9} $$
+
 $$ -3x^4 + 18x \over {x^6 + 6x^3 + 9} $$
 
 ### Piąty przykład
@@ -217,6 +229,7 @@ $$ $$
 $$ (x0,y)=(2,0) $$
 
 $$ 0 = 2 + b $$
+
 $$ b = -2 $$
 
 $$ y = x - 2 $$
@@ -232,7 +245,9 @@ Aby dowiedzieć się w jakich przedziałach funkcja rośnie a w jakich maleje mu
 $$ (x -5 \sqrt x)' = 1 - {5 \over 2 \sqrt x} $$
 
 Aby policzyć pochodną z pierwiastka musimy pamiętać że
+
 $$ \sqrt x = x^{1 \over2} $$
+
 $$ (x^{1 \over2})' = x^{-1 \over 2} $$
 
 Funkcja jest rosnąca wtedy gdy g(x)' > 0
@@ -240,13 +255,19 @@ Funkcja jest rosnąca wtedy gdy g(x)' > 0
 $$ 1 - {5 \over 2 \sqrt x} > 0 $$
 
 $$ - {5 \over 2 \sqrt x} = -1 $$
+
 $$ -5 = -2 \sqrt x $$
+
 $$ {5 \over 2} = \sqrt x $$
+
 $$ {25 \over 4} = x $$
 
 Funkcja jest rosnąca dla:
+
 $$ x > {25 \over 4} $$
+
 Funkcja jest malejąca dla:
+
 $$ x < {25 \over 4} $$
 
 ### b)
