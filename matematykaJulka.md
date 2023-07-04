@@ -272,11 +272,15 @@ $$ 12x^2 + 2x - 14 = 0 $$
 $$ b^2 - 4ac = \Delta $$
 
 $$ \Delta = 4 - 784 $$
+
 $$ \Delta < 0 $$
+
 Oznacza brak rozwiązania dlatego musimy szukać dalej, następnie możemy spróbować przekształcić równanie do innej postaci
 
 $$ 12x^2 + 2x - 14 = 2(6x^2 + x -7) = 2(x-1)(6x+7)$$
+
 $$ (x-1) = 0 \ dla \ x = 1 $$
+
 $$ (6x+7) = \ dla \ x = {-7 \over 6} $$
 
 Czyli widzimy już, że punktem przegięcia spośród podanych w zadaniu jest 1
@@ -284,8 +288,11 @@ Czyli widzimy już, że punktem przegięcia spośród podanych w zadaniu jest 1
 Wracając do ekstremum, obliczymy je z pochodnej pierwszego stopnia, przyrównując ją do 0.
 
 $$ 4x^3 + x^2 - 14x = 0 $$
+
 $$ x(4x^2 + x - 14) = 0 $$
+
 $$ x(x+2)(4x-7) = 0 $$
+
 Czyli nasze ekstremum jest w punkcie -2, 7/4 lub 0. 7/4 nie jest w puli potencjalnych rozwiązań więc pozostaje nam -2 lub 0 także pozostaje nam podstawić je do oryginalnej funkcji.
 
 $$ f(-2) = -2^4 + {1 \over 3} \times -2^3 - 7 \times -2^2 = 16 + {-8 \over 3} - 28 = -14 {2 \over 3} $$
