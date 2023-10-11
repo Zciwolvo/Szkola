@@ -143,6 +143,12 @@ row {
 | PC W1-201  | NIC       | 10.1.1.118 | 255.255.255.248 | 10.1.1.113     |
 | PC W2-87   | NIC       | 10.1.1.62  | 255.255.255.192 | 10.1.1.1       |
 
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
 | Opis podsieci | Ilość wymaganych hostów | Adres sieci/CIDR | Pierwszy użyteczny adres hosta | Adres rozgłoszeniowy |
 | ------------- | ----------------------- | ---------------- | ------------------------------ | -------------------- |
 | WS-2 LAN      | 47                      | 10.1.1.0/26      | 10.1.1.1                       | 10.1.1.63            |
@@ -150,6 +156,8 @@ row {
 | ES-1 LAN      | 11                      | 10.1.48.96/28    | 10.1.1.97                      | 10.1.1.111           |
 | WS-1 LAN      | 5                       | 10.1.48.112/29   | 10.1.1.113                     | 10.1.1.119           |
 | WAN Link      | 2                       | 10.1.48.120/30   | 10.1.1.121                     | 10.1.1.123           |
+
+<div style="page-break-after: always;"></div>
 
 ### East Config
 
@@ -246,6 +254,8 @@ ES-2(config-if)#
 %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to up
 ip def 10.1.1.65
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### WS-1 Config
 
