@@ -40,6 +40,10 @@ row {
 }
  </style>
 
+<p align="center">
+  <img src="./ubblogo.png" alt="ubb logo"/>
+</p>
+
 <h3 style="text-align:center"><b>Wydział budowy maszyn i informatyki</b></h3>
 
 &nbsp;
@@ -56,10 +60,8 @@ row {
 
 &nbsp;
 
-&nbsp;
-
 <h2 style="text-align:center; border: none;"><b>Architektura komputerów</b></h2>
-<h3 style="text-align:center; border: none;">(Laboratorium No1)</h3>
+<h3 style="text-align:center; border: none;">(Laboratorium №1)</h3>
 
 **Temat ćwiczenia: Systemy kodowania liczb**
 
@@ -115,6 +117,8 @@ int main() {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 ```cmd
 00000000000000000000000000101010        32 bits 42
 01000000010010001111010111000011        32 bits 3.14000010490417480469
@@ -154,6 +158,8 @@ Dla liczby 60:
 Kod uzupełnieniowy do dwóch (U2): `00000000000000000000000000111100`
 Tożsame z wynikiem w programie.
 Podsumowując, przekształcone wartości do kodu uzupełnieniowego do dwóch (U2) są identyczne z wynikami otrzymanymi w programie dla odpowiednich wartości int. To pokazuje, że program poprawnie wyświetla reprezentacje binarne liczb całkowitych i można zaufać wynikom w programie.
+
+<div style="page-break-after: always;"></div>
 
 2. 3.Napisz program lub funkcję w języku C++ do sumowania dwóch liczb
    zmiennoprzecinkowych i porównania wyniku z oczekiwaną wartością.
@@ -208,6 +214,8 @@ Podaj oczekiwana wartosc sumy: 415.656
 Wynik jest zgodny z oczekiwana wartoscia.
 ```
 
+<div style="page-break-after: always;"></div>
+
 2. 4. Napisz program lub funkcję w języku C++, która zawiera pętlę, która 100 razy
       dodaje wartość 0.1 do zmiennej "suma". Celem zadania jest zrozumienie, dlaczego
       wynik obliczeń może być inny niż oczekiwany ze względu na niedokładność
@@ -245,6 +253,8 @@ Różnica: 1.95399e-14
 ```
 
 Niedokładność reprezentacji liczb zmiennoprzecinkowych w komputerze może prowadzić do narastania błędów w wyniku kolejnych operacji arytmetycznych. Dlatego ważne jest, aby być świadomym ograniczeń reprezentacji liczb zmiennoprzecinkowych i ostrożnym w obliczeniach, zwłaszcza w przypadkach, gdzie dokładność jest krytyczna.
+
+<div style="page-break-after: always;"></div>
 
 2. 5.Korzystając z poniższego programu sprawdź dokładność wykonywanych
    obliczeń, dla których prawidłowy wynik wynosi 137 (spróbuj zmienić kolejność
