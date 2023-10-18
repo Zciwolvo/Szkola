@@ -87,6 +87,8 @@ GRUPA: 2B / SEMESTR: 5 / ROK: 3
 
 Igor Gawłowicz / 59096
 
+Krystian Niedźwiedź / 
+
 <div style="page-break-after: always;"></div>
 
 ### **Proces**
