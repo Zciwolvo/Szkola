@@ -87,7 +87,7 @@ GRUPA: 2B / SEMESTR: 5 / ROK: 3
 
 Igor Gawłowicz / 59096
 
-Krystian Niedźwiedź / 
+Krystian Niedźwiedź / 58824
 
 <div style="page-break-after: always;"></div>
 
