@@ -436,3 +436,7 @@ SWC(config)#interface g0/2
 SWC(config-if)#switchport mode trunk
 SWC(config-if)#switchport trunk native vlan 100
 ```
+
+## Wnioski
+
+W sprawozdaniu przeprowadziliśmy konfigurację sieci VLAN na przełącznikach S2 i S3 oraz przypisaliśmy porty do odpowiednich VLANów. Następnie skonfigurowaliśmy łącza trunk między przełącznikami S1, S2 i S3, zarówno w trybie statycznym, jak i dynamicznym, co umożliwiło skuteczną komunikację między nimi. Wprowadziliśmy także VLAN natywny na wszystkich przełącznikach i wyłączyliśmy negocjację DTP na jednym z łączy trunk. Po skonfigurowaniu wszystkich elementów sieci przetestowaliśmy łączność od końca do końca, co potwierdziło poprawność naszej konfiguracji. W trakcie sprawozdania zapoznaliśmy się z ważnymi aspektami związanymi z zarządzaniem sieciami, w tym tworzeniem i konfiguracją VLANów oraz łączami trunk, co ma istotne znaczenie dla prawidłowego funkcjonowania sieci komputerowych.

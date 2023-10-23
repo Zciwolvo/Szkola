@@ -99,9 +99,6 @@ Każdy proces może utworzyć jedene lub więcej procesów potomnych **(child)**
 
 Każdy system operacyjny oferuje usługi umożliwiające pobranie informacji o aktywności i stanie bieżących procesów. W systemach rodziny **_POSIX_** służą temu m.in. zestaw poleceń konsoli:
 
-`ps top watch time`
-
-
 `ps [option] -o [format]`
 
 np.
@@ -111,15 +108,38 @@ np.
 
 Wyświetli dla grupy _users_ z terminala _3_ informację o jej procesach podająć _PID_ oraz komendę jaka uaktywniła proces.
 
+np. zwykłe `ps` zwróci nam:
+
+```bash
+$ ps
+    PID TTY          TIME CMD
+    575 pts/2    00:00:00 bash
+   3140 pts/2    00:00:00 nano
+   3714 pts/2    00:00:00 ps
+```
+
 ### Listing procesów
 
 Procesy możemy wyświetlić w postaci struktury drzewa, poczynając od procesu _init_ albo _pid_
 
-```
-pstree [options] [pid|user]
+`pstree [options] [pid|user]`
+
+np zwykłe `pstree` bez żadnych argumentów zwróci nam:
+
+```bash
+$ pstree
+pause─┬─dockerd─┬─containerd───8*[{containerd}]
+      │         └─10*[{dockerd}]
+      ├─logger
+      ├─python─┬─editor-proxy───4*[{editor-proxy}]
+      │        └─sudo───tmux-agent───4*[{tmux-agent}]
+      ├─rsyslogd───3*[{rsyslogd}]
+      ├─sshd─┬─sshd───sshd───bash───bash
+      │      └─sshd───sshd───bash───start-shell.sh───tmux
+      └─tmux───bash───pstree
 ```
 
-### Zarządzanie procesami
+<div style="page-break-after: always;"></div>
 
 Ponieważ informacja odnośnie identyfikacji procesów ma kluczowe znaczenie przy zarządzaniu nimi, każde API systemowe daje nam możliwość w jakiś sposób uzyskać takie informacje.
 np w języku c/c++
@@ -129,14 +149,39 @@ np w języku c/c++
 #include <unistd.h>
 int main(void)
 {
-    prinf("Currnet ID\t%d\n", (int)getpid());
-    prinf("Parent ID\t%d\n", (int)getppid());
+    printf("Currnet ID\t%d\n", (int)getpid());
+    printf("Parent ID\t%d\n", (int)getppid());
 
-    return 0
+    return 0;
 }
 ```
 
 Taki program zwróci nam informacje o identyfikatorze obecnego procesu i identyfikatorze procesu macierzystego.
+
+```bash
+$ gcc pid.c -o pid
+$ ./pid
+Current ID      1670
+Parent ID       575
+```
+
+Nieco inne możliwości śledzenia daje nam komenda `top`, która jest szczególnie ważna w przypadku konieczności monitorowania pracy komputera jako węzła cluster'a.
+```bash
+top - 10:03:14 up 18 min,  2 users,  load average: 0.34, 0.48, 0.37
+Tasks:  30 total,   1 running,  29 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.2 us,  0.2 sy,  0.0 ni, 99.6 id,  0.0 wa,  0.0 hi,  0.1 si,  0.0 st
+MiB Mem :  16002.5 total,  14164.4 free,    375.4 used,   1462.8 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.  15335.5 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                                                                                                                             
+    330 root      20   0 1356272  42540  30556 S   0.3   0.3   0:02.26 containerd                                                                                                                                                          
+      1 65535     20   0     972      4      0 S   0.0   0.0   0:00.00 pause                                                                                                                                                               
+      7 root      20   0 1238212  15992   9828 S   0.0   0.1   0:01.17 gateway                                                                                                                                                             
+     18 root      20   0    3896   3040   2748 S   0.0   0.0   0:00.04 bash                                                                                                                                                                
+     25 root      20   0   88652  10496   6172 S   0.0   0.1   0:01.34 python                                                                                                                                                              
+     33 root      20   0  220796   2840   1852 S   0.0   0.0   0:00.99 rsyslogd                                                                                                                                                            
+     34 root      20   0 1678536  13596   7676 S   0.0   0.1   0:00.62 command-recorde      
+```
 
 <div style="page-break-after: always;"></div>
 
@@ -155,8 +200,8 @@ int main(int argc, char **argv)
 
 Powyższy program możemy wykonać podając wraz z poleceniem uruchamiającym argumenty, które ma podać funkcji main.
 
-```cmd
-$> ./child pierwszy drugi trzeci
+```bash
+$ ./child pierwszy drugi trzeci
     0:... ./child
     1:... pierwszy
     2:... drugi
@@ -178,8 +223,8 @@ int main(void)
 }
 ```
 
-```cmd
-$> ./parent
+```bash
+$ ./parent
 - wywołanie (samobójcze) potomka ----------
     0:... pierwszy
     1:... drugi
@@ -207,13 +252,22 @@ int main(void)
         printf("<child> pozdrowienia dla potomka\n");
         break;
         default: //Parent
-        print("<parent> ja jestem PARENT\n");
+        printf("<parent> ja jestem PARENT\n");
         wait(&status);
         printf("<parent> potomek skończył, zwrócił: :%d\n", status);
     }
 
-    return 0
+    return 0;
 }
+```
+
+Taki program zwróci nam następujący komunikat:
+
+```bash
+$ ./fork
+<parent> ja jestem PARENT
+<child> pozdrowienia dla potomka
+<parent> potomek skończył, zwrócił: :0
 ```
 
 ### Wnioski

