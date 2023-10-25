@@ -101,11 +101,6 @@ Niewykorzystane ustawienia przełączników powinny włączyć tryb mrugania św
   <img src="./s2.png" alt="Sublime's custom image"/>
 </p>
 
-Kodowanie faz świateł:
-
-<p align="center">
-  <img src="./c0.png" alt="Sublime's custom image"/>
-</p>
 
 <div style="page-break-after: always;"></div>
 
@@ -129,135 +124,9 @@ oraz 20 wyjść, oznacza to więc że musimy przygotować siatkę zależności z
 
 Na wyżej załączonym obrazie możemy zauważyć, że w tym przypadku jak i w większości przypadków taka siatka jest po prostu zbyt długa i zbyt skomplikowana żeby w taki sposób przedstawiać ją w programie. Rozwiążemy ten problem poprzez zastosowanie siatek Carnough dla każdej zmiennej wyjściowej.
 
-<p align="center">
-  <img src="./c1.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4 * !W1!W2) + (!W3 * !W2 * W1) + (!W4*W3*W2*W1)
-</p>
-<p align="center">
-  <img src="./c2.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (!W4 * W3 * !W2 * !W1) + (!W4 * !W3 * W2 * W1)
-</p>
-<p align="center">
-  <img src="./c3.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (!W4 * W2 * !W1)
-</p>
-<p align="center">
-  <img src="./c4.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*W3*!W2) + (!W4) + (W4*W2)
-</p>
-<p align="center">
-  <img src="./c5.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*!W2)
-</p>
-<p align="center">
-  <img src="./c6.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*!W2*!W1) + (W4*!W3*!W2*W1) + (!W4 * !W3 * W2 * W1)
-</p>
-<p align="center">
-  <img src="./c7.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (!W4*W3*!W2*!W1) + (!W4*!W3*W2*W1)
-</p>
-<p align="center">
-  <img src="./c8.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (!W4*W2*W1)
-</p>
-<p align="center">
-  <img src="./c9.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*W3*!W2) + (!W4) + (W4*W2)
-</p>
-<p align="center">
-  <img src="./c10.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*!W2)
-</p>
-<p align="center">
-  <img src="./c11.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W3* !W2 * !W1) + (!W4*W2*!W1) + (!W4*!W3*W2*W1)
-</p>
-<p align="center">
-  <img src="./c12.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*W3*!W2*!W1) + (!W4*!W3*!W2*W1)
-</p>
-<p align="center">
-  <img src="./c13.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*!W3*!W2)
-</p>
-<p align="center">
-  <img src="./c14.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W2) + (W4*W2) + (!W4*W2*W1)
-</p>
-<p align="center">
-  <img src="./c15.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (!W4*W2*!W1)
-</p>
-<p align="center">
-  <img src="./c16.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4) + (W3*!W2) + (!W4*!W3*!W2*!W1)
-</p>
-<p align="center">
-  <img src="./c17.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*W3*!W2*!W1) + (!W4*!W3*!W2*W1)
-</p>
-<p align="center">
-  <img src="./c18.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*!W3*!W2)
-</p>
-<p align="center">
-  <img src="./c19.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W2) + (W4*W2) + (!W4*W2*W1)
-</p>
-<p align="center">
-  <img src="./c20.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (!W4*W2*!W1)
-</p>
+
 
 Oraz aby rozwiązać problem dla każdej kombinacji wejść innej od podanych faz, rozwiążemy jeszcze jedną siatkę dla wszystkich innych opcji.
-
-<p align="center">
-  <img src="./c21.png" alt="Sublime's custom image"/>
-</p>
-<p align="center">
-  (W4*W3*!W2) + (W4*!W3*W1) + (!W4*W2*W1) + (W3*W2*!W1)
-</p>
 
 Kolejnym krokiem będzie przełożenie naszych wzorów do odpowiedniego programu, który zapisze nam nasze dane wejściowe dla urządzenia do formatu możliwego do odczytania przez program PAC. 
 
