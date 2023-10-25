@@ -1,7 +1,7 @@
 var time = 0
 var alpha = Array.from(Array(26)).map((e, i) => i + 65);
 var alphabet = alpha.map((x) => String.fromCharCode(x));
-var vovels = ["A", "O", "U", "E", "I"]
+var vovels = ["A", "O", "U", "E", "I","Y"]
 var i = 0
 
 //Zadanie 2.1

@@ -8,7 +8,7 @@ document.getElementById('processFilesButton').addEventListener('click', async ()
     }
 
     const text1 = await readFileAsync(fileInput1);
-    const text2 = await readFileAsync(fileInput2);
+    const text2 = readFile(fileInput2);
 
     const processedText = processText(text1);
 
@@ -17,6 +17,11 @@ document.getElementById('processFilesButton').addEventListener('click', async ()
     document.getElementById('result1').textContent = 'Result 1: ' + text1;
     document.getElementById('result2').textContent = 'Result 2: ' + processedText;
 });
+
+function readFile(file) {
+    const fileReader = new FileReader();
+    return fileReader.readAsText(file);
+}
 
 
 async function readFileAsync(file) {
