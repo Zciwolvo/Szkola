@@ -87,6 +87,8 @@ GRUPA: 2B / SEMESTR: 5 / ROK: 3
 
 Igor Gawłowicz / 59096
 
+Krystian Niedźwiedź / 58824
+
 <div style="page-break-after: always;"></div>
 
 Rodzina systemów POSIX zaopatrzona została w mechanizm tworzenie międzyprocesowych łączy komunikacyjnych, zwanych potokami:
@@ -176,23 +178,23 @@ int main( void )
     switch( (int)fork() )
     {
         case -1:
-        perror( "<!> błąd inicjacji potomka" ); exit( 1 ); break;
+            perror( "<!> błąd inicjacji potomka" ); exit( 1 ); break;
         case 0:
-        // Obliczamy całkę, ale już w potomku
-        I = quad( n,a,b,sine );
-        // Dla pewności wyprowadzamy informację o tym co wyliczyliśmy
-        printf( "[%d] wartość całki\t%16.6f\n",(int)getpid(),I );
-        //... i kończymy działanie potomka
-        exit( 0 );
-        // Teraz kod dla procesu nadrzędnego
+            // Obliczamy całkę, ale już w potomku
+            I = quad( n,a,b,sine );
+            // Dla pewności wyprowadzamy informację o tym co wyliczyliśmy
+            printf( "[%d] wartość całki\t%16.6f\n",(int)getpid(),I );
+            //... i kończymy działanie potomka
+            exit( 0 );
+            // Teraz kod dla procesu nadrzędnego
         default:
-        // Powiedzmy, że coś tutaj ważnego się dzieje
-        printf( "[%d] wykonuje ważne rzeczy...\n",(int)getpid() );
-        // Oczekiwanie na wynik z potomka
-        pid = (int)wait( &status );
-        // ... i mamy gotowy rezultat
-        printf( "[%d] zakończył z kodem %d\n",pid,status );
-        printf( "[%d] otrzymał wartość\t%16.6f\n",(int)getpid(),I );
+            // Powiedzmy, że coś tutaj ważnego się dzieje
+            printf( "[%d] wykonuje ważne rzeczy...\n",(int)getpid() );
+            // Oczekiwanie na wynik z potomka
+            pid = (int)wait( &status );
+            // ... i mamy gotowy rezultat
+            printf( "[%d] zakończył z kodem %d\n",pid,status );
+            printf( "[%d] otrzymał wartość\t%16.6f\n",(int)getpid(),I );
     }
     // Na tym program kończy działanie
     return 0;
@@ -245,19 +247,19 @@ int main( void )
     switch( fork() )
     {
         case -1:
-        perror( "<!> błąd inicjacji potomka" ); exit( 1 ); break;
+            perror( "<!> błąd inicjacji potomka" ); exit( 1 ); break;
         case 0:
-        close( fd[0] );
-        I = quad( n,a,b,sine );
-        printf( "[%d] wartość całki %19.6f\n",(int)getpid(),I );
-        write( fd[1],(void*)&I,sizeof( double ) );
-        exit( 0 );
+            close( fd[0] );
+            I = quad( n,a,b,sine );
+            printf( "[%d] wartość całki %19.6f\n",(int)getpid(),I );
+            write( fd[1],(void*)&I,sizeof( double ) );
+            exit( 0 );
         default:
-        close( fd[1] );
-        printf( "[%d] wykonuje, ważne rzeczy...\n",(int)getpid() );
-        read( fd[0],(void*)&I,sizeof( double ) );
-        printf( "[%d] zakończył z kodem %d\n",pid,status );
-        printf( "[%d] otrzymał wartość %16.6f\n",(int)getpid(),I );
+            close( fd[1] );
+            printf( "[%d] wykonuje, ważne rzeczy...\n",(int)getpid() );
+            read( fd[0],(void*)&I,sizeof( double ) );
+            printf( "[%d] zakończył z kodem %d\n",pid,status );
+            printf( "[%d] otrzymał wartość %16.6f\n",(int)getpid(),I );
     }
     return 0;
 }

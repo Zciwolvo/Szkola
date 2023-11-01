@@ -141,7 +141,7 @@ pause─┬─dockerd─┬─containerd───8*[{containerd}]
 
 <div style="page-break-after: always;"></div>
 
-Ponieważ informacja odnośnie identyfikacji procesów ma kluczowe znaczenie przy zarządzaniu nimi, każde API systemowe daje nam możliwość w jakiś sposób uzyskać takie informacje.
+Ponieważ informacja odnośnie identyfikacji procesów ma kluczowe znaczenie przy zarządzaniu nimi, każde API systemowe daje nam możliwość w `jakiś` sposób uzyskać takie informacje.
 np w języku c/c++
 
 ```cpp
