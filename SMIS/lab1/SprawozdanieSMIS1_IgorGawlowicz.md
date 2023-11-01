@@ -101,6 +101,16 @@ Niewykorzystane ustawienia przełączników powinny włączyć tryb mrugania św
   <img src="./s2.png" alt="Sublime's custom image"/>
 </p>
 
+Takie zadanie rozwiążemy w sposób następujący:
+
+- Zapoznamy się z grafiką reprezentującą 8 faz świateł które musimy uwzględnić
+- Stworzymy siatkę zależności wyjść od wejść na podstawie faz
+- Na podstawie schematu zrobimy siatkę wykorzystując metodę Karnaugha dla każdego wyjścia
+- Rozpiszemy jeszcze wszystkie pozostałe 8 scenariuszy, które nie zostały uwzględnione w podanych fazach
+- Na podstawie pozostałych scenariuszy stworzymy siatkę uwzględniającą każdy z nie uwzględnionych scenariuszy, która będzie odpowiadać za włączenie migających żółtych świateł.
+- Na podstawie naszych siatek napiszemy skrócone wzory dla każdego wyjścia
+- Przeniesiemy nasze wzory do schematu drabinkowego w odpowiednim programie.
+
 
 <div style="page-break-after: always;"></div>
 
@@ -124,14 +134,100 @@ oraz 20 wyjść, oznacza to więc że musimy przygotować siatkę zależności z
 
 Na wyżej załączonym obrazie możemy zauważyć, że w tym przypadku jak i w większości przypadków taka siatka jest po prostu zbyt długa i zbyt skomplikowana żeby w taki sposób przedstawiać ją w programie. Rozwiążemy ten problem poprzez zastosowanie siatek Carnough dla każdej zmiennej wyjściowej.
 
-
-
 Oraz aby rozwiązać problem dla każdej kombinacji wejść innej od podanych faz, rozwiążemy jeszcze jedną siatkę dla wszystkich innych opcji.
+
+<p align="center">
+  <img src="./c1.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c2.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c3.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c4.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c5.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c6.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c7.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c8.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c9.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c10.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c11.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c12.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c13.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c14.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c15.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c16.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c17.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c18.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c19.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c20.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="./c21.png" alt="Sublime's custom image"/>
+</p>
 
 Kolejnym krokiem będzie przełożenie naszych wzorów do odpowiedniego programu, który zapisze nam nasze dane wejściowe dla urządzenia do formatu możliwego do odczytania przez program PAC. 
 
-Dla przykładu, tak wygląda wzór PLC dla S1_CZER
+Dla przykładu, tak wygląda schemat drabinkowy dla S1_CZER
 
 <p align="center">
   <img src="./s5.png" alt="Sublime's custom image"/>
 </p>
+
+### Wnioski
+
+Nasz projekt systemu sterowania światłami na sygnalizatorach w trybie pracy ręcznej opiera się na analizie ośmiu faz świateł, a metoda Karnaugha pomaga w zoptymalizowaniu logicznych funkcji. Siatki Karnaugha ułatwiają reprezentację tych funkcji. Dodatkowo, stworzyliśmy schemat drabinkowy dla wszystkich innych scenariuszy, co sprawia, że nasze rozwiązanie jest elastyczne i efektywne. Dzięki temu projekt pozwala na sprawną kontrolę nad sygnalizacją świetlną, niezależnie od potrzeb operatora i pojawiających się sytuacji.
