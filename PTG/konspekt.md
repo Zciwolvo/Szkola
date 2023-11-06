@@ -21,7 +21,7 @@ Gra ma być mieszanką z kategorii:
 - Side scroller
 - Bullet hell
 - Looter shooter
-- Rougelike/Rougelite
+- Rougelite
 - City builder
 
 Głównym punktem gameplay, będzie zbieranie ulepszeń i walka z przeciwnikami w celu zdobycia większej ilośc ulepszeń i punktów, które następnie możemy wykorzystać w mieście, które w trakcie rozgrywki stale ulepszamy i zdobywamy z niego nowe korzyści wspomogające nas w grze.
