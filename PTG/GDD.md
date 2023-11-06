@@ -28,4 +28,20 @@ W tym etapie gracz będzie zdobywał wspomnianą wcześniej walutę, rozgrywka b
 
 ## Sztuka 
 
-Stylistyka gry będzie bardzo prost, rzut miasta będzie ustawiony z wcześniej
+Stylistyka gry będzie bardzo prosta, rzut miasta będzie złożony z wcześniej przygotowanych rysunków, modeli.
+
+## Dźwięk i muzyka
+
+Prosta szybki elektroniczny podkład i proste satysfakcjonujące dźwięki.
+
+## Interface, sterowanie grą
+
+Bardzo intuicyjne przez ekran dotykowy poprzez klikanie w odpowiednio wyróżniające się miejsca na ekranie
+
+## Sposób dystrybucji
+
+Gra będzie do pobrania za darmo ze sklepów mobilnych takich jak: sklep google play czy apple app store.
+
+## Model finansowania 
+
+Projekt rozpocznie się w pełni za darmo do stworzenia podstawowego modelu gry, który będzie miał na tyle dużo zawartości by przyciągnąć graczy, następnie poprzez monetyzację projekt powinien zarobić sam na siebie, by zwiększyć jakość produkcji w następnych aktualizacjach.

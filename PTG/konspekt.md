@@ -1,4 +1,10 @@
-# Koncept
+# Konspekt
+
+## Grupa projektowa:
+
+- Igor Gawłowicz
+- Kacper Lizak
+- Maciej Małutowski
 
 ## Wstęp
 
