@@ -153,7 +153,7 @@ Otwórzmy teraz dwie sesje terminala, w oknie pierwszego pierwszego wpisujemy
 
 `$ cat < /tmp/km-fifo`
 
-czyli przekierujemy zawartość km-fifo na wejście komendy systemowej cat. Ta, jak wiadomo,
+czyli przekierujemy zawartość km-fifo na wejście komendy systemowej cat. Ta, jask wiadomo,
 wyświetla na swoim wyjściu (czyli tutaj w oknie terminala pierwszego), to co otrzyma na wejściu.
 Teraz przełączamy się na drugie okno terminala, i wykonujemy
 
@@ -173,5 +173,83 @@ output (odróżniamy od outputu za pomocą znaku `<`)
 $ cat < /tmp/km-fifo
 test polaczenie km-fifo
 ```
+Możemy zauważyć że po zakończeniu sesji plik pozostaje w katalogu ale jego rozmiar jest zerowy. Ponieważ łącze usuwamy jako plik.
 
+W systemach rodziny POSIX, łącza nazwane tworzone są wywołaniami funkcji mkfifo().
+
+Usuwanie łączy nazwanych odbywa się przy pomocy funkcji unlink().
+
+Ponieważ łącze nazwane posiada dowiązanie do struktury plików operacje na nim przeprowadza
+się w zwyczajowy sposób, tak jak i w przypadku ogółu, a więc:
+
+- utworzone łącze trzeba otworzyć, przed użyciem, uzyskując w ten sposób jego deskryptor albo wskazanie do obiektu typu FILE;
+- wykonujemy odczyt lub zapis, odpowiednio do potrzeb;
+- po wykorzystaniu łącza proces powinien zamknąć je, od swojej strony.
+
+Niskopoziomowe operacje otwarcia i zamknięcia realizujemy przy pomocy open() i close().
+
+Przydzielając deskryptor łączu za pośrednictwem funkcji open() trzeba pamiętać, że jej wywołanie
+mają zasadniczo charakter blokujący, tzn. wywołanie
+
+fd=open( pathname,O_RDONLY ); będzie czekać aż jakiś proces nie otworzy kolejki do zapisu
+
+fd=open( pathname,O_WRONLY ); będzie czekać aż jakiś proces nie otworzy kolejki do odczytu
+
+Jeżeli jednak otwarcie nastąpi z użyciem maski O_NONBLOCK wówczas
+
+fd=open( pathname,O_RDONLY|O_NONBLOCK ); zwróci natychmiast sterowanie
+
+fd=open( pathname,O_WRONLY|O_NONBLOCK ); także zwróci natychmiast sterowanie, jeżeli
+
+jednak nie będzie żadnego procesu, który wykona otwarcie do odczytu, to zamiast deskryptora otrzymamy `-1 (oraz errno = ENXIO)`
+
+O ile zasadniczym przeznaczeniem łączy nazwanych jest wymiana informacji między procesami
+niespokrewnionymi, to może równie dobrze odbywać się w obrębie pojedynczego procesu.
+
+```cpp
+#include <unistd.h>
+#include <sys/stat.h>
+#include <errno.h> // kody błędów errno
+#include <string.h> // opisy błędów errno
+#include <fcntl.h> // definicje dla open()
+#include <linux/limits.h> // definicja PIPE_BUF
+#include <stdio.h>
+int main( void )
+{
+    char pipe[]="xyz"; // to będzie nasze łącze nazwane
+    char message[PIPE_BUF]="POZDROWIENIE (OD SAMEGO SIEBIE)";
+    int in,out; // deskryptory dla wejścia i wyjścia
+    // próbujemy utworzyć łącze nazwane
+    if( (in = open( pipe, O_RDONLY|O_NONBLOCK) ) < 0 )
+    { 
+        printf( "errno=%d ...%s... mkfifo() \n",errno,strerror(errno) );
+    }
+    else
+    {
+        if( (out = open( pipe, O_WRONLY)) < 0 )
+        { 
+            printf("errno=%d ...%s... mkfifo() \n",errno,strerror(errno)); 
+        }
+        else
+        {
+            write( out,message,PIPE_BUF );
+            read( in,message,PIPE_BUF );
+            close( out );
+            printf( "%s\n",message );
+        }
+        close( in );
+    }
+    // usunięcie łącza (niekoniecznie musi tak być)
+    if(unlink( pipe )==-1 )
+    { 
+        perror( "unable to remove named pipe" ); 
+    }
+    else
+    {
+        printf( "errno=%d ...%s... %s\n",errno,strerror(errno),
+        "Unable to create named pipe" );
+    }
+    return 0;
+}
+```
 

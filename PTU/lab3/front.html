@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <p>Add person</p>
+        <form>
+            <label for="FirstName">First Name:</label>
+            <input type="text" id="FirstName" placeholder="First Name">
+            <label for="LastName">Last Name:</label>
+            <input type="text" id="LastName" placeholder="Last Name">
+            <button type="submit">Add person</button>
+          </form>
+          <p>Delete person</p>
+          <form>
+            <label for="delid">Person id</label>
+            <input type="text" id="delid" placeholder="Person id">
+            <button type="submit">Delete person</button>
+          </form>
+          <p>Update person</p>
+          <form>
+            <label for="upid">Person id</label>
+            <input type="text" id="upid" placeholder="Person id">
+            <button type="submit">Get Person</button>
+            <label for="FirstName">First Name:</label>
+            <input type="text" id="FirstName" placeholder="First Name">
+            <label for="LastName">Last Name:</label>
+            <input type="text" id="LastName" placeholder="Last Name">
+            <button type="submit">Add person</button>
+          </form>
+          <p>Get Person</p>
+          <form>
+            <label for="getid">Person id</label>
+            <input type="text" id="getid" placeholder="Person id">
+            <button type="submit">Get Person</button>
+          </form>
+          <p>Get persons</p>
+          <button onclick=GetPersons()>Get Persons</button>
+          <div id="result"></div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
