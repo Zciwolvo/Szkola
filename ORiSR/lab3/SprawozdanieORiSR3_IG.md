@@ -87,8 +87,6 @@ GRUPA: 2B / SEMESTR: 5 / ROK: 3
 
 Igor Gawłowicz / 59096
 
-Krystian Niedźwiedź / 58824
-
 <div style="page-break-after: always;"></div>
 
 Prócz ewidentnych zalet i korzyści wynikających z użycia w
@@ -199,8 +197,7 @@ Jeżeli jednak otwarcie nastąpi z użyciem maski O_NONBLOCK wówczas
 
 fd=open( pathname,O_RDONLY|O_NONBLOCK ); zwróci natychmiast sterowanie
 
-fd=open( pathname,O_WRONLY|O_NONBLOCK ); także zwróci natychmiast sterowanie, jeżeli
-
+fd=open( pathname,O_WRONLY|O_NONBLOCK ); także zwróci natychmiast sterowanie, jeżeli \
 jednak nie będzie żadnego procesu, który wykona otwarcie do odczytu, to zamiast deskryptora otrzymamy `-1 (oraz errno = ENXIO)`
 
 O ile zasadniczym przeznaczeniem łączy nazwanych jest wymiana informacji między procesami
