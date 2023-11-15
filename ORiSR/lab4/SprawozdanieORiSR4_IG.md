@@ -357,14 +357,14 @@ int main( void )
         message.type = (long)pid;
         //Przygotowujemy i wysyłamy pierwszą wiadomość
         (void) strcpy( message.text, "\'<1> pierwsza wiasomość <1>\'");
-        printf( "[%u] wysyła...\t%s\n",pid,message.text );
+        printf( "[%u] wysyłał...\t%s\n",pid,message.text );
         //Konstrukcja strlen(message.text)+1 konieczna, ponieważ msgsnd() wymaga
         //potania ilości bajtów, a strlen() zwraca długość łańcucha 
         //bez końcowego '\0'
         msgsnd( msqid,(void*)&message,strlen(message.text)+1,IPC_NOWAIT );
         //... no i druga wiadomość
         (void) strcpy( message.text, "\'<2> druga wiadomość <2>\'");
-        printf( "[%u] wysyła...\t%s\n",pid,message.text );
+        printf( "[%u] wysyłał...\t%s\n",pid,message.text );
         msgsnd( msqid,(void*)&message,strlen(message.text)+1,IPC_NOWAIT );
         bzero( (void*)&message,sizeof( message ) );
         //Dopóki jeszcze coś jest w kolejce identyfikowanego typem pid, to czytamy
@@ -387,8 +387,8 @@ W wyniku programu widzimy teraz
 
 ```bash
 [1180] utworzył kolejkę...1
-[1180] wysyła...        '<1> pierwsza wiasomość <1>'
-[1180] wysyła...        '<2> druga wiadomość <2>'
+[1180] wysyłał...        '<1> pierwsza wiasomość <1>'
+[1180] wysyłał...        '<2> druga wiadomość <2>'
 [1180] otrzymał...      '<1> pierwsza wiasomość <1>'
 [1180] otrzymał...      '<2> druga wiadomość <2>'
 ```
