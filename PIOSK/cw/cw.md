@@ -48,28 +48,152 @@ Rozważmy najpierw nasze możliwości
 
 Dla kliniki medycznej "HealthCare Plus", najlepszym wyborem może być topologia gwiazdy. Jest to stabilne rozwiązanie, które zapewnia prosty dostęp do zarządzania siecią oraz pozwala na łatwe rozszerzenie sieci w przyszłości. Ponadto, można rozważyć wykorzystanie switchy z funkcją redundancji (np. stosowane w technologii High Availability), aby zapewnić niezawodność w przypadku awarii.
 
+<div style="page-break-after: always;"></div>
+
 # Wybór Sprzętu sieciowego
 
 ### *Główny switch:* 
 
 Centralnym urządzeniem w topologii gwiazdy będzie główny switch. Musi być to switch o odpowiedniej pojemności, który może obsłużyć wszystkie urządzenia w sieci, w tym 25 urządzeń. Wybierzmy model switcha o co najmniej 24 portach Ethernet 1 Gb/s, aby mieć zapas na przyszłe rozbudowy.
 
-Przykładowy model: Cisco Catalyst 2960X-24PS-L lub odpowiednik innej renomowanej marki.
+Zdecydowaliśmy się na sprawdzony model cisco **WS-C2960X-24PS-L**
+
+Jest to model, który jest jednym z bestsellerów firmy cisco przez swoją wszechstronność i zaawansowane możliwości:
+
+- **Zaawansowane funkcje warstwy 2 i warstwy 3:** Switchy serii 2960-X oferują zaawansowane funkcje zarówno warstwy 2 (np. VLAN, STP, ACL) jak i warstwy 3 (np. routing IP statyczny, IP multicast). To pozwala na elastyczne zarządzanie ruchem sieciowym wewnątrz kliniki medycznej.
+
+- **Power over Ethernet Plus (PoE+):** Model 2960X-24PS-L jest wyposażony w technologię PoE+, co oznacza, że może zasilać różnorodne urządzenia bez dodatkowych zewnętrznych zasilaczy. To sprawia, że jest idealny do zasilania urządzeń medycznych takich jak kamery IP, telefony VoIP czy punkty dostępu Wi-Fi, co jest kluczowe w środowisku medycznym.
+
+- **Wysoka moc wyjściowa PoE na port:** Oferuje do 370W mocy na 24 porty gigabit Ethernet, co zapewnia elastyczność w zasilaniu urządzeń. Możliwość obsługi do 30W PoE na port umożliwia zasilanie nawet wymagających sprzętów, jednocześnie zapewniając wydajność.
+
+- **Wsparcie dla różnych rodzajów interfejsów:** Oprócz 24 portów gigabit Ethernet, switch ten posiada 4 porty SFP uplink, co umożliwia rozbudowę sieci o interfejsy fiber lub inne modele połączeń. To elastyczność w obsłudze różnorodnych potrzeb sieciowych.
+
+- **Zaawansowane zarządzanie siecią:** Dzięki pełnemu zarządzaniu, switch ten oferuje zaawansowane funkcje konfiguracyjne, zarządzanie przepustowością oraz monitoring ruchu sieciowego, co jest kluczowe dla stabilności i bezpieczeństwa sieci medycznej.
+
+- **Wsparcie dla różnorodnych urządzeń:** Z możliwością zasilania różnych urządzeń przy różnych poziomach mocy PoE, switch ten umożliwia obsługę wielu typów urządzeń medycznych bez konieczności dodatkowych zasilaczy.
+
+To wszystko za cenę około 1000zł.
 
 ### *Router:* 
 
 Chociaż topologia gwiazdy nie wymaga routera do przesyłania danych między podsieciami (ponieważ wszystkie urządzenia są podłączone bezpośrednio do switcha), warto rozważyć urządzenie z funkcjami zabezpieczeń, takie jak firewall i VPN, aby chronić poufność danych medycznych.
 
-Przykładowy model: Cisco 2901 lub podobny.
+Co do routera zdecydowaliśmy się na **ASUS RT-AX88U**
 
-### *Access Point (AP): *
+- **Standard Wi-Fi 6 (802.11ax):** Posiadanie standardu Wi-Fi 6 zapewnia wysoką przepustowość i efektywność sieci bezprzewodowej. To znacznie wyższe prędkości transmisji danych oraz lepsza wydajność w obszarach o dużej gęstości urządzeń.
+
+- **Prędkość transmisji bezprzewodowej 6000 Mb/s:** Szybkość transmisji danych na poziomie 6 Gb/s oznacza, że router ten może obsłużyć duże ilości urządzeń jednocześnie, zapewniając wysoką wydajność sieci.
+
+- **Zabezpieczenia bezprzewodowe:** Posiada różnorodne protokoły zabezpieczeń, takie jak WPA3-Personal, co przekłada się na wyższy poziom ochrony sieci bezprzewodowej przed potencjalnymi atakami.
+
+- **Obsługa wielu trybów pracy:** Oprócz trybu routera, umożliwia pracę jako access point, bridge, co zapewnia elastyczność w zastosowaniach sieciowych.
+
+- **Zarządzanie i konfiguracja:** Posiada intuicyjną stronę WWW do zarządzania siecią, co ułatwia konfigurację i dostosowanie ustawień sieciowych do potrzeb kliniki medycznej.
+
+- **Obsługa VPN, QoS, serwery sieciowe:** Router oferuje funkcje takie jak obsługa VPN Pass-Through, serwer VPN, serwer dysku sieciowego, serwer wydruku, funkcja modemu USB, QoS (Quality of Service), co jest istotne w zapewnianiu bezpieczeństwa, wydajności i funkcjonalności sieci.
+
+- **Obsługa IPv6:** Wspiera nowszy standard IP, co jest ważne w kontekście rozwoju technologicznego oraz zmian w sieciach.
+
+- **Dodatkowe funkcje i zabezpieczenia:** Wsparcie dla modemów 3G/4G/LTE, kontrola diod, podwójna ochrona firewall (SPI i NAT), ochrona przed atakami DoS - wszystko to zapewnia dodatkowy poziom bezpieczeństwa i elastyczności.
+
+Cena około 1200zł
+
+### *Access Point (AP):*
 
 Jeśli klinika potrzebuje dostępu do sieci bezprzewodowej dla swojego personelu lub pacjentów, należy uwzględnić access point. Wybierzmy model AP o dobrej przepustowości i obszarze działania, aby zapewnić odpowiednie pokrycie.
 
-Przykładowy model: Ubiquiti UniFi AP-AC Pro lub równoważny model innej marki.
+Naszym rekomendowanym access pointem będzie: **Ubiquiti UniFi AP-AC Pro**
 
-### *Przełączniki PoE:* 
+- **Standard Wi-Fi ac i wysoka wydajność:** Wykorzystanie najnowszego standardu Wi-Fi ac zapewnia wydajność i szybkość transmisji danych na poziomie do 1300 Mb/s w paśmie 5 GHz oraz do 450 Mb/s w paśmie 2,4 GHz. To pozwala obsługiwać duże ilości użytkowników jednocześnie, zapewniając szybką i stabilną sieć.
 
-W związku z wykorzystywaniem sprzętu medycznego, które może wymagać zasilania przez Ethernet (Power over Ethernet, PoE), warto rozważyć używanie przełączników PoE w celu zasilania tych urządzeń. Wymaga to również, aby główny switch obsługiwał PoE, lub możemy zainstalować osobny przełącznik PoE.
+- **Zastosowanie technologii 3x3 MIMO:** Trzy wbudowane anteny o zysku 3 dBi pracujące w technologii 3x3 MIMO poprawiają jakość sygnału i zasięg, co przekłada się na lepszą jakość połączenia dla użytkowników.
 
-Przykładowy model: Cisco Catalyst 2960X-24PS-L (obsługuje PoE) lub odpowiednik innej marki.
+- **Dwa gigabitowe porty Ethernet:** Posiadanie dwóch portów Ethernet pozwala na elastyczne połączenie z siecią przewodową, umożliwiając zasilanie urządzenia oraz zapewnienie szybkiego przesyłu danych.
+
+- **Odporność na warunki zewnętrzne:** Jako jedyny z serii UAP AC, jest przystosowany do pracy na zewnątrz budynków. Posiada wodoodporną obudowę, co czyni go idealnym rozwiązaniem do zastosowań zewnętrznych, takich jak punkt dostępowy dla ogólnodostępnej sieci bezprzewodowej w parkach, kampusach uniwersyteckich czy miejscach publicznych.
+
+- **Produkt Ubiquiti i serwery UniFi:** Ubiquiti jest znanym producentem sprzętu sieciowego, a rozwiązania UniFi oferują zaawansowane funkcje zarządzania sieciami, w tym monitoring, zarządzanie przepustowością oraz w pełni konfigurowalne opcje.
+
+- **Wysoka reputacja na rynku:** Model UniFi AC PRO cieszy się pozytywnymi opiniami na rynku, co świadczy o jego solidności, niezawodności oraz wydajności.
+
+Cena około 700zł
+
+### *Okablowanie:*
+
+Do podłączenia całej konfiguracji będziemy potrzebować sporej ilości okablowania dokładnie będziemy potrzebować około 30 kabli ethernet o różnych długościach pomiędzy 10 a 30m.
+
+Uwzględniamy tutaj podłączenie do urządzeń a także zapasowe kable, w razie takiej potrzeby.
+
+Cena około 1200zł
+
+## Podsumowanie
+
+Instalacja sieci może być kosztowna, jednak wybór najlepszego sprzętu rozwiązuje nam wiele problemów i jest dobrą inwestycją w przyszłość firmy. Ostatecznie koszty zakupu sprzętów potrzebnych do stworzenia naszej sieci wyglądają tak:
+
+- Router - 1200zł
+- Switch - 1000zł
+- Access Point - 700zł
+- Okablowanie - 1200zł
+
+Całość daje nam **3900zł**.
+
+<div style="page-break-after: always;"></div>
+
+# Projektowanie podsieci:
+
+Aby zaprojektować odpowiednio model naszej sieci musimy wziąć pod uwagę kilka rzeczy.
+
+- **Wymagania dotyczące zabezpieczeń:** Biorąc pod uwagę charakter danych medycznych, istotne jest stworzenie podsieci w taki sposób, aby zapewnić odpowiednie zabezpieczenia i izolację danych.
+
+- **Zarządzanie dostępem do zasobów sieciowych:** Upewnij się, że pracownicy mają dostęp do zasobów sieciowych, takich jak bazy danych pacjentów, jednocześnie zachowując bezpieczeństwo.
+
+- **Zwiększenie wydajności i efektywności:** Rozważenie podziału sieci na podsieci może pomóc w zwiększeniu wydajności i ograniczeniu ruchu sieciowego, co jest istotne w środowiskach medycznych.
+
+Z takim właśnie podejście napisaliśmy poniższy przykład modelu sieci:
+
+### Podsieć 1: Dla pracowników administracyjnych i biurowych
+
+Adres IP: 192.168.1.0/24 \
+Liczba adresów IP: 20 \
+Przykładowe adresy IP: 
+- Dla urządzeń: 192.168.1.1 - 192.168.1.10 
+- Dla drukarek sieciowych, serwerów: 192.168.1.11 - 192.168.1.20
+
+### Podsieć 2: Dla lekarzy i personelu medycznego
+
+Adres IP: 192.168.2.0/24 \
+Liczba adresów IP: 20 \
+Przykładowe adresy IP: 
+- Dla urządzeń: 192.168.2.1 - 192.168.2.10 
+- Dla sprzętu medycznego: 192.168.2.11 - 192.168.2.20 
+
+### Podsieć 3: Dla systemów diagnostyki obrazowej
+
+Adres IP: 192.168.3.0/24 \
+Liczba adresów IP: 20 \
+Przykładowe adresy IP: 
+- Dla systemów diagnostyki: 192.168.3.1 - 192.168.3.10
+- Dla serwerów przetwarzania obrazów: 192.168.3.11 - 192.168.3.20 
+
+### Podsieć bezprzewodowa 1: Dla pracowników kliniki
+
+Nazwa sieci: HealthCare_Internal \
+Adres IP: 192.168.4.0/24 \
+Liczba adresów IP: 40 \
+Przykładowe adresy IP: 
+- Dla pracowników: 192.168.4.1 - 192.168.4.40 
+
+### Podsieć bezprzewodowa 2: Dla pacjentów
+
+Nazwa sieci: HealthCare_Guest \
+Adres IP: 192.168.5.0/24 \
+Liczba adresów IP: 40 \
+Przykładowe adresy IP: 
+- Dla pacjentów: 192.168.5.1 - 192.168.5.40 
+
+## Uzasadnienie
+
+- **Izolacja danych:** Każda podsieć jest dedykowana dla określonej grupy, co pomaga w zabezpieczeniu i izolacji danych.
+- **Skalowalność i wydajność:** Podział na podsieci pozwala na efektywne zarządzanie ruchem sieciowym i zapobieganie przeciążeniu sieci.
+- **Łatwość zarządzania:** Prosta struktura podsieci ułatwia zarządzanie i konserwację sieci, co jest istotne w środowiskach medycznych, gdzie stabilność i dostępność są kluczowe.
+- **Oddzielenie sieci pracowników od sieci dla pacjentów:** Utworzenie dwóch oddzielnych sieci bezprzewodowych pozwala na segregację urządzeń i użytkowników, co zapewnia dodatkową warstwę zabezpieczeń między sieciami.
