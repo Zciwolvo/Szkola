@@ -116,3 +116,76 @@ Również **MsWindows**, którego twórcy mają od pewnego czasu aspiracje stwor
 wspierającego współbieżność dysponuje także swoistym **IPC**.
 
 Kolejka komunikatów stanowi połączona listę wiadomości przechowywanych w obszarze pamięci jądra systemowego i jest identyfikowana przez unikalny klucz – identyfikator **qmsqid (queue identifier)** – będący nieujemną liczbą całkowitą. 
+
+Z poziomu interface'u użytkownika informacja o istniejących kolejkach komunikatów może być
+pobrana poleceniem
+
+```bash
+$ ipcs -q
+
+------ Message Queues --------
+key        msqid      owner      perms      used-bytes   messages    
+
+```
+
+W przypadku gdyby w kolejce były opecje jakieś rekordy możemy je wyczyścić za pomocą:
+
+`$ ipcrm [-Q msgkey] | [-q msgid]`
+
+Celem obsługi tego sposobu komunikacji, w obszarze pamięci jadra tworzona jest tablica
+kolejek msgque[] o rozmiarze (maksymalnym) MSGMNI, której elementem składowym są
+struktury o definicji (w linux/msg.h)
+
+Tablica ta jest indeksowana za pośrednictwem identyfikatora danej kolejki qid. Zauważmy, że
+Struktura ta zawiera w szczególności wskazania, w postaci msg_first i msg_last
+identyfikujące listę komunikatów powiązanych z daną kolejką.
+
+Nowa kolejka jest tworzona, co wiąże się z "dopisaniem" do tablicy msgque struktury
+msqid_ds a jeżeli już istnienie, to jest otwierana celem uzyskania dostępu wywołaniem funkcji
+msgget().
+
+TODO
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/msg.h>
+#include <time.h>
+#define PROJECTID 666
+int main( void )
+{
+    key_t key;
+    int flag, msqid;
+    struct msqid_ds buffer;
+    //Generujemy klucz dla potrzeb utworzenia kolejki podając pewien arbitralnie obrany
+    //(ale – koniecznie – istniejący katalog; z pewnością /tmp będzie istniał), a ponadto pewną
+    //wartość liczbową (tutaj stała PROJECTID)
+    key = ftok( "/tmp",_PROJECT_ID );
+    //Następnie tworzymy kolejkę (uprawnienia odczytu i zapisu tylko dla użytkownika)
+    flag = IPC_CREAT | 0x100 | 0x80;
+    msqid = msgget( key,flag );
+    if( msqid<0 ){ perror( "!.!..msgget().." ); exit( 1 ); }
+    else
+    {
+        //Jeżeli tak, to pobieramy o niej informacje
+        if( !msgctl( msqid,IPC_STAT,&buffer ) )
+        {
+            //Identyfikator kolejki
+            printf( "\tKOLEJKA [%d]\n",(int)msqid );
+            //Dla pewności pobieramy nasz UID i GID
+            printf( "\tuid:%d gid:%d\n",(int)getuid(),(int)getgid() );
+            //... i sprawdzenia zawartości struct msqid_ds
+            printf( "\t%s",ctime( &(buffer.msg_ctime ) ) );
+            printf( "\tuid:%dgid:%d\n",(int)buffer.msg_perm.uid,
+            (int)buffer.msg_perm.gid );
+            printf( "\tkey: 0x%x\n",buffer.msg_perm.__key );
+            printf( "\trozmiar kolejki: %lu B / %u MSG\n",
+            buffer.msg_cbytes,(unsigned)buffer.msg_qnum );
+            /* msgctl( msqid,IPC_RMID,&buffer ); */
+        }
+        else{ perror( "!.!..msgctl.." ); exit( 2 ); }
+    }
+    return 0;
+}
+```
