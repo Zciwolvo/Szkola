@@ -130,3 +130,76 @@ row {
 
 ## Część 1: Wyszukiwanie problemów w sieci
 
+Polecenie sugeruje nam użycie nastepujących komend:
+
+```
+R1# show ip interface brief
+R1# show interface g0/1.10
+R1# show interface g0/1.30
+S1# show interface trunk
+```
+
+Aby odnaleźć wszystkie błędy postąpimy w sposób następujący:
+
+- Sprawdzimy wszystkie połączenia i użyjemy powyższych komend
+- Spradzimy czy konfiguracja urządzeń jest taka sama jak w tablicy adresowania
+- Zapiszemy wszystkie błędy i ich potencjalne rozwiązania
+
+1. Fizyczny interface G0/1 jest aktywny ale subinterface G0/1.10 jest wyłączony
+
+Rozwiązanie:
+
+Aby włączyć subinterfejs G0/1.10, wykonamy polecenie no shutdown na tym interfejsie.
+
+```cmd
+R1(config)#interface g0/1.10
+R1(config-subif)#no shutdown
+R1(config-subif)#exit
+```
+
+2. PC3 ma skonfigurowany nieprawidłowy adres bramy domyślnej.
+
+Rozwiązanie:
+
+Zmienimy adres bramy domyślnej na PC3 z 172.17.10.1 na 172.17.30.1, aby był zgodny z konfiguracją sieci VLAN.
+
+```cmd
+R1(config)#interface g0/1.10
+R1(config-subif)#no encapsulation dot1Q 
+
+R1(config-subif)#int g0/1.30
+R1(config-subif)#no encapsulation dot1Q 
+R1(config-subif)#exit
+```
+
+3. Interfejs G0/1 na urządzeniu S1 jest skonfigurowany jako port dostępu zamiast portu trunk.
+
+Rozwiązanie:
+
+Aby zmienić interfejs G0/1 na urządzeniu S1 z trybu dostępu na tryb trunk, wykonamy polecenie switchport mode trunk.
+
+```cmd
+S1(config)#interface g0/1
+S1(config-if)#switchport mode trunk
+```
+
+4. Przypisania VLAN dla subinterfejsów zostały zamienione na urządzeniu R1. Skonfigurowane przypisania nie zgadzają się z tymi przedstawionymi w tablicy adresowania.
+
+Rozwiązanie:
+
+Aby naprawić niezgodne przypisania VLAN dla subinterfejsów na R1, wykonaj następujące kroki:
+
+```cmd
+R1(config)#int g0/1.10
+R1(config-subif)#encapsulation dot1Q 10
+R1(config-subif)#ip address 172.17.10.1 255.255.255.0
+R1(config-subif)#
+R1(config-subif)#int g0/1.30
+R1(config-subif)#encapsulation dot1Q 30
+R1(config-subif)#ip address 172.17.30.1 255.255.255.0
+```
+
+## Wnioski
+
+Podczas tego laboratorium wykorztstaliśmy naszą wcześniej zdobytą wiedzę, zby znaleźć i zneutralizować błedy w konfiguracji sieciowej.
+Po zidentyfikowaniu i naprawieniu problemów konfiguracja działa prawidłowo.

@@ -1,5 +1,3 @@
-
-
 // import modułów wykorzystywanych do utworzenia serwera
 const express = require('express');
 const path = require('path');
