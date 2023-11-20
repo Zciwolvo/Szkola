@@ -126,6 +126,40 @@ Uwzględniamy tutaj podłączenie do urządzeń a także zapasowe kable, w razie
 
 Cena około 1200zł
 
+### *Magazyn danych:*
+
+Bardzo ważnym aspektem jest jakiś magazyn, może to być server lub chmura, dlatego rozważymy te dwie opcje:
+
+1. Serwer lokalny:
+    - Pełna kontrola: Posiadanie serwera lokalnego daje pełną kontrolę nad infrastrukturą i danymi. To może być istotne w sektorach, gdzie istnieją surowe regulacje dotyczące przechowywania danych.
+
+    - Wydajność sieci: W niektórych przypadkach serwer lokalny może zapewnić szybszy dostęp do danych, zwłaszcza gdy wymagane są szybkie transferowanie plików w obrębie sieci wewnętrznej.
+
+    - Koszty na dłuższą metę: W niektórych przypadkach inwestycja w serwer lokalny może być tańsza na dłuższą metę niż opłaty za korzystanie z usług chmurowych.
+
+2. Rozwiązania w chmurze:
+   - Elastyczność i skalowalność: Usługi chmurowe pozwalają na łatwą skalowalność zasobów w zależności od potrzeb. Można łatwo zwiększać lub zmniejszać moc obliczeniową lub przestrzeń dyskową.
+
+   - Redundancja i dostępność: Wiele usług chmurowych oferuje wbudowane zabezpieczenia, takie jak backup danych, wysoka dostępność i redundancja, co często może być trudne do osiągnięcia przy lokalnym serwerze.
+
+    - Niskie koszty początkowe: Często rozwiązania w chmurze wymagają mniejszej inwestycji początkowej, ponieważ nie trzeba zakupić i utrzymywać sprzętu.
+
+Dlatego w naszym przypadku ostatecznie zdecydujemy się na chmurę ze względu na:
+
+1. Bezpieczeństwo danych: Usługi chmurowe często oferują wysoki poziom zabezpieczeń, w tym szyfrowanie danych, kontrolę dostępu i systemy monitorowania.
+
+2. Dostępność i skalowalność: Rozwiązania w chmurze mogą zapewnić wysoką dostępność danych oraz elastyczność w zakresie skalowania zasobów w zależności od potrzeb, co jest ważne w przypadku wzrostu liczby pacjentów i danych medycznych.
+
+3. Redundancja i backup danych: Usługi chmurowe często zapewniają automatyczne tworzenie kopii zapasowych, co minimalizuje ryzyko utraty danych.
+
+4. Koszty: Rozwiązania chmurowe często wymagają niższych kosztów początkowych niż zakup i utrzymanie własnej infrastruktury serwerowej.
+
+Konkretnie skorzystamy z platformy AWS (Amazon Web Services)
+
+Z opcją Amazon Athena, która zapewnia nam możliwość obszernej bazy danych, dość tanim kosztem wraz z możliwością opcji analitycznych naszyc informacji.
+
+Cena: 40-200zł/miesięcznie w zależności od skali początkowej i rozwoju w przyszłości.
+
 ## Podsumowanie
 
 Instalacja sieci może być kosztowna, jednak wybór najlepszego sprzętu rozwiązuje nam wiele problemów i jest dobrą inwestycją w przyszłość firmy. Ostatecznie koszty zakupu sprzętów potrzebnych do stworzenia naszej sieci wyglądają tak:
@@ -134,8 +168,9 @@ Instalacja sieci może być kosztowna, jednak wybór najlepszego sprzętu rozwi�
 - Switch - 1000zł
 - Access Point - 700zł
 - Okablowanie - 1200zł
-
-Całość daje nam **3900zł**.
+- Chmura - 40-200zł/miesięcznie
+  
+Całość daje nam **3900zł** + **40-200zł miesięcznie**.
 
 <div style="page-break-after: always;"></div>
 
@@ -154,26 +189,26 @@ Z takim właśnie podejście napisaliśmy poniższy przykład modelu sieci:
 ### Podsieć 1: Dla pracowników administracyjnych i biurowych
 
 Adres IP: 192.168.1.0/24 \
-Liczba adresów IP: 20 \
+Liczba adresów IP: 8 \
 Przykładowe adresy IP: 
-- Dla urządzeń: 192.168.1.1 - 192.168.1.10 
-- Dla drukarek sieciowych, serwerów: 192.168.1.11 - 192.168.1.20
+- Dla urządzeń: 192.168.1.1 - 192.168.1.4 
+- Dla drukarek sieciowych, serwerów: 192.168.1.5 - 192.168.1.8
 
 ### Podsieć 2: Dla lekarzy i personelu medycznego
 
 Adres IP: 192.168.2.0/24 \
-Liczba adresów IP: 20 \
+Liczba adresów IP: 16 \
 Przykładowe adresy IP: 
-- Dla urządzeń: 192.168.2.1 - 192.168.2.10 
-- Dla sprzętu medycznego: 192.168.2.11 - 192.168.2.20 
+- Dla urządzeń: 192.168.2.1 - 192.168.2.8 
+- Dla sprzętu medycznego: 192.168.2.9 - 192.168.2.16 
 
 ### Podsieć 3: Dla systemów diagnostyki obrazowej
 
 Adres IP: 192.168.3.0/24 \
-Liczba adresów IP: 20 \
+Liczba adresów IP: 6 \
 Przykładowe adresy IP: 
-- Dla systemów diagnostyki: 192.168.3.1 - 192.168.3.10
-- Dla serwerów przetwarzania obrazów: 192.168.3.11 - 192.168.3.20 
+- Dla systemów diagnostyki: 192.168.3.1 - 192.168.3.3
+- Dla serwerów przetwarzania obrazów: 192.168.3.4 - 192.168.3.6 
 
 ### Podsieć bezprzewodowa 1: Dla pracowników kliniki
 
@@ -197,3 +232,9 @@ Przykładowe adresy IP:
 - **Skalowalność i wydajność:** Podział na podsieci pozwala na efektywne zarządzanie ruchem sieciowym i zapobieganie przeciążeniu sieci.
 - **Łatwość zarządzania:** Prosta struktura podsieci ułatwia zarządzanie i konserwację sieci, co jest istotne w środowiskach medycznych, gdzie stabilność i dostępność są kluczowe.
 - **Oddzielenie sieci pracowników od sieci dla pacjentów:** Utworzenie dwóch oddzielnych sieci bezprzewodowych pozwala na segregację urządzeń i użytkowników, co zapewnia dodatkową warstwę zabezpieczeń między sieciami.
+
+
+# TODO
+
+Przydzielić dynamiczne i statyczne adresy i przygotować tabelę adresów dla wszystkich urządzeń.
+
