@@ -1,8 +1,8 @@
 const http = require('http');
 
-exports.zad3 = (url) => {
+exports.zad3 = () => {
     return new Promise((resolve, reject) => {
-        http.get(url, (response) => {
+        http.get("http://127.0.0.1:8080", (response) => {
           let data = '';
     
           response.on('data', (chunk) => {

@@ -9,15 +9,15 @@
 <body>
     <div class="container">
         <p>Add person</p>
-        <form>
-            <label for="FirstName">First Name:</label>
-            <input type="text" id="FirstName" placeholder="First Name">
-            <label for="LastName">Last Name:</label>
-            <input type="text" id="LastName" placeholder="Last Name">
-            <button type="submit">Add person</button>
-          </form>
+        <form id="addPersonForm">
+          <label for="FirstName">First Name:</label>
+          <input type="text" id="FirstName" placeholder="First Name">
+          <label for="LastName">Last Name:</label>
+          <input type="text" id="LastName" placeholder="Last Name">
+          <button type="submit">Add person</button>
+        </form>
           <p>Delete person</p>
-          <form>
+          <form id="deletePersonForm">
             <label for="delid">Person id</label>
             <input type="text" id="delid" placeholder="Person id">
             <button type="submit">Delete person</button>
@@ -31,17 +31,18 @@
             <input type="text" id="FirstName" placeholder="First Name">
             <label for="LastName">Last Name:</label>
             <input type="text" id="LastName" placeholder="Last Name">
-            <button type="submit">Add person</button>
+            <button type="submit">Update Person</button>
           </form>
           <p>Get Person</p>
-          <form>
+          <form id="personForm">
             <label for="getid">Person id</label>
             <input type="text" id="getid" placeholder="Person id">
             <button type="submit">Get Person</button>
           </form>
+          <div id="resultPerson"></div>
           <p>Get persons</p>
           <button onclick=GetPersons()>Get Persons</button>
-          <div id="result"></div>
+          <div id="resultPersons"></div>
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

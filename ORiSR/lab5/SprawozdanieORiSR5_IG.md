@@ -95,3 +95,17 @@ TODO
 
 ## Przebieg ćwiczenia
 
+Następnym elementem wchodzącym w skład **IPC (InterProcess Communication)**, będzie współbieżność procesów/wątków, często jest powiązana z okresową/asynchroniczną wymianą komunikatów. Po raz pierwszy został wprowadzony w **UNIX System V** w postaci **pamięci (współ-)dzielonej** z angielskiego **shared memory**.
+
+Podobnie jak i w przypadku pozostałych obiektów IPC, z poziomu interface'u użytkownika
+dostępne są polecenia:
+
+wyświetlające informacje aktualnie zdefiniowanych obiektach IPC
+
+```bash
+$ ipcs -m
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status 
+```
+
