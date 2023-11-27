@@ -1,0 +1,27 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+      <div id="obj"></div>
+        
+        <form method="POST" action="/car">
+            id:
+            <input type="text" name="id" />
+            brand:
+            <input type="text" name="brand" />
+           model:
+            <input type="text" name="model" />
+            year:
+            <input type="text" name="year" />
+            <input type="submit"/>
+          </form>
+          
+          <form method="POST" action="/car/:id">
+            remove id:
+            <input type="text" name="id" />
+          
+            <input type="submit" />
+          </form>
+    </body>
+</html>

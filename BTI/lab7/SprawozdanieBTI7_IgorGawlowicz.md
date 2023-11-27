@@ -120,8 +120,8 @@ row {
 <b>Osoby wykonujące ćwiczenia: </b>
 
 1. Igor Gawłowicz
-
-&nbsp;
+2. Mieszko Niezgoda
+3. Dawid Machaj
 
 &nbsp;
 

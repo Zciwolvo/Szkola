@@ -2,7 +2,7 @@ const http = require('http');
 
 exports.zad3 = () => {
     return new Promise((resolve, reject) => {
-        http.get("http://127.0.0.1:8080", (response) => {
+        http.get("http://igorgawlowicz.pythonanywhere.com", (response) => {
           let data = '';
     
           response.on('data', (chunk) => {

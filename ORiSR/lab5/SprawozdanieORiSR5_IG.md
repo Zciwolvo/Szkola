@@ -129,26 +129,26 @@ dedykowany obiekt danych
 ```
 struct shmid_ds
 {
-struct ipc_perm shm_perm; /* Uprawnienia do segmentu */
-size_t shm_segsz; /* Rozmiar segmentu w bajtach */
-time_t shm_atime; /* Ostatnie przyłączenie segmentu */
-time_t shm_dtime; /* Ostatnie odłączenie segmentu */
-time_t shm_ctime; /* Ostatnia zmiana */
-pid_t shm_cpid; /* PID twórcy */
-pid_t shm_lpid; /* PID ostatniego shmat()/shmdt() */
-shmatt_t shm_nattch; /* Ilość przyłączonych */
- ... /* ... i ewentualnie jeszcze inne */
+    struct ipc_perm shm_perm; /* Uprawnienia do segmentu */
+    size_t shm_segsz; /* Rozmiar segmentu w bajtach */
+    time_t shm_atime; /* Ostatnie przyłączenie segmentu */
+    time_t shm_dtime; /* Ostatnie odłączenie segmentu */
+    time_t shm_ctime; /* Ostatnia zmiana */
+    pid_t shm_cpid; /* PID twórcy */
+    pid_t shm_lpid; /* PID ostatniego shmat()/shmdt() */
+    shmatt_t shm_nattch; /* Ilość przyłączonych */
+    ... /* ... i ewentualnie jeszcze inne */
 };
 ```
 
 ```
 struct ipc_perm
 {
-key_t key; /* key podany w shmget() */
-uid_t uid; /* UID właściciela */
-gid_t gid; /* GID właściciela */
-unsigned short mode;/* uprawnienia + flagi (SHM_DEST,SHM_LOCKED) */
-unsigned short seq; /* numer sekwencyjny */
+    key_t key; /* key podany w shmget() */
+    uid_t uid; /* UID właściciela */
+    gid_t gid; /* GID właściciela */
+    unsigned short mode;/* uprawnienia + flagi (SHM_DEST,SHM_LOCKED) */
+    unsigned short seq; /* numer sekwencyjny */
 };
 
 ```

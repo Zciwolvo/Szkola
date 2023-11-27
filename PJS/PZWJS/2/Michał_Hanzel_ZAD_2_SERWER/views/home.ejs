@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= data.title.charAt(0).toUpperCase() + data.title.slice(1) %></title>
+</head>
+
+<body>
+    <h1>Welcome to <%= data.title.charAt(0).toUpperCase() + data.title.slice(1) %></h1>
+    <ul>
+        <% data.titles.forEach(result=> { %>
+        <li><a href=<%= result %>> <%= result.charAt(0).toUpperCase() + result.slice(1) %> </a></li>
+        <% }) %>
+    </ul>
+</body>
+
+</html>
