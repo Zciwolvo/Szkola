@@ -188,26 +188,26 @@ Z takim właśnie podejście napisaliśmy poniższy przykład modelu sieci:
 
 ### Podsieć 1: Dla pracowników administracyjnych i biurowych
 
-Adres IP: 192.168.1.0/24 \
+Adres IP: 172.17.10.0/24 \
 Liczba adresów IP: 8 \
 Przykładowe adresy IP: 
-- Dla urządzeń: 192.168.1.1 - 192.168.1.4 
-- Dla drukarek sieciowych, serwerów: 192.168.1.5 - 192.168.1.8
+- Dla urządzeń: 172.17.10.1 - 172.17.10.4 
+- Dla drukarek sieciowych, serwerów: 172.17.10.5 - 172.17.10.8
 
 ### Podsieć 2: Dla lekarzy i personelu medycznego
 
-Adres IP: 192.168.2.0/24 \
+Adres IP: 172.17.20.0/24 \
 Liczba adresów IP: 16 \
 Przykładowe adresy IP: 
-- Dla urządzeń: 192.168.2.1 - 192.168.2.8 
-- Dla sprzętu medycznego: 192.168.2.9 - 192.168.2.16 
+- Dla urządzeń: 172.17.20.1 - 172.17.20.8 
+- Dla sprzętu medycznego: 172.17.20.9 - 172.17.20.16 
 
 ### Podsieć 3: Dla systemów diagnostyki obrazowej
 
 Adres IP: 192.168.3.0/24 \
 Liczba adresów IP: 6 \
 Przykładowe adresy IP: 
-- Dla systemów diagnostyki: 192.168.3.1 - 192.168.3.3
+- Dla systemów diagnostyki: 172.17.30 - 192.168.3.3
 - Dla serwerów przetwarzania obrazów: 192.168.3.4 - 192.168.3.6 
 
 ### Podsieć bezprzewodowa 1: Dla pracowników kliniki
@@ -216,7 +216,7 @@ Nazwa sieci: HealthCare_Internal \
 Adres IP: 192.168.4.0/24 \
 Liczba adresów IP: 40 \
 Przykładowe adresy IP: 
-- Dla pracowników: 192.168.4.1 - 192.168.4.40 
+- Dla pracowników: 172.17.40.1 - 192.168.4.40 
 
 ### Podsieć bezprzewodowa 2: Dla pacjentów
 
@@ -224,7 +224,7 @@ Nazwa sieci: HealthCare_Guest \
 Adres IP: 192.168.5.0/24 \
 Liczba adresów IP: 40 \
 Przykładowe adresy IP: 
-- Dla pacjentów: 192.168.5.1 - 192.168.5.40 
+- Dla pacjentów: 172.172.50.1 - 192.168.5.40 
 
 ## Uzasadnienie
 
@@ -234,7 +234,83 @@ Przykładowe adresy IP:
 - **Oddzielenie sieci pracowników od sieci dla pacjentów:** Utworzenie dwóch oddzielnych sieci bezprzewodowych pozwala na segregację urządzeń i użytkowników, co zapewnia dodatkową warstwę zabezpieczeń między sieciami.
 
 
-# TODO
+| Device          | Interface | IP Address    | Subnet Mask    | Default Gateway | VLAN / Description                              |
+|-----------------|-----------|---------------|----------------|-----------------|-------------------------------------------------|
+| Router          | G0/1      | 172.17.10.1   | 255.255.255.0  | N/A             | VLAN 10 (Administrative Staff)                    |
+|                 | G0/2      | 172.17.20.1   | 255.255.255.0  | N/A             | VLAN 20 (Medical Staff)                           |
+|                 | G0/3      | 172.17.30   | 255.255.255.0  | N/A             | VLAN 30 (Diagnostic Imaging Systems)              |
+| Switch          | VLAN 10    | N/A           | N/A            | 172.17.10.1     | VLAN 10 (Administrative Staff)   |
+|                 | VLAN 20    | N/A           | N/A            | 172.17.20.1     | VLAN 20 (Medical Staff)          |
+|                 | VLAN 30    | N/A           | N/A            | 172.17.30     | VLAN 30 (Diagnostic Imaging Systems) - Default GW |
+| Access Point 1  | HealthCare_Internal | 172.17.40.1  | 255.255.255.0  | 172.17.40.1     | HealthCare_Internal             |
+| Access Point 2  | HealthCare_Guest    | 172.172.50.1  | 255.255.255.0  | 172.17.50.1     | HealthCare_Guest             |
+| Workstations    | NIC       | 172.17.10.2-4 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administrative Staff) - Workstations     |
+|                 | NIC       | 172.17.10.5-8 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administrative Staff) - Printers/Servers  |
+|                 | NIC       | 172.17.20.2-9 | 255.255.255.0  | 172.17.20.1     | VLAN 20 (Medical Staff) - Workstations             |
+|                 | NIC       | 172.17.20.10-16| 255.255.255.0 | 172.17.20.1     | VLAN 20 (Medical Staff) - Medical Equipment        |
+|                 | NIC       | 192.168.3.2-6 | 255.255.255.0  | 172.17.30     | VLAN 30 (Diagnostic Imaging Systems) - Workstations|
+|                 | NIC       | 192.168.3.4-6 | 255.255.255.0  | 172.17.30     | VLAN 30 (Diagnostic Imaging Systems) - Servers    |
+| Mobile Devices  | HealthCare_Internal | 192.168.4.2-40| 255.255.255.0 | 172.17.40.1     | HealthCare_Internal    |
+| Patients' Devices | HealthCare_Guest  | 192.168.5.2-40| 255.255.255.0 | 172.17.50.1     | HealthCare_Guest    |
 
-Przydzielić dynamiczne i statyczne adresy i przygotować tabelę adresów dla wszystkich urządzeń.
+
+
+## Protokoły używane w sieci
+
+W naszej sieci będziemy stosować protokoły takie jak:
+
+- VLAN (Virtual Local Area Network) może być dobrym rozwiązaniem w małej sieci. VLAN pozwala na logiczne podzielenie jednej fizycznej sieci na kilka odrębnych segmentów, co może przynieść kilka korzyści:
+- Segmentacja ruchu: Możesz podzielić sieć na logiczne grupy, co pomaga w zarządzaniu i kontrolowaniu ruchu.
+- Bezpieczeństwo: VLAN pozwala na izolowanie ruchu między segmentami, co zwiększa bezpieczeństwo.
+- Łatwiejsze zarządzanie: Ułatwia zarządzanie siecią, zwłaszcza gdy urządzenia wymagają różnych ustawień sieciowych.
+- Optymalizacja wydajności: Możesz zoptymalizować wydajność sieci, minimalizując niepotrzebny ruch między segmentami.
+- DHCP ((Dynamic Host Configuration Protocol)) do przydzielania automatycznych adresów IP
+- DNS (Domain Name System) do rozwiązywania nazw domen. Jest użyteczny w diagnostyce sieciowej i monitorowaniu ruchu sieciowego.
+
+### Dla zabezpieczenia sieci, użyjemy protokołu
+Dla Wi-Fi wykorzystamy
+- WPA3 najnowsza wersja, wprowadzająca dodatkowe usprawnienia bezpieczeństwa, w tym bardziej zaawansowane protokoły szyfrowania, chroniące przed atakami typu "offline" i innymi nowoczesnymi technikami ataków.
+
+oraz zaimplementujemy
+
+Firewall na poziomie urządzeń i bramy sieciowej.
+- Brama sieciowa pełni funkcję punktu kontrolnego między siecią wewnętrzną a zewnętrzną, więc firewall na tym poziomie może skutecznie filtrować ruch przed wejściem do sieci wewnętrznej.
+- Urządzenia firewalle na każdym urządzeniu końcowym pozwolą kontrolować ruch na poziomie indywidualnych komputerów.
+
+Do zarządzania urządzeniami można wykorzystamy protokoły SSH.
+
+Ważne jest także monitorowanie ruchu sieciowego, który osiągniemy przy użyciu protokołu:
+
+- SNMP (Simple Network Management Protocol): jest standardowym protokołem zarządzania siecią, który umożliwia zbieranie informacji oraz monitorowanie i kontrolę urządzeń sieciowych.
+- Zbieranie informacji: SNMP pozwala administratorom na zbieranie danych z urządzeń sieciowych, takich jak routery, przełączniki, serwery, drukarki itp. Te informacje mogą obejmować stan urządzenia, zużycie zasobów itp.
+- Monitoring sieci: SNMP umożliwia monitorowanie wydajności i dostępności urządzeń sieciowych. Administratorzy mogą śledzić zmiany w parametrach i identyfikować potencjalne problemy.
+- Zdalne zarządzanie: SNMP pozwala na zdalne zarządzanie urządzeniami sieciowymi.
+
+Dzięki niemu można modyfikować ustawienia urządzeń, restartować je, aktualizować oprogramowanie itp.
+
+## Opracuj plan zabezpieczeń sieci 
+
+1. Zabezpieczenie sieci 
+
+firewall - administrator ma możliwość zdefiniowania wielu różnych zestawów reguł określających jaki ruch powinien być przez firewall przepuszczany a jaki blokowany. Pozwala także na ustalenie np.innych zasad filtrowania ruchu w godzinach pracy, innych w godzinach popołudniowych, a jeszcze innych w dni wolne od pracy. 
+
+IPS – (ang. Intrusion Prevention System) system Intrusion Prevention wykorzystuje technologię wykrywania i blokowania ataków ASQ (Active Security Qualification). Analizie w poszukiwaniu zagrożeń i ataków poddawany jest cały ruch sieciowy od trzeciej (warstwa sieciowa) do siódmej (warstwa aplikacji) warstwy modelu OSI. Kontroli poddawane są nie tylko poszczególne pakiety ale także połączenia i sesje. 
+
+serwer VPN (ang. Virtual Private Networks) - pozwala na tworzenie bezpiecznych połączeń, tzw. kanałów VPN. Kanały VPN mogą być tworzone pomiędzy użytkownikami pracującymi w terenie (tzw. zdalnymi użytkownikami) a siedzibą firmy lub pomiędzy centralą a oddziałami firmy. 
+
+ochrona antywirusowa – na obecność wirusów sprawdzana jest poczta przychodząca, wychodząca, odwiedzane strony, pobierane pliki, 
+
+filtrowanie URL - filtr URL może być ustawiany dla wszystkich lub wybranych grup użytkowników definiowanych przez administratora. Dodatkowo określone filtry mogą działać tylko w wyznaczonych godzinach, dzięki czemu użytkownicy mogą np. w godzinach popołudniowych mieć zapewniony szerszy dostęp do Internetu niż w czasie godzin pracy. 
+
+oprogramowanie antyszpiegowskie i antyreklamowe - Oprogramowanie wykrywające i usuwające programy szpiegujące (antyspyware) również może być bezpośrednio wbudowane w system chroniony (np. w systemie Windows jest nim Microsoft Defender) lub stosowane jako zewnętrzne rozwiązanie. 
+
+2. Bezpieczeństwo sieci bezprzewodowej 
+
+W celu zapewnienia bezpieczeństwa sieci urządzenia dostępowe (Access Point, AP), z których korzysta eduroam muszą spełniać określone wymagania techniczne, przede wszystkim muszą wspierać standard 802.1X oraz odpowiednie technologie szyfrowania (WPA, WPA2). Urządzenia te powinny funkcjonować w chronionej, dedykowanej podsieci (VLAN-ie) i muszą być na nich wdrożone mechanizmy ochrony przed nieuprawnionym dostępem. 
+
+Dostęp do sieci bezprzewodowej w usłudze eduroam wymaga uwierzytelnienia. Dzięki istnieniu zaufanej struktury serwerów RADIUS nie jest możliwe korzystanie z sieci przez nieuprawnione osoby.  
+
+Stosowanie szyfrowania danych i korzystanie z aplikacji monitorujących i wykrywające włamania 
+
+
 
