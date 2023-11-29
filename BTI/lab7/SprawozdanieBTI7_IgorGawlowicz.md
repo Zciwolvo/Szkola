@@ -185,6 +185,64 @@ Potencjalne źródła ryzyka
 - Fizyczne uszkodzenie sprzętu
 - Dostęp nieautoryzowanego użytkownika
 
+## Ocena ryzyka
+
+- Zagrożenie: 
+- Typ: 
+- Identyfikacja ryzyka: 
+- Analiza ryzyka
+  - Sposób wystąpienia: 
+  - Wpływ:
+  - Prawdopodobieństwo: 
+- Ustalenie priorytetów ryzyka
+  - punktowa ocena:
+- Zarządzanie ryzykiem
+  - Akceptacja ryzyka:
+  - Identyfikacja i ocena planów redukcji:
+  - Przygotowanie planów działania:
+
+- Zagrożenie: **Hasła na karteczkach przyczepionych do monitorów**
+- Typ: **Operacyjne/Reputacji/Finansowe**
+- Identyfikacja ryzyka: **Osoby niepowołane mogą uzyskać dostęp do danych logowania pracowników, co może doprowadzić do wyciku danych firmy i wszystkich jej klientów**
+- Analiza ryzyka
+  - Sposób wystąpienia: **Nieodpowiedzialny pracownik**
+  - Wpływ: **Straty finansowe, logistyka, negatywna reputacja**
+  - Prawdopodobieństwo: **znikome**
+- Ustalenie priorytetów ryzyka
+  - punktowa ocena: **6**
+- Zarządzanie ryzykiem
+  - Akceptacja ryzyka: **Wykluczona**
+  - Identyfikacja i ocena planów redukcji: **Regularne kontrole stanowisko pracowników**
+  - Przygotowanie planów działania: **Szkolenia dotyczące bezpieczeństwa**
+
+- Zagrożenie: **Wyciek informacji przez pracownika**
+- Typ: **Operacyjne/Reputacji/Finansowe**
+- Identyfikacja ryzyka: **Pracownicy ze źle zdefiniowaną umową mogą doprowadzić do ataku na firmę z wewnątrz poprzez wyciek danych.**
+- Analiza ryzyka
+  - Sposób wystąpienia: **Zatrudnianie podejrzanych pracowników**
+  - Wpływ: **Straty finansowe, negatywna reputacja**
+  - Prawdopodobieństwo: **znikome**
+- Ustalenie priorytetów ryzyka
+  - punktowa ocena: **6**
+- Zarządzanie ryzykiem
+  - Akceptacja ryzyka: **Wykluczona**
+  - Identyfikacja i ocena planów redukcji: **Dokładny background check pracowników przed zatrudnieniem**
+  - Przygotowanie planów działania: **Sformułowanie umowy prawne zabezpieczającej obie ze stron**
+
+- Zagrożenie: **Brak odpowiednich kwalifikacji pracowników przedzielonych do zadań**
+- Typ: **Operacyjne/Reputacji/Finansowe**
+- Identyfikacja ryzyka: **Źle wykfalifikowani pracownicy mogą doprowadzić do**
+- Analiza ryzyka
+  - Sposób wystąpienia: **Zatrudnianie podejrzanych pracowników**
+  - Wpływ: **Straty finansowe, negatywna reputacja**
+  - Prawdopodobieństwo: **znikome**
+- Ustalenie priorytetów ryzyka
+  - punktowa ocena: **6**
+- Zarządzanie ryzykiem
+  - Akceptacja ryzyka: **Wykluczona**
+  - Identyfikacja i ocena planów redukcji: **Dokładny background check pracowników przed zatrudnieniem**
+  - Przygotowanie planów działania: **Sformułowanie umowy prawne zabezpieczającej obie ze stron**
+
 ## Polityka bezpieczeństwa
 
 https://securitum.pl/baza-wiedzy/przykladowa-polityka-bezpieczenstwa/
