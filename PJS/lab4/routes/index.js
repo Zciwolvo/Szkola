@@ -38,8 +38,8 @@ router.get('/nowa', (req, res) => {
 
 const zad7 = require('../controllers/zad7Controller');
 
-router.get('/z7nowa', nowaController.Z7nowa);
-router.get('/z7stara', nowaController.Z7stara);
+router.get('/z7nowa', zad7.Z7nowa);
+router.get('/z7stara', zad7.Z7stara);
 
 
 module.exports = router;

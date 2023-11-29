@@ -1,0 +1,19 @@
+{
+    "baza":{
+        "person1":{
+            "name": "Andrzej",
+            "surname": "Kowalski",
+            "age": 30
+        },
+        "person2":{
+            "name": "Maciej",
+            "surname": "Kowalski",
+            "age": 43
+        },
+        "person3":{
+            "name": "Andrzej",
+            "surname": "Nowak",
+            "age": 10
+        }
+    }
+}
