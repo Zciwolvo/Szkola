@@ -66,7 +66,7 @@ row {
 
 &nbsp;
 
-<h2 style="text-align:center; border: none;"><b>Sprawozdanie nr 6</b></h3>
+<h2 style="text-align:center; border: none;"><b>Sprawozdanie nr 7</b></h3>
 <h2 style="text-align:center; border: none;">Użycie i zarządzanie wątkami</h2>
 
 &nbsp;
@@ -91,513 +91,539 @@ Igor Gawłowicz / 59096
 
 ## Cel ćwiczenia
 
-Eksperymentalna analiza wydajności i zachowania procesów oraz wątków w systemie operacyjnym. Celem jest zrozumienie różnic pomiędzy nimi, sposobu zarządzania nimi, komunikacji oraz ocena ich efektywności w kontekście współbieżności.
-
-Porównanie procesów i wątków: Zbadanie różnic między procesami a wątkami, ich zarządzanie przez system operacyjny oraz wpływ na wydajność systemu.
-
-Przeprowadzenie testów wydajnościowych: Ocena czasu wykonywania dla określonych zadań przez procesy i wątki w zależności od rozmiaru danych wejściowych.
+Celem ćwiczenia było zapoznanie się z semaforami jako elementem InterProcess Communication (IPC) w systemie UNIX oraz z ich zastosowaniem do rozwiązywania problemów związanych z synchronizacją i koordynacją między procesami.
 
 ## Przebieg ćwiczenia
 
-Proces jako pewna instancja programu, w trakcie wykonania, ze swej natury w każdym
-systemie operacyjnym wyróżniają:
-- prawa własności zasobu a jednym z fundamentalnych zadań systemu jest ochrona przed jednoczesnym dostępem;
-- szeregowanie i wykonanie procesów odbywa się z poziomu systemu operacyjnego.
+Kolejnym elementem funkcjonalnym InterProcess Communication (IPC) UNIX System Va także POSIX* są semafory. Stanowią one realizację najwcześniejszych pomysłów i sposobów rozwiązania problemów współużytkowania zasobów i koordynacji, który zaproponował Edsger Wybe Dijkstra.
 
-W odróżnieniu od procesu, wątek stanowi podzbiór przestrzeni adresowej procesu,
-współdzielący jego stan i zasoby (również deskryptory plików) – aczkolwiek nie dziedziczy
-stosu procesu (stack).
-
-Dzięki temu komunikacja między wątkowa nie wymaga użycia systemowych mechanizmów
-inter-process communication a przełączanie kontekstu (context switch) jest niewspółmiernie
-szybsze niż w przypadku procesu.
-
-Ponieważ jest uzupełnieniem API systemowego, wymagana jest jawna konsolidacja z
-libpthread.so (albo libpthread.a)
-
-**gcc -Wall <source>.c -o <exec> -lpthread**
-
-Podobnie jak każdemu procesowi w chili jego tworzenia przypisywane jest unikalne \
-**pid_t id;**
-tak też i wątkowi \
-**pthread_t id;**
-
-Wątek może pobrać swój identyfikator wywołaniem
-
-**#include <pthread.h>**\
-**pthrad_t pthread_self(void);**
-
-Wątek tworzony jest wywołaniem funkcji **pthread_create()**
-
-Zakończenie wątku może nastąpić z czterech przyczyn:
-- zwrócenie sterowania z wątku (wywołanie return, exit(), _exit());
-- wywołanie z wątku nadrzędnego (macierzystego);
-- z innego wątku wywołaniem\
-**#include <pthread.h>**\
-**int pthread_cancel( pthread_t tid );**\
-- jawne wywołanie funkcji **pthread_exit()** z kodem powrotu code.
-**#include <pthread.h>**\
-**void pthread_exit( void *code );**
-
-Przedstawimy teraz prosty przykład tego co się stanie jeśli uruchomimy jednocześnie proces i wątek, żeby działały równocześnie
-
-```cpp
-#include<stdio.h>
-#include<pthread.h>
-#define LIMIT 1000
-
-void* o( void* unused )
-{
-    (void)unused;
-    while( LIMIT ){ putchar( 'o' ); }
-    return 0;
-}
-
-int main( void )
-{
-    int current = 0;
-    pthread_t tid;
-    pthread_create( &tid,NULL,&o,NULL );
-    while( current < LIMIT )
-    { 
-        putchar( 'x' ); 
-        current += 1;    
-    }
-    return 0;
-}
-```
+Ponownie możemy sprawdzić aktualnie otwarte semafory za pomocą polecenia `ipcs -s`
 
 ```bash
-$ ./xox
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxoxxxxxxxxxxxxxxxxxxxxxxxoooooooooooooooxxxxxxoxooooooxxxxoooooooooooooooxxxxxxxxxxxxxxxoooooxxxxxoooooxxxxxoooooxxxxxoooooooxxxxxoooooxxxxxoooooooooxxxxxoooooxxxxxxxxxxxooooooxxxxxxxxxxxxxoooooxxxxxxxxxxxxxxxxxooooooooooooxxxxxoooooxxxxxoooooooooooooxxxxxoooooooxxxxxxxxxxoooooooxxxxxxxxxxxxxoxxxxxxxxxxxxxxxxxxxxxxoooooxxxxxooooooooooxoxxxxxxxxxxxxxxxxxoooooooooooooooxxxxxxxoooooooooooxxxxxoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+$ ipcs -s
+
+------ Semaphore Arrays --------
+key        semid      owner      perms      nsems 
 ```
 
-Po pierwszym uruchomieniu programu konsola zacięła się przez zbyt dużą ilość znaków pojawiających się w każdej chwili dlatego ustawiłem limit na 1000 iteracji, co przedstawiło już wystarczająco długi wynik. W każdym razie możemy zauważyć, że wątek pomimo tego że działa równocześnie działa w zupełnie innym i niekontrolowanym tempie, przez co wynik jest bardzo chaotyczny i losowy.
+Każda z nich identyfikowana jest unikalnym kluczem (semkey) oraz identyfikatorem (semid), każda posiada określonego właściciela (tutaj: kmirota) i prawa dostępu (perms). Ostatnia kolumna podaje ilość semaforów w tablicy (tutaj: 1). Usunięcie takiego obiektu z pamięci jądra odbywa się za pomocą ipcrm [-S semkey -s semid].
 
-Przygotujemy teraz program, którego proces utworzy tyle wątków ile podanych będzie w linii
-wywołania programu.
+
+Jądro systemowe zarządza tablicą semaforów wykorzystując strukturę danych o następującej definicji zawartej w sys/sem.h (a de facto włączanej z bits/sem.h) 
 
 ```cpp
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <pthread.h>
-
-void* hello( void *n )
+struct semid_ds
 {
-    printf("PID[%ld] ...jestem wątkiem #%ld! TID[%d]\n",
-    (long)getpid(),(long)n,(int)pthread_self() );
-    pthread_exit( NULL );
-}
+    struct ipc_perm sem_perm; 
+    __time_t sem_otime;
+    __time_t sem_ctime;
+    unsigned long int sem_nsems;
+};
+```
 
-int main( int argc,char *argv[] )
+Generalnie obligatoryjnymi są 4 wymienione pola struktury semid_ds, a standard UNIX System Vi POSIX, dopuszcza rozszerzania tej definicji. Uprawnienia przechowywane w - podobnie jak i dla pozostałych obiektów IPC - w strukturze ipc_perm (bits/ipc.h). 
+
+```cpp
+struct ipc_perm
 {
-    pthread_t tid;
-    int rc;
-    long i,n;
-    void* hello( void*);
-    if( argc>1 )
+    __key_t_key;
+    __uid_t uid;
+    __uid_t cuid;
+    __gid_t gid;
+    __gid_t cgid;
+    unsigned short int mode;
+    unsigned short int __seq;
+};
+```
+
+Zgodnie z POSIX.1-2001 wartości dla wszystkich nowotworzonych semaforów są nieokreślone, aczkolwiek w przypadku wielu implementacji systemowych - mimo wszystko wprowadza się inicjowanie (i tak przykładowo w LINUX są inicjowane zerami 0). Do dobrej praktyki należy zakładanie iż wartość jest ta jest nieokreślona.
+
+Warto jeszcze zauważyć, że w odniesieniu do:
+- maksymalna ilość semaforów związana z danym identyfikatorem jest ograniczona predefiniowanym w linux/sem.h parametrem SEMMSL;
+- wartość ta określana jest w momencie tworzenia tablicy i nie może być później zmieniana
+- jeżeli odwołujemy się do istniejącej już tablicy, to wartość ta nie ma znaczenia może być zero (0).
+
+Podając wartość klucza można skorzystać z funkcji
+
+**key_t ftok(const char *pathname, int id );**
+
+podając pewne arbitralnie obrane: pathname ścieżką (ale istniejącą) oraz id będący liczbą całkowitą niezerową.
+
+Przygotujemy teraz program, który utworzy zbiór semaforów o zadanym w linii komend rozmiarze. Z założenia ta tablica będzie dostępna dla procesów użytkownika
+
+```cpp
+#include <stdio.h> //...standardowe wejście/wyjście
+#include <stdlib.h> //...komunikat błędu perror ()
+#include <unistd.h> //... identyfikacja procesu geppid()
+#include <sys/sem.h> //... stąd deklaracje dot. semaforów
+#include <sys/stat.h> //...maski uprawnień, choć można inaczej
+//skoro czytamy z linii komend, to nagłówek main()
+int main(int argc, char** argv)
+{
+    int nsems;
+    int semflag; 
+    key_t key;
+    //...zmienna dla ilość semaforów w tworzonym zbiorze 
+    //...zmienna dla maski tworzenia semaforów 
+    //...zmienna dla klucza identyfikującego zbiór
+
+    if( argc>1 ) //...sprawdźmy na początek, czy wywołanie było poprawne
     {
-        sscanf( argv[1],"%ld",&n );
-        for( i=0;i<n;i++ )
+        sscanf(argv[1], "%d", &nsems); //...odczytujemy ilość semaforów 
+        if (nsems > 0) //...sprawdzmy tak na wszelki wypadek
         {
-            printf( "PID[%ld] tworzy wątek,...#%ld...\n",
-            (long)getpid(),(i+1));
-            rc = pthread_create( &tid, NULL,hello,(void *)(i+1));
-            if(rc)
-            {
-                perror( "!.!.!...błąd pthread_create()...");
-                exit(rc);
-            }
-        }
-    }
-    else
-    { 
-        printf( "!.!.!... wywołanie powinno mieć postać: %s %s\n", argv[0],"<ilość_wątków>" ); 
-    }
-
-    pthread_exit( NULL );
-}
-```
-
-
-Początkowo wywołałem program bez podania parametrów więc program zwrócił nam
-
-```bash
-$  ./hello
-!.!.!... wywołanie powinno mieć postać: ./hello <ilość_wątków>
-```
-
-Jednak po podaniu parametru według instrukcji od razu otrzymamy
-
-```bash
-$  ./hello 5
-PID[1131] tworzy wątek,...#1...
-PID[1131] tworzy wątek,...#2...
-PID[1131] tworzy wątek,...#3...
-PID[1131] ...jestem wątkiem #1! TID[346195712]
-PID[1131] ...jestem wątkiem #2! TID[337803008]
-PID[1131] tworzy wątek,...#4...
-PID[1131] ...jestem wątkiem #3! TID[329410304]
-PID[1131] tworzy wątek,...#5...
-PID[1131] ...jestem wątkiem #4! TID[321017600]
-PID[1131] ...jestem wątkiem #5! TID[201324288]
-```
-
-Ponownie możemy zauważyć dość chaotyczną naturę wątków.
-
-W kolejnym przykładzie prześlemy, z procesu głównego do wątku potomnego, tablicę liczbową
-a tam zostanie wyznaczona wartość średnia jej elementów
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-#define n 10000 
-void* thread( void* array )
-{
-    int i;
-    double sum,avg;
-    for( i=0,sum=0.0;i<n;i++ )
-    { 
-        sum += *( (double*)array+i );
-    }
-    avg = sum/n;
-    printf( "wartość średnia: %16.10f\n",avg );
-    return ( (void*)0 );
-}
-
-int main( void )
-{
-    int i;
-    pthread_t tid;
-    double x[n];
-    // double *x;
-    // x = (double*) calloc( size_t n, sizeof( double ) );
-    // free( (void*)x );
-    for( i=0;i<n;i++ )
-    { 
-        *(x+i) = ((double)rand())/(RAND_MAX); 
-    }
-    printf( "wysyłam dane do wątku...[%d]\n",(int)tid );
-    pthread_create( &tid, NULL,thread,(void *)x );
-    printf( "...czekam na wątek\n" );
-    return 0;
-}
-```
-
-Mamy tutaj dość ciekawy przypadek, gdyż program wykonuje się jednak wyniki nie są takie jakich się spodziewamy
-
-```bash
-$  ./table
-wysyłam dane do wątku...[673161680]
-...czekam na wątek
-```
-
-Możemy zauważyć, że dane zostały wysłane do wątku jednak nigdy nie zostały zwrócone ponieważ główny proces skończył się zanim doszło do finalizacji wątku.
-
-Moglibyśmy rozwiązać ten problem poprzez użycie polecenia `sleep`, aczkolwiek nie jest to zalecane rozwiązanie, aby naprawić ten błąd powiniśmy użyć instrukcji `pthread_join()`, ale o tym już w następnym przykładzie.
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-
-void *thread( void *arg )
-{
-    int i;
-    printf( "...w wątku\n" ); fflush( stdout );
-    for ( i=0;i<5;i++ )
-    { 
-        printf("\t%3d s\n",(i+1) ); 
-        fflush( stdout ); 
-        sleep(1); 
-    }
-    printf( "...i już koniec, zwracam sterowanie\n" ); 
-    fflush( stdout );
-    pthread_exit( NULL );
-}
-
-int main( void )
-{
-    pthread_t tid;
-    int rc;
-    void* thread( void* );
-    rc = pthread_create( &tid, NULL,thread,NULL );
-    if( rc )
-    { 
-        perror( "!.!.!...pthread_create()..." ); 
-        exit( 1 );
-    }
-    else
-    {
-        if( pthread_join ( tid, NULL ) )
-        { 
-            perror( "!.!.!...pthread_join()..." ); 
-            exit( 2 ); 
-        }
-    }
-    return 0;
-}
-
-```
-
-Tym razem w odróżnieniu od poprzedniego przykładu, główny proces poczekał na działający wątek.
-
-```bash
-$  ./join
-...w wątku
-          1 s
-          2 s
-          3 s
-          4 s
-          5 s
-...i już koniec, zwracam sterowanie
-```
-
-Funkcja pthread_join(), ze swej natury, służy przyłączeniu jednego wątku co może stanowić
-pewnie problem jeżeli wątków będzie więcej.
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <pthread.h>
-#include <limits.h>
-#define T 10
-#define N 100000
-//#define N INT_MAX ...dla chcących sprawdzić wentylator
-
-void *thread( void *n )
-{
-    int i;
-    double sum;
-    printf("...wątek %3ld startuje...\n",(long)n ); 
-    fflush( stdout );
-    for( i=0,sum=0.0;i<N;i++ )
-    {
-        sum += sin((double)i)*sin((double)i) +
-        cos((double)i)*cos((double)i) - 1.0;
-    }
-    printf("...wątek %3ld zakończył...suma = %e\n",(long)n,sum );
-    fflush( stdout );
-    pthread_exit( NULL );
-}
-
-
-int main( void )
-{
-    pthread_t threads[T];
-    int rc;
-    long t;
-    for( t=0;t<T;t++)
-    {
-        rc = pthread_create( &threads[t],NULL,thread,(void *)(t+1) );
-        if (rc) 
-        { 
-            perror( "!.!.!...pthread_create()..." ); 
-            exit( 1 ); 
-        }
-    }
-    for( t=0;t<T;t++)
-    {
-        rc = pthread_join( threads[t],NULL );
-        if (rc){ 
-            perror( "!.!.!...pthread_join()..." ); 
-            exit( 2 ); 
-        }
-    }
-    pthread_exit(NULL);
-}
-```
-
-Widzimy że pomimo tego że oczekujemy na każdy z wątków wynik wciąż jest dość chaotyczny
-
-```bash
-$  ./joins
-...wątek   2 startuje...
-...wątek   1 startuje...
-...wątek   3 startuje...
-...wątek   7 startuje...
-...wątek   8 startuje...
-...wątek   9 startuje...
-...wątek   5 startuje...
-...wątek   6 startuje...
-...wątek  10 startuje...
-...wątek   4 startuje...
-...wątek   2 zakończył...suma = -1.311840e-12
-...wątek   1 zakończył...suma = -1.311840e-12
-...wątek   7 zakończył...suma = -1.311840e-12
-...wątek   3 zakończył...suma = -1.311840e-12
-...wątek   8 zakończył...suma = -1.311840e-12
-...wątek   4 zakończył...suma = -1.311840e-12
-...wątek   9 zakończył...suma = -1.311840e-12
-...wątek   5 zakończył...suma = -1.311840e-12
-...wątek   6 zakończył...suma = -1.311840e-12
-...wątek  10 zakończył...suma = -1.311840e-12
-```
-
-Dzieje się tak ponieważ nie jesteśmy w stanie kontrolować tego w jakiej kolejności każdy z wątków rozpocznie pracę przez co wszystko się w dość losowej kolejności.
-
-Jednym z kluczowych względów zastosowania wątków na gruncie współbieżności, prócz
-wymienionych na wstępnie, są kwestie efektywności.
-
-Aby dokonać takiej oceny napiszemy dwa programy, które uruchomią identyczną ilość
-procesów oraz wątków i porównamy czasy jakie zużyje na to system.
-
-Cele określenia czasu wykonywania wykorzystamy komendę systemową \
-time <command> \
-podaje ona oszacowanie czasu dla procesu, z podziałem na składowe
-- real, w przybliżeniu jest to
-**real ≈ user + sys**\
-jednak w przypadku systemów multi-tasking, dodatkowo pracujących przy dużym obciążeniu\
-**real ≫ user + sys**
-- user, jest to czas kiedy CPU pozostawał w trybie user mode, a więc wykonywane były
-zakodowane instrukcje czy były wywołanie funkcji bibliotecznych typu printf(), malloc(),
-strlen(), fopen(), i podobnych;
-- sys , jest to czas kiedy CPU pozostawał w trybie kernel mode, a więc wystąpiły wywołania
-funkcji systemowych w rodzaju open(), read(), write(), close(), wait(), exec(),
-fork(), exit(), i podobnych.
-
-Przykładowo:
-
-```bash
-$ time sleep 5
-real 0m5.006s
-user 0m0.000s
-sys 0m0.004s
-```
-
-czyli uśpienie na 5 sekund zajęło de facto 5.006 sekundy, z czego na wywołania funkcji
-użytkownika wypadło 0 (bo ich nie było) a systemowych 4 milisekundy. Zauważmy, że
-pojawiły się też 2 milisekundy opóźnienia wynikła z faktu, że nie jest to w końcu jedyny proces
-obsługiwany przez system.
-
-Załóżmy że oba programy wywołają funkcję jak niżej
-
-```cpp
-void* task( void* arg )
-{
-    double x;
-    x = 1.0 + 1.0;
-    return NULL;
-}
-
-```
-
-Typ dla funkcji i parametru formalnego, wybrano tak aby uzyskać zgodność z
-pthread_create(), przy czym dla:
-- procesów, będzie ona wykonywana przez potomka powołanego wywołaniem fork();
-- wątków, będzie to po prostu funkcja wątku, zadana w wywołaniu pthread_create();
-
-Dla pierwszego przykładu program będzie wyglądać następująco
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <limits.h>
-
-void* task( void* arg )
-{
-    double x;
-    x = 1.0 + 1.0;
-    return NULL;
-}
-
-
-int main( int argc,char** argv )
-{
-    unsigned long i,n;
-    int status;
-    pid_t pid;
-    if( argc>1 )
-    {
-        if( sscanf( argv[1],"%lu",&n )==1 )
-    {
-    for( i=0;i<n;i++ )
-    {
-        switch( (int)(pid=fork()) )
-        {
-            case -1: perror( "!.!.!...fork()..." ); exit( 1 ); break;
-            case 0: task( NULL ); exit( 0 ); break;
-            default: waitpid( pid,&status,0 );
-        }
-    }
-    }
-    else{ printf( "!.!.!...błędny argument [%s] wywołania [%s]\n",argv[1],argv[0] ); }
-    }
-    else{ printf( "!.!.!... %s [ilość < ULONG_MAX=%lu]\n",argv[0],ULONG_MAX ); }
-    return 0;
-}   
-```
-
-A drugi program wykorzystujący wątki
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <limits.h>
-
-void* task( void* arg )
-{
-    double x;
-    x = 1.0 + 1.0;
-    return NULL;
-}
-
-int main( int argc,char** argv )
-{
-    unsigned long i,n;
-    pthread_t tid;
-    if( argc>1 )
-    {
-        if( sscanf( argv[1],"%lu",&n )==1 )
-        {
-        for( i=0;i<n;i++ )
-        {
-            if( pthread_create( &tid, NULL,task,NULL ) )
+            key = ftok( "/tmp", 'a'+'t'+'h'+'r'+'i'+'r');
+            //...taki sobie komunikat diagnostyczny
+            printf( "[pid=%u] tworzy zbiór %d semaforów [key=%x]\n", (unsigned) getpid(),nsems, (unsigned) key);
+            //...przygotujemy maskę tworzenia semaforów 
+            semflag = IPC_CREAT | S_IRUSR | S_IWUSR;
+            //...i to już wszystkie czynności przygotowawcze do semget()
+            if(semget(key,nsems, semflag )==-1) //...jeżeli,to kłopot
             { 
-                perror( "!.!.!...fork()..." ); 
-                exit( 1 ); 
+                perror("\tsemget()..."); 
+                exit(3); 
+            }
+            /*- a dalej to już tylko diagnostyka ewentualnych błędów -*/
+
+        }
+        else
+        {
+            printf("\tbłędna ilość semaforów (n=%d)\n",nsems ); 
+            exit(2);
+        }
+
+    }        
+    else
+    { 
+        printf("\t%s [%s]\n%s", argv[0], "n",
+        "\tn -rozmiar tworzonej tablicy semaforów\n"); 
+        exit(1); 
+    } 
+    return 0;
+}
+```
+
+I teraz możemy uruchomić nasz program podając jakiś parametr
+
+```bash
+$ ./setsem 5
+[pid=1369] tworzy zbiór 5 semaforów [key=8a5067ec]
+```
+
+Po czym możemy sprawdzić czy semafor faktycznie powstał
+
+```bash
+ipcs -s
+
+------ Semaphore Arrays --------
+key        semid      owner      perms      nsems     
+0x8a5067ec 0          zciwolvo   600        5  
+```
+
+Ponownie jak w poprzednich z funkcji IPCs kontrola nad semaforami odbywa się za pomocą polecenia **semctl()**
+
+Gdybyśmy chcieli po działaniu programu usunąć nasz semafor musialibyśmy zmodyfikować kod w następujący sposób
+
+```cpp
+#include <stdio.h> //...standardowe wejście/wyjście
+#include <stdlib.h> //...komunikat błędu perror ()
+#include <unistd.h> //... identyfikacja procesu geppid()
+#include <sys/sem.h> //... stąd deklaracje dot. semaforów
+#include <sys/stat.h> //...maski uprawnień, choć można inaczej
+//skoro czytamy z linii komend, to nagłówek main()
+int main(int argc, char** argv)
+{
+    int nsems;
+    int semflag; 
+    int semid;
+    key_t key;
+
+    if( argc>1 ) //...sprawdźmy na początek, czy wywołanie było poprawne
+    {
+        sscanf(argv[1], "%d", &nsems); //...odczytujemy ilość semaforów 
+        if (nsems > 0) //...sprawdzmy tak na wszelki wypadek
+        {
+            key = ftok( "/tmp", 'a'+'t'+'h'+'r'+'i'+'r');
+            //...taki sobie komunikat diagnostyczny
+            printf( "[pid=%u] tworzy zbiór %d semaforów [key=%x]\n", (unsigned) getpid(),nsems, (unsigned) key);
+            //...przygotujemy maskę tworzenia semaforów 
+            semflag = IPC_CREAT | S_IRUSR | S_IWUSR;
+            semid = semget(key, nsems, semflag);
+            //...i to już wszystkie czynności przygotowawcze do semget()
+            if(semid == -1) //...jeżeli,to kłopot
+            { 
+                perror("\tsemget()..."); 
+                exit(3); 
             }
             else
-            { 
-                pthread_join ( tid, NULL ); 
+            {
+                if (semctl(semid, 0x0, IPC_RMID) == -1)
+                {
+                    perror("\tsemctl()");
+                    exit(1);
+                }
             }
+            /*- a dalej to już tylko diagnostyka ewentualnych błędów -*/
+
         }
+        else
+        {
+            printf("\tbłędna ilość semaforów (n=%d)\n",nsems ); 
+            exit(2);
         }
+
+    }        
     else
     { 
-        printf( "!.!.!...błędny argument [%s] wywołania [%s]\n",argv[1],argv[0] ); 
-    }
-    }
-    else
-    { 
-        printf( "!.!.!... %s [ilość < ULONG_MAX=%lu]\n",argv[0],ULONG_MAX );
+        printf("\t%s [%s]\n%s", argv[0], "n",
+        "\tn -rozmiar tworzonej tablicy semaforów\n"); 
+        exit(1); 
+    } 
+    return 0;
+}
+```
+
+```bash
+$ ./setsem 5
+[pid=1421] tworzy zbiór 5 semaforów [key=8a5067ec]
+zciwolvo@cloudshell:~ (glassy-courage-399021)$ ipcs -s
+
+------ Semaphore Arrays --------
+key        semid      owner      perms      nsems 
+```
+
+Operacje na semaforach wykonujemy za pomocą funkcji **semop()**
+
+Utworzymy teraz krótki program w którym zdefiniujemy pojedyńczy semafor, zainicjiujemy jego wartość, a następnie odwołamy się do niego z procesu potomnego wygenerowanego za pomocą **fork()**
+
+```cpp
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <unistd.h> 
+#include <sys/stat.h> 
+#include <sys/sem.h> 
+#include <sys/wait.h>
+int main(void)
+{
+    int status;
+    key_t semkey; //... zmienne opisujące
+    int nsems, semflag, semid; //...tworzoną tablicę semaforów 
+    struct sembuf sems; //...tworzoną tablicę semaforów struktura dla semop()
+    nsems = 1; //... tworzymy tablicę semaforów, z jednym semaforem 
+    semkey = ftok( "/tmp", 'k'+'m' );
+    semflag = IPC_CREAT | S_IRUSR | S_IWUSR;
+    semid = semget(semkey, nsems, semflag);
+
+    sems.sem_num = 0; //... indeks do semafora, pierwszy=0 !
+    sems.sem_op = 7; //... może współdzielić 7 procesów
+    sems.sem flg = 0x0; //... czyli z blokadą
+    semop(semid, &sems,nsems ); //... inicjujemy semafor
+    //... teraz pozostaje już tylko utworzyć proces potomny
+    switch( fork() )
+    {
+        case -1: //... obsługa błędu fork()
+            printf("!.!.!... błąd fork()...!.!.!\n" ); 
+            exit( 1 ); 
+            break; 
+        case 0: //... kod dla procesu potomnego
+            printf("[u] semval=%d\n", (unsigned) getpid(), semctl(semid, 0, GETVAL) ); 
+            exit( 0 ); 
+            break; 
+        default: //...kod dla procesu nadrzędnego
+            wait(&status );
+            printf( "[%u] semval=%d\n", (unsigned) getpid(), semctl(semid, 0, GETVAL) );
+            semctl(semid, 0x0, IPC_RMID); //... usuwamy semafory
     }
     return 0;
 }
-
 ```
 
-<center>
-<img src="./TvF.png"></img>
-</center>
+```bash
+$ ./semval
+[1395] semval=7
+[1394] semval=7
+```
 
+Oznacza to że program za działał i nasuwa nam się pytanie, dlaczego zarówno program macierzysty i potomek widzi nowo utworzony semafor?
+
+Jest to dość proste ponieważ obiekty IPC, są dziedziczone w programie.
+
+Jeśli by tak nie było obiekty IPC nie miałyby zbyt dużego użytku i byłyby troszkę zbyteczne.
+
+Następny kod, w którym semafor będzie użyty celem ochrony sekcji krytycznej następnych procesów.
+
+```cpp
+
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <unistd.h> 
+#include <sys/stat.h>
+#include <sys/sem.h>
+union semun //...struktura potrzebna dla semctl()
+{
+    int value; 
+    struct semid_ds *stat;
+    unsigned short int *array; 
+    struct seminfo *info;    
+};
+
+int main(int argc, char ** argv)
+{
+    key_t key;
+    int semid, flag;
+    struct sembuf P={0,-1,0}; //...żądanie dostępu {numer, operacja, flaga}
+    struct sembuf V={ 0,+1,0}; //...zwolnienie zasobu {numer, operacja, flaga}
+    union semun control;
+    int i,p,k,n;
+    double x;
+    if( argc<2) //...sprawdźmy, czy aby wywołanie jest poprawne
+    {
+        printf("%s %s\n %s\n", argv[0], "[n]", "n-krotność wykonania procesu" ); 
+        exit(1);
+    }
+    
+    sscanf(argv[1], "%d",&p ); //...jeżeli tak, to czytamy ilość powtórzeń
+    key = ftok("/tmp", 'k'+'m' ); 
+    flag = IPC_CREAT | S_IRUSR | S_IWUSR; 
+    semid = semget(key,1,flag); //... tworzymy tablicę semaforów (pojedynczy) 
+    control.value = 1; //... inicjowanie semafora (binarnego) wartością 1 
+    semctl(semid, 0x0, SETVAL, control);
+    switch( fork() ) //...utworzenie procesu potomnego
+    {
+        case 1: //...obsługa błędu fork
+            printf("!.!.!...fork()...!.!.!\n"); 
+            exit(1); 
+            break;
+        case 0: //...kod dla procesu potomnego
+            printf("...[%u]...proces potomny.......start\n", (unsigned) getpid()); 
+            fflush(stdout); 
+            break;
+        default: //...kod dla procesu macierzystego
+            printf("... [%u]...proces macierzysty...start\n", (unsigned) getpid()); 
+            fflush(stdout); 
+            break;
+    }
+    for(i=0;i<p;i++ )
+    {
+        semop(semid, &P, 1 );
+        //...początek sekcji krytycznej
+        printf(" [%u]...rozpoczyna wykonywanie sekcji krytycznej\n", (unsigned) getpid());
+        n = rand();
+        for(k=0,x=0;k<n; k++ ) 
+        { 
+            x += (double) rand()/RAND_MAX; 
+        } 
+        printf("    n=%d x=%f\n",n,x/(double)n ); 
+        fflush(stdout); 
+        printf("    [%u]...kończy wykonywanie sekcji krytycznej\n", (unsigned) getpid());
+        //...koniec sekcji krytycznej
+        semop(semid, &V, 1 );
+    }
+
+    semctl(semid, 0x0, IPC_RMID, control ); //...usuwamy tablicę semaforów
+    return 0;
+}
+```
+
+```bash
+$ ./forks-1 2
+... [1452]...proces macierzysty...start
+    [1452]...rozpoczyna wykonywanie sekcji krytycznej
+... [1453]...proces potomny.......start
+    n=1804289383 x=0.499997
+    [1452]...kończy wykonywanie sekcji krytycznej
+    [1453]...rozpoczyna wykonywanie sekcji krytycznej
+    n=1804289383 x=0.499997
+    [1453]...kończy wykonywanie sekcji krytycznej
+    [1452]...rozpoczyna wykonywanie sekcji krytycznej
+    n=298072528 x=0.500004
+    [1452]...kończy wykonywanie sekcji krytycznej
+    [1453]...rozpoczyna wykonywanie sekcji krytycznej
+```
+
+Niezależnie od czasu trwania wykonania sekcji krytycznej, jest ona w każdym przypadku skutecznie chroniona, choć znajduje się w obrębie części wspólnej kodu procesów.
+Zwróćmy także uwagę na kolejność wykonywania się procesów.
+
+Często będzie nam zależało na uzyskaniu pożądanej kolejności wykonania procesów. Można to zrobić następująco
+
+```cpp
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <unistd.h> 
+#include <sys/stat.h> 
+#include <sys/sem.h>
+int main( void )
+{
+    union semun
+    {
+        int value; 
+        struct semid_ds *stat;
+        unsigned short int *array; 
+        struct seminfo *info;
+    } control;
+    key_t key;
+    int flag, semid;
+    struct sembuf sems;
+
+    key = ftok("/tmp", 'k'+'m' ); 
+    flag = IPC_CREAT | S_IRUSR | S_IWUSR; 
+    semid = semget(key, 1, flag);
+    control.value =+1; 
+    semctl(semid, 0x0, SETVAL, control );
+    sems.sem_num = 0; 
+    sems.sem_flg = 0x0; 
+    switch( (int) fork() )
+    {
+        case 1: 
+            perror("...fork()...\t"); 
+            exit(1); 
+            break; 
+        case 0:
+            sems.sem_op -1; 
+            semop ( semid, &sems, 1); 
+            printf("...child...\t: %u\n", (unsigned) getpid() ); 
+            sems.sem_op =+2; 
+            semop( semid, &sems, 1 ); 
+            break;
+        default:
+            sems.sem_op =-2; 
+            semop( semid, &sems, 1);
+            printf("...master...\t: %u\n", (unsigned) getpid() ); 
+            sems.sem_op =+1; 
+            semop( semid, &sems, 1); 
+            break;
+    }
+    semctl(semid, 0x0, IPC_RMID );
+    return 0;
+}
+```
+
+```bash
+$ ./forks-2 2
+...child...     : 1496
+...master...    : 1495
+```
+
+Ze względu na sposób w jaki zaincjowaliśmy i wykorzystaliśmy semafor proces potomny zawsze będzie wykonany jako pierwszy.
+
+Posługując się semaforami można wymusić pewną krotność wykonywania określonego procesu podczas gdy wykonanie innego czasowo zawieszamy.
+
+```cpp
+#include <stdio.h> 
+#include <stdlib.h>
+#include <unistd.h> 
+#include <sys/stat.h> 
+#include <sys/sem.h>
+
+int main( void )
+{
+    union semun
+    {
+        //...tę strukturę musimy zdefiniować we własnym zakresie
+        int count; 
+        struct semid_ds *stats;
+        unsigned short int *array; 
+        struct seminfo *infos;
+    } control;
+    //...struktury wykorzystywane przez semop()
+    struct sembuf PO={0,-1,0 }, VO={0,1,0 },Z0={0,0,0 }; 
+    struct sembuf P1={ 1,-1,0 },V1={ 1,1,0 },Z1={ 1,0,0 }; //...i cała reszta
+    key_t key; 
+    pid_t pid;
+    int semid, flag,nsems, step;
+    key=ftok("/tmp", 'k'+'m' ); 
+    flag=IPC_CREAT | S_IRUSR | S_IWUSR; 
+    nsems = 2;
+    semid = semget(key, nsems, flag);
+    control.count = 1; 
+    semctl(semid, 0, SETVAL, control);
+    control.count = 5; 
+    semctl(semid, 1, SETVAL, control); //czyli będzie 5 cykli
+
+    pid = fork(); //...uaktywniamy proces potomny
+    for(step=0; step<control.count; step++)
+    {
+        if(!pid) //...to wyłacznie dla potomka
+        {
+            printf("[%u]...procesu potomny... start\n", (unsigned) getpid() ); 
+            semop(semid, &PO, 1 ); //... ustawiamy semafor '0' 
+            printf("[%u]...krytyczna...start\n", (unsigned) getpid() );
+            sleep( 1 );
+            printf("[%u]...krytyczna...stop\n", (unsigned)getpid() ); 
+            semop(semid, &VO,1 ); //...i zwalniamy semafor '0' 
+            //...jeszcze zwiększymy o 1 wartość semafora 1,
+            // blokującego proces nadrzędny
+            semop(semid, &P1,1 ); //...zwiększamy wartość o '1' dla 
+            printf("[%u]...procesu potomny...stop\n\n", (unsigned) getpid() );
+        }
+    } //...no i załóżmy, że to wszystko, co miał zrobić potomek/potomkowie
+    /* Jeżeli pozostawimy ten fragment w komentarzu, to...
+    if(!pid)
+    {
+        printf("[%u]...proces potomny zwalnia pamięć\n", (unsigned) getpid()); 
+        exit( 0 );
+    }
+    ...potomek wykona i całą resztę kodu (kiedy zakończy pętlę)*/
+    semop(semid, &Z1, 1); //...na tym semaforze zatrzymał się parent
+    //...przechodzi go w momencie kiedy, właściwą wartość ustawi potomek 
+    printf("[%u]...proces nadrzędny odzyskał sterowanie\n", (unsigned) getpid()); //...na koniec usuwany semafor z pomięci
+    semctl(semid, 0x0, IPC_RMID );
+    return 0;
+}
+```
+
+```bash
+$ ./forks-3
+[1528]...procesu potomny... start
+[1528]...krytyczna...start
+[1528]...krytyczna...stop
+[1528]...procesu potomny...stop
+
+[1528]...procesu potomny... start
+[1528]...krytyczna...start
+[1528]...krytyczna...stop
+[1528]...procesu potomny...stop
+
+[1528]...procesu potomny... start
+[1528]...krytyczna...start
+[1528]...krytyczna...stop
+[1528]...procesu potomny...stop
+
+[1528]...procesu potomny... start
+[1528]...krytyczna...start
+[1528]...krytyczna...stop
+[1528]...procesu potomny...stop
+
+[1528]...procesu potomny... start
+[1528]...krytyczna...start
+[1528]...krytyczna...stop
+[1528]...procesu potomny...stop
+
+[1528]...proces nadrzędny odzyskał sterowanie
+[1527]...proces nadrzędny odzyskał sterowanie
+```
 
 ## Wnioski
 
-1. Wątki są lżejsze od procesów: Wątki współdzielą zasoby w ramach procesu, co prowadzi do mniejszego narzutu systemowego i szybszego przełączania kontekstu w porównaniu z procesami.
+1. **InterProcess Communication (IPC):**
+   - Semafor to mechanizm synchronizacji IPC służący do kontrolowania dostępu do współdzielonych zasobów między procesami.
+   - Pozwala on na kontrolę dostępu do sekcji krytycznej, zapobiegając współbieżnym dostępom wielu procesów do jednego zasobu.
 
-2. Komunikacja międzywątkowa bezpośrednia: Wątki mogą komunikować się bez konieczności używania mechanizmów inter-process communication, co przyspiesza ich współpracę w obrębie jednego procesu.
+2. **Operacje na semaforach:**
+   - Tworzenie semaforów odbywa się przy użyciu funkcji `semget()`.
+   - Kontrola semaforów (np. inicjowanie, odczytywanie, usuwanie) odbywa się za pomocą funkcji `semctl()`.
+   - Realizacja operacji P (wait) i V (signal) odbywa się przy użyciu funkcji `semop()`.
 
-3. Wyższa wydajność wątków w przypadku wielu zadań: Testy wykazały, że wątki są szybsze od procesów, szczególnie przy wykonywaniu wielu zadań równocześnie. Jednak zarządzanie większą liczbą wątków wymaga ostrożności i może wpłynąć na wydajność systemu.
+3. **Inicjacja semaforów:**
+   - Semafor może być zainicjowany wartością początkową przez funkcję `semctl()` lub automatycznie inicjowany przez system.
 
-4. Synchronizacja jest kluczowa: Zarządzanie wieloma wątkami wymaga starannej synchronizacji, aby uniknąć problemów z dostępem do wspólnych zasobów, zakleszczeń czy błędów.
+4. **Dziedziczenie semaforów:**
+   - Procesy potomne mogą dziedziczyć semafory utworzone przez procesy macierzyste, co pozwala na ich wspólne wykorzystanie.
 
-5. Optymalne zarządzanie wątkami: Przemyślane podejście do zarządzania i synchronizacji wątków może znacząco wpłynąć na wydajność, stabilność i zachowanie systemu w kontekście współbieżności.
+5. **Kontrola dostępu i sekcje krytyczne:**
+   - Semafor jest użyteczny do zapewnienia bezpieczeństwa w sekcjach krytycznych poprzez blokowanie lub zwalnianie dostępu.
+   - Zastosowanie semaforów pozwala na kontrolę dostępu do współdzielonych zasobów, zapobiegając wyścigom (race conditions) między procesami.
+
+6. **Synchronizacja procesów:**
+   - Semafor może być wykorzystany do synchronizacji procesów, na przykład do wymuszenia kolejności ich wykonywania.
+   - Możliwe jest użycie semaforów do sterowania ilością powtórzeń lub zabezpieczenia sekcji krytycznych przed jednoczesnym dostępem wielu procesów.
