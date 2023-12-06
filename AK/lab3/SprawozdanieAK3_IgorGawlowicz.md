@@ -309,3 +309,257 @@ decimal 555
 Binary: 1000101011
 ```
 
+Następnym krokiem będzie przemiana liczby szesnastkowej na dziesiętną i binarną
+
+Wykorzystamy do tego funkcję konwertującą z hexa na dziesiątkowy
+
+```cpp
+int hexadecimalToDecimal(const std::string& hex) {
+    int decimal = 0;
+    int power = 0;
+    for (int i = hex.length() - 1; i >= 0; --i) {
+        int digit;
+        if (hex[i] >= '0' && hex[i] <= '9') {
+            digit = hex[i] - '0';
+        } else if (hex[i] >= 'A' && hex[i] <= 'F') {
+            digit = hex[i] - 'A' + 10;
+        } else if (hex[i] >= 'a' && hex[i] <= 'f') {
+            digit = hex[i] - 'a' + 10;
+        }
+        decimal += digit * pow(16, power);
+        ++power;
+    }
+    return decimal;
+}
+```
+
+I otrzymamy taki wynik
+
+```cpp
+int main() {
+    int number = 555;
+    std::string hex = decimalToHexadecimal(number);
+
+    std::cout << "Hex: " << hex << std::endl;
+    
+    int decimal = hexadecimalToDecimal(hex);
+    
+    std::cout << "decimal " << decimal << std::endl;
+    
+    std::string binary = decimalToBinary(decimal);
+    
+    std::cout << "Binary: " << binary << std::endl;
+
+    return 0;
+}
+```
+
+```bash
+Hex: 22B
+decimal 555
+Binary: 1000101011
+```
+
+## Zadanie 2
+
+Napisz program, który wykonuje operacje:
+- dodawania dwóch liczb binarnych;
+- odejmowania liczb binarnych;
+- mnożenia dwóch liczb binarnych;
+- dzielenia liczb binarnych.
+
+Najpierw napisałem funkcję dodawania liczb binarnych
+
+```cpp
+std::string binaryAddition(std::string binary1, std::string binary2) {
+    std::string result = "";
+    int carry = 0;
+
+    int i = binary1.length() - 1;
+    int j = binary2.length() - 1;
+
+    while (i >= 0 || j >= 0 || carry == 1) {
+        int sum = carry;
+
+        if (i >= 0) {
+            sum += binary1[i] - '0';
+            i--;
+        }
+
+        if (j >= 0) {
+            sum += binary2[j] - '0';
+            j--;
+        }
+
+        result = char(sum % 2 + '0') + result;
+        carry = sum / 2;
+    }
+
+    return result;
+}
+```
+
+Następnie odejmowania liczb binarnych
+
+```cpp
+std::string binarySubtraction(std::string binary1, std::string binary2) {
+    std::string result = "";
+    int borrow = 0;
+
+    int i = binary1.length() - 1;
+    int j = binary2.length() - 1;
+
+    while (i >= 0 || j >= 0) {
+        int num1 = (i >= 0) ? binary1[i--] - '0' : 0;
+        int num2 = (j >= 0) ? binary2[j--] - '0' : 0;
+
+        int diff = num1 - num2 - borrow;
+        if (diff < 0) {
+            diff += 2;
+            borrow = 1;
+        } else {
+            borrow = 0;
+        }
+
+        result = char(diff + '0') + result;
+    }
+
+    return result;
+}
+```
+
+Po czym mnożenia liczb binarynch
+
+```cpp
+std::string binaryMultiplication(std::string binary1, std::string binary2) {
+    int len1 = binary1.length();
+    int len2 = binary2.length();
+    std::string result(len1 + len2, '0');
+
+    for (int i = len1 - 1; i >= 0; i--) {
+        for (int j = len2 - 1; j >= 0; j--) {
+            int mul = (binary1[i] - '0') * (binary2[j] - '0');
+            int sum = mul + (result[i + j + 1] - '0');
+
+            result[i + j] += sum / 2;
+            result[i + j + 1] = char(sum % 2 + '0');
+        }
+    }
+
+    result.erase(0, std::min(result.find_first_not_of('0'), result.size() - 1));
+    return result;
+}
+```
+
+Niestety miałem spore problem z dzieleniem liczb binarnych i ostatecznie nie udało mi się napisać działającej funkcji.
+
+Jednak dla napisanych podpunktów przygotowałem maina do którego podajemy dwie liczby binarne i otrzymujemy wyniki działań na nich.
+
+```cpp
+int main() {
+    std::string binaryNum1, binaryNum2;
+    std::cout << "Podaj pierwsza liczbe binarna: ";
+    std::cin >> binaryNum1;
+    std::cout << "Podaj druga liczbe binarna: ";
+    std::cin >> binaryNum2;
+
+    std::string additionResult = binaryAddition(binaryNum1, binaryNum2);
+    std::cout << "Dodawanie: " << additionResult << std::endl;
+
+    std::string subtractionResult = binarySubtraction(binaryNum1, binaryNum2);
+    std::cout << "Odejmowanie: " << subtractionResult << std::endl;
+
+    std::string multiplicationResult = binaryMultiplication(binaryNum1, binaryNum2);
+    std::cout << "Mnozenie: " << multiplicationResult << std::endl;
+
+    return 0;
+}
+```
+
+```bash
+Podaj pierwsza liczbe binarna: 1001111
+Podaj druga liczbe binarna: 101101
+Dodawanie: 1111100
+Odejmowanie: 0100010
+Mnozenie: 110111100011
+```
+
+## Zadanie 3 
+
+2.3. Napisz program, który wykonuje arytmetyczne/logiczne przesunięcie o 𝑛 bitów:
+- (𝑥 ≪ 1) & (𝑦 ≫ 1)
+- ( (𝑥 ^ 𝑦) ≫ 2) | (𝑦 ≪ 3)
+- (~𝑥 & (𝑦 ≪ 2)) ^ ( (𝑥 ≪ 1) ⋙ 1)
+
+zadaniu przyjęto następujące oznaczenie:
+- << 𝑛 - arytmetyczne/logiczne przesunięcie o 𝑛 bitów w lewo;
+- >> 𝑛 – logiczne przesunięcie o 𝑛 bitów w prawo
+- >>> 𝑛 – arytmetyczne przesunięcie o 𝑛 bitów w prawo
+
+Tak więc na podstawie podanych przez użytkownika zmiennych x, y oraz n wykonujemy operacje przesunięcia bitowego.
+
+Aby wykonać to zadanie wystarczyło tylko przepisać te operacje w odpowiedni sposób i przedstawić wyniki.
+
+```cpp
+int main() {
+    int x, y, n;
+    std::cout << "Podaj liczbe x: ";
+    std::cin >> x;
+    std::cout << "Podaj liczbe y: ";
+    std::cin >> y;
+    std::cout << "Podaj liczbe n: ";
+    std::cin >> n;
+
+    int operation1 = (x << 1) & (y >> 1);
+    int operation2 = ((x ^ y) >> 2) | (y << 3);
+    int operation3 = (~x & (y << 2)) ^ ((x << 1) >> 1);
+
+    std::cout << "Wynik operacji (x << 1) & (y >> 1): " << operation1 << std::endl;
+    std::cout << "Wynik operacji ((x ^ y) >> 2) | (y << 3): " << operation2 << std::endl;
+    std::cout << "Wynik operacji (~x & (y << 2)) ^ ((x << 1) >> 1): " << operation3 << std::endl;
+
+    return 0;
+}
+```
+
+Przykładowo testując otrzymałem taki wynik
+
+```bash
+Podaj liczbe x: 5
+Podaj liczbe y: 3
+Podaj liczbe n: 1
+Wynik operacji (x << 1) & (y >> 1): 0
+Wynik operacji ((x ^ y) >> 2) | (y << 3): 25
+Wynik operacji (~x & (y << 2)) ^ ((x << 1) >> 1): 13
+```
+
+## Wnioski
+
+#### Zadanie 1
+
+1. **Przeliczanie liczb na różne systemy:**
+   - Program umożliwia przeliczanie liczb dziesiętnych na systemy binarne, ósemkowe i szesnastkowe.
+   - Wykorzystano funkcje konwertujące liczby dziesiętne na systemy binarne, ósemkowe i szesnastkowe.
+
+2. **Operacje arytmetyczne na liczbach binarnych:**
+   - Program wykonuje operacje arytmetyczne na liczbach binarnych, takie jak dodawanie, odejmowanie i mnożenie.
+   - Napisano funkcje dla każdej operacji, które przyjmują dwie liczby binarne i zwracają wynik również w postaci liczby binarnej.
+   - Nie zaimplementowano funkcji dzielenia liczb binarnych.
+
+3. **Przeliczanie z systemu ósemkowego i szesnastkowego:**
+   - Program przelicza liczby ósemkowe na dziesiętne, a następnie wyświetla ich reprezentację binarną.
+   - Wykorzystano funkcje konwertujące liczby ósemkowe i szesnastkowe na dziesiętne, a następnie na liczby binarne.
+
+#### Zadanie 2
+
+1. **Operacje na liczbach binarnych:**
+   - Program umożliwia wykonywanie operacji matematycznych na liczbach binarnych, takich jak dodawanie, odejmowanie i mnożenie.
+   - Napisano funkcje realizujące dodawanie, odejmowanie i mnożenie liczb binarnych.
+   - Działanie dzielenia liczb binarnych nie zostało zaimplementowane.
+
+#### Zadanie 3
+
+1. **Operacje przesunięcia bitowego:**
+   - Program wykonuje operacje przesunięcia bitowego na podstawie zmiennych x, y i n.
+   - Przyjmuje oznaczenia << n jako przesunięcie bitowe w lewo, >> n jako przesunięcie bitowe w prawo oraz >>> n jako arytmetyczne przesunięcie bitowe w prawo.
+   - Prezentuje wyniki operacji przesunięć bitowych zgodnie z podanymi wzorami matematycznymi.

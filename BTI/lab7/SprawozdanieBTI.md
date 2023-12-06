@@ -187,61 +187,53 @@ Potencjalne źródła ryzyka
 
 ## Ocena ryzyka
 
-- Zagrożenie: 
-- Typ: 
-- Identyfikacja ryzyka: 
-- Analiza ryzyka
-  - Sposób wystąpienia: 
-  - Wpływ:
-  - Prawdopodobieństwo: 
-- Ustalenie priorytetów ryzyka
-  - punktowa ocena:
-- Zarządzanie ryzykiem
-  - Akceptacja ryzyka:
-  - Identyfikacja i ocena planów redukcji:
-  - Przygotowanie planów działania:
+Sposób wyznaczania ryzyka wg. Courtney'a
 
-- Zagrożenie: **Hasła na karteczkach przyczepionych do monitorów**
-- Typ: **Operacyjne/Reputacji/Finansowe**
-- Identyfikacja ryzyka: **Osoby niepowołane mogą uzyskać dostęp do danych logowania pracowników, co może doprowadzić do wyciku danych firmy i wszystkich jej klientów**
-- Analiza ryzyka
-  - Sposób wystąpienia: **Nieodpowiedzialny pracownik**
-  - Wpływ: **Straty finansowe, logistyka, negatywna reputacja**
-  - Prawdopodobieństwo: **znikome**
-- Ustalenie priorytetów ryzyka
-  - punktowa ocena: **6**
-- Zarządzanie ryzykiem
-  - Akceptacja ryzyka: **Wykluczona**
-  - Identyfikacja i ocena planów redukcji: **Regularne kontrole stanowisko pracowników**
-  - Przygotowanie planów działania: **Szkolenia dotyczące bezpieczeństwa**
+Koncepcja ryzyka wg. Courtney’a
 
-- Zagrożenie: **Wyciek informacji przez pracownika**
-- Typ: **Operacyjne/Reputacji/Finansowe**
-- Identyfikacja ryzyka: **Pracownicy ze źle zdefiniowaną umową mogą doprowadzić do ataku na firmę z wewnątrz poprzez wyciek danych.**
-- Analiza ryzyka
-  - Sposób wystąpienia: **Zatrudnianie podejrzanych pracowników**
-  - Wpływ: **Straty finansowe, negatywna reputacja**
-  - Prawdopodobieństwo: **znikome**
-- Ustalenie priorytetów ryzyka
-  - punktowa ocena: **6**
-- Zarządzanie ryzykiem
-  - Akceptacja ryzyka: **Wykluczona**
-  - Identyfikacja i ocena planów redukcji: **Dokładny background check pracowników przed zatrudnieniem**
-  - Przygotowanie planów działania: **Sformułowanie umowy prawne zabezpieczającej obie ze stron**
+R = P×C
 
-- Zagrożenie: **Brak odpowiednich kwalifikacji pracowników przedzielonych do zadań**
-- Typ: **Operacyjne/Reputacji/Finansowe**
-- Identyfikacja ryzyka: **Źle wykfalifikowani pracownicy mogą doprowadzić do**
-- Analiza ryzyka
-  - Sposób wystąpienia: **Zatrudnianie podejrzanych pracowników**
-  - Wpływ: **Straty finansowe, negatywna reputacja**
-  - Prawdopodobieństwo: **znikome**
-- Ustalenie priorytetów ryzyka
-  - punktowa ocena: **6**
-- Zarządzanie ryzykiem
-  - Akceptacja ryzyka: **Wykluczona**
-  - Identyfikacja i ocena planów redukcji: **Dokładny background check pracowników przed zatrudnieniem**
-  - Przygotowanie planów działania: **Sformułowanie umowy prawne zabezpieczającej obie ze stron**
+- P – prawdopodobieństwo wystąpienia określoną ilość razy z ciągu roku, zdarzenia powodującego stratę dla organizacji
+- C – strata dla danej organizacji będąca wynikiem pojedynczego wystąpienia zdarzenia powodującego stratę
+
+| Prawdopodobieństwo wystąpienia zdarzenia  | Wartość parametru f | Rząd wielkości szacowanej straty  | Wartość parametru i |
+| --- | --- | --- | --- |
+|raz na 300 lat| 1| 10 PLN |1|
+|raz na 30 lat |2 |100 PLN |2|
+|raz na 3 lata |3 |1 000 PLN |3|
+|raz na 100 dni| 4| 10 000 PLN |4|
+|raz na 10 dni |5 |100 000 PLN| 5|
+|raz na dzień |6 |1 000 000 PLN |6|
+|10 razy dziennie| 7| 10 000 000 PLN |7|
+|100 razy dziennie| 8| 100 000 000 PLN |8|
+|1000 razy dziennie| 9 |1 000 000 000 PLN |9| 
+
+
+Rozpocznijmy analizę ryzyka dla podanych zagrożeń w kontekście przedstawionej firmy oraz jej aktywów informacyjnych, wykorzystując metodologię wyznaczania ryzyka wg. Courtney'a, gdzie ryzyko (R) jest iloczynem prawdopodobieństwa (P) wystąpienia zdarzenia i straty dla danej organizacji (C).
+
+### Tabela ryzyka dla potencjalnych zagrożeń:
+
+Oczywiście, uwzględnięc dane z poprzedniego zestawienia dla wypełnienia tabeli:
+
+| Zagrożenie | Prawdopodobieństwo wystąpienia zdarzenia | Wartość parametru f | Rząd wielkości szacowanej straty | Wartość parametru i | Ryzyko (R = P × C) |
+| --- | --- | --- | --- | --- | --- |
+| Hasła na karteczkach | raz na dzień | 6 | 10 PLN | 1 | 6 |
+| Wyciek informacji przez sprzątaczkę | raz na 10 dni | 5 | 100 000 PLN | 5 | 25 |
+| Wyciek informacji przez pracownika | raz na 100 dni | 4 | 10 000 PLN | 4 | 16 |
+| Brak odpowiednich kwalifikacji pracowników | raz na 30 lat | 2 | 100 PLN | 2 | 4 |
+| Brak odpowiednich autoryzacji w dostępie | raz na 3 lata | 3 | 1 000 PLN | 3 | 9 |
+| Phishing | raz na 10 dni | 5 | 100 000 PLN | 5 | 25 |
+| DDOS | raz na 100 dni | 4 | 10 000 PLN | 4 | 16|
+| Wirusy komputerowe | raz na 30 lat | 2 | 100 PLN | 2 | 4 |
+| Ransomware | raz na 100 dni | 4 | 10 000 PLN | 4 | 16 |
+| Niedoedukowani pracownicy | raz na dzień | 6 | 1 000 000 PLN | 6 | 36 |
+| Awaria sprzętu | raz na 3 lata | 3 | 1 000 PLN | 3 | 9 |
+| Cyberprzestępcy | raz na 100 dni | 4 | 10 000 PLN | 4 | 16 |
+| Błędna konfiguracja sieci | raz na 10 dni | 5 | 100 000 PLN | 5 | 25 |
+| Przestarzałe oprogramowanie | raz na 30 lat | 2 | 100 PLN | 2 | 4 |
+| Fizyczne uszkodzenie sprzętu | raz na 100 dni | 4 | 10 000 PLN | 4 | 16 |
+| Dostęp nieautoryzowanego użytkownika | raz na dzień | 6 | 1 000 000 PLN | 6 | 36 |
+
 
 ## Polityka bezpieczeństwa
 
