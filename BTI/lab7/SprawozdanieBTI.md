@@ -238,3 +238,42 @@ Oczywiście, uwzględnięc dane z poprzedniego zestawienia dla wypełnienia tabe
 ## Polityka bezpieczeństwa
 
 https://securitum.pl/baza-wiedzy/przykladowa-polityka-bezpieczenstwa/
+
+
+## Technizne środki bezpieczeństwa
+
+| Fizyczne | Programowe |
+| ---- | ---- |
+| Firewall | Antywirus |
+| Fizyczne kopie zapasowe | Szyfrowanie danych |
+| Monitoring | Narzędzia kontrolujące ruch sieciowy |
+| Identyfikatory/karty dostępu | VPN |
+
+Wdrożone technologie
+
+- RSA 512
+    Bezpieczeństwo szyfru polega na trudności faktoryzacji dużych liczb złożonych, a jego działanie oparto o zastosowanie klucza publicznego i prywatnego.
+- VPN 
+    Chroni Twoje połączenie internetowe i prywatność online. VPN tworzy zaszyfrowany tunel dla Twoich danych, chroni Twoją tożsamość w sieci poprzez ukrycie adresu IP i pozwala Ci bezpiecznie korzystać z publicznych hotspotów Wi-Fi
+- NetFlow Analyzer
+    Jest internetowym narzędziem do monitorowania ruchu sieciowego, które analizuje dane eksportowe NetFlow z routerów Cisco monitorując ruch, w tym rozmiar ruchu, prędkość ruchu, pakiety, głównych mówców, wykorzystanie przepustowości i czas największego wykorzystania.
+
+## Zarządzanie dostepem
+
+Autentykacja użytkownika będzie się odbywała za pomocą loginu i hasła.
+
+| Rola | Administrator systemu  | Dostęp do komputerów biurowych | Odczyt bazy danych  | Modifykacja bazy danych | Dostęp do urządzeń sieciowych | Konfiguracja maszyn |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Pracownik biurowy |  | X | X | | | |
+| Pracownik lini produkcyjnej | | | | | | |
+| Prezes |  | X | X | | | |
+| Kierownik działu |  | X | X | | | |
+| Administrator sieci |  | X |  | | X |  |
+| Administrator bazy danych | | X | X | X | | |
+| Specjalista od maszyn CNC | | X |  | | | X |
+
+Audyt dostępów do systemu zawierający dane:
+
+- Logowania
+- Podjętych operacji
+- Działań użytkownika
