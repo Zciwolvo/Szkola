@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/szkola/Szkola",
-      "program": "c:/szkola/Szkola/build/Debug/outDebug",
+      "cwd": "c:/szkola/Szkola/AK/lab4",
+      "program": "c:/szkola/Szkola/AK/lab4/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

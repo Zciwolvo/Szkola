@@ -420,27 +420,148 @@ Wdrożone technologie
 
 - RSA 512
     Bezpieczeństwo szyfru polega na trudności faktoryzacji dużych liczb złożonych, a jego działanie oparto o zastosowanie klucza publicznego i prywatnego.
+- TLS 1.3
+    Transport Layer Security (TLS) to protokół kryptograficzny zapewniający bezpieczne połączenie i przesyłanie danych między serwerem a klientem w sieciach komputerowych. TLS stosuje szyfrowanie, uwierzytelnianie oraz integralność danych w celu ochrony informacji przesyłanych przez Internet.
 - VPN 
-    Chroni Twoje połączenie internetowe i prywatność online. VPN tworzy zaszyfrowany tunel dla Twoich danych, chroni Twoją tożsamość w sieci poprzez ukrycie adresu IP i pozwala Ci bezpiecznie korzystać z publicznych hotspotów Wi-Fi
+  - ExpressVPN
+        usługa VPN oferowana przez firmę Express VPN International Ltd., zarejestrowaną na Brytyjskich Wyspach Dziewiczych. Oprogramowanie jest promowane jako narzędzie zapewniające bezpieczeństwo i poufność danych poprzez szyfrowanie ruchu internetowego użytkowników i maskowanie adresów IP. 
 - NetFlow Analyzer
     Jest internetowym narzędziem do monitorowania ruchu sieciowego, które analizuje dane eksportowe NetFlow z routerów Cisco monitorując ruch, w tym rozmiar ruchu, prędkość ruchu, pakiety, głównych mówców, wykorzystanie przepustowości i czas największego wykorzystania.
+- Monitoring CCTV
+    monitoring wizyjny, wideonadzór, telewizyjny system dozorowy – to system pozwalający na śledzenie z odległości zdarzeń rejestrowanych przez jedną do nawet kilkuset kamer przemysłowych.
+
 
 ## Zarządzanie dostepem
 
 Autentykacja użytkownika będzie się odbywała za pomocą loginu i hasła.
 
-| Rola | Administrator systemu  | Dostęp do komputerów biurowych | Odczyt bazy danych  | Modifykacja bazy danych | Dostęp do urządzeń sieciowych | Konfiguracja maszyn |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Pracownik biurowy |  | X | X | | | |
-| Pracownik lini produkcyjnej | | | | | | |
-| Prezes |  | X | X | | | |
-| Kierownik działu |  | X | X | | | |
-| Administrator sieci |  | X |  | | X |  |
-| Administrator bazy danych | | X | X | X | | |
-| Specjalista od maszyn CNC | | X |  | | | X |
+| Role w Firmie               | Technik Serwisu CNC | Operator Maszyny CNC | Kierownik Produkcji | Specjalista ds. Bezpieczeństwa IT | Asystent Biurowy | Administrator Sieci | Administrator Bazy Danych |
+|-----------------------------|---------------------|----------------------|---------------------|------------------------------------|------------------|----------------------|---------------------------|
+| Dostęp do danych            | Brak         | Brak          | Pełen               | Ograniczony      | Ograniczony      | Ograniczony          | Pełen                     |
+| Zarządzanie finansami       | Brak         | Brak          | Ograniczony         | Brak                        | Ograniczony      | Ograniczony          | Ograniczony               |
+| Uprawnienia do zmian w systemie | Ograniczony    | Brak          | Ograniczony         | Pełen                              | Ograniczony      | Pełen                | Ograniczony               |
+| Prawo do zatwierdzania transakcji | Brak  | Brak       | Ograniczony         | Ograniczony                        | Ograniczony      | Ograniczony          | Ograniczony               |
+| Tworzenie nowych kont       | Brak         | Brak          | Ograniczony         | Ograniczony                        | Ograniczony      | Ograniczony          | Ograniczony               |
+| Dostęp do konfiguracji maszyn CNC | Pełen        | Ograniczony       | Brak         | Ograniczony                        | Ograniczony      | Ograniczony          | Ograniczony               |
+| Dostęp do bazy danych        | Ograniczony        | Brak         | Ograniczony         | Ograniczony                        | Ograniczony      | Ograniczony          | Pełen                     |
 
 Audyt dostępów do systemu zawierający dane:
 
 - Logowania
 - Podjętych operacji
 - Działań użytkownika
+
+## Szkolenie dla Pracowników
+
+Oczywiście, uwzględnienie pracowników biurowych niezwiązanych bezpośrednio z obsługą maszyn CNC jest istotne ze względu na ogólne zasady bezpieczeństwa informacji w firmie. Poniżej przedstawiam zaktualizowany program szkoleń obejmujący zarówno pracowników biurowych, jak i tych zajmujących się obsługą maszyn CNC:s
+
+### Cele Szkolenia:
+
+1. Zrozumienie podstawowych zasad bezpieczeństwa informacji.
+2. Rozpoznawanie potencjalnych zagrożeń dla bezpieczeństwa informacji w środowisku pracy.
+3. Zapoznanie się z narzędziami i technikami zapewniającymi ochronę informacji.
+
+### Moduły Szkoleniowe:
+
+#### 1. Podstawy Bezpieczeństwa Informacji
+
+   - Definicja bezpieczeństwa informacji.
+   - Wpływ niewłaściwego bezpieczeństwa informacji na firmę i klientów.
+   - Znaczenie świadomości bezpieczeństwa informacji dla pracowników.
+
+#### 2. Zagrożenia dla Bezpieczeństwa Informacji w Kontekście CNC
+
+   - Rozpoznawanie potencjalnych zagrożeń związanych z obsługą maszyn CNC.
+   - Przykładowe przypadki naruszeń bezpieczeństwa informacji w kontekście maszyn CNC.
+   - Szkodliwe skutki braku bezpieczeństwa informacji w tej branży.
+
+#### 3. Zasady Bezpieczeństwa Przy Korzystaniu z Narzędzi i Systemów
+
+   - Wprowadzenie do zasad bezpiecznego korzystania z narzędzi, oprogramowania i systemów w kontekście maszyn CNC.
+   - Omówienie procedur zabezpieczania danych i wrażliwych informacji w procesie obsługi maszyn.
+
+#### 4. Bezpieczeństwo Informacji w Pracy Biurowej
+
+   - Zasady bezpiecznego przechowywania i udostępniania danych w biurze.
+   - Ochrona informacji poufnych, danych klientów i wrażliwych dokumentów biurowych.
+   - Znaczenie świadomości zagrożeń cybernetycznych dla pracowników biurowych.
+
+#### 5. Zapobieganie Incydentom Bezpieczeństwa
+
+   - Techniki zapobiegania incydentom związanym z bezpieczeństwem informacji.
+   - Praktyki ochrony przed atakami z zewnątrz i wewnątrz firmy.
+   - Działania w sytuacji incydentu bezpieczeństwa - plan reagowania.
+
+#### 6. Testy i Egzaminy Końcowe
+
+   - Sprawdzenie zrozumienia zasad bezpieczeństwa informacji przez pracowników poprzez testy zakończeniowe.
+   - Egzamin końcowy oceniający zdobytą wiedzę i świadomość w zakresie bezpieczeństwa informacji.
+
+### Metody Szkoleniowe:
+
+- Prezentacje multimedialne prezentujące zagadnienia bezpieczeństwa informacji w kontekście pracy na maszynach CNC oraz w biurze.
+- Studia przypadków dotyczących incydentów związanych z bezpieczeństwem informacji w firmach zajmujących się maszynami CNC i biurowych.
+- Warsztaty praktyczne z zastosowaniem narzędzi i procedur zapewniających bezpieczeństwo informacji w środowisku pracy.
+
+
+## Monitorowanie i Reagowanie na Incydenty:
+
+### Etapy Wdrożenia:
+
+#### 1. Ocena Potrzeb i Wymagań
+   - Przeprowadzenie analizy potrzeb firmy pod kątem monitorowania i reagowania na incydenty bezpieczeństwa.
+   - Identyfikacja obszarów wymagających szczególnej uwagi, w tym miejsc, w których konieczne jest wdrożenie systemów monitoringu.
+
+#### 2. Wybór Systemu Monitorowania
+   - Ocena dostępnych narzędzi i systemów monitoringu bezpieczeństwa informacji.
+   - Wybór odpowiedniego systemu uwzględniającego specyfikę branży CNC oraz potrzeby firmowe.
+
+#### 3. Wdrożenie Systemu Monitoringu
+   - Instalacja i konfiguracja systemu monitorowania bezpieczeństwa informacji.
+   - Testowanie funkcjonalności systemu w środowisku produkcyjnym i biurowym.
+
+#### 4. Szkolenia Pracowników
+   - Szkolenie personelu z zakresu korzystania z nowego systemu monitorowania.
+   - Edukacja zasad reagowania na incydenty bezpieczeństwa oraz korzystania z planu kontynuacji działania.
+
+#### 5. Opracowanie Procedur Reagowania na Incydenty
+   - Tworzenie procedur reagowania na różnego rodzaju incydenty bezpieczeństwa.
+   - Wypracowanie planu kontynuacji działania, uwzględniającego zabezpieczenie danych i ciągłość operacyjną w przypadku wystąpienia incydentu.
+
+#### 6. Testy Systemu i Procedur
+   - Przeprowadzenie testów systemu monitorowania oraz procedur reagowania na incydenty w warunkach symulacyjnych.
+   - Korekta i ulepszanie procedur na podstawie wyników testów.
+
+
+### Procedury reagowania na incydenty
+
+### 1. Wykrycie incydentu   
+
+- **Monitorowanie i Alerty:** Używanie systemów monitoringu bezpieczeństwa informacji do ciągłego śledzenia i analizowania aktywności sieciowej oraz systemów w celu wykrycia nieprawidłowości, nieautoryzowanych dostępów lub anomalii.
+- **Zgłaszanie i Identyfikacja:** Natychmiastowe zgłaszanie wszelkich podejrzanych aktywności do zespołu ds. bezpieczeństwa informacji w celu dokładnej identyfikacji incydentu.
+
+### 2. Ocena Wpływu i Ustalenie Poziomu Ważności
+
+- **Analiza Skutków:** Ocena skali incydentu, jego potencjalnych skutków i wpływu na operacje firmy.
+- **Priorytetyzacja:** Ustalanie poziomu ważności incydentu w celu odpowiedniego zareagowania - od małych incydentów o niewielkim wpływie po poważne, krytyczne incydenty.
+
+### 3. Komunikacja z Klientami
+
+- **Komunikacja Wewnętrzna:** Informowanie wewnętrznych interesariuszy, włączając personel zarządzający, zespół IT oraz zainteresowane strony w firmie.
+- **Komunikacja Zewnętrzna:** Jeśli incydent ma wpływ na klientów lub zewnętrzne interesariusze, należy dostarczyć im odpowiednich informacji, zgodnie z polityką i wymogami ochrony danych.
+
+### 4. Eskalacja do Właściwych Osób Reagujących
+
+- **Hierarchia Eskalacji:** Określenie łańcucha dowodzenia i procedur eskalacji incydentu do właściwych osób decyzyjnych i specjalistów.
+- **Szybka Reakcja:** Ustalenie limitów czasowych dla eskalacji incydentu w zależności od jego poziomu ważności.
+
+### 5. Delegowanie Ról związanych z Reagowaniem na Incydenty
+
+- **Definicja Ról:** Przydzielenie konkretnych ról i odpowiedzialności w zespole ds. reagowania na incydenty, w tym lidera zespołu, analityków, specjalistów ds. komunikacji itp.
+- **Szkolenie i Przygotowanie:** Zapewnienie odpowiedniego przeszkolenia i przygotowania członków zespołu do wykonywania swoich zadań w przypadku incydentu.
+
+### 6. Rozwiązanie Incydentu
+
+- **Isolacja i Minimalizacja Szkód:** Natychmiastowe działania w celu izolacji incydentu i ograniczenia jego wpływu na infrastrukturę i dane firmy.
+- **Przywracanie Systemów:** Wykonanie procedur naprawczych i przywracanie usług, włączając odbudowę danych, zmiany haseł itp.
+- **Analiza Incydentu:** Po zakończeniu incydentu przeprowadzenie szczegółowej analizy celem zrozumienia jego przyczyn, sposobów działania oraz wyciągnięcia wniosków mających na celu doskonalenie procedur reagowania na przyszłość.
