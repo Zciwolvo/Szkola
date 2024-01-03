@@ -303,6 +303,9 @@ filtrowanie URL - filtr URL może być ustawiany dla wszystkich lub wybranych gr
 
 oprogramowanie antyszpiegowskie i antyreklamowe - Oprogramowanie wykrywające i usuwające programy szpiegujące (antyspyware) również może być bezpośrednio wbudowane w system chroniony (np. w systemie Windows jest nim Microsoft Defender) lub stosowane jako zewnętrzne rozwiązanie. 
 
+Technologia SFTP (Secure File Transfer Protocol) -
+SFTP to protokół zapewniający bezpieczny transfer plików między urządzeniami w sieci. Wykorzystuje szyfrowane połączenie do przesyłania danych, co minimalizuje ryzyko przechwycenia informacji w trakcie transmisji. W kontekście kliniki medycznej, SFTP może być wykorzystywany do bezpiecznego udostępniania danych medycznych, wyników badań czy też raportów pacjentów między różnymi urządzeniami lub systemami w ramach sieci.
+
 2. Bezpieczeństwo sieci bezprzewodowej 
 
 W celu zapewnienia bezpieczeństwa sieci urządzenia dostępowe (Access Point, AP), z których korzysta eduroam muszą spełniać określone wymagania techniczne, przede wszystkim muszą wspierać standard 802.1X oraz odpowiednie technologie szyfrowania (WPA, WPA2). Urządzenia te powinny funkcjonować w chronionej, dedykowanej podsieci (VLAN-ie) i muszą być na nich wdrożone mechanizmy ochrony przed nieuprawnionym dostępem. 
@@ -311,6 +314,10 @@ Dostęp do sieci bezprzewodowej w usłudze eduroam wymaga uwierzytelnienia. Dzi�
 
 Stosowanie szyfrowania danych i korzystanie z aplikacji monitorujących i wykrywające włamania 
 
+Szyfrowanie Dysków: Zastosowanie szyfrowania dysków na wszystkich istotnych urządzeniach w sieci, zwłaszcza tych przechowujących dane medyczne pacjentów, zapewnia dodatkową ochronę przed nieautoryzowanym dostępem do informacji.
 
+Technologia SFTP: Korzystanie z SFTP zapewnia bezpieczny transfer plików, co jest kluczowe w środowisku medycznym, gdzie ochrona danych pacjentów jest priorytetem. Umożliwia ona bezpieczne udostępnianie, przesyłanie i przechowywanie poufnych informacji medycznych.
 
-Szyfrowanie dysków, SFTP
+## Prototyp topologii sieci
+
+![topologia](topologia.png)

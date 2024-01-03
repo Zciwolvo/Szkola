@@ -201,3 +201,70 @@ Wróciliśmy do zakładki Setup/Basic Setup i ustawiliśmy adresy zgodnie z pole
 
 ### Część 1: Monitorowanie WLC
 
+#### Krok 1: Oczekiwanie na zbieżność STP w sieci
+
+Poczekaj, aż protokół STP zbiegnie w sieci. Możesz kliknąć przycisk Przyspiesz Czas w Packet Tracer, aby przyspieszyć ten proces. Kontynuuj, gdy wszystkie diody łącz są zielone.
+
+#### Krok 2: Połączenie się z kontrolerem WLC
+
+a. Przejdź do pulpitu PC Administratora i otwórz przeglądarkę. Wprowadź adres IP zarządzania WLC-1 z tabeli adresacji do paska adresu. Musisz określić protokół HTTPS.
+
+b. Kliknij "Login" i wprowadź następujące dane uwierzytelniające: Nazwa użytkownika: admin, Hasło: Cisco123. Po krótkim opóźnieniu zobaczysz ekran Podsumowania Monitora WLC.
+
+c. Przewiń ekran Podsumowania Monitora.
+
+*Co można dowiedzieć się z tego ekranu?*
+
+**Można tutaj znaleźć wiele wartościowych informacji, w tym dane operacyjne dotyczące WLC, informacje o znanych punktach dostępowych i podłączonych klientach, a także punkty dostępowe i klientów dzikich, które zostały wykryte w sieci.**
+
+*Czy WLC jest podłączony do punktu dostępowego?*
+
+**Tak, WLC jest podłączony do jednego punktu dostępowego. Jest to widoczne w sekcji Podsumowanie punktów dostępowych na stronie.**
+
+d. Kliknij Szczegóły obok Wszystkie AP w sekcji Podsumowanie punktów dostępowych na stronie. Jakie informacje można znaleźć dotyczące punktów dostępowych na ekranie Wszystkie AP?
+
+Informacje wyświetlane na WLC obejmują nazwę AP, adres IP AP, model urządzenia, MAC, wersję oprogramowania, status operacyjny, źródło zasilania, itp.
+
+### Część 2: Tworzenie sieci LAN bezprzewodowej
+
+#### Krok 1: Utwórz i włącz sieć LAN bezprzewodową
+
+a. Kliknij WLANs na pasku menu WLC. Zlokalizuj rozwijane pole w prawym górnym rogu ekranu WLANs. Będzie mówić Utwórz nowy. Kliknij Przejdź, aby utworzyć nową sieć LAN bezprzewodową.
+
+b. Wprowadź Nazwę profilu nowej sieci LAN. Użyj nazwy profilu Pracownicy Piętra 2. Przypisz SSID SSID-5 do sieci LAN. Hosty będą musiały używać tego SSID do dołączenia do sieci.
+
+c. Wybierz identyfikator dla sieci LAN. Ta wartość to etykieta, która będzie używana do identyfikacji sieci LAN w innych wyświetlaniach. Wybierz wartość 5, aby zachować spójność z numerem VLAN i SSID. To nie jest wymóg, ale pomaga zrozumieć topologię.
+
+d. Kliknij Zastosuj, aby uaktywnić te ustawienia.
+
+e. Teraz, gdy sieć LAN została utworzona, możesz skonfigurować funkcje sieci. Kliknij Włącz, aby sieć LAN była funkcjonalna. To jest częsty błąd, żeby przypadkowo pominąć ten krok.
+
+f. Wybierz interfejs VLAN, który będzie używany dla sieci LAN. WLC będzie używał tego interfejsu do ruchu użytkownika w sieci. Kliknij pole rozwijane dla Interfejs/Grupa interfejsów (G). Wybierz interfejs WLAN-5. Ten interfejs został wcześniej skonfigurowany na WLC dla tej aktywności.
+
+g. Kliknij zakładkę Zaawansowane.
+
+h. Przewiń w dół do części FlexConnect na stronie. Kliknij, aby włączyć FlexConnect Local Switching i FlexConnect Local Auth.
+
+i. Kliknij Zastosuj, aby włączyć nową sieć LAN. Jeśli zapomnisz to zrobić, sieć LAN nie będzie działać.
+
+#### Krok 2: Zabezpiecz sieć LAN
+
+Nowa sieć LAN obecnie nie ma ustawionego żadnego zabezpieczenia. Ta sieć LAN początkowo będzie używać zabezpieczenia WPA2-PSK. W innym zadaniu skonfigurujesz tę sieć LAN, aby używała WPA2-Enterprise, znacznie lepsze rozwiązanie dla większych sieci bezprzewodowych.
+
+a. W ekranie Edycji sieci LAN dla sieci Pracownicy Piętra 2, kliknij zakładkę Zabezpieczenia. W zakładce Warstwa 2 wybierz WPA+WPA2 z rozwijanej listy Zabezpieczenia warstwy 2. To ujawni parametry WPA.
+
+b. Zaznacz pole wyboru obok Zasady WPA2. To ujawni dodatkowe ustawienia zabezpieczeń. W Zarządzaniu kluczem autentykacji włącz PSK.
+
+c. Teraz możesz wprowadzić współdzielony klucz, który będzie używany przez hosty do dołączenia do sieci LAN. Użyj Cisco123 jako hasła.
+
+d. Kliknij Zastosuj, aby zapisać te ustawienia.
+
+#### Krok 3: Weryfikacja ustawień
+a. Po zastosowaniu konfiguracji, kliknij Wstecz. To przeniesie Cię z powrotem do ekranu sieci LAN.
+
+Jakie informacje o nowej sieci LAN są dostępne na tym ekranie?
+Nazwa sieci LAN, SSID, polityka zabezpieczeń i status administratora są dostępne tutaj. Warto
+
+### Wnioski
+
+Podczas monitorowania kontrolera WLC uzyskaliśmy istotne informacje o sieci i jej urządzeniach. Pomyślnie utworzyliśmy i zabezpieczyliśmy nową sieć LAN, zapewniając funkcjonalność oraz odpowiednie zabezpieczenia dla przyszłych użytkowników. Dzięki tym krokom zwiększyliśmy kontrolę i bezpieczeństwo naszej sieci bezprzewodowej.
