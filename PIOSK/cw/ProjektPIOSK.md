@@ -321,3 +321,13 @@ Technologia SFTP: Korzystanie z SFTP zapewnia bezpieczny transfer plików, co je
 ## Prototyp topologii sieci
 
 ![topologia](topologia.png)
+
+
+Sugestie
+
+- 3 switche zamiast jednego jako alternatywa dla WLANow 
+- AP dołączyć do istniejących już VLANow ale rozłączyć je od drukarek 
+- Skonfigurować całą sieć i dostosować tabelę adresowania 
+- Dodać przykładowe urządzenia korzystające z sieci bezprzewodowej pochodzącej z AP
+- Dodać połączenia trunk w koniecznych do tego urządzeniach 
+- Skonfigurować statyczne adresy IP oraz bramę domyślną dla każdego urządzenia
