@@ -64,7 +64,7 @@ Jest to model, który jest jednym z bestsellerów firmy cisco przez swoją wszec
 
 - **Power over Ethernet Plus (PoE+):** Model 2960X-24PS-L jest wyposażony w technologię PoE+, co oznacza, że może zasilać różnorodne urządzenia bez dodatkowych zewnętrznych zasilaczy. To sprawia, że jest idealny do zasilania urządzeń medycznych takich jak kamery IP, telefony VoIP czy punkty dostępu Wi-Fi, co jest kluczowe w środowisku medycznym.
 
-- **Wysoka moc wyjściowa PoE na port:** Oferuje do 370W mocy na 24 porty gigabit Ethernet, co zapewnia elastyczność w zasilaniu urządzeń. Możliwość obsługi do 30W PoE na port umożliwia zasilanie nawet wymagających sprzętów, jednocześnie zapewniając wydajność.
+- **Wysoka moc wyjściowa PoE na port:** Oferuje do 370W mocy na 24 porty gigabit Ethernet, co zapewnia elastyczność w zasilaniu urządzeń. Możliwość obsługi do 20W PoE na port umożliwia zasilanie nawet wymagających sprzętów, jednocześnie zapewniając wydajność.
 
 - **Wsparcie dla różnych rodzajów interfejsów:** Oprócz 24 portów gigabit Ethernet, switch ten posiada 4 porty SFP uplink, co umożliwia rozbudowę sieci o interfejsy fiber lub inne modele połączeń. To elastyczność w obsłudze różnorodnych potrzeb sieciowych.
 
@@ -104,7 +104,7 @@ Jeśli klinika potrzebuje dostępu do sieci bezprzewodowej dla swojego personelu
 
 Naszym rekomendowanym access pointem będzie: **Ubiquiti UniFi AP-AC Pro**
 
-- **Standard Wi-Fi ac i wysoka wydajność:** Wykorzystanie najnowszego standardu Wi-Fi ac zapewnia wydajność i szybkość transmisji danych na poziomie do 1300 Mb/s w paśmie 5 GHz oraz do 450 Mb/s w paśmie 2,4 GHz. To pozwala obsługiwać duże ilości użytkowników jednocześnie, zapewniając szybką i stabilną sieć.
+- **Standard Wi-Fi ac i wysoka wydajność:** Wykorzystanie najnowszego standardu Wi-Fi ac zapewnia wydajność i szybkość transmisji danych na poziomie do 1200 Mb/s w paśmie 5 GHz oraz do 450 Mb/s w paśmie 2,4 GHz. To pozwala obsługiwać duże ilości użytkowników jednocześnie, zapewniając szybką i stabilną sieć.
 
 - **Zastosowanie technologii 3x3 MIMO:** Trzy wbudowane anteny o zysku 3 dBi pracujące w technologii 3x3 MIMO poprawiają jakość sygnału i zasięg, co przekłada się na lepszą jakość połączenia dla użytkowników.
 
@@ -120,7 +120,7 @@ Cena około 700zł
 
 ### *Okablowanie:*
 
-Do podłączenia całej konfiguracji będziemy potrzebować sporej ilości okablowania dokładnie będziemy potrzebować około 30 kabli ethernet o różnych długościach pomiędzy 10 a 30m.
+Do podłączenia całej konfiguracji będziemy potrzebować sporej ilości okablowania dokładnie będziemy potrzebować około 20 kabli ethernet o różnych długościach pomiędzy 10 a 20m.
 
 Uwzględniamy tutaj podłączenie do urządzeń a także zapasowe kable, w razie takiej potrzeby.
 
@@ -204,11 +204,11 @@ Przykładowe adresy IP:
 
 ### Podsieć 3: Dla systemów diagnostyki obrazowej
 
-Adres IP: 172.17.30.0/24 \
+Adres IP: 172.17.20.0/24 \
 Liczba adresów IP: 6 \
 Przykładowe adresy IP: 
-- Dla systemów diagnostyki: 172.17.30 - 172.17.30.3
-- Dla serwerów przetwarzania obrazów: 172.17.30.4 - 172.17.30.6 
+- Dla systemów diagnostyki: 172.17.20 - 172.17.20.3
+- Dla serwerów przetwarzania obrazów: 172.17.20.4 - 172.17.20.6 
 
 ### Podsieć bezprzewodowa 1: Dla pracowników kliniki
 
@@ -236,21 +236,21 @@ Przykładowe adresy IP:
 
 | Device          | Interface | IP Address    | Subnet Mask    | Default Gateway | VLAN / Description                              |
 |-----------------|-----------|---------------|----------------|-----------------|-------------------------------------------------|
-| Router          | G0/1      | 172.17.10.1   | 255.255.255.0  | N/A             | VLAN 10 (Administrative Staff)                    |
+| Router          | G0/1      | 172.17.10.1   | 255.255.255.0  | N/A             | VLAN 10 (Administration)                    |
 |                 | G0/2      | 172.17.20.1   | 255.255.255.0  | N/A             | VLAN 20 (Medical Staff)                           |
-|                 | G0/3      | 172.17.30.1   | 255.255.255.0  | N/A             | VLAN 30 (Diagnostic Imaging Systems)              |
-| Switch          | VLAN 10    | N/A           | N/A            | 172.17.10.1     | VLAN 10 (Administrative Staff)   |
-|                 | VLAN 20    | N/A           | N/A            | 172.17.20.1     | VLAN 20 (Medical Staff)          |
-|                 | VLAN 30    | N/A           | N/A            | 172.17.30.1     | VLAN 30 (Diagnostic Imaging Systems) - Default GW |
-| Access Point 1  | HealthCare_Internal | 172.17.40.1  | 255.255.255.0  | 172.17.40.1     | HealthCare_Internal             |
-| Access Point 2  | HealthCare_Guest    | 172.17.50.1  | 255.255.255.0  | 172.17.50.1     | HealthCare_Guest             |
-| Workstations    | NIC       | 172.17.10.2-4 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administrative Staff) - Workstations     |
-|                 | NIC       | 172.17.10.5-8 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administrative Staff) - Printers  |
+|                 | G0/3      | 172.17.30.1   | 255.255.255.0  | N/A             | VLAN 30 (Public)              |
+| Switch          | VLAN 10    | N/A           | N/A            | 172.17.10.1     | VLAN 10 (Administration)   |
+|                 | VLAN 20    | N/A           | N/A            | 172.17.20.1     | VLAN 20 (Medical)          |
+|                 | VLAN 30    | N/A           | N/A            | 172.17.30.1     | VLAN 30 (Public) |
+| Access Point 1  | HealthCare_Internal | 172.17.40.1  | 255.255.255.0  | 172.17.20.1     | HealthCare_Internal             |
+| Access Point 2  | HealthCare_Guest    | 172.17.50.1  | 255.255.255.0  | 172.17.30.1     | HealthCare_Guest             |
+| Workstations    | NIC       | 172.17.10.2-4 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administration) - Workstations     |
+|                 | NIC       | 172.17.10.5-8 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administration) - Printers  |
 |                 | NIC       | 172.17.20.2-9 | 255.255.255.0  | 172.17.20.1     | VLAN 20 (Medical Staff) - Workstations             |
 |                 | NIC       | 172.17.20.10-16| 255.255.255.0 | 172.17.20.1     | VLAN 20 (Medical Staff) - Medical Equipment        |
-|                 | NIC       | 172.17.30.2-6 | 255.255.255.0  | 172.17.30.1     | VLAN 30 (Diagnostic Imaging Systems) - Workstations|
-| Mobile Devices  | HealthCare_Internal | 172.17.40.2-40| 255.255.255.0 | 172.17.40.1     | HealthCare_Internal    |
-| Patients' Devices | HealthCare_Guest  | 172.17.50.2-40| 255.255.255.0 | 172.17.50.1     | HealthCare_Guest    |
+|                 | NIC       | 172.17.20.16-20 | 255.255.255.0  | 172.17.20.1     | VLAN 20 (Diagnostic Imaging Systems) - Workstations|
+| Mobile Devices  | HealthCare_Internal | 172.17.10.10-60| 255.255.255.0 | 172.17.20.1     | HealthCare_Internal    |
+| Patients' Devices | HealthCare_Guest  | 172.17.30.2-60| 255.255.255.0 | 172.17.30.1     | HealthCare_Guest    |
 
 
 

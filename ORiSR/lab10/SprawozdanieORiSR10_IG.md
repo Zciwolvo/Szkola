@@ -91,701 +91,575 @@ Igor Gawłowicz / 59096
 
 ## Cel ćwiczenia
 
-Celem ćwiczenia jest eksploracja i zrozumienie mechanizmów synchronizacji wątków w systemie operacyjnym, a także zastosowanie semaforów, zmiennych warunkowych, i barier w celu zarządzania dostępem do współdzielonych zasobów między wątkami. Ćwiczenie polega na implementacji kodu w języku C, który wykorzystuje różne techniki synchronizacji wątków takie jak mutexy, zmienne warunkowe i bariery, aby kontrolować dostęp do wspólnych zasobów.
-
+- Symulacja procesu produkującego i konsumującego dane.
+- Zastosowanie semaforów do synchronizacji dostępu do współdzielonych zasobów (bufora).
+- Symulacja problemu dostępu czytelników i pisarzy do współdzielonych zasobów.
+- Zastosowanie semaforów do kontrolowania dostępu.
+- Symulacja problemu znanego jako "problem ucztujących filozofów".
+- Zastosowanie semaforów do uniknięcia zakleszczeń i równomiernego dostępu do zasobów.
 
 ## Przebieg ćwiczenia
 
-W odniesieniu do wątków, podobnie jak i procesów można stosować celem synchronizacji
-semafory POSIX aczkolwiek jest to sposób co najmniej niewygodny.
-Standard IEEE POSIX począwszy od 1003.1c (1995), dla potrzeb wątków implementuje
-semafory MUTEX.
+Piewrszy fragment kodu przedstawia nam przykład problemu typu producent/consumer, polegający na producencie, który tworzy jakieś wartości i konsumencie który te wartości wykorzystuje.
 
-Są one reprezentowane za pośrednictwem typu mutex_t (bits/pthreadtypes.h włączany do
-pthreads.h). Przed użyciem semafor mutex musi być – oczywiście – zainicjowany, a - kiedy
-już będzie niepotrzebny - z pamięci.
+W najprostszym wariancie rozwiązanie zadania można byłoby sobie wyobrazić w następujący sposób:
 
-MUTEX z definicji jest semaforem binarnym a więc dwustanowym, przeznaczonych od ochrony
-zasobów udostępnianych na wyłączność.
-Chęć dostępu do zasobu powinna być poprzedzona wywołaniem **pthread_mutex_lock()** a jego
-zwolnienie **pthread_mutex_unlock()**, co stanowi analogię **P()** **(wait())** i **V()** **(signal())**
-Dijkstry.
+1. program pobierze z linii komend argument określający ilość liczb pierwszych jaka będzie wygenerowana
+2. producent i konsument stanowić będą dwa wątki o funkcjach producer() i consumer(), odpowiednio
+3. wymiana danych między producentem a konsumentem zachodzić będzie przez bufor globalny buffer (tutaj jedno-elementowy);
+4. z pewnością dostęp do bufora powinien być operacją wyłączną, w takim razie wprowadzimy smafor binarny mutex.
 
-Funkcja pthread_mutex_trylock() dokonuje dostępności zasobu bez wprowadzania blokady,
-aczkolwiek generuje błąd **EBUSY** jeżeli zasób współdzielony jest niedostępny.
-
-Zacznijmy od prostego przykładu Daniela Robbinsa (nieznacznie zmodyfikowanego)
-ilustrującego sytuację wyścigu w dostępie do zasobu – tutaj – będzie to zmienna globalna, w
-przypadku dwóch wątków: główny w **main()** a potomny wykona **thread()**.
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-int N=0; //...zmienna na której będziemy działać
-void *thread( void *arg )
-{
-    int n,i;
-    for ( i=0;i<5;i++ )
-    {
-        n = N; //...pobieramy wartość zmiennej globalnej
-        n++; //...inkrementacja kopii lokalnej
-        printf("thread() [%lu]\n",(unsigned long)pthread_self());
-        fflush( stdout );
-        sleep( 1 ); //...czekamy 1 sekundę
-        N = n; //...przypisanie wartości zmiennej globalnej
-    }
-    pthread_exit( NULL );
-}
-
-int main( void )
-{
-    pthread_t tid;
-    int i;
-    //...tworzymy jeden wątek potomny (może trochę niefortunne określenie)
-    if( pthread_create( &tid,NULL,thread,NULL ) )
-    { 
-        perror( "...pthread_create()..." ); 
-        exit( 1 ); 
-    }
-    for ( i=0;i<5;i++)
-    {
-        N--; //...dekrementacja globalnej, w wątku głównym
-        printf( "main() [%lu]\n",(unsigned long)pthread_self() );
-        fflush( stdout );
-        sleep( 1 ); //...czekamy 1 sekundę
-    }
-    if( pthread_join( tid,NULL ) )
-    { 
-        perror( "...pthread_join()..." ); 
-        exit( 2 ); 
-    }
-    printf( "\nglobalnie N=%d, po wykonaniu 5+5 iteracji\n",N );
-    return 0;
-}
-```
-
-Co ciekawe pomimo tego że zarówno wątek jak i proces, wykonują tą samą lecz przeciwną operację wynik nie wychodzi równy 0 tylko jak poniżej
-
-```bash
-$ ./zero
-main() [140390545930048]
-thread() [140390545925888]
-main() [140390545930048]
-thread() [140390545925888]
-main() [140390545930048]
-thread() [140390545925888]
-main() [140390545930048]
-thread() [140390545925888]
-thread() [140390545925888]
-main() [140390545930048]
-```
-
-Prześledźmy wykonanie wątków:
-- proces jest uruchamiany N = 0
-- zgodnie z komunikatem main() wykonuje N-- (czyli jest -1) i zasypia na 1 sekundę;
-
-następnie:
-
-- sterowanie uzyskuje thread() pobiera pobiera N i przypisuje n (czyli jest-1), wykonuje n++ (czyli w n jest 0) i zasypia na 1 sekundę;
-- w tym momencie budzi się main() i wykonuje wykonuje N-- (czyli jest -2) i zasypia;
-- budzie się thread() i wykonuje przypisanie N=n, więc podstawia 0 do N, i rozpoczynając kolejną iterację n będzie także 0, więc po n++ będzie miał w n wartość 1, i zasypia;
-- powraca mian() mając w zmiennej globalnej 0, wykonuje N-- (czyli jest -1) i zasypia;
-- ale thread() odzyskuje sterowanie i podstawia pod N wartość 1, następnie pobiera tę wartość i inkrementuje w zmiennej lokalnej n (uzyskuje w ten sposób 2);
-
-proces ten jest kontynuowany i w efekcie finalnym uzyskujemy
-
-4
-
-zamiast
-
-0
-
-bowiem konieczne byłoby tutaj zastosowania semafora zamykającego w niepodzielnym bloku –
-mimo i wbrew relacjom czasowym – działań realizowanych przez oba wątki.
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER; //...konieczna deklaracja
-int N=0;
-void *thread( void *arg )
-{
-    int n;
-    int i;
-    for ( i=0;i<5;i++ )
-    {
-        pthread_mutex_lock( &mutex ); //...zgłoszenie
-        n = N; n++;
-        printf( "thread() [%lu]\n",(unsigned long)pthread_self() );
-        fflush( stdout );
-        sleep( 1 ); N = n;
-        pthread_mutex_unlock( &mutex ); //...i zwolnienie
-    }
-    pthread_exit( NULL );
-}
-
-int main( void )
-{
-    pthread_t tid;
-    int i;
-    if( pthread_create( &tid,NULL,thread,NULL ) )
-    { 
-        perror( "...pthread_create()..." ); 
-        exit( 1 ); 
-    }
-    for ( i=0; i<5; i++)
-    {
-    pthread_mutex_lock( &mutex );
-    N--;
-    printf( "main() [%lu]\n",(unsigned long)pthread_self() );
-    fflush( stdout );
-    sleep( 1 );
-    pthread_mutex_unlock( &mutex );
-    }
-    if( pthread_join( tid,NULL ) )
-    { 
-        perror( "...pthread_join()..." ); 
-        exit( 2 ); 
-    }
-    if( pthread_mutex_destroy( &mutex) )
-    { 
-        perror( "...pthread_mutex_destroy()..." ); 
-        exit( 3 ); 
-    }
-    printf( "\nglobalnie N=%d, po wykonaniu 5+5 iteracji\n",N );
-    return 0;
-}
-```
-
-Tym razem otrzymamy już oczekiwany wynik
-
-```bash
-$ ./tzero
-main() [133727424735040]
-main() [133727424735040]
-thread() [133727424730880]
-thread() [133727424730880]
-thread() [133727424730880]
-thread() [133727424730880]
-thread() [133727424730880]
-main() [133727424735040]
-main() [133727424735040]
-main() [133727424735040]
-```
-
-Natomiast wniosek bardziej ogólny jest taki, że w przypadku wątków należy zwracać baczną
-uwagę na ewentualne skutki uboczne do zmiennych globalnych, które zawsze są
-"współdzielone" między wątkami.
-
-Jak wiadomo suma kolejnych liczb naturalnych wyraża się
-
-n=1,2,3,....,n
-
-n*(n+1)/2
-
-Przygotujemy program, który wykorzystując wątki oblicza sumę tego rodzaju ciągu.
+Jest prostym przykładem programu wielowątkowego, który symuluje działanie producenta i konsumenta. Wykorzystuje wątki do wykonywania równoległych zadań. Producent oblicza wartości i umieszcza je w globalnym buforze, podczas gdy konsument pobiera te wartości z bufora i wyświetla je. Semafor mutex jest wykorzystywany do synchronizacji dostępu do bufora między wątkami, zapewniając bezpieczeństwo dostępu do danych współdzielonych między wątkami. Jednak kod ten może wymagać poprawek w celu zapewnienia pełnej poprawności i bezpieczeństwa w środowisku wielowątkowym.
 
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER;
-int N=0; //...zmienna służąca przechowywaniu wartości sumy
-void *thread( int id ) //...funkcja wątku
-{
-    pthread_mutex_lock( &mutex ); //...P() aby zapewnić
-    { // wątkowi wyłączność w momencie
-        N += id; // kiedy odwołuje się do
-    } // zmiennej globalnej
-    pthread_mutex_unlock( &mutex );//...V() i zwalniamy
-    pthread_exit( NULL );
-}
-
-int main( int argc,char** argv )
-{
-    pthread_t* tid;
-    int i,n;
-    if( argc>1 )
-    {
-        sscanf( argv[1],"%d",&n );
-        if( n<2 )
-        { 
-            printf( "...n<2, przyjęto n=2...\n" ); 
-            n = 2; 
-        }
-        //...tworzymy tablicę w której będziemy przechowywać id wątków
-        // aby w przyszłości wykonać pthread_join()
-        if( !(tid=(pthread_t*)calloc( (size_t)n,sizeof( pthread_t) ) ) )
-        { 
-            perror( "...calloc()..." ); 
-            exit( 2 ); 
-        }
-        for( i=0;i<n;i++ ) //...uruchamiamy wątki
-        {
-            if( pthread_create( (tid+i), NULL,(void*(*)(void*))thread, (void*)(i+1)) )
-            {
-                free( (void*)tid );
-                perror( "...pthread_create()..." );
-                exit( 2 );
-            }
-        }
-        for( i=0;i<n;i++ ) //...dołączamy w takim razie wątki
-        {
-            if( pthread_join( *(tid+i),NULL ) )
-            { //...tak na wszelki wypadek
-                free( (void*)tid );
-                perror( "...pthread_join()..." );
-                exit( 2 );
-            }
-        }
-        free( (void*)tid ); //...zwalniamy pamięć
-        if( pthread_mutex_destroy( &mutex) )
-        { 
-            perror( "...pthread_mutex_destroy()..." ); 
-            exit( 2 ); 
-        }
-        printf( "|\n|%s%d%s%d\n|\n"," suma ciągu n=",n,
-        " liczb naturalnych wynosi n*(n+1)/2=",N );
-    }
-    else //...gdyby wywołanie programu było niepoprawne
-    { 
-        printf( "...wywołanie programu %s <ilość wątków>\n",argv[0] ); 
-        exit( 1 ); 
-    }
-    return 0;
-}
-```
-
-Po uruchomieniu programu otrzymamy następujący wynik
-
-```bash
-$ ./sum 100
-|
-| suma ciągu n=100 liczb naturalnych wynosi n*(n+1)/2=5050
-|
-```
-
-ardzo często programy wykonują pewne działanie wobec ciągu identycznych elementów 
-(zwykle zestawów danych). Niejako na bazie wcześniejszego, przyjrzyjmy się jak można 
-zwiększyć efektywność przetwarzania wykorzystując w tym celu wątki.
-
-```cpp
-//...zaczynamy od standardowych, w tym przypadku, deklaracji
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-
-//...inicjujemy domyślnie semafor binarny MUTEX
-pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER;
-
-//...zmienna X będzie tablicą, której sumę elementów wyznaczymy
-// wartość sumy będzie pamiętana w zmiennej sum (wartość początkowa-oczywiście-0)
-double *X,sum=0.0;
-
-//...zmienne globalne n i m posłużą zapamiętaniu rozmiaru tablicy i ilości wątków,
-odpowiednio
-unsigned long int n,m;
-
-void *thread( unsigned long int id )
-{
-    unsigned long int i;
-    double x;
-    for( i=id,x=0.0;i<n;i+=m )
-    {
-        x += *(X+i);
-    }
-    pthread_mutex_lock( &mutex ); //...powiedzmy że przypisanie wartości
-    { // zmiennej globalnej wykonamy
-        sum += x; // przy wyłącznym dostępie
-    }
-    pthread_mutex_unlock( &mutex );
-    pthread_exit( NULL );
-}
-
-int main( int argc,char** argv )
-{
-    pthread_t* tid;
-    unsigned long int i;
-    if( argc>2 ) //...sprawdzamy czy wywołanie programu jest poprawne
-    {
-        /...pobieramy ilość wątków
-        sscanf( argv[1],"%lu",&m );
-        if( m<2 )
-        { 
-            printf( "...m<2, przyjęto m=2...\n" ); 
-            m=2; 
-        }
-        //...alokacja tablicy w której pamiętać będziemy ID poszczególnych wątków
-        tid = (pthread_t*)calloc( (size_t)m,sizeof( pthread_t) );
-        //...pobieramy rozmiar tablicy X
-        sscanf( argv[2],"%lu",&n );
-        if( n<10 )
-        { 
-            printf( "...n<10,przyjęto n=1000...\n" ); 
-            n=1000; 
-        }
-        //...alokacja tablicy i inicjowanie wartości
-        if( !(X=(double*)calloc( (size_t)n,sizeof( double ) ) ) )
-        { 
-            perror( "...calloc()..." ); 
-            exit( 2 ); 
-        }
-        for( i=0;i<n;i++ )
-        { 
-            *(X+i) = (double)(i+1); 
-        }
-        for( i=0;i<m;i++ ) //...uruchamiamy zatem poszczególne wątki
-        {
-            if( pthread_create( (tid+i),NULL,( void*( * )( void* ) )thread,(void*)i) )
-            { 
-                free( (void*)tid ); 
-                free( (void*)X );
-                perror( "...pthread_create()..." ); 
-                exit( 2 );
-            }
-        }
-        for( i=0;i<m;i++ ) //...i dołączamy 
-        {
-            if( pthread_join( *(tid+i),NULL ) )
-            { 
-                free( (void*)tid ); 
-                free( (void*)X );
-                perror( "...pthread_join()..." ); exit( 2 );
-            }
-        }
-        free( (void*)tid ); free( (void*)X );
-        if( pthread_mutex_destroy( &mutex) )
-        { 
-            perror( "...pthread_mutex_destroy()..." ); 
-            exit( 2 );
-        }
-        printf( "|\n|%s%f\n|\n","suma elementów tablicy X wynosi ",sum );
-    }
-    else
-    { 
-        printf( "...wywołanie programu %s <ilość wątków> <rozmiar tablicy>\n",argv[0] ); 
-        exit( 1 ); 
-    }
-    return 0;
-}
-```
-
-Taki program po uruchomieniu zwraca
-
-```bash
-$ ./test 5 5000
-|
-|suma elementów tablicy X wynosi 12502500.000000
-|
-```
-
-Możemy zrobić porównanie dwóch poprzednich programów pod względem czasu, gdzie dla pierwszej wersji podamy n=5000, a dla drugiej ilość wątków = 5 i n = 5000
-
-```bash
-zciwolvo@cloudshell:~ (glassy-courage-399021)$ time ./sum 5000
-|
-| suma ciągu n=5000 liczb naturalnych wynosi n*(n+1)/2=12502500
-|
-
-real    0m0.284s
-user    0m0.057s
-sys     0m0.275s
-zciwolvo@cloudshell:~ (glassy-courage-399021)$ time ./test 5 5000
-|
-|suma elementów tablicy X wynosi 12502500.000000
-|
-
-real    0m0.003s
-user    0m0.001s
-sys     0m0.002s
-```
-
-Możemy zauważyć że przy użciu 5 wątków czas pracy jest znacznie krótszy, a wynik dokładnie taki sam.
-
-W bardzo wielu przypadkach wykonanie wątku, czy kontynuacja wykonanie, musi być
-uzależniona od spełniania pewnego warunku. Oczywiście można by prowadzić ciągłe 
-sprawdzanie instrukcją if(...){...} byłoby to jednak posunięcie dość nieefektywne. Znacznie 
-lepiej w tym celu wykorzystać w tym celu zmienne warunkowe pthread_cond_t.
-
-W sposobie inicjowania i usuwania zmiennej warunkowej jest nieprzypadkowa analogia do
-zmiennych MUTEX.
-
-Po zainicjowaniu danej zmiennej warunkowej, wywołując pthread_cond_wait() wątek 
-przechodzi w stan oczekiwania aż pojawi się sygnał o spełnieniu warunku wygenerowany przez 
-pthread_cond_signal() albo int pthread_cond_broadcast() , przy czym ta druga funkcja 
-zwalnia wszystkie wątki oczekujące w kolejce związanej z danym warunkiem. Wygenerowanie 
-sygnału w przypadku kiedy nie ma wątków oczekujących nie powoduje żadnego skutku. 
-
-Najprostszy przykład (schemat) użycia zmiennej warunkowej.
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-
-int go = 0; //...zmienna sterująca wykonaniem (określa warunek)
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+#define ENDLESS 1 //...dla sterowania pętli producenta
+//...semafor mutex celem zapewnienia dostępności wyłącznej, inicjowany domyślnie
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+unsigned long int buffer; //...bufor globalny wymiany danych
+int n,no; //...zmienne sterujące wykonaniem konsumenta
 
-void* producer( void* arg )
+unsigned long int produce( void )
 {
-    printf ("[%lu] producent: ???\n",(unsigned long)pthread_self() );
-    sleep (1);
-    pthread_mutex_lock( &mutex );
-    go = 1;
-    pthread_cond_signal( &cond );
-    pthread_mutex_unlock( &mutex );
-    pthread_exit( NULL );
+    /* Formuła Jarosława Wróblewskiego i Jean-Charles'a Meyrignac'a (2006) */
+    return (42*n*n*n + 270*n*n - 26436*n + 250703);
 }
 
-void* consumer( void* arg )
+void append( unsigned long int v )
 {
-    printf ("[%lu] konsument: czeka...\n",(unsigned long)pthread_self() );
-    pthread_mutex_lock (&mutex);
-    while( !go )
-    { 
-        pthread_cond_wait( &cond,&mutex ); 
-    }
-    pthread_mutex_unlock (&mutex);
-    printf ("[%lu] konsument: kontynuacja\n",(unsigned long)pthread_self() );
-    pthread_exit( NULL );
+    buffer = v; 
+    return;
 }
 
-int main( int argc, char *argv[] )
+unsigned long int take( void )
 {
-    pthread_t cid,pid;
-    if( pthread_create( &cid,NULL,consumer,NULL ) )
-    { perror( "...pthread_create()..." ); exit( 1 ); }
-    if( pthread_create( &pid,NULL,producer,NULL ) )
-    { perror( "...pthread_create()..." ); exit( 1 ); }
-    if( pthread_join( cid,NULL ) )
-    { perror( "...pthread_join()..." ); exit( 1 ); }
-    if( pthread_join( pid,NULL ) )
-    { perror( "...pthread_join()..." ); exit( 1 ); }
-    return 0;
-}
-```
-
-Powyższy program da nam taki wynik:
-
-```bash
-$ ./cond1
-[136582164489984] konsument: czeka...
-[136582156097280] producent: ???
-[136582164489984] konsument: kontynuacja
-```
-
-Rozpatrzmy przykład kiedy mamy dwa wątki dla pierwszy worker() wykonuje określone działania na 
-ustalonej zmiennej, zaś watch() czeka aż zmienna to osiągnie odpowiednią wartość
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-
-pthread_mutex_t mutex;
-pthread_cond_t cond;
-unsigned long int n=0; //...monitorowana zmienna
-const unsigned long int no=10; //...pożądana wartość
-
-void* watch( void *arg )
-{
-    printf( "[%lu] watch(): start\n",(unsigned long)pthread_self() );
-    pthread_mutex_lock( &mutex );
-    while( n<no )
-    { 
-        pthread_cond_wait( &cond,&mutex ); 
-    }
-    printf( "[%lu] watch(): V() %lu\n",(unsigned long)pthread_self(),n );
-    pthread_mutex_unlock( &mutex );
-    printf( "[%lu] watch(): stop\n",(unsigned long)pthread_self() );
-    pthread_exit( NULL );
+    return buffer;
 }
 
-void* worker( void *arg )
+void* producer( void *arg )
 {
-    for( n=0;n<25;n++ )
+    unsigned long int v;
+    //...komunikat diagnostyczny
+    printf( "[%lu] producer, start\n",(unsigned long)pthread_self() );
+    //...w pętli bez końca, bo łączeniu podlegają konsumenci
+    while( ENDLESS )
     {
-        //pthread_mutex_lock(&mutex);
-        printf( "[%lu] worker(): %lu\n",(unsigned long)pthread_self(),n);
-        if( !(n-no) )
-        { 
-            pthread_cond_broadcast( &cond ); 
-            break; 
-        }
-        //...równoważnie if( !(n-no) ){ pthread_cond_signal( &cond ); }
-        //pthread_mutex_unlock( &mutex );
+        pthread_mutex_lock( &mutex );
+        v = produce(); //...to wywołanie jest bezpieczne ale może być problematyczne
+        append( v ); //...i dodajemy do bufora (tu: wstawiamy właściwie)
+        pthread_mutex_unlock( &mutex );
     }
-    pthread_exit( NULL );
+    //...de facto ten fragment nie będzie nigdy wykonany
+    printf( "[%lu] producer, stop\n",(unsigned long)pthread_self() );
+    pthread_exit(NULL);
+}
+
+void *consumer( void* arg )
+{
+    unsigned long int v; //...typ musi odpowiadać temu co jest pobierane
+    //...komunikat diagnostyczny
+    printf( "[%lu] consumer, start\n",(unsigned long)pthread_self() );
+    //...i zaczynamy
+    for( n=0;n<no;n++ )
+    {
+        pthread_mutex_lock( &mutex );
+        v = take();
+        pthread_mutex_unlock( &mutex );
+        printf("%d -> %lu\n",n,v );
+    }
+    printf( "[%lu] consumer, stop\n",(unsigned long)pthread_self() );
+    pthread_exit(NULL);
 }
 
 int main( int argc,char** argv )
 {
-    pthread_t tid[2];
-    pthread_mutex_init( &mutex,NULL ); pthread_cond_init ( &cond,NULL );
-    pthread_create((tid+0),NULL,worker,NULL); pthread_create((tid+1),NULL,watch,NULL);
-    pthread_join( *(tid+1),NULL ); pthread_join( *(tid+0),NULL );
-    pthread_mutex_destroy( &mutex ); pthread_cond_destroy( &cond );
-    printf( "[%lu] main(): stop\n",(unsigned long)pthread_self() );
-    return 0;
-}
-```
-
-Otrzymamy następujący output
-
-```bash
-$ ./cond2
-[138991326258944] worker(): 0
-[138991326258944] worker(): 1
-[138991326258944] worker(): 2
-[138991326258944] worker(): 3
-[138991326258944] worker(): 4
-[138991326258944] worker(): 5
-[138991326258944] worker(): 6
-[138991326258944] worker(): 7
-[138991326258944] worker(): 8
-[138991326258944] worker(): 9
-[138991326258944] worker(): 10
-[138991317866240] watch(): start
-[138991317866240] watch(): V() 10
-[138991317866240] watch(): stop
-[138991326263104] main(): stop
-```
-
-W niektórych przypadkach zachodzić może potrzeba synchronizacji wszystkich wątków procesu 
-z pewnym punktem wykonania kodu. Służą temu bariery POSIX. Barierę wprowadzają i 
-likwidują wywołania dwóch funkcji pthread_barrier_init() oraz 
-pthread_barrier_destroy().
-
-Ustawiając barierę barrier określamy licznik count. W trakcie wykonania wątków bariera 
-będzie obowiązywać tak długo – tak długo wątki nie zostaną zwolnione – aż ilość wywołań 
-pthread_barrier_wait() odwołań do danej bariery osiągnie count. 
-Bariera nie wymaga dodatkowych form blokad, jak semafory MUTEX.
-
-```cpp
-//...zaczynamy od standardowego zestawu plików włączanych
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h> //...tylko aby wywołać sleep()
-#include <pthread.h>
-
-pthread_barrier_t barrier; //...zmienna identyfikująca barierę
-unsigned count; //...licznik odwołań do bariery
-
-void *thread( void *arg ) //...funkcja wątku, bardzo prosta
-{ // tylko komunikat diagnostyczny i ...
-    printf( "[%lu] thread wait signal...!\n",(unsigned long)pthread_self() );
-    pthread_barrier_wait( &barrier ); //...wait() względem bariery
-    pthread_exit( NULL );
-}
-
-int main( int argc,char** argv )
-{
-    pthread_t* tid;
-    int i,n;
+    pthread_t _pid; //...ID wątki producenta
+    pthread_t _cid; //...ID wątki konsumenta
+    void *producer( void* ); //...ewentualnie deklaracje nagłówkowe
+    void *consumer( void* );
     if( argc>1 )
     {
-        sscanf( argv[1],"%d",&n );
-        if( n<2 )
+        sscanf( argv[1],"%d",&no ); if( no>40 )
         { 
-            printf( "...n<2, przyjęto n=2...\n" ); 
-            n = 2; 
-        }
-        count = n+1; //...licznik bariery ustawiamy na n wątków + 1 ❢
-        if( !(tid=(pthread_t*)calloc( (size_t)n,sizeof( pthread_t) ) ) )
-        { 
-            perror( "...calloc()..." ); 
-            exit( 2 ); 
-        }
-        pthread_barrier_init( &barrier,NULL,count );
-        for( i=0;i<n;i++ )
-        {
-            if( pthread_create( (tid+i), NULL,thread,NULL ) )
-            {
-                free( (void*)tid );
-                perror( "...pthread_create()..." );
-                exit( 2 );
-            }
-        }
-        //... no i w tym miejscu mamy wątek (n+1) ❢
-        printf( "[%lu] main()...?\n",(unsigned long)pthread_self() );
-        sleep( 1 );
-        pthread_barrier_wait( &barrier ); //...teraz dopiero będzie zwolniona
-        printf( "[%lu] main()...done\n",(unsigned long)pthread_self() );
-        for( i=0;i<n;i++ ) //...łączymy wątki
-        {
-            if( pthread_join( *(tid+i),NULL ) )
-            {
-                free( (void*)tid );
-                perror( "...pthread_join()..." );
-                exit( 2 );
-            }
-        }
-        //...i końcowe porządki
-        free( (void*)tid );
-        if( pthread_barrier_destroy( &barrier ) )
-        { 
-            perror( "...pthread_barrier_destroy()..." ); 
-            exit( 2 ); 
-        }
+            no=40; 
+        };
+        pthread_create( &_cid,NULL,consumer,NULL );
+        pthread_create( &_pid,NULL,producer,NULL );
+        pthread_join( _cid,NULL ); //...łączone tylko wątki konsumenta (-ów)
     }
     else
     { 
-        printf("...wywołanie programu %s <ilość wątków>\n",argv[0] );
-        exit( 1 ); 
+        printf( "...%s no= ???\n",argv[0] ); 
     }
     return 0;
 }
 ```
 
+Po kompilacji i uruchomieniu programu, możemy zaobserwować że wyniki nie zgadzają nam się z oczekiwaniami
+
 ```bash
-$ ./barrier 10
-[136660141311744] thread wait signal...!
-[136660116133632] thread wait signal...!
-[136660107740928] thread wait signal...!
-[136660099348224] thread wait signal...!
-[136660020885248] thread wait signal...!
-[136660012492544] thread wait signal...!
-[136660141315904] main()...?
-[136660124526336] thread wait signal...!
-[136660132919040] thread wait signal...!
-[136660004099840] thread wait signal...!
-[136659981915904] thread wait signal...!
-[136660141315904] main()...done
+./pc-1 10
+[138865224574720] consumer, start
+0 -> 0
+1 -> 0
+2 -> 0
+3 -> 0
+4 -> 0
+5 -> 0
+6 -> 0
+7 -> 0
+8 -> 0
+9 -> 0
+[138865224574720] consumer, stop
+[138865216182016] producer, start
 ```
 
-Zwróćmy uwagę, że wprowadzenie bariery nie wymusza żadnych relacji czasowych wykonania –
-wątki będą się wykonywać ale żaden z nich nie przekroczy wywołania
-pthread_barrier_wait( &barrier );
-dopóki licznik count nie osiągnie wartości zadanej w trakcie inicjowania bariery, czyli w 
-pthread_barrier_init( &barrier,NULL,count );
+Problem polega na koordynacji między producentem a konsumentem, aby go rozwiązac możemy zastosować dodatkowy semafor.
 
-## Wnioski
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#define ENDLESS 1
+unsigned long int buffer;
+int n,no;
+//...dwa semafory, odpowiednio dla:
+pthread_mutex_t delay = PTHREAD_MUTEX_INITIALIZER; //...konsumenta
+pthread_mutex_t exclude = PTHREAD_MUTEX_INITIALIZER; //...producenta
 
-1. **Semafor MUTEX**:
-   - Mutexy są używane do zapewnienia wyłącznego dostępu do współdzielonych zasobów w obrębie wątków.
-   - Funkcje `pthread_mutex_lock()` i `pthread_mutex_unlock()` pozwalają na zablokowanie i odblokowanie mutexu, zapewniając, że tylko jeden wątek może jednocześnie korzystać z chronionego zasobu.
-   - Wykorzystanie mutexów eliminuje błędy wynikające z jednoczesnego dostępu wielu wątków do wspólnych zasobów, co prowadzi do konsystentnego stanu danych.
+void append( unsigned long int v )
+{ 
+    buffer = v; 
+    return; 
+}
 
-2. **Zmienne warunkowe**:
-   - Zmienne warunkowe (`pthread_cond_t`) są przydatne, gdy wątek musi czekać na wystąpienie określonego warunku przed kontynuacją.
-   - Funkcje `pthread_cond_wait()` i `pthread_cond_signal()` pozwalają wątkom na oczekiwanie na wystąpienie określonego warunku lub na sygnalizowanie innym wątkom, że warunek został spełniony.
-   - Użycie zmiennych warunkowych eliminuje potrzebę ciągłego sprawdzania warunków w pętli, co prowadzi do bardziej wydajnego i przewidywalnego działania programu.
+unsigned long int take( void )
+{ 
+    return buffer; 
+}
 
-3. **Bariery**:
-   - Bariery (`pthread_barrier_t`) są wykorzystywane do synchronizacji grupy wątków, które muszą poczekać, aż wszystkie osiągną określony punkt w kodzie przed kontynuacją.
-   - Funkcje `pthread_barrier_init()` i `pthread_barrier_wait()` pozwalają na inicjalizację bariery i oczekiwanie na osiągnięcie przez wszystkie wątki punktu synchronizacji.
-   - Użycie barier umożliwia kontrolowanie przebiegu działania wielu wątków, czekając aż wszystkie osiągną wspólny punkt synchronizacji.
+unsigned long int produce( void )
+{
+    return (42*n*n*n + 270*n*n - 26436*n + 250703);
+}
 
-4. **Zarządzanie zasobami w wielowątkowym środowisku**:
-   - Korzystanie z mechanizmów synchronizacji takich jak mutexy, zmienne warunkowe i bariery pozwala na kontrolę dostępu do wspólnych zasobów.
-   - Poprawne zarządzanie synchronizacją wątków jest kluczowe dla zapewnienia spójności danych i uniknięcia błędów wynikających z jednoczesnego dostępu wielu wątków do tych samych zasobów.
+void* producer( void *arg )
+{
+    unsigned long int v;
+    printf( "[%lu] producer, start\n",(unsigned long)pthread_self() );
+    while( ENDLESS )
+    {
+        pthread_mutex_lock(&exclude);//...żądanie wyłączności dostępu do bufora
+        v = produce();
+        append( v );
+        pthread_mutex_unlock( &delay );//...ewentualne zwolnienie klienta
+    }
+    printf( "[%lu] producer, stop\n",(unsigned long)pthread_self() );
+    pthread_exit(NULL);
+}
 
-5. **Optymalizacja wydajności poprzez wielowątkowość**:
-   - Wprowadzenie wielowątkowości może znacząco poprawić wydajność programu, zwłaszcza gdy wiele zadań może być wykonywanych równolegle.
-   - Optymalne wykorzystanie wątków, poprzez efektywne zarządzanie synchronizacją, może przyspieszyć przetwarzanie i zwiększyć efektywność systemu.
+void *consumer( void* arg )
+{
+    unsigned long int v;
+    printf( "[%lu] consumer, start\n",(unsigned long)pthread_self() );
+    for( n=0;n<no;n++ )
+    {
+        //...pytanie o dostępność bufora
+        pthread_mutex_lock( &delay );
+        //...jeżeli tak, to pobieramy daną
+        v = take();
+        //...ten moment możemy wykorzystać dla ewent. zwolnienia producenta
+        pthread_mutex_unlock( &exclude);
+        printf("%d -> %lu\n",n,v );
+    }
+    printf( "[%lu] consumer, stop\n",(unsigned long)pthread_self() );
+    pthread_exit(NULL);
+}
+
+int main( int argc,char** argv )
+{
+    pthread_t _pid,_cid;
+    if( argc>1 )
+    {
+        sscanf( argv[1],"%d",&no ); 
+        if( no>40 )
+        { 
+            no=40; 
+        };
+        pthread_mutex_lock( &delay );
+        pthread_create( &_cid,NULL,consumer,NULL );
+        pthread_create( &_pid,NULL,producer,NULL );
+        pthread_join( _cid,NULL );
+    }
+    else
+    { 
+        printf( "...%s no= ???\n",argv[0] ); 
+    }
+    return 0;
+}
+```
+
+Tym razem możemy zaobserwować że wyniki wydają się bardziej rzetelne
+
+```bash
+$ ./pc-3 10
+[133131453089536] consumer, start
+[133131444696832] producer, start
+0 -> 250703
+1 -> 224579
+2 -> 224579
+3 -> 174959
+4 -> 151967
+5 -> 130523
+6 -> 110879
+7 -> 93287
+8 -> 77999
+9 -> 65267
+[133131453089536] consumer, stop
+```
+
+Zajmijmy się teraz kolejnym klasycznym problemem współbieżności readers/writers.
+
+Załóżmy na wstępie:
+
+1. będziemy mieli R czytelników i W pisarzy a każdy z nich dokona N cykli zapisu, po czym program zakończy działanie;
+2. jest rzeczą naturalną, że wykorzystamy tu dwa semafory (w zupełności wystarczającymi będą binarne mutex);
+3. sformułowanie rozwiązania może być bardzo różne, zależnie od zamierzonego efektu – tutaj przyjmiemy preferencję dla czytelników.
+
+```cpp
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+#define R 4 //...ilość czytelników
+#define W 2 //...ilość pisarzy
+#define N 5 //...ilość wejść pisarza do czytelni
+#define ENDLESS 1
+pthread_mutex_t wmutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t rmutex = PTHREAD_MUTEX_INITIALIZER;
+int counter; //...zmienna monitorująca ilość czytelników w czytelni
+void* writer( void* arg )
+{
+    int n; //...zmienna posłuży do zliczania ilości cykli pisarzy
+    for( n=0;n<N;n++)
+    {
+        //...zgłoszenie żądania dostępu na wyłączność czytelni
+        pthread_mutex_lock( &wmutex );
+        printf( "[%lu] pisarz, start\n",(unsigned long)pthread_self() );
+        sleep(1); //...wykonanie operacji przez pisarza (tu: pusta)
+        printf( "[%lu] pisarz, stop\n",(unsigned long)pthread_self() );
+        //...zwolnienie czytelni (semafora)
+        pthread_mutex_unlock( &wmutex );
+        sleep( n%2 ); //...aby nieco utrudnić koordynację
+    }
+    pthread_exit( NULL );
+}
+
+void* reader( void* arg )
+{
+    int n=0; //...wyłącznie po to aby utrudnić (sprawdzić) koordynację
+    while( ENDLESS ) //...bez końca bo monitorujemy pisarzy
+    {
+        pthread_mutex_lock( &rmutex );
+        counter++; //...wchodzi czytelnik
+        //...ponieważ pisarz musi mieć czytelnię na wyłączność, stąd....
+        if( counter==1 )
+        { 
+            pthread_mutex_lock( &wmutex ); 
+        }
+        pthread_mutex_unlock( &rmutex );
+        printf( "[%lu] czytelnik, start\n",(unsigned long)pthread_self() );
+        sleep(1); //...odczyt, tutaj jako operacja pusta
+        printf( "[%lu] czytelnik, stop\n",(unsigned long)pthread_self() );
+        pthread_mutex_lock( &rmutex );
+        counter--; //...czytelnik zwalnia czytelnię
+        //...jeżeli czytelnia pusta, to możemy wpuścić (zwolnić) pisarza
+        if( !counter )
+        { 
+            pthread_mutex_unlock( &wmutex ); 
+        }
+        pthread_mutex_unlock( &rmutex );
+        sleep( n%3 ); n++; //...żeby trochę utrudnić
+    }
+    pthread_exit(NULL);
+}
+
+int main( void )
+{
+    pthread_t rid[R];
+    pthread_t wid[W];
+    int t;
+    counter = 0; //...zero czytelników w czytelni
+    //...uaktywniamy wątki czytelników
+    for( t=0;t<R;t++ )
+    { 
+        pthread_create( (rid+t),NULL,reader,NULL ); 
+    }
+    //...uaktywniamy wątki pisarzy
+    for( t=0;t<W;t++ )
+    { 
+        pthread_create( (wid+t),NULL,writer,NULL );
+    }
+    //...łączymy pisarzy, ponieważ akurat ich działania monitorujemy
+    for( t=0;t<W;t++ )
+    {
+         pthread_join( *(wid+t),NULL ); 
+    }
+    return 0;
+}
+```
+
+Program po kompilacji i uruchomienia zwróci nam następujący wynik
+
+```bash
+$ ./rw
+[134876250441472] czytelnik, start
+[134876133062400] czytelnik, start
+[134876258834176] czytelnik, start
+[134876242048768] czytelnik, start
+[134876250441472] czytelnik, stop
+[134876133062400] czytelnik, stop
+[134876250441472] czytelnik, start
+[134876133062400] czytelnik, start
+[134876242048768] czytelnik, stop
+[134876258834176] czytelnik, stop
+[134876258834176] czytelnik, start
+[134876242048768] czytelnik, start
+[134876250441472] czytelnik, stop
+[134876258834176] czytelnik, stop
+[134876133062400] czytelnik, stop
+[134876242048768] czytelnik, stop
+[134876233656064] pisarz, start
+[134876233656064] pisarz, stop
+[134876225263360] pisarz, start
+[134876225263360] pisarz, stop
+[134876258834176] czytelnik, start
+```
+
+Problem ten polega na tym, że pewna liczba czytelników i pisarzy dzieli wspólny zasób, w tym przypadku fikcyjną "czytelnię". Pisarze mogą zapisywać w czytelni, podczas gdy czytelnicy mogą tylko czytać, ale nie mogą zapisywać.
+
+Opis logiki działania programu:
+
+Program uruchamia R wątków reprezentujących czytelników i W wątków reprezentujących pisarzy.
+Każdy z pisarzy próbuje uzyskać dostęp do czytelni N razy, wyświetlając komunikat "pisarz, start" i "pisarz, stop", a następnie przerywa na chwilę, aby utrudnić koordynację.
+Czytelnicy również próbują uzyskać dostęp do czytelni w pętli nieskończonej, wyświetlając komunikaty "czytelnik, start" i "czytelnik, stop" oraz wykonywując operację odczytu przez określony czas. Następnie zwalniają dostęp do czytelni.
+
+Wyniki wydaje się zgodny z przewidywanym i możemy na podstawie niego zaobserwować to jak program radzi sobie z alokacją zasobów i dostępów do danych.
+
+Kolejny przykład dotyczyć będzie problemu dining philosophers
+
+```cpp
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+#define N 5 //...pięciu filozofów
+#define CYCLE 1 //...każdy powinien uzyskać CYCLE-krotnie pałeczki
+pthread_mutex_t sticks[N]; //...semafor monitorujący dostęp do pałeczek
+
+void* diner( void* arg )
+{
+    int v;
+    int eating = 0;
+    v = *((int*)arg) +1;
+    while( eating<CYCLE )
+    {
+        printf( "[%d]...hmm...co ja to miałem\n",v );
+        sleep( v/2);
+        printf( "[%d]...głodny\n", v);
+        pthread_mutex_lock( (sticks+v) );
+        pthread_mutex_lock( (sticks + (v+1)%N ) );
+        printf( "[%d]...obiad...start\n",v );
+        eating++;
+        sleep(1);
+        printf( "[%d]...obiad...stop\n",v );
+        pthread_mutex_unlock( (sticks+v) );
+        pthread_mutex_unlock( (sticks + (v+1)%N ) );
+    }
+    pthread_exit(NULL);
+}
+
+int main( void )
+{
+    pthread_t tid[N];
+    int n[N]; //...tylko w celu diagnostycznym (aby określić numer kolejny)
+    int i;
+    //...inicjujemy semafor monitorujący dostępność pałeczek
+    for (i=0;i<N;i++)
+    { 
+        pthread_mutex_init( (sticks+i), NULL );
+    }
+    for (i=0;i<N;i++)
+    {
+        *(n+i) = i; 
+        pthread_create( (tid+i),NULL,diner,(void*)(n+i) ); 
+    }
+    for (i=0;i<N;i++)
+    { 
+        pthread_join( *(tid+i),NULL ); 
+    }
+    pthread_exit(0); //...w końcu to też wątek
+}
+```
+
+```bash
+$ ./dining-1
+[1]...hmm...co ja to miałem
+[2]...hmm...co ja to miałem
+[3]...hmm...co ja to miałem
+[4]...hmm...co ja to miałem
+[5]...hmm...co ja to miałem
+[1]...głodny
+[1]...obiad...start
+[2]...głodny
+[1]...obiad...stop
+[2]...obiad...start
+[3]...głodny
+[4]...głodny
+[4]...obiad...start
+[5]...głodny
+[5]...obiad...start
+[2]...obiad...stop
+[4]...obiad...stop
+[5]...obiad...stop
+[3]...obiad...start
+[3]...obiad...stop
+```
+
+Analiza działania programu:
+- Każdy filozof jest reprezentowany przez osobny wątek.
+- Filozofowie wykonują się w nieskończonej pętli, z których każda reprezentuje jedno "cykle" - próby zjedzenia posiłku określoną ilość razy (zdefiniowane przez zmienną `CYCLE`).
+- Każdy filozof wyświetla komunikaty, mówiące o swoim myśleniu, głodzie i próbach zjedzenia.
+- Filozofowie próbują uzyskać dostęp do dwóch pałeczek (reprezentowanych przez semafory) po swoich stronach stołu.
+- Jeśli filozof o numerze `v` uzyska dostęp do dwóch pałeczek (blokując je semaforami), to oznacza to, że zaczyna jeść przez określony czas (`sleep(1)`), po czym zwalnia pałeczki (odblokowuje semafory).
+
+Wynik działania programu:
+- Filozofowie są identyfikowani numerami od 1 do 5.
+- Widzimy, że filozofowie zaczynają od stanu myślenia, przechodzą przez stan głodu i próbują jeść.
+- Jednak tylko dwóch filozofów jednocześnie uzyskuje dostęp do pałeczek i zaczyna jeść. Pozostali filozofowie pozostają w stanie głodu i próbują uzyskać dostęp do pałeczek, ale nie są w stanie tego zrobić.
+
+Analiza wyniku:
+- Wynik pokazuje, że tylko dwóch filozofów jednocześnie jest w stanie zjeść. Pozostali filozofowie czekają na dostęp do pałeczek, ale z powodu wyścigów i konfliktów w dostępie do zasobów (pałeczek), większość z nich pozostaje w stanie głodu.
+- Problemem jest zakleszczenie zasobów - dwa filozofowie o numerach parzystych próbują uzyskać dostęp do tych samych dwóch pałeczek jednocześnie, co prowadzi do sytuacji, w której nikt nie może zjeść.
+- Zmiana algorytmu lub podejścia do przypisania dostępu do pałeczek (semaforów) może pomóc w rozwiązaniu problemu zakleszczenia i umożliwić równomierny dostęp filozofów do posiłków.
+
+Jak w powyższych wnioskach, program pomimo tego że działa poprawnie jest dość chaotyczny i istnieje mała szansa że dojdzie do zakleszczenia.
+
+Można byłoby przyjąć mniej ofensywną strategię – czekamy cierpliwie do momentu aż będziemy mogli
+podnieść obie pałeczki. Jest to rozwiązanie plasujące się, niejako, na przeciwległym biegunie. W
+przypadku gdy proces (wątek) korzysta równocześnie z wielu współdzielonych zasobów a obierze tego
+rodzaju strategię może to prowadzić do zagłodzenia (process starvation).
+
+```cpp
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+#define N 5
+#define CYCLE 1
+pthread_mutex_t stick[N];
+pthread_mutex_t eat; //...oprócz tego że wprowadzimy tu dodatkowy semafor
+
+void* diner( void* arg )
+{
+    int v;
+    int eating = 0;
+    v = *((int*)arg) +1;
+    while( eating<CYCLE )
+    {
+        printf( "[%d]...hmm...co ja to miałem\n",v ); sleep( v/2);
+        printf( "[%d]...głodny\n", v);
+        pthread_mutex_lock( &eat );
+        pthread_mutex_lock( (stick+v) );
+        pthread_mutex_lock( (stick + (v+1)%N) );
+        pthread_mutex_unlock( &eat );
+        printf( "[%d]...obiad...start\n",v );
+        eating++; sleep(1);
+        printf( "[%d]...obiad...stop\n",v );
+        pthread_mutex_unlock( (stick+v) );
+        pthread_mutex_unlock( (stick + (v+1)%N ) );
+    }
+    pthread_exit(NULL);
+}
+
+int main( void )
+{
+    pthread_t tid[N];
+    int n[N],i;
+    pthread_mutex_init( &eat,NULL );
+    for( i=0;i<N;i++ )
+    { 
+        pthread_mutex_init( (stick+i), NULL ); 
+    }
+    for( i=0;i<N;i++ )
+    { 
+        *(n+i) = i; pthread_create( (tid+i),NULL,diner,(void*)(n+i) ); 
+    }
+    for( i=0;i<N;i++ )
+    { 
+        pthread_join(tid[i],NULL); 
+    }
+    pthread_exit(0);
+}
+```
+
+```bash
+$ ./dining-2
+[1]...hmm...co ja to miałem
+[2]...hmm...co ja to miałem
+[4]...hmm...co ja to miałem
+[3]...hmm...co ja to miałem
+[5]...hmm...co ja to miałem
+[1]...głodny
+[1]...obiad...start
+[2]...głodny
+[3]...głodny
+[1]...obiad...stop
+[2]...obiad...start
+[5]...głodny
+[4]...głodny
+[2]...obiad...stop
+[3]...obiad...start
+[5]...obiad...start
+[3]...obiad...stop
+[4]...obiad...start
+[5]...obiad...stop
+[4]...obiad...stop
+```
+
+Wprowadzone zmiany w programie uwzględniają dodatkowy semafor (`eat`), który został użyty do koordynacji dostępu do zasobów (pałeczek). Wszystkie semafory, zarówno `stick` jak i `eat`, zostały zainicjowane jako binarne semafory w celu synchronizacji dostępu do zasobów.
+
+Analiza działania programu po zmianach:
+- Program wykonuje się w ten sam sposób jak poprzednio, z tą różnicą, że został wprowadzony dodatkowy semafor `eat`, którego blokada jest wykonywana na początku pętli przez filozofa.
+- Semafor `eat` jest wykorzystywany jako zabezpieczenie, aby tylko jeden filozof mógł próbować uzyskać dostęp do pałeczek jednocześnie. W miarę jak filozofowie są głodni, próbują uzyskać dostęp do dwóch pałeczek.
+- Filozofowie są w stanie uzyskać dostęp do pałeczek w sposób bardziej równomierny niż w poprzedniej wersji programu.
+- Dodanie semafora `eat` pomaga w uniknięciu sytuacji, w której więcej niż jedno "trio" filozofów jednocześnie próbuje uzyskać dostęp do pałeczek.
+- Wynik programu pokazuje, że wszystkie pięć wątków/filozofów ma szansę zjeść swoje posiłki, choć niekoniecznie w pełni równolegle.
+
+Wnioski:
+- Dodanie dodatkowego semafora (`eat`) pomogło w poprawie równoważenia dostępu do zasobów (pałeczek) przez filozofów.
+- Pomimo wprowadzenia zmian, wciąż mogą wystąpić sytuacje, w których niektórzy filozofowie będą czekać na dostęp do pałeczek, szczególnie w przypadku, gdy więcej niż jeden filozof jednocześnie jest głodny.
+- Nadal jest to rozwiązanie uproszczone, które może prowadzić do zakleszczenia (szczególnie w bardziej złożonych scenariuszach), jednak w tym konkretnym przypadku wprowadzone zmiany poprawiają równoważenie dostępu do zasobów i zmniejszają ryzyko, że wszyscy filozofowie będą czekać w nieskończoność na posiłek.
+
+
+## Wnioski dla poszczególnych programów
+
+1. **Problem producenta i konsumenta:**
+
+    - Pierwszy kod nie gwarantuje poprawności i bezpieczeństwa dostępu do współdzielonych danych.
+    - Drugi kod poprawia ten problem poprzez zastosowanie dodatkowego semafora (`delay`) do synchronizacji producenta i konsumenta.
+    - Drugi kod rozwiązuje problem poprzez wykorzystanie dwóch semaforów (jeden do opóźnienia operacji konsumenta, drugi do wykluczania zapisu przez producenta), co eliminuje błędy synchronizacji w poprzednim kodzie.
+
+2. **Problem czytelników i pisarzy:**
+
+    - W pierwotnym kodzie, wyścigi pomiędzy czytelnikami i pisarzami prowadzą do zakleszczeń i braku równomiernego dostępu do zasobów.
+    - Problemem jest niewłaściwe zarządzanie zasobami i brak koordynacji, co prowadzi do problemów synchronizacyjnych.
+    - Konieczne jest zastosowanie odpowiedniej strategii dostępu do zasobów, aby uniknąć zakleszczeń i zapewnić równomierny dostęp czytelników i pisarzy.
+
+3. **Problem filozofów przy stole:**
+
+    - Pierwotny kod działa, ale może prowadzić do problemów synchronizacyjnych (zakleszczeń) w bardziej złożonych scenariuszach.
+    - Wprowadzenie dodatkowego semafora (`eat`) poprawia równowagę dostępu do zasobów przez filozofów, zmniejszając ryzyko zakleszczeń i umożliwiając lepsze wykorzystanie zasobów.
+    - Nadal istnieje ryzyko, że niektórzy filozofowie mogą czekać na dostęp do zasobów, ale zmiany pomogły w bardziej równomiernym dostępie do pałeczek.
+
+Wszystkie omówione programy pokazują różne podejścia i strategie do rozwiązywania problemów synchronizacyjnych w wielowątkowym środowisku. Poprawne zarządzanie zasobami i zastosowanie odpowiednich mechanizmów synchronizacyjnych jest kluczowe dla uniknięcia zakleszczeń i zapewnienia poprawnego działania programów wielowątkowych.
+
