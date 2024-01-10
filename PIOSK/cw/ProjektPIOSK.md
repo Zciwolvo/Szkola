@@ -236,9 +236,7 @@ Przykładowe adresy IP:
 
 | Device          | Interface | IP Address    | Subnet Mask    | Default Gateway | VLAN / Description                              |
 |-----------------|-----------|---------------|----------------|-----------------|-------------------------------------------------|
-| Router          | G0/1      | 172.17.10.1   | 255.255.255.0  | N/A             | VLAN 10 (Administration)                    |
-|                 | G0/2      | 172.17.20.1   | 255.255.255.0  | N/A             | VLAN 20 (Medical Staff)                           |
-|                 | G0/3      | 172.17.30.1   | 255.255.255.0  | N/A             | VLAN 30 (Public)              |
+| Router          | G0/0/0      | 172.17.1.1   | 255.255.255.0  | N/A             | Default                    |
 | Switch          | VLAN 10    | N/A           | N/A            | 172.17.10.1     | VLAN 10 (Administration)   |
 |                 | VLAN 20    | N/A           | N/A            | 172.17.20.1     | VLAN 20 (Medical)          |
 |                 | VLAN 30    | N/A           | N/A            | 172.17.30.1     | VLAN 30 (Public) |
@@ -249,8 +247,8 @@ Przykładowe adresy IP:
 |                 | NIC       | 172.17.20.2-9 | 255.255.255.0  | 172.17.20.1     | VLAN 20 (Medical Staff) - Workstations             |
 |                 | NIC       | 172.17.20.10-16| 255.255.255.0 | 172.17.20.1     | VLAN 20 (Medical Staff) - Medical Equipment        |
 |                 | NIC       | 172.17.20.16-20 | 255.255.255.0  | 172.17.20.1     | VLAN 20 (Diagnostic Imaging Systems) - Workstations|
-| Mobile Devices  | HealthCare_Internal | 172.17.10.10-60| 255.255.255.0 | 172.17.20.1     | HealthCare_Internal    |
-| Patients' Devices | HealthCare_Guest  | 172.17.30.2-60| 255.255.255.0 | 172.17.30.1     | HealthCare_Guest    |
+| Mobile Devices  | HealthCare_Internal | DHCP | 255.255.255.0 | 172.17.20.1     | HealthCare_Internal    |
+| Patients' Devices | HealthCare_Guest  | DHCP | 255.255.255.0 | 172.17.30.1     | HealthCare_Guest    |
 
 
 
