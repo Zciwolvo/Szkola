@@ -1,0 +1,13 @@
+{
+    "name": "GRA",
+    "version": "1.0.0",
+    "description": "Hangman Game with Node.js and Express",
+    "main": "serwer.js",
+    "scripts": {
+        "start": "node serwer.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
+    }
+}

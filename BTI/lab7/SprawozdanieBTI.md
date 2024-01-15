@@ -565,3 +565,21 @@ Oczywiście, uwzględnienie pracowników biurowych niezwiązanych bezpośrednio 
 - **Isolacja i Minimalizacja Szkód:** Natychmiastowe działania w celu izolacji incydentu i ograniczenia jego wpływu na infrastrukturę i dane firmy.
 - **Przywracanie Systemów:** Wykonanie procedur naprawczych i przywracanie usług, włączając odbudowę danych, zmiany haseł itp.
 - **Analiza Incydentu:** Po zakończeniu incydentu przeprowadzenie szczegółowej analizy celem zrozumienia jego przyczyn, sposobów działania oraz wyciągnięcia wniosków mających na celu doskonalenie procedur reagowania na przyszłość.
+
+**Zarządzanie Łatkami i Aktualizacje:**
+
+1. Utworzenie harmonogramu regularnych aktualizacji oprogramowania.
+2. Wdrożenie procedur testowania łatek przed pełnym wdrożeniem.
+3. Monitorowanie bieżących aktualizacji bezpieczeństwa dostarczanych przez dostawców.
+4. Zapewnienie redundancji systemów w przypadku niepowodzeń podczas procesu aktualizacji.
+5. Szkolenie personelu w zakresie procedur aktualizacyjnych i wdrażania łatek.
+6. Przeprowadzanie regularnych audytów, aby ocenić skuteczność procesu aktualizacji.
+
+**Audyt Bezpieczeństwa:**
+
+1. Opracowanie planu audytów wewnętrznych i zewnętrznych.
+2. Określenie kluczowych obszarów do przeglądu, obejmujących zarządzanie dostępem, zabezpieczenia fizyczne i logikę systemów.
+3. Przeprowadzanie audytów zgodnie z harmonogramem, identyfikując i dokumentując potencjalne zagrożenia.
+4. Analiza wyników audytów w celu wprowadzenia niezbędnych poprawek i ulepszeń.
+5. Utrzymywanie spójności z regulacjami i normami branżowymi w dziedzinie bezpieczeństwa informacji.
+6. Edukacja pracowników w zakresie praktyk bezpieczeństwa informacji i ich roli w procesie audytu.

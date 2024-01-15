@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wisielec</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <h1>Wisielec</h1>
+  <p id="hiddenWord"></p>
+  <p>Pozostałe próby: <span id="attemptsLeft"></span></p>
+  <p>Wynik: <span id="playerScore"></span></p>
+  <input type="text" id="guessInput" placeholder="Wprowadź literę">
+  <button onclick="makeGuess()">Make Guess</button>
+
+  <script>
+    function updateGameDisplay(data) {
+      $('#hiddenWord').text(data.hiddenWord.join(' '));
+      $('#attemptsLeft').text(data.attemptsLeft);
+      $('#playerScore').text(data.playerScore);
+    }
+
+    function makeGuess() {
+      const guessedLetter = $('#guessInput').val().toLowerCase();
+      $('#guessInput').val('');
+
+      $.post(`http://localhost:3000/guess/${guessedLetter}`, updateGameDisplay);
+    }
+
+    function fetchGameState() {
+      $.get('http://localhost:3000/game-state', updateGameDisplay);
+    }
+
+    $(document).ready(function() {
+      fetchGameState();
+    });
+  </script>
+
+</body>
+</html>
