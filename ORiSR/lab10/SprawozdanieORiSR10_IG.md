@@ -66,8 +66,8 @@ row {
 
 &nbsp;
 
-<h2 style="text-align:center; border: none;"><b>Sprawozdanie nr 9</b></h3>
-<h2 style="text-align:center; border: none;">mutex</h2>
+<h2 style="text-align:center; border: none;"><b>Sprawozdanie nr 10</b></h3>
+<h2 style="text-align:center; border: none;">Wybrane problemy</h2>
 
 &nbsp;
 

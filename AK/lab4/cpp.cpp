@@ -29,7 +29,7 @@ int main()
     {
         for (int i = 0; i < n; ++i) 
         {
-            switch (t % 16) {
+            switch (t % 8) {
                 case 0:
                     s1 += tab[i];
                     break;

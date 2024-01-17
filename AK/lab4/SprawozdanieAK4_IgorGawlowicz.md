@@ -239,6 +239,10 @@ s16 = 4194304.000000
 | v4 | 8 | 4.508 |
 | v5 | 16 | 5.315 |
 
+Najkrótszy czas wykonania (4.508 [µs]) występuje dla wersji kodu z 8 buforami (v4). \
+Czas wykonania dla 2 i 16 buforów jest zbliżony, ale nieznacznie dłuższy niż dla 8 buforów. \
+Wersje z 1 i 4 buforami mają podobny czas wykonania, choć dla 4 buforów jest nieco dłuższy niż dla 1 bufora.
+
 2.2 
 
 | Wersja kodu | Liczba buforów | Suma wszystkich elementów |
@@ -248,3 +252,18 @@ s16 = 4194304.000000
 | v3 | 4 | 107374182.823529407382011413574218750000 |
 | v4 | 8 | 107374182.147058829665184020996093750000 |
 | v5 | 16 | 107374182.294117674231529235839843750000 |
+
+Wartości sumy są bliskie wartości 107374182.5, która jest sumą łączną dla 1024 elementów o wartości 0.1. \
+Różnice w sumach są wynikiem błędów arytmetyki zmiennoprzecinkowej, co jest naturalne w tego typu operacjach.
+
+## Wnioski
+
+Czas wykonania programu zależy od liczby buforów, ale wyniki nie pokazują jednoznacznej zależności: największa liczba buforów (v5) nie zawsze oznacza najdłuższy czas wykonania.
+
+Różnice w czasie wykonania są stosunkowo niewielkie między różnymi wersjami kodu, co może wynikać z niewielkich rozmiarów danych i prostej logiki operacji w pętli.
+
+Wartości sumy są zbliżone do oczekiwanej sumy, ale różnice mogą występować z powodu błędów reprezentacji liczb zmiennoprzecinkowych.
+
+Skuteczność buforów może zależeć od wielu aspektów, gdzie głównym czynnikiem będzie urządzenie z którego korzystamy, największy wpływ ma architektura procesora ponieważ 8 rdzeniowy procesor o wiele lepiej poradzi sobie z podziałem pracy 8 buforów od 16 buforów.
+
+Kolejnym aspektem będzie pamięć RAM, nie powinna mieć ona wpływu na zależność ilości buforów od czasu ale zdecydowanie będzie miała ona wpływ na szybkość działania programu.

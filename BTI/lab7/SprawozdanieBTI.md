@@ -583,3 +583,56 @@ Oczywiście, uwzględnienie pracowników biurowych niezwiązanych bezpośrednio 
 4. Analiza wyników audytów w celu wprowadzenia niezbędnych poprawek i ulepszeń.
 5. Utrzymywanie spójności z regulacjami i normami branżowymi w dziedzinie bezpieczeństwa informacji.
 6. Edukacja pracowników w zakresie praktyk bezpieczeństwa informacji i ich roli w procesie audytu.
+
+## **Kontrola Dostawców:**
+
+1. **Ustalenie standardów bezpieczeństwa dla dostawców i kontrahentów:**
+   - **Zasady dostępu do informacji:**
+     - Określenie, kto w dostawcy ma dostęp do kluczowych informacji firmy.
+     - Wymaganie korzystania z bezpiecznych metod uwierzytelniania.
+
+   - **Ochrona danych osobowych:**
+     - Zapewnienie zgodności z przepisami dotyczącymi prywatności, takimi jak RODO.
+     - Określenie, jakie dane są traktowane jako poufne i wymagają szczególnej ochrony.
+
+   - **Zasady przechowywania poufnych danych:**
+     - Określenie okresów przechowywania danych w zależności od ich charakteru.
+     - Wprowadzenie polityki niszczenia danych w sposób bezpieczny po zakończeniu okresu przechowywania.
+
+2. **Opracowanie procedur oceny i monitorowania dostawców:**
+   - **Proces oceny dostawców:**
+     - Określenie, jakie dokumenty i informacje są wymagane od dostawcy w celu oceny zgodności z polityką bezpieczeństwa.
+     - Ustalenie częstotliwości ocen, szczególnie w kontekście zmieniających się warunków rynkowych.
+s
+   - **Audyty bezpieczeństwa:**
+     - Określenie kryteriów audytu, takich jak obecność odpowiednich zabezpieczeń, polityk bezpieczeństwa, i monitoringu dostępu.
+     - Przygotowanie procesu monitorowania ciągłego, aby upewnić się, że dostawcy utrzymują ustalone standardy.
+
+1. **Zasady wyboru dostawców**
+    - Reputacja w branży
+    - Zaufanie
+    - Jakość produktów 
+    - Wydajność
+
+**12. Szkolenie Zespołu Bezpieczeństwa:**
+
+1. **Szkolenie dla specjalisty odpowiedzialnego za utrzymanie i monitorowanie systemu bezpieczeństwa:**
+   - **Identyfikacja kluczowych obszarów wiedzy:**
+     - Cyberzagrożenia: Szkolenie z rozpoznawania różnych rodzajów cyberzagrożeń.
+     - Bezpieczne praktyki: Zapoznanie z najlepszymi praktykami w zakresie bezpieczeństwa informacji.
+     - Nowoczesne narzędzia: Szkolenie z korzystania z najnowszych narzędzi zabezpieczających.
+
+   - **Szkolenia dotyczące najnowszych zagrożeń cybernetycznych:**
+     - Kursy omawiające aktualne zagrożenia i metody ich przeciwdziałania.
+     - Analiza konkretnych przypadków ataków, aby zrozumieć mechanizmy działania cyberprzestępców.
+
+2. **Przygotowanie zespołu do skutecznego reagowania na incydenty:**
+   - **Plan reagowania na incydenty:**
+     - Szczegółowe określenie roli każdego członka zespołu w przypadku incydentu.
+     - Przeprowadzenie symulacji incydentów w celu sprawdzenia gotowości zespołu.
+
+   - **Symulacje incydentów:**
+     - Organizacja symulacji różnych scenariuszy ataków.
+     - Analiza reakcji zespołu i identyfikacja obszarów do doskonalenia.
+
+
