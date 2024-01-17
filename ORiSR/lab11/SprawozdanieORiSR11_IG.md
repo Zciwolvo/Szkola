@@ -91,7 +91,8 @@ Igor Gawłowicz / 59096
 
 ## Cel ćwiczenia
 
-
+**Cel ćwiczenia:**
+Celem ćwiczenia było zapoznanie się z podstawowymi funkcjami i operacjami związanymi z programowaniem współbieżnym w MPI (Message Passing Interface). Ćwiczenie obejmowało instalację i konfigurację OPEN MPI, a następnie praktyczne wykorzystanie funkcji takich jak `MPI_Init`, `MPI_Comm_size`, `MPI_Comm_rank`, `MPI_Barrier`, `MPI_Send`, `MPI_Recv`, `MPI_Finalize`, `MPI_Get_processor_name`, `MPI_Reduce` do realizacji prostych programów współbieżnych.
 
 ## Przebieg ćwiczenia
 
@@ -245,7 +246,10 @@ int main( int argc, char *argv[] )
 ```
 
 ```bash
-OUTPUT 10 strona
+$ mpirun -np 3 ./kolejne
+proces 1 z 3
+proces 2 z 3
+proces 3 z 3
 ```
 
 Warto pamiętać, że - tradycyjnie – jeżeli proces (wątek) będzie wykonywał jakiekolwiek zadania i może
@@ -296,8 +300,24 @@ int main( int argc, char *argv[] )
 }
 ```
 
+Sprawdzimy najpierw **-o cmd,ppid,pid**
+
 ```bash
-OUTPUT strona 12
+CMD                            PPID     PID
+-bash                           400     401
+ps -o cmd,ppid,pid              401    2597
+```
+
+
+
+```bash
+$ mpirun -np 6 ./slaves
+SLAVE   4.6 [2738->2742] | węzeł: cs-87756155163-default
+SLAVE   3.6 [2738->2741] | węzeł: cs-87756155163-default
+SLAVE   5.6 [2738->2743] | węzeł: cs-87756155163-default
+SLAVE   6.6 [2738->2744] | węzeł: cs-87756155163-default
+MASTER  1.6 [2738->2739] | węzeł: cs-87756155163-default
+SLAVE   2.6 [2738->2740] | węzeł: cs-87756155163-default
 ```
 
 Jako przykład użycia komunikacji blokującej przygotujemy program w którym węzły slave prześlą
@@ -334,8 +354,7 @@ int main(int argc, char *argv[])
             MPI_Recv( (void*)(&x),1,MPI_DOUBLE,counter,TAG,MPI_COMM_WORLD,&status );
             Sx += x;
         }
-        printf( "\nProces %d odebrał od %d do %d,
-        sumę Sx=%f\n\n",MASTER,MASTER+1,world-1,Sx );
+        printf( "\nProces %d odebrał od %d do %d, sumę Sx=%f\n\n",MASTER,MASTER+1,world-1,Sx );
     }
     //...od tego miejsca już kod wspólny
     MPI_Finalize();
@@ -343,15 +362,40 @@ int main(int argc, char *argv[])
 }
 ```
 
+Niestety środowisko w chmurze nie pozwala na taką ilość procesów więc musimy improwizować
+
 ```bash
-OUTPUT strona 17
+$ mpirun -np 100 ./block
+
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 2931 RUNNING AT cs-87756155163-default
+=   EXIT CODE: 9
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Terminated (signal 15)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
 ```
+
+```bash
+$ mpirun -np 50 ./block
+
+Proces 0 odebrał od 1 do 49, sumę Sx=29.416904
+```
+
+Nie zawsze koordynacja czasowa wymiany danych ma znaczenie krytyczne dla procesu, tak że niekoniecznie
+muszą one wiązać się z koniecznością wprowadzenia blokowania. W przypadku operacji nieblokujących
+sterowanie zwracane jest natychmiastowo do procesu, tak że może on podjąć dalsze działania.
 
 Kolejny przykład użycia **MPI_Send()** i **MPI_Receive()**, tym razem celem wyznaczenia wariancji. Zwróćmy
 tutaj uwagę na sposób różnicowania kodu pomiędzy procesy
 
 ```cpp
 #include <stdio.h>
+#include <stdlib.h>
 #include <mpi.h>
 #define MASTER 0
 #define TAG 'K'+'M'
@@ -403,8 +447,21 @@ int main( int argc, char *argv[] )
 }
 ```
 
+Przykładowy efekt wykonania dla 5 procesów
+
 ```bash
-OUTPUT strona 22
+$ mpirun -np 5 ./sr 10
+(proces 0)@cs-87756155163-default...ilość składników 10*100000
+(proces 1)@cs-87756155163-default
+(proces 3)@cs-87756155163-default
+(proces 4)@cs-87756155163-default
+(proces 2)@cs-87756155163-default
+...SLAVE wysyła sumę 20787.4
+...SLAVE wysyła sumę 20787.4
+...SLAVE wysyła sumę 20787.4
+...SLAVE wysyła sumę 20787.4
+...MASTER zyskał wariancję Var=0.0831498
+ dla 10*100000 składników sumy
 ```
 
 Istnieje także wersja tej funkcji, w efekcie wywołania której wszystkie procesy komunikatora otrzymują
@@ -454,9 +511,18 @@ int main( int argc, char *argv[] )
 ```
 
 ```bash
-OUTPUT strona 25
+$  mpirun -np 4 ./reduce 10
+Ilość elementów N*M=10*100000
+Otrzymana wartość Var= 0.083150
 ```
 
 ## Wnioski
 
+1. **Inicjalizacja MPI:** Programy korzystające z MPI powinny zaczynać od inicjalizacji MPI za pomocą funkcji `MPI_Init`.
+2. **Równoległe wykonywanie kodu:** Dzięki MPI można uruchamiać programy równolegle na wielu procesach, co pozwala na przyspieszenie obliczeń.
+3. **Komunikacja między procesami:** Komunikacja między procesami w MPI opiera się na funkcjach takich jak `MPI_Send` i `MPI_Recv`. Procesy mogą wymieniać dane w sposób blokujący lub nieblokujący.
+4. **Synchronizacja:** Funkcja `MPI_Barrier` umożliwia synchronizację wszystkich procesów, co może być istotne w pewnych etapach programu.
+5. **Identyfikacja procesów:** MPI udostępnia funkcje do identyfikacji numeru procesu (`MPI_Comm_rank`) oraz liczby wszystkich procesów (`MPI_Comm_size`).
+6. **Zakończenie MPI:** Po zakończeniu korzystania z MPI należy użyć funkcji `MPI_Finalize` w celu zwolnienia zasobów.
 
+W praktyce, programy MPI są bardziej skomplikowane niż przedstawione przykłady, ale podstawowe zasady korzystania z tej biblioteki pozostają podobne. Programy MPI mogą być używane do równoległego przetwarzania dużych zbiorów danych, rozwiązywania problemów numerycznych czy symulacji.
