@@ -189,42 +189,35 @@ Z takim właśnie podejście napisaliśmy poniższy przykład modelu sieci:
 ### Podsieć 1: Dla pracowników administracyjnych i biurowych
 
 Adres IP: 172.17.10.0/24 \
-Liczba adresów IP: 8 \
+Liczba adresów IP: 6 \
 Przykładowe adresy IP: 
-- Dla urządzeń: 172.17.10.1 - 172.17.10.4 
-- Dla drukarek sieciowych, serwerów: 172.17.10.5 - 172.17.10.8
+- Dla urządzeń: 172.17.10.2 - 172.17.10.4 
+- Dla drukarek sieciowych: 172.17.10.5 - 172.17.10.6
 
 ### Podsieć 2: Dla lekarzy i personelu medycznego
 
 Adres IP: 172.17.20.0/24 \
-Liczba adresów IP: 16 \
+Liczba adresów IP: 17 \
 Przykładowe adresy IP: 
-- Dla urządzeń: 172.17.20.1 - 172.17.20.8 
-- Dla sprzętu medycznego: 172.17.20.9 - 172.17.20.16 
+- Dla urządzeń: 172.17.20.2 - 172.17.20.9 
+- Dla sprzętu medycznego: 172.17.20.10 - 172.17.20.18
 
-### Podsieć 3: Dla systemów diagnostyki obrazowej
+### Podsieć bezprzewodowa 1: Dla pacjentów sieć publiczna
 
-Adres IP: 192.168.3.0/24 \
-Liczba adresów IP: 6 \
-Przykładowe adresy IP: 
-- Dla systemów diagnostyki: 172.17.30.1 - 192.168.3.3
-- Dla serwerów przetwarzania obrazów: 192.168.3.4 - 192.168.3.6 
+Oddzielona od pozostałych sieci dla jak największego bezpieczeństwa przez odosobniony VLAN.
 
-### Podsieć bezprzewodowa 1: Dla pracowników kliniki
+Nazwa sieci: HealthCare_Public \
+Liczba adresów IP: Dynamiczna \
+Adresy przydzielane automatyczne za pomocą protokołu DHCP
+
+### Podsieć bezprzewodowa 2: Dla pracowników kliniki
+
+
 
 Nazwa sieci: HealthCare_Internal \
-Adres IP: 192.168.4.0/24 \
-Liczba adresów IP: 40 \
-Przykładowe adresy IP: 
-- Dla pracowników: 172.17.40.1 - 192.168.4.40 
-
-### Podsieć bezprzewodowa 2: Dla pacjentów
-
-Nazwa sieci: HealthCare_Guest \
-Adres IP: 192.168.5.0/24 \
-Liczba adresów IP: 40 \
-Przykładowe adresy IP: 
-- Dla pacjentów: 172.172.50.1 - 192.168.5.40 
+Zabezpieczona protokołem: WPA3 \
+Liczba adresów IP: Dynamiczna \
+Adresy przydzielane automatyczne za pomocą protokołu DHCP
 
 ## Uzasadnienie
 
@@ -236,22 +229,20 @@ Przykładowe adresy IP:
 
 | Device          | Interface | IP Address    | Subnet Mask    | Default Gateway | VLAN / Description                              |
 |-----------------|-----------|---------------|----------------|-----------------|-------------------------------------------------|
-| Router          | G0/1      | 172.17.10.1   | 255.255.255.0  | N/A             | VLAN 10 (Administrative Staff)                    |
-|                 | G0/2      | 172.17.20.1   | 255.255.255.0  | N/A             | VLAN 20 (Medical Staff)                           |
-|                 | G0/3      | 172.17.30.1   | 255.255.255.0  | N/A             | VLAN 30 (Diagnostic Imaging Systems)              |
+| Router          | G0/0/0.1      | 172.17.10.1   | 255.255.255.0  | N/A             | VLAN 10 (Administrative Staff)                    |
+|                 | G0/0/0.2      | 172.17.20.1   | 255.255.255.0  | N/A             | VLAN 20 (Medical Staff)                           |
+|                 | G0/0/0.3      | 172.17.30.1   | 255.255.255.0  | N/A             | VLAN 30 (Diagnostic Imaging Systems)              |
 | Switch          | VLAN 10    | N/A           | N/A            | 172.17.10.1     | VLAN 10 (Administrative Staff)   |
 |                 | VLAN 20    | N/A           | N/A            | 172.17.20.1     | VLAN 20 (Medical Staff)          |
-|                 | VLAN 30    | N/A           | N/A            | 172.17.30.1     | VLAN 30 (Diagnostic Imaging Systems) - Default GW |
-| Access Point 1  | HealthCare_Internal | 172.17.40.1  | 255.255.255.0  | 172.17.40.1     | HealthCare_Internal             |
-| Access Point 2  | HealthCare_Guest    | 172.172.50.1  | 255.255.255.0  | 172.17.50.1     | HealthCare_Guest             |
+|                 | VLAN 30    | N/A           | N/A            | 172.17.30.1     | VLAN 30 Public |
+| Access Point 1  | HealthCare_Internal | 172.17.40.1  | 255.255.255.0  | DHCP     | HealthCare_Internal             |
+| Access Point 2  | HealthCare_Public    | 172.172.50.1  | 255.255.255.0  | DHCP     | HealthCare_Public             |
 | Workstations    | NIC       | 172.17.10.2-4 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administrative Staff) - Workstations     |
-|                 | NIC       | 172.17.10.5-8 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administrative Staff) - Printers/Servers  |
+|                 | NIC       | 172.17.10.5-6 | 255.255.255.0  | 172.17.10.1     | VLAN 10 (Administrative Staff) - Printers/Servers  |
 |                 | NIC       | 172.17.20.2-9 | 255.255.255.0  | 172.17.20.1     | VLAN 20 (Medical Staff) - Workstations             |
-|                 | NIC       | 172.17.20.10-16| 255.255.255.0 | 172.17.20.1     | VLAN 20 (Medical Staff) - Medical Equipment        |
-|                 | NIC       | 192.168.3.2-6 | 255.255.255.0  | 172.17.30.1     | VLAN 30 (Diagnostic Imaging Systems) - Workstations|
-|                 | NIC       | 192.168.3.4-6 | 255.255.255.0  | 172.17.30.1     | VLAN 30 (Diagnostic Imaging Systems) - Servers    |
+|                 | NIC       | 172.17.20.10-18| 255.255.255.0 | 172.17.20.1     | VLAN 20 (Medical Staff) - Medical Equipment        |
 | Mobile Devices  | HealthCare_Internal | 192.168.4.2-40| 255.255.255.0 | 172.17.40.1     | HealthCare_Internal    |
-| Patients' Devices | HealthCare_Guest  | 192.168.5.2-40| 255.255.255.0 | 172.17.50.1     | HealthCare_Guest    |
+| Patients' Devices | HealthCare_Public  | 192.168.5.2-40| 255.255.255.0 | 172.17.50.1     | HealthCare_Public    |
 
 
 
