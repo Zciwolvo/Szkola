@@ -211,6 +211,8 @@ R = P×C
 
 Rozpocznijmy analizę ryzyka dla podanych zagrożeń w kontekście przedstawionej firmy oraz jej aktywów informacyjnych, wykorzystując metodologię wyznaczania ryzyka wg. Courtney'a, gdzie ryzyko (R) jest iloczynem prawdopodobieństwa (P) wystąpienia zdarzenia i straty dla danej organizacji (C).
 
+<div style="page-break-after: always;"></div>
+
 ### Tabela ryzyka dla potencjalnych zagrożeń:
 
 Oczywiście, uwzględnięc dane z poprzedniego zestawienia dla wypełnienia tabeli:
@@ -407,7 +409,7 @@ W przypadku rozwiązania umowy o pracę z pracownikiem, dezaktywowane są wszela
 
     Zarząd okresowo wykonuje wewnętrzny lub zewnętrzny audyt bezpieczeństwa mający na celu wykrycie ewentualnych uchybień w realizacji założeń polityki bezpieczeństwa.
 
-## Technizne środki bezpieczeństwa
+## Techniczne środki bezpieczeństwa
 
 | Fizyczne | Programowe |
 | ---- | ---- |
@@ -415,21 +417,43 @@ W przypadku rozwiązania umowy o pracę z pracownikiem, dezaktywowane są wszela
 | Fizyczne kopie zapasowe | Szyfrowanie danych |
 | Monitoring | Narzędzia kontrolujące ruch sieciowy |
 | Identyfikatory/karty dostępu | VPN |
+| Kontrola dostępu | Aktualizacje systemu |
+| Zabezpieczenia antywłamaniowe | Zarządzanie podatnościami |
+| | Audyt bezpieczeństwa |
+| | Szkolenia pracowników |
+| | Identyfikacja pracowników |
 
-Wdrożone technologie
+## Wdrożone technologie
 
-- RSA 512
-    Bezpieczeństwo szyfru polega na trudności faktoryzacji dużych liczb złożonych, a jego działanie oparto o zastosowanie klucza publicznego i prywatnego.
-- TLS 1.3
-    Transport Layer Security (TLS) to protokół kryptograficzny zapewniający bezpieczne połączenie i przesyłanie danych między serwerem a klientem w sieciach komputerowych. TLS stosuje szyfrowanie, uwierzytelnianie oraz integralność danych w celu ochrony informacji przesyłanych przez Internet.
-- VPN 
-  - ExpressVPN
-        usługa VPN oferowana przez firmę Express VPN International Ltd., zarejestrowaną na Brytyjskich Wyspach Dziewiczych. Oprogramowanie jest promowane jako narzędzie zapewniające bezpieczeństwo i poufność danych poprzez szyfrowanie ruchu internetowego użytkowników i maskowanie adresów IP. 
-- NetFlow Analyzer
-    Jest internetowym narzędziem do monitorowania ruchu sieciowego, które analizuje dane eksportowe NetFlow z routerów Cisco monitorując ruch, w tym rozmiar ruchu, prędkość ruchu, pakiety, głównych mówców, wykorzystanie przepustowości i czas największego wykorzystania.
-- Monitoring CCTV
-    monitoring wizyjny, wideonadzór, telewizyjny system dozorowy – to system pozwalający na śledzenie z odległości zdarzeń rejestrowanych przez jedną do nawet kilkuset kamer przemysłowych.
+- **RSA 512**
+    - Bezpieczeństwo szyfru polega na trudności faktoryzacji dużych liczb złożonych, a jego działanie oparto o zastosowanie klucza publicznego i prywatnego.
 
+- **TLS 1.3**
+    - Transport Layer Security (TLS) to protokół kryptograficzny zapewniający bezpieczne połączenie i przesyłanie danych między serwerem a klientem w sieciach komputerowych. TLS stosuje szyfrowanie, uwierzytelnianie oraz integralność danych w celu ochrony informacji przesyłanych przez Internet.
+
+- **VPN**
+    - *ExpressVPN*
+        - Usługa VPN oferowana przez firmę Express VPN International Ltd., zarejestrowaną na Brytyjskich Wyspach Dziewiczych. Oprogramowanie jest promowane jako narzędzie zapewniające bezpieczeństwo i poufność danych poprzez szyfrowanie ruchu internetowego użytkowników i maskowanie adresów IP.
+
+- **NetFlow Analyzer**
+    - Internetowe narzędzie do monitorowania ruchu sieciowego, analizujące dane eksportowe NetFlow z routerów Cisco monitorując ruch, w tym rozmiar ruchu, prędkość ruchu, pakiety, głównych mówców, wykorzystanie przepustowości i czas największego wykorzystania.
+
+- **Monitoring CCTV**
+    - Monitoring wizyjny, wideonadzór, telewizyjny system dozorowy – system pozwalający na śledzenie z odległości zdarzeń rejestrowanych przez jedną do nawet kilkuset kamer przemysłowych.
+
+**Dodatkowe technologie:**
+
+- **Systemy detekcji ataków (IDS) i prewencji (IPS)**
+    - Wprowadzenie systemów monitorujących ruch sieciowy w czasie rzeczywistym w celu wykrywania i reagowania na potencjalne ataki.
+
+- **Oprogramowanie do zarządzania incydentami**
+    - Wdrożenie systemu do skutecznego zarządzania incydentami bezpieczeństwa, w tym śledzenia, reagowania i raportowania.
+
+- **Zabezpieczenia przed ransomware**
+    - Wprowadzenie technologii skanowania zachowań plików i zaawansowanego oprogramowania anty-ransomware.
+
+
+<div style="page-break-after: always;"></div>
 
 ## Zarządzanie dostepem
 
