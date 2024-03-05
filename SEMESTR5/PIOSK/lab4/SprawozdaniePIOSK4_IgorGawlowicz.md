@@ -137,7 +137,7 @@ S1(config)#vlan 10
 S1(config-vlan)#vlan 30
 ```
 
-Następnie przypiszemy te sieci do odpowiednich portów 
+Następnie przypiszemy te sieci do odpowiednich portów
 
 ```cmd
 S1(config)#interface f0/11
@@ -157,6 +157,7 @@ Jest to spowodowane tym że komputery są pod innym adresem IP więc wymagają r
 Zaczniemy od utworzenia interfejsów dla wcześniej stworzonych vlanów
 
 VLAN 10
+
 ```cmd
 R1(config)# int g0/0.10
 R1(config-subif)# encapsulation dot1Q 10
@@ -164,6 +165,7 @@ R1(config-subif)# ip address 172.17.10.1 255.255.255.0
 ```
 
 VLAN 30
+
 ```cmd
 R1(config-subif)#int g0/0.30
 R1(config-subif)#encapsulation dot1Q 30
@@ -212,7 +214,7 @@ S1(config-if)#
 
 ```
 
-*Jak można określić, że interfejs jest portem trunk, używając polecenia show vlan?*
+_Jak można określić, że interfejs jest portem trunk, używając polecenia show vlan?_
 
 Interfejs nie jest już widoczny przy poleceniu `show vlan`
 
