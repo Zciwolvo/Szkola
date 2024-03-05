@@ -1,0 +1,66 @@
+[
+    {
+        "student_id": 1,
+        "student_name": "Anna",
+        "student_surname": "Nowak",
+        "subjects": [
+            {
+                "subject": "math",
+                "grade": 4,
+                "final": true
+            },
+            {
+                "subject": "history",
+                "grade": 5,
+                "final": true
+            }
+        ]
+    }
+]
+
+db.courses.insertMany([
+    {
+        "student_id": 1,
+        "student_name": "Anna",
+        "student_surname": "Nowak",
+        "subjects": [
+            {
+                "subject": "math",
+                "grade": 4,
+                "final": true
+            },
+            {
+                "subject": "history",
+                "grade": 5,
+                "final": true
+            },
+        ]
+    },
+    {
+        "student_id": 2,
+        "student_name": "John",
+        "student_surname": "Smith",
+        "subjects": [
+            {
+                "subject": "science",
+                "grade": 3,
+                "final": true
+            },
+            {
+                "subject": "english",
+                "grade": 5,
+                "final": true
+            }
+        ]
+    }
+])
+
+
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "123",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+)
