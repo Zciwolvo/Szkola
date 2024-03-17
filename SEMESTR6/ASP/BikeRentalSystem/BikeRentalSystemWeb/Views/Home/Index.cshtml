@@ -1,0 +1,84 @@
+﻿@using BikeRentalSystemWeb.ViewModels
+@model IEnumerable<BikeDetailViewModel>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h1, h2, h3, h4 {
+            color: #007bff;
+        }
+
+        p {
+            color: #6c757d;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="display-4">Welcome</h1>
+        <h2>To <strong>UBBBikeRental.com</strong></h2>
+        <h3>Enjoy your rented bike in 7 simple steps!</h3>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h4>1. Browse our Bike Selection</h4>
+                <p>Explore our diverse range of bicycles suitable for various terrains and riding preferences. From mountain bikes for off-road adventures to sleek road bikes for urban exploration, we have something for everyone.</p>
+
+                <h4>2. Select Your Rental Period</h4>
+                <p>Choose the duration of your bike rental based on your itinerary and riding plans. Whether you need a bike for a few hours, a day, a weekend getaway, or an extended vacation, we offer flexible rental options to accommodate your schedule.</p>
+
+                <h4>3. Reserve Online or In-Store</h4>
+                <p>Reserve your desired bike online through our user-friendly booking system, or visit our store to speak with our knowledgeable staff and finalize your rental in person. We ensure a seamless reservation process to make renting a bike hassle-free.</p>
+
+                <h4>4. Pick Up Your Bike</h4>
+                <p>Collect your reserved bike at our convenient location at the scheduled time. Our team will assist you in selecting the right size and adjusting the bike to ensure a comfortable and safe riding experience.</p>
+
+                <h4>5. Enjoy Your Ride</h4>
+                <p>Embark on your biking adventure and explore your destination at your own pace. Whether you're cruising along scenic trails, commuting to work, or sightseeing in the city, our well-maintained bikes are ready to take you on memorable journeys.</p>
+
+                <h4>6. Return the Bike</h4>
+                <p>Once your rental period is over, return the bike to our designated drop-off point or store location. Our team will inspect the bike for any damages and ensure that it's in good condition for the next rider.</p>
+
+                <h4>7. Share Your Experience</h4>
+                <p>We value your feedback! Share your biking experience with us and let us know how we can further enhance our services to better serve your needs and improve the biking experience for all our customers.</p>
+
+                <h4>Choose one of bikes below!</h4>
+            </div>
+        </div>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id">@item.Producer - @item.Model</a>
+                </li>
+            }
+        </ul>
+    </div>
+</body>
+

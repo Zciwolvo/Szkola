@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "5QOUuCmrX9lsU+1gO3WJq3y67PcWiUIAihVXLAkmof3frE265kdaEMJTBhbkpMVCT9UpAOgKylv1zwKdNf5j1g==",
+  "success": true,
+  "projectFilePath": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Igor\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.17\\microsoft.windowsdesktop.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\Igor\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.17\\microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\Igor\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.17\\microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\Igor\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.17\\microsoft.netcore.app.host.win-x64.7.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}
