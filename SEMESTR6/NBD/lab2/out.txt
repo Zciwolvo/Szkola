@@ -1,7495 +1,3702 @@
 use my_app;
-db.createCollection("courses", {
-   validator: {
-      $jsonSchema: {
-         bsonType: "object",
-         required: ["student_id", "student_name", "student_surname", "subjects"],
-         properties: {
-            student_id: {
-               bsonType: "int",
-               description: "ID of the student"
-            },
-            student_name: {
-               bsonType: "string",
-               description: "Name of the student"
-            },
-            student_surname: {
-               bsonType: "string",
-               description: "Surname of the student"
-            },
-            subjects: {
-               bsonType: "array",
-               description: "List of subjects",
-               items: {
-                  bsonType: "object",
-                  required: ["subject", "grade", "final"],
-                  properties: {
-                     subject: {
-                        bsonType: "string",
-                        description: "Name of the subject"
-                     },
-                     grade: {
-                        bsonType: ["int", "double"],
-                        description: "Grade of the student for the subject"
-                     },
-                     final: {
-                        bsonType: "bool",
-                        description: "Whether the grade is final or not"
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
-});
-
 db.courses.insertMany([
 {
 "student_id": 0,
-"student_name": "Shannon",
-"student_surname": "Dennis",
+"student_name": "Evelyn",
+"student_surname": "Roberts",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 1,
-"student_name": "Kyle",
-"student_surname": "Beard",
+"student_name": "Joanne",
+"student_surname": "Thomas",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": false
 },
 ],
 },
 {
 "student_id": 2,
-"student_name": "Rachel",
-"student_surname": "Johnson",
+"student_name": "Kristina",
+"student_surname": "Young",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "false"
+"grade": 2,
+"final": true
 },
 ],
 },
 {
 "student_id": 3,
 "student_name": "Timothy",
-"student_surname": "Stanton",
+"student_surname": "Price",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": true
 },
 ],
 },
 {
 "student_id": 4,
-"student_name": "Krystal",
-"student_surname": "Brown",
+"student_name": "Michael",
+"student_surname": "Castillo",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 5,
-"student_name": "Pamela",
-"student_surname": "Charles",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 6,
-"student_name": "Jessica",
-"student_surname": "Case",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 7,
-"student_name": "John",
-"student_surname": "Campos",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 8,
-"student_name": "Gary",
-"student_surname": "Hawkins",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 9,
-"student_name": "Bruce",
-"student_surname": "Calderon",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 10,
-"student_name": "Sierra",
-"student_surname": "Richmond",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 11,
-"student_name": "Daniel",
-"student_surname": "Moreno",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 12,
-"student_name": "Amber",
-"student_surname": "Walsh",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 13,
-"student_name": "Yolanda",
-"student_surname": "Phillips",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 14,
-"student_name": "Natalie",
-"student_surname": "Harrington",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 15,
-"student_name": "Eric",
-"student_surname": "Rice",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 16,
-"student_name": "Jennifer",
-"student_surname": "Carpenter",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 17,
-"student_name": "Benjamin",
-"student_surname": "Barrett",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 18,
-"student_name": "Marcia",
-"student_surname": "Foley",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 19,
-"student_name": "Logan",
-"student_surname": "Delgado",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 20,
-"student_name": "Daniel",
-"student_surname": "Monroe",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 21,
-"student_name": "Greg",
-"student_surname": "Cardenas",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 22,
-"student_name": "Gary",
-"student_surname": "Woodard",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 23,
-"student_name": "Patrick",
-"student_surname": "Bell",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 24,
-"student_name": "Robert",
-"student_surname": "Perez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 25,
-"student_name": "Brenda",
-"student_surname": "White",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 26,
-"student_name": "Michael",
-"student_surname": "Andrade",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 27,
-"student_name": "Amy",
-"student_surname": "Smith",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 28,
-"student_name": "Annette",
-"student_surname": "Osborne",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 29,
-"student_name": "David",
-"student_surname": "Maldonado",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 30,
-"student_name": "John",
-"student_surname": "Brown",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 31,
-"student_name": "Kevin",
-"student_surname": "Alvarado",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 32,
-"student_name": "Crystal",
-"student_surname": "Myers",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 33,
-"student_name": "Maria",
-"student_surname": "Paul",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 34,
-"student_name": "Megan",
-"student_surname": "Zuniga",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 35,
-"student_name": "Kenneth",
-"student_surname": "Richards",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 36,
-"student_name": "Madison",
-"student_surname": "Carlson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 37,
-"student_name": "Kim",
-"student_surname": "Taylor",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 38,
-"student_name": "Sara",
-"student_surname": "Lynch",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 39,
-"student_name": "Teresa",
-"student_surname": "Cruz",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 40,
-"student_name": "Willie",
-"student_surname": "Callahan",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 41,
-"student_name": "Raymond",
-"student_surname": "Martinez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 42,
-"student_name": "Felicia",
-"student_surname": "Campbell",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 43,
-"student_name": "Christopher",
-"student_surname": "Mclean",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 44,
-"student_name": "Christy",
-"student_surname": "Olson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 45,
-"student_name": "Robert",
-"student_surname": "Garrett",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 46,
-"student_name": "Daisy",
-"student_surname": "Church",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 47,
-"student_name": "Todd",
-"student_surname": "Garcia",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 48,
-"student_name": "Samantha",
-"student_surname": "Gutierrez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 49,
-"student_name": "Pamela",
-"student_surname": "Hudson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 50,
-"student_name": "William",
-"student_surname": "Blair",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 51,
-"student_name": "Zachary",
-"student_surname": "Ramirez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 52,
-"student_name": "Robert",
-"student_surname": "Frazier",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 53,
-"student_name": "David",
-"student_surname": "Sanchez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 54,
-"student_name": "Bryan",
-"student_surname": "Castro",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 55,
-"student_name": "Dominique",
-"student_surname": "Brock",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 56,
-"student_name": "Joshua",
-"student_surname": "Jackson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 57,
-"student_name": "Donna",
-"student_surname": "Mccormick",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 58,
-"student_name": "Matthew",
-"student_surname": "Williams",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 59,
-"student_name": "Patricia",
-"student_surname": "Thompson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 60,
-"student_name": "William",
-"student_surname": "Owens",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 61,
-"student_name": "Robin",
-"student_surname": "Boyd",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 62,
-"student_name": "Shannon",
-"student_surname": "Thompson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 63,
-"student_name": "Olivia",
-"student_surname": "Nguyen",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 64,
-"student_name": "Matthew",
-"student_surname": "Atkinson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 65,
-"student_name": "Patricia",
-"student_surname": "Huff",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 66,
-"student_name": "Virginia",
-"student_surname": "Vazquez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 67,
-"student_name": "Christine",
-"student_surname": "Smith",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 68,
-"student_name": "Tyler",
-"student_surname": "White",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 69,
-"student_name": "Patrick",
-"student_surname": "Chavez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 70,
-"student_name": "Greg",
-"student_surname": "Sanchez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 71,
-"student_name": "Rebecca",
-"student_surname": "Rodriguez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 72,
-"student_name": "Kelly",
-"student_surname": "Wiley",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 73,
-"student_name": "Lance",
-"student_surname": "Castro",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 74,
-"student_name": "Robert",
-"student_surname": "Austin",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 75,
-"student_name": "Thomas",
-"student_surname": "Coleman",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 76,
-"student_name": "Anne",
-"student_surname": "Nolan",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 77,
-"student_name": "Christopher",
-"student_surname": "Ellis",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 78,
-"student_name": "April",
-"student_surname": "Thomas",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 79,
-"student_name": "Scott",
-"student_surname": "Lawrence",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 80,
-"student_name": "Michael",
-"student_surname": "Pierce",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 81,
-"student_name": "Jennifer",
-"student_surname": "Hamilton",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 82,
-"student_name": "Mark",
-"student_surname": "Ward",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 83,
-"student_name": "Robert",
-"student_surname": "Gonzalez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 84,
-"student_name": "Kristin",
-"student_surname": "Diaz",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 85,
-"student_name": "Dennis",
-"student_surname": "Vargas",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 86,
-"student_name": "Tammy",
-"student_surname": "Henry",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 87,
-"student_name": "Daniel",
-"student_surname": "Patel",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 88,
 "student_name": "Brian",
-"student_surname": "Pearson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 89,
-"student_name": "Dustin",
-"student_surname": "Edwards",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 90,
-"student_name": "Gregory",
-"student_surname": "Gonzalez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 91,
-"student_name": "Carlos",
-"student_surname": "Fletcher",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 92,
-"student_name": "Cassandra",
-"student_surname": "Garcia",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 93,
-"student_name": "Vincent",
-"student_surname": "Andrews",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 94,
-"student_name": "Nancy",
-"student_surname": "Cervantes",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 95,
-"student_name": "John",
-"student_surname": "Lucas",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 96,
-"student_name": "Jennifer",
-"student_surname": "Carey",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 97,
-"student_name": "Lisa",
-"student_surname": "Phillips",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 98,
-"student_name": "Donna",
-"student_surname": "Ford",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 99,
-"student_name": "Suzanne",
-"student_surname": "Wall",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-])
-
-db.createCollection("courses", {
-   validator: {
-      $jsonSchema: {
-         bsonType: "object",
-         required: ["student_id", "student_name", "student_surname", "subjects"],
-         properties: {
-            student_id: {
-               bsonType: "int",
-               description: "ID of the student"
-            },
-            student_name: {
-               bsonType: "string",
-               description: "Name of the student"
-            },
-            student_surname: {
-               bsonType: "string",
-               description: "Surname of the student"
-            },
-            subjects: {
-               bsonType: "array",
-               description: "List of subjects",
-               items: {
-                  bsonType: "object",
-                  required: ["subject", "grade", "final"],
-                  properties: {
-                     subject: {
-                        bsonType: "string",
-                        description: "Name of the subject"
-                     },
-                     grade: {
-                        bsonType: ["int", "double"],
-                        description: "Grade of the student for the subject"
-                     },
-                     final: {
-                        bsonType: "bool",
-                        description: "Whether the grade is final or not"
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
-});
-
-db.courses.insertMany([
-{
-"student_id": 0,
-"student_name": "Jeffrey",
-"student_surname": "Wilkerson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 1,
-"student_name": "Mark",
-"student_surname": "Mcdowell",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 2,
-"student_name": "Gregory",
-"student_surname": "Fletcher",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 3,
-"student_name": "Renee",
-"student_surname": "Meyer",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 4,
-"student_name": "Mary",
-"student_surname": "Thomas",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 5,
-"student_name": "Donna",
-"student_surname": "Reid",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 6,
-"student_name": "Jose",
-"student_surname": "Logan",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 7,
-"student_name": "Pamela",
-"student_surname": "Jackson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 8,
-"student_name": "Alexandra",
-"student_surname": "Anderson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 9,
-"student_name": "Colton",
-"student_surname": "Henry",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 10,
-"student_name": "Jessica",
-"student_surname": "Ingram",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 11,
-"student_name": "Jeffrey",
-"student_surname": "Norton",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 12,
-"student_name": "Alicia",
-"student_surname": "Harmon",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 13,
-"student_name": "Fred",
-"student_surname": "Williams",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 14,
-"student_name": "Cindy",
-"student_surname": "Anderson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 15,
-"student_name": "Karen",
-"student_surname": "Vance",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 16,
-"student_name": "Shelley",
-"student_surname": "Warner",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 17,
-"student_name": "Christopher",
-"student_surname": "Spence",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 18,
-"student_name": "Diana",
-"student_surname": "Floyd",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 19,
-"student_name": "Willie",
-"student_surname": "Elliott",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 20,
-"student_name": "Gregory",
-"student_surname": "Oneal",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 21,
-"student_name": "James",
-"student_surname": "Young",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 22,
-"student_name": "Robert",
-"student_surname": "Allen",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 23,
-"student_name": "Daniel",
-"student_surname": "Garcia",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 24,
-"student_name": "Mary",
-"student_surname": "Lewis",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 25,
-"student_name": "Nicholas",
-"student_surname": "Mccullough",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 26,
-"student_name": "Manuel",
-"student_surname": "Camacho",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 27,
-"student_name": "Nicholas",
-"student_surname": "Smith",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 28,
-"student_name": "Pamela",
-"student_surname": "Ferguson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 29,
-"student_name": "Alexandria",
-"student_surname": "Torres",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 30,
-"student_name": "Connie",
-"student_surname": "White",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 31,
-"student_name": "Joseph",
-"student_surname": "Barr",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 32,
-"student_name": "Melissa",
-"student_surname": "Salas",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 33,
-"student_name": "Stacy",
-"student_surname": "Yates",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 34,
-"student_name": "Gary",
-"student_surname": "Osborne",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "false"
-},
-],
-},
-{
-"student_id": 35,
-"student_name": "Ariel",
-"student_surname": "Sullivan",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 36,
-"student_name": "Tracy",
-"student_surname": "Martinez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "5",
-"final": "true"
-},
-],
-},
-{
-"student_id": 37,
-"student_name": "Louis",
-"student_surname": "Brooks",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 38,
-"student_name": "Jason",
-"student_surname": "Perez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 39,
-"student_name": "Adam",
-"student_surname": "Ferguson",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 40,
-"student_name": "Marissa",
-"student_surname": "Beck",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "true"
-},
-],
-},
-{
-"student_id": 41,
-"student_name": "Dennis",
-"student_surname": "Bailey",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 42,
-"student_name": "Joann",
-"student_surname": "Leon",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 43,
-"student_name": "Lauren",
-"student_surname": "Carter",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 44,
-"student_name": "Nicholas",
-"student_surname": "Vasquez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 45,
-"student_name": "Diane",
-"student_surname": "Mueller",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 46,
-"student_name": "Crystal",
-"student_surname": "Fuller",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 47,
-"student_name": "Lisa",
-"student_surname": "Marshall",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 48,
-"student_name": "Tina",
-"student_surname": "Rodriguez",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 49,
-"student_name": "Brent",
-"student_surname": "Wood",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "4",
-"final": "false"
-},
-],
-},
-{
-"student_id": 50,
-"student_name": "Danielle",
-"student_surname": "Farmer",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 51,
-"student_name": "Megan",
-"student_surname": "Ray",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "4",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "false"
-},
-],
-},
-{
-"student_id": 52,
-"student_name": "Edward",
-"student_surname": "Allen",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "true"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "false"
-},
-],
-},
-{
-"student_id": 53,
-"student_name": "Alyssa",
-"student_surname": "Mcconnell",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "English Language",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "History",
-"grade": "2",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "2",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "3",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "2",
-"final": "true"
-},
-],
-},
-{
-"student_id": 54,
-"student_name": "Kelli",
-"student_surname": "Ryan",
-"subjects": [
-{
-"subject": "Mathematics",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "English Language",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "History",
-"grade": "3",
-"final": "true"
-},
-{
-"subject": "Science",
-"grade": "4",
-"final": "false"
-},
-{
-"subject": "Computer Science",
-"grade": "5",
-"final": "false"
-},
-{
-"subject": "Physical Education",
-"grade": "3",
-"final": "true"
-},
-],
-},
-{
-"student_id": 55,
-"student_name": "Kenneth",
 "student_surname": "Martin",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "true"
+"grade": 3,
+"final": true
+},
+],
+},
+{
+"student_id": 6,
+"student_name": "Benjamin",
+"student_surname": "Douglas",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": true
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": false
+},
+],
+},
+{
+"student_id": 7,
+"student_name": "Robert",
+"student_surname": "Brown",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": false
+},
+],
+},
+{
+"student_id": 8,
+"student_name": "Ashley",
+"student_surname": "Brown",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": false
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": false
+},
+],
+},
+{
+"student_id": 9,
+"student_name": "Toni",
+"student_surname": "Butler",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": false
+},
+],
+},
+{
+"student_id": 10,
+"student_name": "Sarah",
+"student_surname": "Hernandez",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": true
+},
+{
+"subject": "History",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 11,
+"student_name": "Martin",
+"student_surname": "Brown",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": false
+},
+],
+},
+{
+"student_id": 12,
+"student_name": "Mackenzie",
+"student_surname": "Sloan",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": true
+},
+{
+"subject": "History",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": false
+},
+],
+},
+{
+"student_id": 13,
+"student_name": "David",
+"student_surname": "Kane",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": true
+},
+],
+},
+{
+"student_id": 14,
+"student_name": "Lauren",
+"student_surname": "King",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": false
+},
+],
+},
+{
+"student_id": 15,
+"student_name": "Jeremiah",
+"student_surname": "Davis",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": false
+},
+],
+},
+{
+"student_id": 16,
+"student_name": "Donald",
+"student_surname": "Gill",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": false
+},
+],
+},
+{
+"student_id": 17,
+"student_name": "Eugene",
+"student_surname": "Walker",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 18,
+"student_name": "Paul",
+"student_surname": "Blake",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": true
+},
+{
+"subject": "History",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": false
+},
+],
+},
+{
+"student_id": 19,
+"student_name": "John",
+"student_surname": "Rodgers",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": false
+},
+],
+},
+{
+"student_id": 20,
+"student_name": "Ryan",
+"student_surname": "Wilcox",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": false
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
+},
+],
+},
+{
+"student_id": 21,
+"student_name": "Anna",
+"student_surname": "Christensen",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": false
+},
+],
+},
+{
+"student_id": 22,
+"student_name": "Troy",
+"student_surname": "Stewart",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
+},
+],
+},
+{
+"student_id": 23,
+"student_name": "Jeffrey",
+"student_surname": "Glass",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": false
+},
+],
+},
+{
+"student_id": 24,
+"student_name": "Amy",
+"student_surname": "Sexton",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": true
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": true
+},
+],
+},
+{
+"student_id": 25,
+"student_name": "Joseph",
+"student_surname": "Brewer",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": false
+},
+{
+"subject": "History",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 26,
+"student_name": "Joseph",
+"student_surname": "Sanders",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
+},
+],
+},
+{
+"student_id": 27,
+"student_name": "Daniel",
+"student_surname": "Mueller",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": true
+},
+],
+},
+{
+"student_id": 28,
+"student_name": "Erik",
+"student_surname": "Nelson",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": true
+},
+],
+},
+{
+"student_id": 29,
+"student_name": "Karen",
+"student_surname": "Parker",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 30,
+"student_name": "Teresa",
+"student_surname": "Garcia",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": false
+},
+],
+},
+{
+"student_id": 31,
+"student_name": "Melissa",
+"student_surname": "Sanders",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": true
+},
+],
+},
+{
+"student_id": 32,
+"student_name": "Victoria",
+"student_surname": "Casey",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 33,
+"student_name": "Crystal",
+"student_surname": "Taylor",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
+},
+],
+},
+{
+"student_id": 34,
+"student_name": "Andrew",
+"student_surname": "Gaines",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": false
+},
+],
+},
+{
+"student_id": 35,
+"student_name": "Jeffrey",
+"student_surname": "Tapia",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": true
+},
+],
+},
+{
+"student_id": 36,
+"student_name": "Richard",
+"student_surname": "Mccoy",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": false
+},
+],
+},
+{
+"student_id": 37,
+"student_name": "Kimberly",
+"student_surname": "Sullivan",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": true
+},
+{
+"subject": "History",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": true
+},
+],
+},
+{
+"student_id": 38,
+"student_name": "Ashley",
+"student_surname": "Pittman",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": true
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": false
+},
+],
+},
+{
+"student_id": 39,
+"student_name": "Edward",
+"student_surname": "Lewis",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": false
+},
+{
+"subject": "History",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": false
+},
+],
+},
+{
+"student_id": 40,
+"student_name": "Robert",
+"student_surname": "Garcia",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 3,
+"final": false
+},
+{
+"subject": "History",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": false
+},
+],
+},
+{
+"student_id": 41,
+"student_name": "Joyce",
+"student_surname": "Harrison",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": true
+},
+],
+},
+{
+"student_id": 42,
+"student_name": "Russell",
+"student_surname": "English",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 43,
+"student_name": "Kenneth",
+"student_surname": "Aguilar",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
+},
+],
+},
+{
+"student_id": 44,
+"student_name": "Melinda",
+"student_surname": "Palmer",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 4,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
+},
+],
+},
+{
+"student_id": 45,
+"student_name": "Harold",
+"student_surname": "Hartman",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": true
+},
+],
+},
+{
+"student_id": 46,
+"student_name": "Jessica",
+"student_surname": "Gordon",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": true
+},
+],
+},
+{
+"student_id": 47,
+"student_name": "Tara",
+"student_surname": "Richardson",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": false
+},
+{
+"subject": "History",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 48,
+"student_name": "Dale",
+"student_surname": "Cole",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
+},
+],
+},
+{
+"student_id": 49,
+"student_name": "Sharon",
+"student_surname": "Robinson",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": false
+},
+{
+"subject": "History",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": false
+},
+],
+},
+{
+"student_id": 50,
+"student_name": "Sylvia",
+"student_surname": "Buchanan",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 2,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": false
+},
+],
+},
+{
+"student_id": 51,
+"student_name": "Amanda",
+"student_surname": "Taylor",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": true
+},
+{
+"subject": "History",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 52,
+"student_name": "Christopher",
+"student_surname": "English",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": false
+},
+{
+"subject": "English Language",
+"grade": 5,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 3,
+"final": true
+},
+],
+},
+{
+"student_id": 53,
+"student_name": "Crystal",
+"student_surname": "Rodriguez",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 3,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": true
+},
+{
+"subject": "History",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Science",
+"grade": 5,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 5,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 4,
+"final": true
+},
+],
+},
+{
+"student_id": 54,
+"student_name": "Matthew",
+"student_surname": "Crawford",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 4,
+"final": false
+},
+{
+"subject": "History",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 2,
+"final": false
+},
+{
+"subject": "Computer Science",
+"grade": 4,
+"final": false
+},
+{
+"subject": "Physical Education",
+"grade": 5,
+"final": false
+},
+],
+},
+{
+"student_id": 55,
+"student_name": "Jennifer",
+"student_surname": "Garcia",
+"subjects": [
+{
+"subject": "Mathematics",
+"grade": 5,
+"final": true
+},
+{
+"subject": "English Language",
+"grade": 2,
+"final": true
+},
+{
+"subject": "History",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Science",
+"grade": 3,
+"final": true
+},
+{
+"subject": "Computer Science",
+"grade": 2,
+"final": true
+},
+{
+"subject": "Physical Education",
+"grade": 2,
+"final": true
 },
 ],
 },
 {
 "student_id": 56,
-"student_name": "Brittney",
-"student_surname": "Brandt",
+"student_name": "Kelly",
+"student_surname": "Delgado",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 57,
-"student_name": "Erica",
-"student_surname": "Harrington",
+"student_name": "Matthew",
+"student_surname": "Chambers",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "false"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 58,
-"student_name": "Johnny",
-"student_surname": "Sanchez",
+"student_name": "John",
+"student_surname": "Jennings",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": false
 },
 ],
 },
 {
 "student_id": 59,
-"student_name": "Heather",
-"student_surname": "Pacheco",
+"student_name": "Jennifer",
+"student_surname": "Huber",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": false
 },
 ],
 },
 {
 "student_id": 60,
-"student_name": "Craig",
-"student_surname": "Drake",
+"student_name": "Ray",
+"student_surname": "Ayers",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "true"
+"grade": 2,
+"final": false
 },
 ],
 },
 {
 "student_id": 61,
-"student_name": "Steven",
-"student_surname": "Rowe",
+"student_name": "Brandon",
+"student_surname": "Winters",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 62,
-"student_name": "William",
-"student_surname": "Nunez",
+"student_name": "Mary",
+"student_surname": "Ward",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": true
 },
 ],
 },
 {
 "student_id": 63,
-"student_name": "Edward",
-"student_surname": "Soto",
+"student_name": "Marcus",
+"student_surname": "Brown",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 64,
-"student_name": "David",
-"student_surname": "Garcia",
+"student_name": "Brandy",
+"student_surname": "Murillo",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "true"
+"grade": 3,
+"final": true
 },
 ],
 },
 {
 "student_id": 65,
-"student_name": "Jennifer",
-"student_surname": "Petersen",
+"student_name": "Jason",
+"student_surname": "Williams",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": true
 },
 ],
 },
 {
 "student_id": 66,
-"student_name": "Lori",
-"student_surname": "Stevens",
+"student_name": "Christine",
+"student_surname": "Rose",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": true
 },
 ],
 },
 {
 "student_id": 67,
-"student_name": "Erin",
-"student_surname": "Anderson",
+"student_name": "Vanessa",
+"student_surname": "Murillo",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 68,
-"student_name": "Gregory",
-"student_surname": "Henry",
+"student_name": "Jessica",
+"student_surname": "Mclaughlin",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 69,
-"student_name": "Brandon",
-"student_surname": "Richard",
+"student_name": "Terri",
+"student_surname": "Bell",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 70,
-"student_name": "Michael",
-"student_surname": "Warren",
+"student_name": "Adam",
+"student_surname": "Phillips",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": true
 },
 ],
 },
 {
 "student_id": 71,
-"student_name": "Jordan",
-"student_surname": "Neal",
+"student_name": "Shawn",
+"student_surname": "Dixon",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 72,
-"student_name": "Kelly",
-"student_surname": "Zavala",
+"student_name": "Vanessa",
+"student_surname": "Brown",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 73,
-"student_name": "Gina",
-"student_surname": "Delgado",
+"student_name": "William",
+"student_surname": "Duncan",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 ],
 },
 {
 "student_id": 74,
-"student_name": "Jeffrey",
-"student_surname": "Cain",
+"student_name": "Patricia",
+"student_surname": "Roberts",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": false
 },
 ],
 },
 {
 "student_id": 75,
-"student_name": "Erica",
-"student_surname": "Miller",
+"student_name": "Ross",
+"student_surname": "Shah",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": false
 },
 ],
 },
 {
 "student_id": 76,
-"student_name": "Jordan",
-"student_surname": "Woods",
+"student_name": "Sherri",
+"student_surname": "Smith",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": true
 },
 ],
 },
 {
 "student_id": 77,
-"student_name": "Carl",
-"student_surname": "Richardson",
+"student_name": "Debbie",
+"student_surname": "Tucker",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 78,
-"student_name": "Adrian",
-"student_surname": "Ross",
+"student_name": "Katelyn",
+"student_surname": "Williams",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 79,
-"student_name": "Benjamin",
-"student_surname": "Rice",
+"student_name": "Heather",
+"student_surname": "Key",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": true
 },
 ],
 },
 {
 "student_id": 80,
-"student_name": "Daniel",
-"student_surname": "Mason",
+"student_name": "Jason",
+"student_surname": "Tucker",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 81,
-"student_name": "Dylan",
-"student_surname": "Moore",
+"student_name": "Matthew",
+"student_surname": "Buckley",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": false
 },
 ],
 },
 {
 "student_id": 82,
-"student_name": "Jason",
-"student_surname": "Valdez",
+"student_name": "Laura",
+"student_surname": "Cook",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": false
 },
 ],
 },
 {
 "student_id": 83,
-"student_name": "Jasmine",
-"student_surname": "Ross",
+"student_name": "Dennis",
+"student_surname": "Jones",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": false
 },
 ],
 },
 {
 "student_id": 84,
-"student_name": "Kimberly",
-"student_surname": "Wong",
+"student_name": "Jorge",
+"student_surname": "Cooper",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 85,
-"student_name": "Jennifer",
-"student_surname": "Howard",
+"student_name": "Melissa",
+"student_surname": "Gordon",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 86,
-"student_name": "Jeffrey",
-"student_surname": "Mejia",
+"student_name": "Jesse",
+"student_surname": "Mcgee",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 ],
 },
 {
 "student_id": 87,
-"student_name": "Tammy",
-"student_surname": "Garner",
+"student_name": "Maria",
+"student_surname": "Walters",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": false
 },
 ],
 },
 {
 "student_id": 88,
-"student_name": "Jennifer",
-"student_surname": "Aguirre",
+"student_name": "Aaron",
+"student_surname": "Galloway",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "true"
+"grade": 3,
+"final": true
 },
 ],
 },
 {
 "student_id": 89,
-"student_name": "Joseph",
-"student_surname": "Brown",
+"student_name": "Todd",
+"student_surname": "Cisneros",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "false"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 90,
-"student_name": "Alan",
-"student_surname": "King",
+"student_name": "Kimberly",
+"student_surname": "Vega",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": false
 },
 ],
 },
 {
 "student_id": 91,
-"student_name": "Donald",
-"student_surname": "Wright",
+"student_name": "Jonathan",
+"student_surname": "Gonzales",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 92,
-"student_name": "Jared",
-"student_surname": "Harrell",
+"student_name": "Traci",
+"student_surname": "Miles",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "true"
+"grade": 4,
+"final": false
 },
 ],
 },
 {
 "student_id": 93,
-"student_name": "Veronica",
-"student_surname": "Howard",
+"student_name": "Christopher",
+"student_surname": "Herrera",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "false"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 94,
-"student_name": "Brandi",
-"student_surname": "Molina",
+"student_name": "Jennifer",
+"student_surname": "Hart",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "true"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": true
 },
 ],
 },
 {
 "student_id": 95,
-"student_name": "Sherry",
-"student_surname": "Sutton",
+"student_name": "Kristen",
+"student_surname": "Daniels",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "3",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "3",
-"final": "true"
+"grade": 5,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "2",
-"final": "false"
+"grade": 4,
+"final": true
 },
 ],
 },
 {
 "student_id": 96,
-"student_name": "Wendy",
-"student_surname": "Klein",
+"student_name": "Megan",
+"student_surname": "Bell",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "5",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "5",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "true"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "2",
-"final": "false"
+"grade": 3,
+"final": false
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": false
 },
 ],
 },
 {
 "student_id": 97,
-"student_name": "Tanya",
-"student_surname": "Anderson",
+"student_name": "Mary",
+"student_surname": "Wilson",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "true"
+"grade": 5,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "2",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "4",
-"final": "false"
+"grade": 2,
+"final": true
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 3,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 ],
 },
 {
 "student_id": 98,
-"student_name": "Gerald",
-"student_surname": "Grant",
+"student_name": "Cody",
+"student_surname": "Jimenez",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "2",
-"final": "true"
+"grade": 2,
+"final": true
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": true
 },
 {
 "subject": "History",
-"grade": "2",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "4",
-"final": "true"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "5",
-"final": "false"
+"grade": 3,
+"final": false
 },
 ],
 },
 {
 "student_id": 99,
-"student_name": "Leslie",
-"student_surname": "Johnson",
+"student_name": "Elizabeth",
+"student_surname": "Gray",
 "subjects": [
 {
 "subject": "Mathematics",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": false
 },
 {
 "subject": "English Language",
-"grade": "4",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "History",
-"grade": "3",
-"final": "false"
+"grade": 4,
+"final": false
 },
 {
 "subject": "Science",
-"grade": "2",
-"final": "true"
+"grade": 2,
+"final": false
 },
 {
 "subject": "Computer Science",
-"grade": "4",
-"final": "false"
+"grade": 4,
+"final": true
 },
 {
 "subject": "Physical Education",
-"grade": "4",
-"final": "false"
+"grade": 5,
+"final": true
 },
 ],
 },
