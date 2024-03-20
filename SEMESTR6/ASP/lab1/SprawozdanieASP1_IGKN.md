@@ -194,6 +194,160 @@ W ten sposób wszystko zacznie nam działać w oczekiwany sposób:
 
 ![Detail](image-1.png)
 
-### Wnioski
+<div style="page-break-after: always;"></div>
 
-ASP.NET to technologia opracowana przez Microsoft, która umożliwia budowanie dynamicznych aplikacji internetowych i serwisów sieciowych. Dzięki ASP.NET programiści mogą tworzyć aplikacje webowe, które są skalowalne, wydajne i bezpieczne. Ta platforma oferuje szeroki zakres narzędzi do projektowania interfejsu użytkownika, zarządzania danymi oraz obsługi żądań HTTP. Pozwala również na integrację z różnymi bazami danych i serwisami zewnętrznymi. W rezultacie ASP.NET stanowi wszechstronne narzędzie do tworzenia zaawansowanych aplikacji internetowych dla różnych dziedzin, w tym e-commerce, zarządzania zasobami ludzkimi, systemów informatycznych dla firm i wiele innych.
+## Baza danych i modele danych
+
+Aby połączyć naszą aplikacje z bazą danych zaczniemy od zainstalowania potrzebnych pakietów NuGet
+
+```bash
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+```
+
+Po zainstalowaniu, musimy zdobyć connection stringa koniecznego do połączenia się z naszą bazą danych, możemy go uzyskać z poziomu Visual Studia poprzez naciśnięcie na instancje naszego servera prawym
+
+![alt text](image-2.png)
+
+A następnie wybranie edit
+
+![alt text](image-3.png)
+
+Skopiowany connection string będzie trzeba wkleić w pliku appsettings.json w strukturze naszego projektu
+
+```json
+  "ConnectionStrings": {
+    "BikeContext": "Server=(localdb)\\mssqllocaldb;Database=aspnet-53bc9b9d-9d6a-45d4-8429-2a2761773502;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+```
+
+W swoim przypadku nazwałem go BikeContext ponieważ tak będę się do niego odnosił w programie.
+
+Następnym krokiem jest stworzenie modelu naszej bazy w postaci klasy w folderze `Models`
+
+```cs
+namespace BikeRentalSystemWeb.Models
+{
+    public enum BikeTypeModel { Male, Female, Kids }
+    public class Bike
+    {
+
+        public int BikeID { get; set; }
+        public string Producer { get; set; }
+        public string Model { get; set; }
+        public int NumberofGears { get; set; }
+        public BikeTypeModel BikeType { get; set; }
+        public string Color { get; set; }
+        public int NumberofBikes { get; set; }
+    }
+}
+```
+
+Aby wykorzystać ten model w bazie danych musimy stworzyć kontekst dla tej tabeli
+
+```cs
+namespace BikeRentalSystemWeb.Data
+{
+    public class BikeContext : DbContext
+    {
+        public BikeContext(DbContextOptions<BikeContext> options) : base(options)
+        {
+        }
+
+        public DbSet<Bike> Bikes { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Bike>().ToTable("Bike");
+        }
+    }
+}
+```
+
+Teraz aby połączyć się z bazą musimy zmodyfikować Program uruchamiający naszą aplikację, czyli `Program.cs`
+
+```cs
+builder.Services.AddDbContext<BikeContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BikeContext")));
+```
+
+dodanie tych dwóch linijek kodu, powiąże naszą bazę na podstawie connection stringa, który wcześniej nazwaliśmy `BikeContext`
+
+Połączenie zostało już nawiązane teraz musimy tylko wykorzystać to połączenie, dlatego następną rzeczą którą zrobimy będzie dodanie klasy inicjalizującej bazę danych, czyli w sytuacji w której nie będzie w niej żadnych rekordów zostanie wywołana funkcja wprowadzająca nowe rekordy.
+
+```cs
+using BikeRentalSystemWeb.Models;
+using System;
+using System.Linq;
+
+
+namespace BikeRentalSystemWeb.Data
+{
+    public class DbInitializer_
+    {
+        public static void Initialize(BikeContext context)
+        {
+            context.Database.EnsureCreated();
+
+
+            if (context.Bikes.Any())
+            {
+                return;
+            }
+
+            var bikes = new Bike[]
+            {
+                new Bike { Producer = "Giant", Model = "TCR56-1", Color = "Black", BikeType = BikeTypeModel.Male, NumberofBikes = 1, NumberofGears = 24 },
+                new Bike { Producer = "Trek", Model = "FX3", Color = "Blue", BikeType = BikeTypeModel.Male, NumberofBikes = 1, NumberofGears = 21 },
+                new Bike { Producer = "Specialized", Model = "Sirrus X 4.0", Color = "Red", BikeType = BikeTypeModel.Kids, NumberofBikes = 1, NumberofGears = 18 },
+                new Bike { Producer = "Cannondale", Model = "Synapse", Color = "White", BikeType = BikeTypeModel.Male, NumberofBikes = 1, NumberofGears = 22 },
+                new Bike { Producer = "Giant", Model = "Reign 29", Color = "Green", BikeType = BikeTypeModel.Male, NumberofBikes = 1, NumberofGears = 20 },
+                new Bike { Producer = "Trek", Model = "Marlin 7", Color = "Orange", BikeType = BikeTypeModel.Male, NumberofBikes = 1, NumberofGears = 18 },
+                new Bike { Producer = "Specialized", Model = "Rockhopper", Color = "Yellow", BikeType = BikeTypeModel.Male, NumberofBikes = 1, NumberofGears = 24 },
+                new Bike { Producer = "Cannondale", Model = "Trail 5", Color = "Purple", BikeType = BikeTypeModel.Female, NumberofBikes = 1, NumberofGears = 21 },
+                new Bike { Producer = "Giant", Model = "Trance X 29", Color = "Blue", BikeType = BikeTypeModel.Male, NumberofBikes = 1, NumberofGears = 22 },
+                new Bike { Producer = "Trek", Model = "Domane", Color = "Black", BikeType = BikeTypeModel.Female, NumberofBikes = 1, NumberofGears = 20 }
+
+
+            };
+            foreach (Bike b in bikes)
+            {
+                context.Bikes.Add(b);
+            }
+            context.SaveChanges();
+        }
+    }
+}
+```
+
+Teraz w naszym kontrolerze musimy zmodyfikować jego inicjalizację
+
+```cs
+        public HomeController(ILogger<HomeController> logger, BikeContext context)
+        {
+            _logger = logger;
+            _context = context;
+            _context.Database.EnsureCreated();
+            DbInitializer_.Initialize(context);
+        }
+```
+
+W ten sposób powiążemy sobie kontekst naszej tabeli z kontekstem w programie, w między czasie sprawdzimy też czy tabela jest już utworzona w bazie danych i zostanie przeprowadzona jej inicjalizacja.
+
+Teraz możemy przypisać rowery z bazy do rowerów używanych na stronie
+
+```cs
+        public async Task<IActionResult> Index()
+        {
+            var bikes = await _context.Bikes.ToListAsync();
+            return View(bikes);
+        }
+```
+
+Teraz możemy korzystać ze strony w taki sam sposób jak wcześniej wystarczy tylko zmienić importy w plikach `.cshtml`
+
+```cs
+@using BikeRentalSystemWeb.Models;
+@model Bike
+```

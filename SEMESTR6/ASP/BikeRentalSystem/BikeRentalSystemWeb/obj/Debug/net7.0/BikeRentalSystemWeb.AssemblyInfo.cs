@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("8d40874c-a654-4a82-a5b1-e37d6b3a6563")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BikeRentalSystemWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+449b0bfbf28081875a1f80d48b9837b1e2ca9fd3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b5e5b7810143c3e54088d26ad9bf19547fc03e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("BikeRentalSystemWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BikeRentalSystemWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

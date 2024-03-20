@@ -3,6 +3,42 @@
   "WorkspaceRootPath": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\data\\bikecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\data\\bikecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\models\\bike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\models\\bike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\viewmodels\\bikedetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\viewmodels\\bikedetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\views\\home\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\views\\home\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -11,28 +47,8 @@
       "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\viewmodels\\bikedetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\viewmodels\\bikedetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|c:\\szkola\\semestr6\\asp\\bikerentalsystem\\bikerentalsystemweb\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAE014E7-D13F-4447-8CA1-15B04BAA637E}|BikeRentalSystemWeb\\BikeRentalSystemWeb.csproj|solutionrelative:bikerentalsystemweb\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,15 +58,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DbInitializer.cs",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Data\\DbInitializer.cs",
+              "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Data\\DbInitializer.cs",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Data\\DbInitializer.cs",
+              "RelativeToolTip": "BikeRentalSystemWeb\\Data\\DbInitializer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T18:44:41.593Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\appsettings.json",
+              "RelativeDocumentMoniker": "BikeRentalSystemWeb\\appsettings.json",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\appsettings.json",
+              "RelativeToolTip": "BikeRentalSystemWeb\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-19T18:25:56.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BikeContext.cs",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Data\\BikeContext.cs",
+              "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Data\\BikeContext.cs",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Data\\BikeContext.cs",
+              "RelativeToolTip": "BikeRentalSystemWeb\\Data\\BikeContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T18:18:38.444Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Bike.cs",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Models\\Bike.cs",
+              "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Models\\Bike.cs",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Models\\Bike.cs",
+              "RelativeToolTip": "BikeRentalSystemWeb\\Models\\Bike.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T18:14:58.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "additional-methods.js",
               "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
               "RelativeDocumentMoniker": "BikeRentalSystemWeb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
@@ -58,12 +122,11 @@
               "RelativeToolTip": "BikeRentalSystemWeb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
               "ViewState": "AQIAAK4EAAAAAAAAAAAtwMQEAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-03-17T21:15:53.449Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-17T21:15:53.449Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Views\\_ViewImports.cshtml",
@@ -76,16 +139,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "Detail.cshtml",
               "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Views\\Home\\Detail.cshtml",
               "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Views\\Home\\Detail.cshtml",
               "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Views\\Home\\Detail.cshtml",
               "RelativeToolTip": "BikeRentalSystemWeb\\Views\\Home\\Detail.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-17T20:32:06.155Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-17T20:32:06.155Z"
             },
             {
               "$type": "Document",
@@ -95,46 +157,44 @@
               "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Controllers\\HomeController.cs",
               "RelativeToolTip": "BikeRentalSystemWeb\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAQwFoAAAAAAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAQwCAAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-17T20:32:06.236Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "BikeDetailViewModel.cs",
               "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\ViewModels\\BikeDetailViewModel.cs",
               "RelativeDocumentMoniker": "BikeRentalSystemWeb\\ViewModels\\BikeDetailViewModel.cs",
               "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\ViewModels\\BikeDetailViewModel.cs",
               "RelativeToolTip": "BikeRentalSystemWeb\\ViewModels\\BikeDetailViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAuAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-17T20:32:06.24Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-17T20:32:06.24Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "BikeRentalSystemWeb\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAACoAAAAAAAAAAAAAAE4AAAAVAAAA",
+              "ViewState": "AQIAACcAAAAAAAAAAIBJwE4AAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-17T20:32:06.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-17T20:32:06.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Program.cs",
               "RelativeDocumentMoniker": "BikeRentalSystemWeb\\Program.cs",
               "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\BikeRentalSystem\\BikeRentalSystemWeb\\Program.cs",
               "RelativeToolTip": "BikeRentalSystemWeb\\Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAqwB4AAAA5AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-17T20:32:06.246Z",
               "EditorCaption": ""

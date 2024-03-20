@@ -1,3 +1,11 @@
+using BikeRentalSystemWeb.Data;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using Microsoft.EntityFrameworkCore;
+
 namespace BikeRentalSystemWeb
 {
     public class Program
@@ -7,6 +15,9 @@ namespace BikeRentalSystemWeb
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<BikeContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("BikeContext")));
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -32,5 +43,7 @@ namespace BikeRentalSystemWeb
 
             app.Run();
         }
+
+
     }
 }

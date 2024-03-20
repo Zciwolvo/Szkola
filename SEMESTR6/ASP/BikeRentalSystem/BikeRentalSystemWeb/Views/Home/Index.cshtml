@@ -1,5 +1,5 @@
-﻿@using BikeRentalSystemWeb.ViewModels
-@model IEnumerable<BikeDetailViewModel>
+﻿@using BikeRentalSystemWeb.Models
+@model IEnumerable<Bike>
 
 <head>
     <style>
@@ -75,7 +75,7 @@
             @foreach (var item in Model)
             {
                 <li>
-                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id">@item.Producer - @item.Model</a>
+                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.BikeID">@item.Producer - @item.Model</a>
                 </li>
             }
         </ul>
