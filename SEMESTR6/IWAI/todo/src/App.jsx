@@ -112,20 +112,20 @@ function App() {
         todo.id === id ? { ...todo, done: !todo.done } : todo
       );
       setDailyTodos(updatedDailyTodos);
-      saveDailyTodos(updatedDailyTodos); // Save daily tasks after marking as done
+      saveDailyTodos(updatedDailyTodos);
     } else {
       const updatedSingleTimeTodos = singleTimeTodos.map((todo) =>
         todo.id === id ? { ...todo, done: !todo.done } : todo
       );
       setSingleTimeTodos(updatedSingleTimeTodos);
-      saveSingleTimeTodos(updatedSingleTimeTodos); // Save single-time tasks after marking as done
+      saveSingleTimeTodos(updatedSingleTimeTodos);
     }
   };
 
   return (
     <div className={`App ${isNightMode ? "night-mode" : ""}`}>
       <header className="App-header">
-        <h1 className="mb-4">Todo App</h1>
+        <h1 className="mb-4">Todo App (Igor Gawłowicz)</h1>
         <div className="toggle-container">
           <div className="toggle">
             <label className="switch">
@@ -141,9 +141,6 @@ function App() {
             >
               {isDaily ? "Daily Tasks" : "Single-time Tasks"}
             </button>
-            <span className="current-task-type">
-              Currently Viewing: {isDaily ? "Daily Tasks" : "Single-time Tasks"}
-            </span>
           </div>
         </div>
       </header>
