@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TripApp.Models;
 
-namespace TripApp.Models
+namespace TripApp.Data
 {
-    public class TripsContext : DbContext
+    public class TripContext : DbContext
     {
-        public TripsContext(DbContextOptions<TripsContext> options) : base(options)
+        public TripContext(DbContextOptions<TripContext> options) : base(options)
         {
         }
         public DbSet<Trip> Trips { get; set; }

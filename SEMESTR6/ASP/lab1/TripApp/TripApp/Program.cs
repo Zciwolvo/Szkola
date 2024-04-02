@@ -1,6 +1,7 @@
+using BikeRentalSystemWeb.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using TripApp.Models;
+using TripApp.Data;
 
 namespace TripApp
 {
@@ -9,9 +10,9 @@ namespace TripApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<TripsContext>(options =>
-
+            builder.Services.AddDbContext<TripContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -36,6 +37,12 @@ namespace TripApp
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
+                name: "trip",
+                pattern: "Trip/{action=Index}/{id?}",
+                defaults: new { controller = "Trip" });
+
 
             app.Run();
         }

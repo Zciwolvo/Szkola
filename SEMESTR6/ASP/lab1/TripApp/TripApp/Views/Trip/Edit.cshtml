@@ -1,0 +1,24 @@
+﻿@model TripApp.Models.Trip
+
+<h1>Edit</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="TripId" />
+    <div class="form-group">
+        <label asp-for="Destination"></label>
+        <input asp-for="Destination" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TripDateStart"></label>
+        <input asp-for="TripDateStart" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TripDateEnd"></label>
+        <input asp-for="TripDateEnd" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

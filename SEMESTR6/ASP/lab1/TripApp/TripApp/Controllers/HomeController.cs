@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BikeRentalSystemWeb.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using TripApp.Data;
 using TripApp.Models;
 
 namespace TripApp.Controllers
@@ -9,13 +11,14 @@ namespace TripApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly DbContext _context;
+        private readonly TripContext _context;
 
-        public HomeController(ILogger<HomeController> logger, TripsContext context)
+        public HomeController(ILogger<HomeController> logger, TripContext context)
         {
             _logger = logger;
             _context = context;
             _context.Database.EnsureCreated();
+            //DbInitializer.Initialize(context);
 
         }
 

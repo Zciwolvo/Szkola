@@ -1,0 +1,51 @@
+﻿@model List<TripApp.Models.Trip>
+
+<h1>Trip List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Destination
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Destination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripDateStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripDateEnd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TripId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
