@@ -18,8 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Szkola\SEMESTR6\ASP\lab1\TripApp\TripApp
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Szkola/SEMESTR6/ASP/lab1/TripApp/TripApp/Views/ClientReservation/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50UmVzZXJ2YXRpb25cQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Szkola/SEMESTR6/ASP/lab1/TripApp/TripApp/Views/Client/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Szkola/SEMESTR6/ASP/lab1/TripApp/TripApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Szkola/SEMESTR6/ASP/lab1/TripApp/TripApp/Views/Reservation/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Szkola/SEMESTR6/ASP/lab1/TripApp/TripApp/Views/Shared/Error.cshtml]

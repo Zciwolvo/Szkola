@@ -10,6 +10,7 @@ namespace TripApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             builder.Services.AddDbContext<TripContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
 
@@ -43,6 +44,15 @@ namespace TripApp
                 pattern: "Trip/{action=Index}/{id?}",
                 defaults: new { controller = "Trip" });
 
+            app.MapControllerRoute(
+                name: "reservations",
+                pattern: "Reservations",
+                defaults: new { controller = "Reservation", action = "Index" });
+
+            app.MapControllerRoute(
+                name: "clients",
+                pattern: "Clients",
+                defaults: new { controller = "Client", action = "Index" });
 
             app.Run();
         }

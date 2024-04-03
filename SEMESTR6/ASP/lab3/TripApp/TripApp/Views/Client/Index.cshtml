@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TripApp.Models.Client>
+
+<h1>Existing Clients</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Client ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.ClientId</td>
+                <td>@client.Name</td>
+                <td>@client.Email</td>
+                <td>@client.Phone</td>
+            </tr>
+        }
+    </tbody>
+</table>
