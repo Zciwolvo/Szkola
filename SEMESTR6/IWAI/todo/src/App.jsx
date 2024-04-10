@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import "./App2.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -123,11 +123,15 @@ function App() {
   };
 
   return (
-    <div className={`App ${isNightMode ? "night-mode" : ""}`}>
+    <div
+      className={`App ${
+        isNightMode ? "bg-gray-900 text-white" : "bg-gray-100"
+      }`}
+    >
       <header className="App-header">
-        <h1 className="mb-4">Todo App (Igor Gawłowicz)</h1>
-        <div className="toggle-container">
-          <div className="toggle">
+        <h1 className="text-2xl mb-4">Todo App (Igor Gawłowicz)</h1>
+        <div className="toggle-container flex justify-between items-center">
+          <div className="toggle flex items-center">
             <label className="switch">
               <input type="checkbox" onChange={handleNightModeToggle} />
               <span className="slider round"></span>
@@ -136,7 +140,7 @@ function App() {
           </div>
           <div className="task-toggle">
             <button
-              className={`btn btn-${isDaily ? "secondary" : "primary"} mr-2`}
+              class="bg-transparent hover:bg-blue-500 text-grey-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
               onClick={handleToggle}
             >
               {isDaily ? "Daily Tasks" : "Single-time Tasks"}
@@ -144,17 +148,17 @@ function App() {
           </div>
         </div>
       </header>
-      <div className="container">
-        <div className="input-group mb-3">
+      <div className="container mx-auto p-4">
+        <div className="input-group flex mb-3">
           <input
             type="text"
-            className="form-control"
+            className="form-control rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:ring-1"
             placeholder="Enter a todo"
             value={inputValue}
             onChange={handleInputChange}
           />
           <button
-            className="btn btn-primary"
+            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-black py-2 px-4 border border-blue-500 hover:border-transparent rounded"
             type="button"
             onClick={handleAddTodo}
           >
@@ -164,9 +168,12 @@ function App() {
         <div className="todos">
           {isDaily
             ? dailyTodos.map((todo) => (
-                <div key={todo.id} className="todo-item">
+                <div
+                  key={todo.id}
+                  className="todo-item p-3 bg-white rounded-md shadow-sm flex justify-between items-center"
+                >
                   <span
-                    style={{ textDecoration: todo.done ? "line-through" : "" }}
+                    className={`text-lg ${todo.done ? "line-through" : ""}`}
                     onClick={() => handleMarkAsDone(todo.id, true)}
                   >
                     {todo.text}
@@ -180,9 +187,12 @@ function App() {
                 </div>
               ))
             : singleTimeTodos.map((todo) => (
-                <div key={todo.id} className="todo-item">
+                <div
+                  key={todo.id}
+                  className="todo-item p-3 bg-white rounded-md shadow-sm flex justify-between items-center"
+                >
                   <span
-                    style={{ textDecoration: todo.done ? "line-through" : "" }}
+                    className={`text-lg ${todo.done ? "line-through" : ""}`}
                     onClick={() => handleMarkAsDone(todo.id, false)}
                   >
                     {todo.text}
