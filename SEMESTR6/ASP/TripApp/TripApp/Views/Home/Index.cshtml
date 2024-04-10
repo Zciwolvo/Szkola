@@ -1,0 +1,45 @@
+﻿@model List<TripApp.ViewModels.TripSummaryViewModel>
+
+<h1>Trip List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Destination
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trip in Model)
+        {
+            <tr>
+                <td>
+                    @trip.Destination
+                </td>
+                <td>
+                    @trip.TripDateStart.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @trip.TripDateEnd.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @trip.Price.ToString("C")
+                </td>
+                <td>
+                    <a href="@Url.Action("Create", "ClientReservation", new { tripId = trip.TripId })">Create Reservation</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
