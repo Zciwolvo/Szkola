@@ -1,8 +1,11 @@
-﻿using BikeRentalSystemWeb.Data; // Assuming this namespace is correct
+﻿using BikeRentalSystemWeb.Data; // Assuming this namespace is correct (might not be used anymore)
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; // Might not be needed anymore
 using System.Diagnostics;
-using TripApp.Data;
+using TripApp.Data; // Might not be needed anymore
+using TripApp.Models;
+using TripApp.Repositories;
+using TripApp.Services;
 using TripApp.ViewModels;
 
 namespace TripApp.Controllers
@@ -10,32 +13,30 @@ namespace TripApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ITripService _tripService;
 
-        private readonly TripContext _context;
-
-        public HomeController(ILogger<HomeController> logger, TripContext context)
+        public HomeController(ILogger<HomeController> logger, ITripService tripService)
         {
             _logger = logger;
-            _context = context;
-            _context.Database.EnsureCreated();
-            DbInitializer.Initialize(context);
+            _tripService = tripService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var trips = await _context.Trips
-                .Select(trip => new TripSummaryViewModel
-                {
-                    TripId = trip.TripId,
-                    Destination = trip.Destination,
-                    TripDateStart = trip.TripDateStart,
-                    TripDateEnd = trip.TripDateEnd,
-                    Price = trip.Price
-                })
-                .ToListAsync();
+            // Get trips using the TripService
+            var trips = await _tripService.GetAllTripsAsync();
 
-            return View(trips);
+            // Convert to TripSummaryViewModel if needed
+            var tripSummaries = trips.Select(trip => new TripSummaryViewModel
+            {
+                TripId = trip.TripId,
+                Destination = trip.Destination,
+                TripDateStart = trip.TripDateStart,
+                TripDateEnd = trip.TripDateEnd,
+                Price = trip.Price
+            }).ToList();
+
+            return View(tripSummaries);
         }
-
     }
 }

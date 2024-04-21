@@ -1,17 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using FluentValidation;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TripApp.Models;
 using TripApp.Repositories;
+using TripApp.ViewModels;
 
 namespace TripApp.Services
 {
     public class TripService : ITripService
     {
         private readonly ITripRepository _tripRepository;
+        private readonly IValidator<Trip> _validator;
 
-        public TripService(ITripRepository tripRepository)
+        public TripService(ITripRepository tripRepository, IValidator<Trip> validator)
         {
             _tripRepository = tripRepository;
+            _validator = validator;
         }
 
         public async Task<IEnumerable<Trip>> GetAllTripsAsync()
@@ -26,12 +30,30 @@ namespace TripApp.Services
 
         public async Task AddTripAsync(Trip trip)
         {
-            await _tripRepository.AddAsync(trip);
+            var validationResult = await _validator.ValidateAsync(trip);
+
+            if (validationResult.IsValid)
+            {
+                await _tripRepository.AddAsync(trip);
+            }
+            else
+            {
+                throw new ValidationException(string.Join(",", validationResult.Errors.Select(e => e.ErrorMessage)));
+            }
         }
 
         public async Task UpdateTripAsync(Trip trip)
         {
-            await _tripRepository.UpdateAsync(trip);
+            var validationResult = await _validator.ValidateAsync(trip);
+
+            if (validationResult.IsValid)
+            {
+                await _tripRepository.UpdateAsync(trip);
+            }
+            else
+            {
+                throw new ValidationException(string.Join(",", validationResult.Errors.Select(e => e.ErrorMessage)));
+            }
         }
 
         public async Task DeleteTripAsync(int id)

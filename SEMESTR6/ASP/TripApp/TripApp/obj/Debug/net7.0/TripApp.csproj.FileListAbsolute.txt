@@ -306,3 +306,4 @@ C:\Szkola\SEMESTR6\ASP\TripApp\TripApp\obj\Debug\net7.0\refint\TripApp.dll
 C:\Szkola\SEMESTR6\ASP\TripApp\TripApp\obj\Debug\net7.0\TripApp.pdb
 C:\Szkola\SEMESTR6\ASP\TripApp\TripApp\obj\Debug\net7.0\TripApp.genruntimeconfig.cache
 C:\Szkola\SEMESTR6\ASP\TripApp\TripApp\obj\Debug\net7.0\ref\TripApp.dll
+C:\Szkola\SEMESTR6\ASP\TripApp\TripApp\bin\Debug\net7.0\FluentValidation.dll

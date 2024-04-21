@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "vEgTc9WoZv2xJBHuA27Nf+a006/sCuTnd9Wwv6wo7h101eOpZE8AWVRrHvRP7GakbjNR14DRCmVttw2kXAt55w==",
+  "dgSpecHash": "DYafcW3avt73XAs7auvCmLhRNkvolX4UINnvyk+w6WUmDeqvJJzpH4N4rMmBnhv4VvAkovZ+RqbtrZCjjZb3PQ==",
   "success": true,
   "projectFilePath": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Igor\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\Igor\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\7.0.17\\microsoft.aspnetcore.diagnostics.entityframeworkcore.7.0.17.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

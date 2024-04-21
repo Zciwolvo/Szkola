@@ -7,6 +7,7 @@ namespace TripApp.Services
     public interface IClientService
     {
         Task<Client> GetOrCreateAsync(string name, string email, string phone);
+        Task<IEnumerable<Client>> GetAllClientsAsync();
     }
 
 }

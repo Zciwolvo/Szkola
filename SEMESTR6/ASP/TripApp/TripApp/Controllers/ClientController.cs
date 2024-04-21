@@ -1,29 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TripApp.Data;
+using TripApp.Services;
 using TripApp.ViewModels;
 
 namespace TripApp.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly TripContext _context;
+        private readonly IClientService _clientService;
 
-        public ClientController(TripContext context)
+        public ClientController(IClientService clientService)
         {
-            _context = context;
+            _clientService = clientService;
         }
 
         // GET: Clients
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var clientListViewModel = _context.Clients.Select(client => new ClientListViewModel
-            {
-                ClientId = client.ClientId,
-                Name = client.Name,
-                Email = client.Email,
-                Phone = client.Phone
-            });
+            var clientListViewModel = await _clientService.GetAllClientsAsync();
 
             return View(clientListViewModel);
         }

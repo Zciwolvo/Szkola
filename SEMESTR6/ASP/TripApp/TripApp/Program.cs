@@ -1,9 +1,13 @@
 using BikeRentalSystemWeb.Data;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using TripApp.Data;
+using TripApp.Models;
 using TripApp.Repositories;
 using TripApp.Services;
+using TripApp.Validator;
+using TripApp.ViewModels;
 
 namespace TripApp
 {
@@ -24,6 +28,9 @@ namespace TripApp
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<ITripService, TripService>();
 
+            builder.Services.AddScoped<IValidator<Client>, ClientValidator>();
+            builder.Services.AddScoped<IValidator<Trip>, TripValidator>();
+            builder.Services.AddScoped<IValidator<Reservation>, ReservationValidator>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
