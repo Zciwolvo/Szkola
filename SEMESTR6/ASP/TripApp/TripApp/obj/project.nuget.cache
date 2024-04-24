@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DYafcW3avt73XAs7auvCmLhRNkvolX4UINnvyk+w6WUmDeqvJJzpH4N4rMmBnhv4VvAkovZ+RqbtrZCjjZb3PQ==",
+  "dgSpecHash": "oVB+wrqOL/4WwzxZBRWTHhX2YCga8Lqc5ZdSB53GdDyxSs2/rDlC7QSVFk8pM/OL+z0UFBnhJGmnmxQDFnL50Q==",
   "success": true,
   "projectFilePath": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Igor\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",

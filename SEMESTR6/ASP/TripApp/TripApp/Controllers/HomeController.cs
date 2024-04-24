@@ -1,10 +1,10 @@
-﻿using BikeRentalSystemWeb.Data; // Assuming this namespace is correct (might not be used anymore)
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; // Might not be needed anymore
-using System.Diagnostics;
-using TripApp.Data; // Might not be needed anymore
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TripApp.Models;
-using TripApp.Repositories;
 using TripApp.Services;
 using TripApp.ViewModels;
 
@@ -14,27 +14,20 @@ namespace TripApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ITripService _tripService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, ITripService tripService)
+        public HomeController(ILogger<HomeController> logger, ITripService tripService, IMapper mapper)
         {
             _logger = logger;
             _tripService = tripService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            // Get trips using the TripService
             var trips = await _tripService.GetAllTripsAsync();
 
-            // Convert to TripSummaryViewModel if needed
-            var tripSummaries = trips.Select(trip => new TripSummaryViewModel
-            {
-                TripId = trip.TripId,
-                Destination = trip.Destination,
-                TripDateStart = trip.TripDateStart,
-                TripDateEnd = trip.TripDateEnd,
-                Price = trip.Price
-            }).ToList();
+            var tripSummaries = _mapper.Map<List<TripSummaryViewModel>>(trips);
 
             return View(tripSummaries);
         }

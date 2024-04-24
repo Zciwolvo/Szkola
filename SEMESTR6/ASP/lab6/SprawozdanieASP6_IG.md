@@ -251,3 +251,99 @@ builder.Services.AddScoped<IValidator<Client>, ClientValidator>();
 builder.Services.AddScoped<IValidator<Trip>, TripValidator>();
 builder.Services.AddScoped<IValidator<Reservation>, ReservationValidator>();
 ```
+
+### AutoMapper
+
+Za pomocą `AutoMappera` możemy bardzo łatwo rzutować dane z modelu na viewmodel bez potrzeby tworzenia nowej struktury danych manualnie.
+
+Aby go zastosować, zacząłem od utworzenia profilu mappera
+
+```cs
+namespace TripApp.AutoMapper
+{
+    public class MappingProfile : Profile
+    {
+        public MappingProfile()
+        {
+            CreateMap<Trip, TripSummaryViewModel>();
+            CreateMap<Client, ClientListViewModel>();
+        }
+    }
+}
+```
+
+Następnie do konfiguracji musimy dodać nowy element do buildera
+
+```cs
+builder.Services.AddAutoMapper(options =>
+{
+    options.AddProfile<MappingProfile>();
+});
+```
+
+Kolejnym krokiem jest przepisanie fragmentów kodu w których musieliśmy rzutować dane ręcznie
+
+Przed
+
+```cs
+public async Task<IActionResult> Index()
+{
+    // Get trips using the TripService
+    var trips = await _tripService.GetAllTripsAsync();
+
+    // Convert to TripSummaryViewModel if needed
+    var tripSummaries = trips.Select(trip => new TripSummaryViewModel
+    {
+        TripId = trip.TripId,
+        Destination = trip.Destination,
+        TripDateStart = trip.TripDateStart,
+        TripDateEnd = trip.TripDateEnd,
+        Price = trip.Price
+    }).ToList();
+
+    return View(tripSummaries);
+}
+```
+
+Po
+
+```cs
+public async Task<IActionResult> Index()
+{
+    var trips = await _tripService.GetAllTripsAsync();
+
+    var tripSummaries = _mapper.Map<List<TripSummaryViewModel>>(trips);
+
+    return View(tripSummaries);
+}
+```
+
+To samo musimy zrobić dla pozostałych modeli
+
+Przed
+
+```cs
+public async Task<IEnumerable<ClientListViewModel>> GetAllClientsAsync()
+{
+    var clients = await _clientRepository.GetAllAsync();
+
+    var clientViewModels = clients.Select(client => new ClientListViewModel
+    {
+        Name = client.Name,
+        Email = client.Email,
+        Phone = client.Phone
+    });
+
+    return clientViewModels;
+}
+```
+
+```cs
+public async Task<IEnumerable<ClientListViewModel>> GetAllClientsAsync()
+{
+    var clients = await _clientRepository.GetAllAsync();
+    return _mapper.Map<IEnumerable<ClientListViewModel>>(clients);
+}
+```
+
+Po zaimplementowaniu tych zmian program działa identycznie a kod wygląda lepiej.
