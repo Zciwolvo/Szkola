@@ -1,0 +1,5 @@
+DBcontext -> IdentityDBcontext
+
+do program.cs -> app.MapRazorPages()
+
+reszta według filmu i dokumentacji

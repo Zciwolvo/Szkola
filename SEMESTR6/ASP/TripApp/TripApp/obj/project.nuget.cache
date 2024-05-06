@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oVB+wrqOL/4WwzxZBRWTHhX2YCga8Lqc5ZdSB53GdDyxSs2/rDlC7QSVFk8pM/OL+z0UFBnhJGmnmxQDFnL50Q==",
+  "dgSpecHash": "eIOLpxh0JBy0vcF0hVlrcArR9azQNRoUbr+MlLv1bs1DNwaX4b8ctThA1Qz8nmiFeGJAUXLGWUIesOglroNarw==",
   "success": true,
-  "projectFilePath": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
+  "projectFilePath": "C:\\szkola\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Igor\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Igor\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

@@ -52,7 +52,7 @@ row {
     <Ltext>Data wykonania ćwiczenia:</Ltext>
     <div align="center">
         <rectangle>
-            <Rtext>08.04.2023</Rtext>
+            <Rtext>22.04.2023</Rtext>
         </rectangle>
     </div>
 </centerer>
@@ -100,7 +100,7 @@ row {
 <row>
     <b>Ćwiczenie nr.</b>
     <rectangle>
-        <Rtext>5</Rtext>
+        <Rtext>6</Rtext>
     </rectangle>
 </row>
 
@@ -108,7 +108,7 @@ row {
 
 &nbsp;
 
-<b>Temat: </b> Tworzenie indeksów i wykorzystywanie ich w zapytaniach
+<b>Temat: </b>  Administracja Systemy zarządzania bazą danych (SZBD)
 
 &nbsp;
 
@@ -126,257 +126,223 @@ row {
 
 <div style="page-break-after: always;"></div>
 
-## Tworzenie indeksów i wykorzystywanie ich w zapytaniach
+##  Administracja Systemy zarządzania bazą danych (SZBD)
 
-Na potrzeby przebadania efektywności indeksów w bazie danych stworzymy sobię nową kolekcję z wygenerowanymi 200 tysięcy prostych rekordów z kolejnymi liczbami.
+### Uzyskaj informacje diagnostyczne dotyczące bazy danych i zawartych w niej kolekcji. 
 
-```py
-from pymongo import MongoClient
-
-
-client = MongoClient('mongodb://localhost:27017')
-
-db = client['my_app']
-
-collection = db['numbers']
-
-query = {"student_surname": "Smith"}
-
-for i in range(200000):
-    collection.insert_one({"num": i})
-```
-
-Po kilku minutach nasze 200000 rekordów jest już w bazie 
+Aby uzyskać podstawowe dane diagnostyczne dla bazy danych możemy użyć poleceń `show dbs` oraz `show collections`, zobaczymy w ten sposób istniejące na tym hoście bazy danych oraz kolekcje, ciężko jednak nazwać to rzeczywistymi danymi diagnostycznymi
 
 ```bash
-my_app> db.numbers.count()
-DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
-200000
+my_app> show dbs
+admin   180.00 KiB
+config   60.00 KiB
+local    72.00 KiB
+my_app    5.18 MiB
+test     88.00 KiB
+
+
+my_app> show collections
+articles
+courses
+numbers
+users
+my_app>
 ```
 
-Możemy także spradzić dowolny konkretny numer
+Jeśli chcemy otrzymać kompletne dane na temat interesującej nas bazy możemy użyć poleceni `db.serverStatus()`, który zwróci nam gigantyczny blok danych, gdzie będziemy mogli dowiedzieć się między innymi takich reczy jak:
+
+1. host
+2. version
+3. process
+4. pid
+5. uptime
+6. uptimeMillis
+7. uptimeEstimate
+8. localTime
+9. asserts
+10. connections
+11. replication
+12. metrics
+13. network
+14. opcounters
+15. opcountersRepl
+16. oplog
+17. backgroundFlushing
+18. storageEngine
+19. rocksdb
+20. wiredTiger
+21. logicalSessionRecordCache
+22. transportSecurity
+23. extra_info
+
+Są to kompletne dane servera i analiza ich może być dość trudna, jednak zawierają praktycznie wszystkie informacje dotyczące danego servera na którym mieści się nasza baza danych.
+
+Jeśli potrzebujemy jednak inforamcji odnośnie naszych kolekcji możemy użyć polecenia `db.getCollectionInfos({ type: "collection" })` na poziomie naszej bazy. W ten sposób dowiemy się wszystkiego co ważne o wszystkich kolekcjach w tym zbiorze.
 
 ```bash
-my_app> db.numbers.find({num: 500})
-[ { _id: ObjectId('6613d5d8c8e3c4af97dd5ddc'), num: 500 } ]
-```
-
-```bash
-my_app> db.numbers.find({num: {"$gt": 199995}})
+my_app> db.getCollectionInfos({ type: "collection" })
 [
-  { _id: ObjectId('6613d6a6c8e3c4af97e06924'), num: 199996 },
-  { _id: ObjectId('6613d6a6c8e3c4af97e06925'), num: 199997 },
-  { _id: ObjectId('6613d6a6c8e3c4af97e06926'), num: 199998 },
-  { _id: ObjectId('6613d6a6c8e3c4af97e06927'), num: 199999 }
-]
-```
-
-Możemy także ustalić górny i dolny limit
-
-```bash
-my_app> db.numbers.find({num: {"$lt": 199995, "$gt":199990}})
-[
-  { _id: ObjectId('6613d6a6c8e3c4af97e0691f'), num: 199991 },
-  { _id: ObjectId('6613d6a6c8e3c4af97e06920'), num: 199992 },
-  { _id: ObjectId('6613d6a6c8e3c4af97e06921'), num: 199993 },
-  { _id: ObjectId('6613d6a6c8e3c4af97e06922'), num: 199994 }
-]
-```
-
-
-
-Możemy teraz stworzyć indeks na naszej kolekcji
-
-```bash
-my_app> db.numbers.ensureIndex({num: 1})
-[ 'num_1' ]
-my_app> db.numbers.getIndexes()
-[
-  { v: 2, key: { _id: 1 }, name: '_id_' },
-  { v: 2, key: { num: 1 }, name: 'num_1' }
-]
-```
-
-Wyniki wykonania zapytania przed dodaniem indeksowania
-
-```bash
-my_app> db.numbers.find({num: {"$gt": 180000}}).explain("executionStats")
-{
-  explainVersion: '1',
-  queryPlanner: {
-    namespace: 'my_app.numbers',
-    indexFilterSet: false,
-    parsedQuery: { num: { '$gt': 180000 } },
-    queryHash: '01E69096',
-    planCacheKey: '01E69096',
-    maxIndexedOrSolutionsReached: false,
-    maxIndexedAndSolutionsReached: false,
-    maxScansToExplodeReached: false,
-    winningPlan: {
-      stage: 'COLLSCAN',
-      filter: { num: { '$gt': 180000 } },
-      direction: 'forward'
+  {
+    name: 'articles',
+    type: 'collection',
+    options: {},
+    info: {
+      readOnly: false,
+      uuid: UUID('c00aabf1-1de7-4320-b9f7-0a63d295c76f')
     },
-    rejectedPlans: []
+    idIndex: { v: 2, key: { _id: 1 }, name: '_id_' }
   },
-  executionStats: {
-    executionSuccess: true,
-    nReturned: 19999,
-    executionTimeMillis: 228,
-    totalKeysExamined: 0,
-    totalDocsExamined: 200000,
-    executionStages: {
-      stage: 'COLLSCAN',
-      filter: { num: { '$gt': 180000 } },
-      nReturned: 19999,
-      executionTimeMillisEstimate: 19,
-      works: 200001,
-      advanced: 19999,
-      needTime: 180001,
-      needYield: 0,
-      saveState: 200,
-      restoreState: 200,
-      isEOF: 1,
-      direction: 'forward',
-      docsExamined: 200000
-    }
+  {
+    name: 'numbers',
+    type: 'collection',
+    options: {},
+    info: {
+      readOnly: false,
+      uuid: UUID('ce96ccd0-8b60-4dd2-8a36-39084ba0abf8')
+    },
+    idIndex: { v: 2, key: { _id: 1 }, name: '_id_' }
   },
-  command: {
-    find: 'numbers',
-    filter: { num: { '$gt': 180000 } },
-    '$db': 'my_app'
+  {
+    name: 'users',
+    type: 'collection',
+    options: {},
+    info: {
+      readOnly: false,
+      uuid: UUID('fcaa2bbf-1b00-4dd4-b251-4746ce07be8c')
+    },
+    idIndex: { v: 2, key: { _id: 1 }, name: '_id_' }
   },
-  serverInfo: {
-    host: 'DESKTOP-6GVNM2J',
-    port: 27017,
-    version: '7.0.5',
-    gitVersion: '7809d71e84e314b497f282ea8aa06d7ded3eb205'
-  },
-  serverParameters: {
-    internalQueryFacetBufferSizeBytes: 104857600,
-    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
-    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
-    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
-    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
-    internalQueryProhibitBlockingMergeOnMongoS: 0,
-    internalQueryMaxAddToSetBytes: 104857600,
-    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
-    internalQueryFrameworkControl: 'trySbeRestricted'
-  },
-  ok: 1
-}
+  {
+    name: 'courses',
+    type: 'collection',
+    options: {},
+    info: {
+      readOnly: false,
+      uuid: UUID('feb39d54-393f-4fda-9e17-2949cabc4c58')
+    },
+    idIndex: { v: 2, key: { _id: 1 }, name: '_id_' }
+  }
+]
 ```
 
-Wyniki wykonania zapytania po dodaniu indeksowania
+### Utwórz kopię zapasową danych bazy danych. 
+
+Aby utworzyć kopię zapasową wykorzystamy narzędzie `mongodump`, należy je uwcześnie zainstalować przez mongo toolsy po czym znaleźć jego lokalizację i w terminalu napisać
+
+`>mongodump --uri="connection string/db name" --out /path/to/backup/directory`
+
+W moim przypadku wyglądało to następująco
 
 ```bash
-my_app> db.numbers.find({num: {"$gt": 180000}}).explain("executionStats")
-{
-  explainVersion: '1',
-  queryPlanner: {
-    namespace: 'my_app.numbers',
-    indexFilterSet: false,
-    parsedQuery: { num: { '$gt': 180000 } },
-    queryHash: '01E69096',
-    planCacheKey: '5AEA6406',
-    maxIndexedOrSolutionsReached: false,
-    maxIndexedAndSolutionsReached: false,
-    maxScansToExplodeReached: false,
-    winningPlan: {
-      stage: 'FETCH',
-      inputStage: {
-        stage: 'IXSCAN',
-        keyPattern: { num: 1 },
-        indexName: 'num_1',
-        isMultiKey: false,
-        multiKeyPaths: { num: [] },
-        isUnique: false,
-        isSparse: false,
-        isPartial: false,
-        indexVersion: 2,
-        direction: 'forward',
-        indexBounds: { num: [ '(180000, inf.0]' ] }
-      }
-    },
-    rejectedPlans: []
-  },
-  executionStats: {
-    executionSuccess: true,
-    nReturned: 19999,
-    executionTimeMillis: 74,
-    totalKeysExamined: 19999,
-    totalDocsExamined: 19999,
-    executionStages: {
-      stage: 'FETCH',
-      nReturned: 19999,
-      executionTimeMillisEstimate: 11,
-      works: 20000,
-      advanced: 19999,
-      needTime: 0,
-      needYield: 0,
-      saveState: 20,
-      restoreState: 20,
-      isEOF: 1,
-      docsExamined: 19999,
-      alreadyHasObj: 0,
-      inputStage: {
-        stage: 'IXSCAN',
-        nReturned: 19999,
-        executionTimeMillisEstimate: 8,
-        works: 20000,
-        advanced: 19999,
-        needTime: 0,
-        needYield: 0,
-        saveState: 20,
-        restoreState: 20,
-        isEOF: 1,
-        keyPattern: { num: 1 },
-        indexName: 'num_1',
-        isMultiKey: false,
-        multiKeyPaths: { num: [] },
-        isUnique: false,
-        isSparse: false,
-        isPartial: false,
-        indexVersion: 2,
-        direction: 'forward',
-        indexBounds: { num: [ '(180000, inf.0]' ] },
-        keysExamined: 19999,
-        seeks: 1,
-        dupsTested: 0,
-        dupsDropped: 0
-      }
-    }
-  },
-  command: {
-    find: 'numbers',
-    filter: { num: { '$gt': 180000 } },
-    '$db': 'my_app'
-  },
-  serverInfo: {
-    host: 'DESKTOP-6GVNM2J',
-    port: 27017,
-    version: '7.0.5',
-    gitVersion: '7809d71e84e314b497f282ea8aa06d7ded3eb205'
-  },
-  serverParameters: {
-    internalQueryFacetBufferSizeBytes: 104857600,
-    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
-    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
-    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
-    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
-    internalQueryProhibitBlockingMergeOnMongoS: 0,
-    internalQueryMaxAddToSetBytes: 104857600,
-    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
-    internalQueryFrameworkControl: 'trySbeRestricted'
-  },
-  ok: 1
-}
+C:\Program Files\MongoDB\Tools\100\bin>mongodump --uri="mongodb://localhost:27017/my_app" --out C:\szkola\Szkola\SEMESTR6\NBD\lab6
+2024-04-22T13:55:22.732+0200    writing my_app.articles to C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\articles.bson
+2024-04-22T13:55:22.734+0200    writing my_app.numbers to C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\numbers.bson
+2024-04-22T13:55:22.734+0200    writing my_app.courses to C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\courses.bson
+2024-04-22T13:55:22.761+0200    writing my_app.users to C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\users.bson
+2024-04-22T13:55:22.772+0200    done dumping my_app.articles (0 documents)
+2024-04-22T13:55:22.779+0200    done dumping my_app.courses (100 documents)
+2024-04-22T13:55:22.780+0200    done dumping my_app.users (4 documents)
+2024-04-22T13:55:23.392+0200    done dumping my_app.numbers (200000 documents)
 ```
 
-Możemy teraz porównać czas wykonania zapytania 
+W wybranym folderze pojawił się teraz folder zawierający wszystkie dane moję bazy.
 
-Przed: `executionTimeMillis: 228,`
+### Przywróć bazę danych z kopii zapasowej. 
 
-Po: `executionTimeMillis: 74,`
+Aby przywrócić wcześniej utworzoną baze danych zaczniemy od użycia polecenia `drop` aby pozbyć się bazy z systemu.
 
-Widzimy że czas wykonania jest 3-krotnie krótszy
+Następnie użyjemy narzędzia `mongorestore` aby przywrócić naszą bazę
+
+`mongorestore --uri="conneciton string" /path/to/backup/directory`
+
+W moim przypadku wygląda to następująco
+
+```bash
+>mongorestore --uri="mongodb://localhost:27017" C:\szkola\Szkola\SEMESTR6\NBD\lab6
+2024-04-22T14:02:58.339+0200    preparing collections to restore from
+2024-04-22T14:02:58.340+0200    don't know what to do with file "C:\szkola\Szkola\SEMESTR6\NBD\lab6\SprawozdanieNBD6_IgorGawlowicz.md", skipping...
+2024-04-22T14:02:58.343+0200    reading metadata for my_app.users from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\users.metadata.json
+2024-04-22T14:02:58.345+0200    reading metadata for my_app.articles from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\articles.metadata.json
+2024-04-22T14:02:58.346+0200    reading metadata for my_app.courses from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\courses.metadata.json
+2024-04-22T14:02:58.346+0200    reading metadata for my_app.numbers from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\numbers.metadata.json
+2024-04-22T14:02:58.484+0200    restoring my_app.numbers from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\numbers.bson
+2024-04-22T14:02:58.484+0200    restoring my_app.courses from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\courses.bson
+2024-04-22T14:02:58.514+0200    restoring my_app.users from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\users.bson
+2024-04-22T14:02:58.535+0200    restoring my_app.articles from C:\szkola\Szkola\SEMESTR6\NBD\lab6\my_app\articles.bson
+2024-04-22T14:02:58.547+0200    finished restoring my_app.courses (100 documents, 0 failures)
+2024-04-22T14:02:58.548+0200    finished restoring my_app.articles (0 documents, 0 failures)
+2024-04-22T14:02:58.548+0200    finished restoring my_app.users (4 documents, 0 failures)
+2024-04-22T14:03:01.344+0200    [##########..............]  my_app.numbers  2.54MB/5.91MB  (43.0%)
+2024-04-22T14:03:04.339+0200    [####################....]  my_app.numbers  5.03MB/5.91MB  (85.0%)
+2024-04-22T14:03:05.292+0200    [########################]  my_app.numbers  5.91MB/5.91MB  (100.0%)
+2024-04-22T14:03:05.292+0200    finished restoring my_app.numbers (200000 documents, 0 failures)
+2024-04-22T14:03:05.293+0200    no indexes to restore for collection my_app.numbers
+2024-04-22T14:03:05.293+0200    no indexes to restore for collection my_app.users
+2024-04-22T14:03:05.293+0200    no indexes to restore for collection my_app.articles
+2024-04-22T14:03:05.293+0200    no indexes to restore for collection my_app.courses
+2024-04-22T14:03:05.293+0200    200104 document(s) restored successfully. 0 document(s) failed to restore.
+```
+
+Możemy się upewnić że baza danych jest spowrotem w systemie i wszystko przywróciło się poprawnie.
+
+### Utwórz wielu użytkowników dla bazy danych z różnymi rolami.
+
+Zaczniemy od utworzenia najprostszego użytkownika z dostępem tylko do odczytu danych na poziomie naszej bazy
+
+```bash
+use my_app
+
+db.createUser({
+  user: "reader",
+  pwd: "123",
+  roles: [{ role: "read", db: "my_app" }]
+})
+```
+
+Następnie utworzymy użytkownika z dostępem do odczytu oraz zapisu
+
+```bash
+use my_app
+
+db.createUser({
+  user: "reader_write",
+  pwd: "123",
+  roles: [{ role: "readWrite", db: "my_app" }]
+})
+```
+
+Następnie na poziomie systemu utworzymy administratora dla bazy danych
+
+```bash
+use admin
+
+db.createUser({
+  user: "db_admin",
+  pwd: "123",
+  roles: [{ role: "dbAdmin", db: "my_app" }]
+})
+```
+
+Następnie zwiększymy zakres i stworzymy użytkownika z dostępem do całej klastry baz danych
+
+```bash
+use admin
+
+db.createUser({
+  user: "cluster_admin",
+  pwd: "123",
+  roles: [{ role: "clusterAdmin", db: "admin" }]
+})
+```
+
+Finalnie utworzymy administratora całego systemu na rootcie
+
+```bash
+use admin
+
+db.createUser({
+  user: "root_admin",
+  pwd: "123",
+  roles: ["root"]
+})
+```
