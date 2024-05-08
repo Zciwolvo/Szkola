@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\szkola\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj": {}
+    "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj": {}
   },
   "projects": {
-    "C:\\szkola\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj": {
+    "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\szkola\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
+        "projectUniqueName": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
         "projectName": "TripApp",
-        "projectPath": "C:\\szkola\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
+        "projectPath": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\TripApp.csproj",
         "packagesPath": "C:\\Users\\Igor\\.nuget\\packages\\",
-        "outputPath": "C:\\szkola\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\obj\\",
+        "outputPath": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -86,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

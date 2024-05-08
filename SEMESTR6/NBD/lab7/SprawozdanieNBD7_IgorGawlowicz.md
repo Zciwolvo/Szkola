@@ -108,7 +108,7 @@ row {
 
 &nbsp;
 
-<b>Temat: </b>  Obliczenia rozproszone. MapReduce w MONGODB
+<b>Temat: </b> Obliczenia rozproszone. MapReduce w MONGODB
 
 &nbsp;
 
@@ -126,7 +126,7 @@ row {
 
 <div style="page-break-after: always;"></div>
 
-##  Obliczenia rozproszone. MapReduce w MONGODB
+## Obliczenia rozproszone. MapReduce w MONGODB
 
 Utwórz kolekcję, dla której będą przechowywane dokumenty źródłowe MapReduce
 
@@ -335,10 +335,58 @@ Porównaj listę otrzymanych dokumentów z oczekiwanym wynikiem:
 
 Kolejność rekordów jest inna wygląda na losową, poza tym wynik bez zmian
 
-Utwórz kolekcję dokumentów, aby przetworzyć je za pomocą MapReduce
+1. Utwórz kolekcję dokumentów, aby przetworzyć je za pomocą MapReduce
 
-Wypełnij kolekcję dokumentami.
+Na potrzeby tego zadania utworzymy sobie kolekcje `dokumenty`
 
-Wykonaj przetwarzanie kolekcję przy użyciu modelu przetwarzania rozproszonego
-MapReduce.
+```bash
+db.createCollection("dokumenty")
+```
 
+2. Wypełnij kolekcję dokumentami.
+
+Następnie wprowadzimy 10 dokumentów do tej kolekcji
+
+```bash
+test> db.dokumenty.insertMany([
+...   { _id: 1, name: "Document 1", type: "Type A", value: 100 },
+...   { _id: 2, name: "Document 2", type: "Type B", value: 200 },
+...   { _id: 3, name: "Document 3", type: "Type A", value: 150 },
+...   { _id: 4, name: "Document 4", type: "Type C", value: 120 },
+...   { _id: 5, name: "Document 5", type: "Type B", value: 180 },
+...   { _id: 6, name: "Document 6", type: "Type A", value: 220 },
+...   { _id: 7, name: "Document 7", type: "Type C", value: 130 },
+...   { _id: 8, name: "Document 8", type: "Type B", value: 250 },
+...   { _id: 9, name: "Document 9", type: "Type A", value: 170 },
+...   { _id: 10, name: "Document 10", type: "Type C", value: 190 }
+... ])
+```
+
+3. Wykonaj przetwarzanie kolekcję przy użyciu modelu przetwarzania rozproszonego MapReduce.
+
+Utworzymy teraz nową funkcję mapującą
+
+```bash
+test> var mapFunction = function() {
+...   emit(this.type, this.value);
+... };
+```
+
+Teraz funkcje redukującą
+
+```bash
+test> var reduceFunction = function(key, values) {
+...   return Array.sum(values);
+... };
+```
+
+Wykonamy teraz operację
+
+```bash
+test> db.dokumenty.mapReduce(
+...   mapFunction,
+...   reduceFunction,
+...   { out: "wyniki" }
+... );
+{ result: 'wyniki', ok: 1 }
+```
