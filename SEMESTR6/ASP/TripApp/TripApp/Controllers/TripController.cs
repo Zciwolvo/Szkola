@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TripApp.Models;
 using TripApp.Services;
 
 namespace TripApp.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class TripController : Controller
     {
         private readonly ITripService _tripService;

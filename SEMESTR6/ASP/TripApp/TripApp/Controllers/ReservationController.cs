@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using TripApp.Data;
@@ -6,6 +7,7 @@ using TripApp.ViewModels;
 
 namespace TripApp.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class ReservationController : Controller
     {
         private readonly TripContext _context;

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TripApp.Models;
 using TripApp.Services;
 
 namespace TripApp.Controllers
 {
+    [Authorize]
     public class ClientReservationController : Controller
     {
         private readonly IClientService _clientService;

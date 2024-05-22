@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TripApp.Data;
 using TripApp.Services;
@@ -6,6 +7,7 @@ using TripApp.ViewModels;
 
 namespace TripApp.Controllers
 {
+    [Authorize(Roles = "Employee,Admin")]
     public class ClientController : Controller
     {
         private readonly IClientService _clientService;

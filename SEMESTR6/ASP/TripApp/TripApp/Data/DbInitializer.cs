@@ -3,22 +3,40 @@ using Microsoft.AspNetCore.Authentication;
 using System;
 using System.Linq;
 using TripApp.Data;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace BikeRentalSystemWeb.Data
 {
     public class DbInitializer
     {
-        public static void Initialize(TripContext context)
+
+        public static void AddRoles(TripContext context)
         {
-
-
-
-            if (context.Trips.Any())
+            if (context.Roles.Any())
             {
                 return;
             }
 
+            var Roles = new IdentityRole[]
+            {
+                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN", Id = "1" },
+                new IdentityRole { Name = "Employee", NormalizedName = "EMPLOYEE", Id = "2"},
+                new IdentityRole { Name = "Client", NormalizedName = "CLIENT", Id = "3"}
+            };
+
+            foreach (IdentityRole r in Roles)
+            {
+                context.Roles.Add(r);
+            }
+
+        }
+        public static void AddInitialDestinations(TripContext context)
+        {
+            if (context.Trips.Any())
+            {
+                return;
+            }
 
             var trips = new Trip[]
             {
@@ -32,7 +50,16 @@ namespace BikeRentalSystemWeb.Data
             {
                 context.Trips.Add(t);
             }
+
+
+        }
+        public static void Initialize(TripContext context)
+        {
+
+            AddInitialDestinations(context);
+            AddRoles(context);
             context.SaveChanges();
+
         }
     }
 }

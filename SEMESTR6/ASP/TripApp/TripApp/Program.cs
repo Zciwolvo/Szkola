@@ -12,6 +12,7 @@ using TripApp.ViewModels;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using TripApp.AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace TripApp
 {
@@ -21,8 +22,13 @@ namespace TripApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add services to the container.
             builder.Services.AddDbContext<TripContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<TripContext>();
 
             builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
             builder.Services.AddScoped<IClientRepository, ClientRepository>();
@@ -41,10 +47,16 @@ namespace TripApp
                 options.AddProfile<MappingProfile>();
             });
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<TripContext>();
+                DbInitializer.Initialize(context);
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -59,7 +71,9 @@ namespace TripApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
