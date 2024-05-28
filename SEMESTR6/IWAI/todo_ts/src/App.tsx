@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -17,20 +18,17 @@ function App(): JSX.Element {
   const [isNightMode, setIsNightMode] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedDailyTodos = JSON.parse(
-      localStorage.getItem("dailyTodos") || "[]"
-    );
-    const savedSingleTimeTodos = JSON.parse(
-      localStorage.getItem("singleTimeTodos") || "[]"
-    );
-
-    if (savedDailyTodos && savedDailyTodos.length > 0) {
-      setDailyTodos(savedDailyTodos);
-    }
-
-    if (savedSingleTimeTodos && savedSingleTimeTodos.length > 0) {
-      setSingleTimeTodos(savedSingleTimeTodos);
-    }
+    const fetchTodos = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/api/todos");
+        const { dailyTodos, singleTimeTodos } = response.data;
+        setDailyTodos(dailyTodos);
+        setSingleTimeTodos(singleTimeTodos);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+    fetchTodos();
   }, []);
 
   useEffect(() => {
@@ -42,67 +40,45 @@ function App(): JSX.Element {
     }
   }, [isNightMode]);
 
-  useEffect(() => {
-    const resetDailyTasks = setInterval(() => {
-      const currentTime = new Date().getTime();
-      const updatedDailyTodos = dailyTodos.map((todo) => {
-        if (todo.done && currentTime - todo.timestamp >= 24 * 60 * 60 * 1000) {
-          return { ...todo, done: false };
-        }
-        return todo;
-      });
-      setDailyTodos(updatedDailyTodos);
-      localStorage.setItem("dailyTodos", JSON.stringify(updatedDailyTodos));
-    }, 1000);
-
-    return () => clearInterval(resetDailyTasks);
-  }, [dailyTodos]);
-
-  const saveDailyTodos = (updatedDailyTodos: Todo[]) => {
-    localStorage.setItem("dailyTodos", JSON.stringify(updatedDailyTodos));
-  };
-
-  const saveSingleTimeTodos = (updatedSingleTimeTodos: Todo[]) => {
-    localStorage.setItem(
-      "singleTimeTodos",
-      JSON.stringify(updatedSingleTimeTodos)
-    );
-  };
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  const handleAddTodo = () => {
+  const handleAddTodo = async () => {
     if (inputValue.trim() !== "") {
-      const newTodo: Todo = {
-        id: dailyTodos.length + singleTimeTodos.length + 1,
+      const newTodo: Omit<Todo, "id"> = {
         text: inputValue,
         done: false,
         timestamp: new Date().getTime(),
       };
-      if (isDaily) {
-        setDailyTodos([...dailyTodos, newTodo]);
-        saveDailyTodos([...dailyTodos, newTodo]);
-      } else {
-        setSingleTimeTodos([...singleTimeTodos, newTodo]);
-        saveSingleTimeTodos([...singleTimeTodos, newTodo]);
+      try {
+        const response = await axios.post("http://127.0.0.1:5000/api/todos", {
+          newTodo,
+          isDaily,
+        });
+        const createdTodo = response.data;
+        if (isDaily) {
+          setDailyTodos([...dailyTodos, createdTodo]);
+        } else {
+          setSingleTimeTodos([...singleTimeTodos, createdTodo]);
+        }
+        setInputValue("");
+      } catch (error) {
+        console.error("Error adding todo:", error);
       }
-      setInputValue("");
     }
   };
 
-  const handleDeleteTodo = (id: number, isDaily: boolean) => {
-    if (isDaily) {
-      const updatedDailyTodos = dailyTodos.filter((todo) => todo.id !== id);
-      setDailyTodos(updatedDailyTodos);
-      saveDailyTodos(updatedDailyTodos);
-    } else {
-      const updatedSingleTimeTodos = singleTimeTodos.filter(
-        (todo) => todo.id !== id
-      );
-      setSingleTimeTodos(updatedSingleTimeTodos);
-      saveSingleTimeTodos(updatedSingleTimeTodos);
+  const handleDeleteTodo = async (id: number, isDaily: boolean) => {
+    try {
+      await axios.delete(`http://127.0.0.1:5000/api/todos/${id}`);
+      if (isDaily) {
+        setDailyTodos(dailyTodos.filter((todo) => todo.id !== id));
+      } else {
+        setSingleTimeTodos(singleTimeTodos.filter((todo) => todo.id !== id));
+      }
+    } catch (error) {
+      console.error("Error deleting todo:", error);
     }
   };
 
@@ -114,19 +90,21 @@ function App(): JSX.Element {
     setIsNightMode(!isNightMode);
   };
 
-  const handleMarkAsDone = (id: number, isDaily: boolean) => {
-    if (isDaily) {
-      const updatedDailyTodos = dailyTodos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
+  const handleMarkAsDone = async (id: number, isDaily: boolean) => {
+    try {
+      const updatedTodos = (isDaily ? dailyTodos : singleTimeTodos).map(
+        (todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)
       );
-      setDailyTodos(updatedDailyTodos);
-      saveDailyTodos(updatedDailyTodos);
-    } else {
-      const updatedSingleTimeTodos = singleTimeTodos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      );
-      setSingleTimeTodos(updatedSingleTimeTodos);
-      saveSingleTimeTodos(updatedSingleTimeTodos);
+      await axios.put(`http://127.0.0.1:5000/api/todos/${id}`, {
+        done: !isDaily ? dailyTodos : singleTimeTodos,
+      });
+      if (isDaily) {
+        setDailyTodos(updatedTodos);
+      } else {
+        setSingleTimeTodos(updatedTodos);
+      }
+    } catch (error) {
+      console.error("Error marking todo as done:", error);
     }
   };
 
