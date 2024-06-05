@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Szkola/todo/static/css/main.8d6357d8.css",
+    "main.js": "/Szkola/todo/static/js/main.015c76fe.js",
+    "index.html": "/Szkola/todo/index.html",
+    "main.8d6357d8.css.map": "/Szkola/todo/static/css/main.8d6357d8.css.map",
+    "main.015c76fe.js.map": "/Szkola/todo/static/js/main.015c76fe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8d6357d8.css",
+    "static/js/main.015c76fe.js"
+  ]
+}
