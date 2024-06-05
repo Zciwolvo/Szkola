@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import logo from "./logo.svg";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 interface Todo {
   id: number;
@@ -192,6 +193,14 @@ function App(): JSX.Element {
                 </div>
               ))}
         </div>
+        <ul>
+          <li>
+            <Link to="/daily-tasks">Daily Tasks</Link>
+          </li>
+          <li>
+            <Link to="/single-time-tasks">Single-time Tasks</Link>
+          </li>
+        </ul>
       </div>
     </div>
   );

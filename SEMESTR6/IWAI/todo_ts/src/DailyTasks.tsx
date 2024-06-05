@@ -1,0 +1,41 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+interface Todo {
+  id: number;
+  text: string;
+  done: boolean;
+  timestamp: number;
+}
+
+const SingleTimeTasks: React.FC = () => {
+  const [dailyTodos, setDailyTodos] = useState<Todo[]>([]);
+  const [singleTimeTodos, setSingleTimeTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/api/todos");
+        const { dailyTodos, singleTimeTodos } = response.data;
+        setDailyTodos(dailyTodos);
+        setSingleTimeTodos(singleTimeTodos);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+    fetchTodos();
+  }, []);
+
+  return (
+    <div>
+      <h2>Daily Tasks</h2>
+      <ul>
+        {dailyTodos.map((todo) => (
+          <li key={todo.id}>{todo.text}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SingleTimeTasks;
