@@ -1,45 +1,38 @@
 ﻿@model List<TripApp.ViewModels.TripSummaryViewModel>
 
-<h1>Trip List</h1>
+<h1 class="h3 mb-4 text-gray-800">Trip List</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Destination
-            </th>
-            <th>
-                Start Date
-            </th>
-            <th>
-                End Date
-            </th>
-            <th>
-                Price
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var trip in Model)
-        {
-            <tr>
-                <td>
-                    @trip.Destination
-                </td>
-                <td>
-                    @trip.TripDateStart.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @trip.TripDateEnd.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @trip.Price.ToString("C")
-                </td>
-                <td>
-                    <a href="@Url.Action("Create", "ClientReservation", new { tripId = trip.TripId })">Create Reservation</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Available Trips</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var trip in Model)
+                    {
+                        <tr>
+                            <td>@trip.Destination</td>
+                            <td>@trip.TripDateStart.ToString("dd/MM/yyyy")</td>
+                            <td>@trip.TripDateEnd.ToString("dd/MM/yyyy")</td>
+                            <td>@trip.Price.ToString("C")</td>
+                            <td>
+                                <a href="@Url.Action("Create", "ClientReservation", new { tripId = trip.TripId })" class="btn btn-primary btn-sm">Create Reservation</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

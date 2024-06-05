@@ -1,33 +1,34 @@
 ﻿@model IEnumerable<TripApp.ViewModels.ReservationViewModel>
 
-<h1>Reservations</h1>
+<h1 class="h3 mb-4 text-gray-800">Reservations</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Reservation ID
-            </th>
-            <th>
-                Client Name
-            </th>
-            <th>
-                Trip Destination
-            </th>
-            <th>
-                Reservation Date
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var reservation in Model)
-        {
-            <tr>
-                <td>@reservation.ReservationId</td>
-                <td>@reservation.ClientId</td>
-                <td>@reservation.TripId</td>
-                <td>@reservation.ReservationDate.ToString("dd/MM/yyyy") </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Reservations</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Reservation ID</th>
+                        <th>Client Name</th>
+                        <th>Trip Destination</th>
+                        <th>Reservation Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model)
+                    {
+                        <tr>
+                            <td>@reservation.ReservationId</td>
+                            <td>@reservation.ClientId</td>
+                            <td>@reservation.TripId</td>
+                            <td>@reservation.ReservationDate.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@ using BikeRentalSystemWeb.Data;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; // Ensure this is the correct namespace
 using TripApp.Data;
 using TripApp.Models;
 using TripApp.Repositories;
@@ -37,6 +37,7 @@ namespace TripApp
             builder.Services.AddScoped<IReservationService, ReservationService>();
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<ITripService, TripService>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
 
             builder.Services.AddScoped<IValidator<Client>, ClientValidator>();
             builder.Services.AddScoped<IValidator<Trip>, TripValidator>();
@@ -93,6 +94,12 @@ namespace TripApp
                 name: "clients",
                 pattern: "Clients",
                 defaults: new { controller = "Client", action = "Index" });
+
+            app.MapControllerRoute(
+                name: "admin",
+                pattern: "Admin",
+                defaults: new { controller = "Admin", action = "Index" }
+            );
 
             app.Run();
         }

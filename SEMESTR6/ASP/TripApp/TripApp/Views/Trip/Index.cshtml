@@ -1,50 +1,43 @@
 ﻿@model List<TripApp.Models.Trip>
 
-<h1>Trip List Control Panel</h1>
+<h1 class="h3 mb-4 text-gray-800">Trip List Control Panel</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Destination
-            </th>
-            <th>
-                Start Date
-            </th>
-            <th>
-                End Date
-            </th>
-            <th>
-                Price
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Destination)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TripDateStart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TripDateEnd)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Trip List</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Destination)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TripDateStart)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TripDateEnd)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.TripId">Edit</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.TripId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

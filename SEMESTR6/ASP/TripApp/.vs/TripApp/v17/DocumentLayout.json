@@ -3,61 +3,24 @@
   "WorkspaceRootPath": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\services\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\services\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\controllers\\clientreservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\controllers\\clientreservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Igor\\AppData\\Local\\Temp\\gucrikco..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\repositories\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\repositories\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\services\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\services\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\areas\\identity\\pages\\account\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\areas\\identity\\pages\\account\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\views\\client\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\views\\client\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Igor\\AppData\\Local\\Temp\\gucrikco..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Igor\\AppData\\Local\\Temp\\gucrikco..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+      "AbsoluteMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|c:\\szkola\\semestr6\\asp\\tripapp\\tripapp\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7D40E038-6BE2-4AC7-941E-7770221F0FEB}|TripApp\\TripApp.csproj|solutionrelative:tripapp\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -67,152 +30,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ClientService.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Services\\ClientService.cs",
-              "RelativeDocumentMoniker": "TripApp\\Services\\ClientService.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Services\\ClientService.cs",
-              "RelativeToolTip": "TripApp\\Services\\ClientService.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAIwEoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T21:42:27.724Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ClientRepository.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Repositories\\ClientRepository.cs",
-              "RelativeDocumentMoniker": "TripApp\\Repositories\\ClientRepository.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Repositories\\ClientRepository.cs",
-              "RelativeToolTip": "TripApp\\Repositories\\ClientRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T21:41:00.973Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SQLQuery2.sql ",
-              "DocumentMoniker": "C:\\Users\\Igor\\AppData\\Local\\Temp\\gucrikco..sql",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\Users\\Igor\\AppData\\Local\\Temp\\gucrikco..sql",
-              "ToolTip": "SQLQuery2.sql *",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-22T21:10:37.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "TripApp\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "TripApp\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T20:39:12.109Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ClientReservationController.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\ClientReservationController.cs",
-              "RelativeDocumentMoniker": "TripApp\\Controllers\\ClientReservationController.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\ClientReservationController.cs",
-              "RelativeToolTip": "TripApp\\Controllers\\ClientReservationController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T20:39:11.482Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DbInitializer.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Data\\DbInitializer.cs",
-              "RelativeDocumentMoniker": "TripApp\\Data\\DbInitializer.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Data\\DbInitializer.cs",
-              "RelativeToolTip": "TripApp\\Data\\DbInitializer.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAowD4AAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T21:00:37.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ClientController.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\ClientController.cs",
-              "RelativeDocumentMoniker": "TripApp\\Controllers\\ClientController.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\ClientController.cs",
-              "RelativeToolTip": "TripApp\\Controllers\\ClientController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T22:18:34.009Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ReservationController.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\ReservationController.cs",
-              "RelativeDocumentMoniker": "TripApp\\Controllers\\ReservationController.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\ReservationController.cs",
-              "RelativeToolTip": "TripApp\\Controllers\\ReservationController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T20:39:12.815Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TripController.cs",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\TripController.cs",
-              "RelativeDocumentMoniker": "TripApp\\Controllers\\TripController.cs",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\TripController.cs",
-              "RelativeToolTip": "TripApp\\Controllers\\TripController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T20:39:13.338Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "RelativeDocumentMoniker": "TripApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "RelativeToolTip": "TripApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-22T21:34:10.22Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Logout.cshtml",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
-              "RelativeDocumentMoniker": "TripApp\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
-              "RelativeToolTip": "TripApp\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-22T21:36:38.193Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Program.cs",
               "RelativeDocumentMoniker": "TripApp\\Program.cs",
@@ -220,20 +42,59 @@
               "RelativeToolTip": "TripApp\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T21:00:47.994Z",
+              "WhenOpened": "2024-06-05T18:55:03.379Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 2,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "TripApp\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "TripApp\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T18:51:22.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IAdminService.cs",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Services\\IAdminService.cs",
+              "RelativeDocumentMoniker": "TripApp\\Services\\IAdminService.cs",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Services\\IAdminService.cs",
+              "RelativeToolTip": "TripApp\\Services\\IAdminService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T19:04:17.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdminService.cs",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Services\\AdminService.cs",
+              "RelativeDocumentMoniker": "TripApp\\Services\\AdminService.cs",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Services\\AdminService.cs",
+              "RelativeToolTip": "TripApp\\Services\\AdminService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAqwBsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T18:51:19.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Views\\Client\\Index.cshtml",
-              "RelativeDocumentMoniker": "TripApp\\Views\\Client\\Index.cshtml",
-              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Views\\Client\\Index.cshtml",
-              "RelativeToolTip": "TripApp\\Views\\Client\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAALAAAA",
+              "DocumentMoniker": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Views\\Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "TripApp\\Views\\Admin\\Index.cshtml",
+              "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Views\\Admin\\Index.cshtml",
+              "RelativeToolTip": "TripApp\\Views\\Admin\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-22T20:54:51.443Z",
+              "WhenOpened": "2024-06-05T18:51:16.833Z",
               "EditorCaption": ""
             }
           ]
