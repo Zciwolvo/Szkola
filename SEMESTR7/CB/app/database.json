@@ -1,0 +1,16 @@
+[
+  {
+    "ID": "admin",
+    "passwords": ["$2b$12$hashedPassword1"],
+    "role": "admin",
+    "new_user": false,
+    "last_password_change": "2023-07-01"
+  },
+  {
+    "ID": "user1",
+    "passwords": ["$2b$12$hashedPassword2"],
+    "role": "user",
+    "new_user": true,
+    "last_password_change": "2023-07-01"
+  }
+]

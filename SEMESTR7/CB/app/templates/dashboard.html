@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <h2>Admin Dashboard</h2>
+    <ul>
+      {% for user in users %}
+      <li>{{ user.ID }} - {{ user.role }} - New user: {{ user.new_user }}</li>
+      {% endfor %}
+    </ul>
+    <h3>Add New User</h3>
+    <form action="/admin/users" method="POST">
+      <input type="text" name="ID" placeholder="User ID" required /><br />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+      /><br />
+      <input type="text" name="role" placeholder="Role" required /><br />
+      <button type="submit">Add User</button>
+    </form>
+  </body>
+</html>
