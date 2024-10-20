@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "ID": "admin",
+      "passwords": [
+        "$2b$12$bbIGD5zy/Hp5PgLklrX76OV1Ya5un4hs7OZcVgcLg7rrTAIaCsYxe"
+      ],
+      "role": "admin",
+      "new_user": false,
+      "last_password_change": "2023-07-01",
+      "force_password_change": false
+    },
+    {
+      "ID": "user",
+      "passwords": [
+        "$2b$12$mt/ljYfjROrwiG8aJNwwIu/UPh6FMBdSEW2gTSBdHtAEPgw5lFV2C",
+        "$2b$12$E9m5BPBoAHBemKCrK4pNneZqOW/TcjSyKf2uZZa5xleqqMfSsOkDy"
+      ],
+      "role": "user",
+      "new_user": false,
+      "last_password_change": "2024-02-20"
+    }
+  ],
+  "settings": {
+    "password_criteria_enabled": true,
+    "expiry_months": 3,
+    "expiry_days": 0
+  }
+}

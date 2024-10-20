@@ -1,52 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Login</title>
-  </head>
-  <body>
-    <h2>Login</h2>
-    <form id="loginForm">
-      <input
-        type="text"
-        id="ID"
-        name="ID"
-        placeholder="User ID"
-        required
-      /><br />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Password"
-        required
-      /><br />
-      <button type="submit">Login</button>
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-4">
+    <h3 class="text-center mb-4">Login</h3>
+    <form id="login-form" method="POST">
+      <div class="mb-3">
+        <label for="ID" class="form-label">User ID</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ID"
+          name="ID"
+          placeholder="Enter your user ID"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
+  </div>
+</div>
 
-    <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault();
-          const ID = document.getElementById("ID").value;
-          const password = document.getElementById("password").value;
+<!-- Optional: Add a modal for errors -->
+<div
+  class="modal fade"
+  id="errorModal"
+  tabindex="-1"
+  aria-labelledby="errorModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Login Error</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" id="errorMessage">
+        <!-- Error message will be displayed here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-          const response = await fetch("/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: `ID=${ID}&password=${password}`,
-          });
+<script>
+  document
+    .getElementById("login-form")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
 
-          const data = await response.json();
-          if (data.token) {
-            localStorage.setItem("jwt", data.token);
-            // Redirect based on role (you may enhance this part)
-            window.location.href = "/dashboard";
-          } else {
-            alert("Login failed");
-          }
+      const userId = document.getElementById("ID").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ID: userId,
+            password: password,
+          }),
         });
-    </script>
-  </body>
-</html>
+
+        if (response.ok) {
+          const data = await response.json();
+          const token = data.token;
+          localStorage.setItem("token", token);
+          // Check if the user needs to change their password
+          if (data.change_password) {
+            // Redirect user to the change password page
+            window.location.href = "/change_password/" + userId;
+          } else {
+            // Redirect to admin or user dashboard based on the role
+            if (data.role === "admin") {
+              window.location.href = "/admin/dashboard";
+            } else {
+              window.location.href = "/user/dashboard";
+            }
+          }
+        } else {
+          // Handle errors, e.g., invalid credentials
+          const errorData = await response.json();
+          document.getElementById("errorMessage").textContent =
+            errorData.error || "Invalid credentials";
+          new bootstrap.Modal(document.getElementById("errorModal")).show();
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        document.getElementById("errorMessage").textContent =
+          "An unexpected error occurred. Please try again.";
+        new bootstrap.Modal(document.getElementById("errorModal")).show();
+      }
+    });
+</script>
+
+{% endblock %}

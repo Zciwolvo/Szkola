@@ -1,14 +1,18 @@
 [
   {
     "ID": "admin",
-    "passwords": ["$2b$12$hashedPassword1"],
+    "passwords": [
+      "$2b$12$OLPgtAxXwEG6o00wMiIEuORWexLrYxTnRZrZRoifsIvt/SmQgFa3O"
+    ],
     "role": "admin",
     "new_user": false,
     "last_password_change": "2023-07-01"
   },
   {
-    "ID": "user1",
-    "passwords": ["$2b$12$hashedPassword2"],
+    "ID": "user",
+    "passwords": [
+      "$2b$12$NhqPXyPLFJK/uPjRIyI6NuaKUxz1GJUVml2raw5XSAMzwf3e7h3uq"
+    ],
     "role": "user",
     "new_user": true,
     "last_password_change": "2023-07-01"

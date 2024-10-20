@@ -7,7 +7,7 @@
   <body>
     <h2>Admin Dashboard</h2>
     <ul>
-      {% for user in users %}
+      a {% for user in users %}
       <li>{{ user.ID }} - {{ user.role }} - New user: {{ user.new_user }}</li>
       {% endfor %}
     </ul>
@@ -25,3 +25,62 @@
     </form>
   </body>
 </html>
+<script>
+  async function fetchData() {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      window.location.href = "/login"; // Redirect to login if no token
+      return;
+    }
+
+    const response = await fetch("/admin/dashboard", {
+      method: "GET",
+      headers: {
+        "x-access-tokens": token,
+      },
+    });
+
+    if (response.status === 403) {
+      alert("Access denied.");
+      window.location.href = "/login";
+    } else {
+      const data = await response.text();
+      document.body.innerHTML = data; // Load the dashboard content
+    }
+  }
+
+  window.onload = fetchData;
+  document
+    .getElementById("logoutButton")
+    .addEventListener("click", function () {
+      localStorage.removeItem("token");
+      window.location.href = "{{ url_for('login') }}";
+    });
+
+  window.addEventListener("DOMContentLoaded", (event) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "{{ url_for('login') }}"; // Redirect to login if no token
+    }
+
+    fetch("{{ url_for('admin_dashboard') }}", {
+      method: "GET",
+      headers: {
+        "x-access-tokens": token,
+      },
+    })
+      .then((response) => {
+        if (response.status === 403) {
+          alert("Access denied. Redirecting to login.");
+          window.location.href = "{{ url_for('login') }}";
+        }
+        return response.text();
+      })
+      .then((html) => {
+        document.body.innerHTML = html;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+</script>

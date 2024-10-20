@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Route 1",
+    "description": "Explore Central Park.",
+    "points": [
+      {
+        "lat": 40.782865,
+        "lon": -73.965355,
+        "description": "Visit the Great Lawn",
+        "media": "https://example.com/video1.mp4",
+        "quiz": {
+          "question": "What was the area originally used for?",
+          "options": ["Farming", "Military training", "Recreation"],
+          "answer": "Farming"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Route 2",
+    "description": "Discover Downtown LA.",
+    "points": [
+      {
+        "lat": 34.052235,
+        "lon": -118.243683,
+        "description": "Griffith Observatory",
+        "media": "https://example.com/video2.mp4",
+        "quiz": {
+          "question": "What year was the observatory opened?",
+          "options": ["1935", "1945", "1955"],
+          "answer": "1935"
+        }
+      }
+    ]
+  }
+]
