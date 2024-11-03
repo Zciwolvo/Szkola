@@ -3,109 +3,162 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-8">
-            <h3 class="text-center">Admin Dashboard</h3>
-            <p class="text-center">Manage Users</p>
-            
-            <!-- Table showing all users -->
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in users %}
-                    <tr>
-                        <td>{{ user['ID'] }}</td>
-                        <td>{{ user['role'] }}</td>
-                        <td>
-                            <!-- Form for updating user role -->
-                            <form method="POST" action="{{ url_for('update_user', user_id=user['ID']) }}">
-                                <select name="role" class="form-select" aria-label="Change role">
-                                    <option value="user" {% if user['role'] == 'user' %}selected{% endif %}>User</option>
-                                    <option value="admin" {% if user['role'] == 'admin' %}selected{% endif %}>Admin</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary mt-2">Update</button>
-                            </form>
-                            
-                            <!-- Form for deleting user -->
-                            <form method="POST" action="{{ url_for('delete_user', user_id=user['ID']) }}" class="mt-2">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <h3 class="text-center">Admin Dashboard</h3>
 
-            <h4>Add New User</h4>
-            <form method="POST" action="{{ url_for('create_user') }}">
-                <div class="mb-3">
-                    <label for="new_user_ID" class="form-label">User ID</label>
-                    <input type="text" class="form-control" id="new_user_ID" name="ID" required>
+        <!-- User Manager Section -->
+        {% if current_user.role == 'admin' or current_user.role == 'user_manager' %}
+        <h4>Manage Users</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user['ID'] }}</td>
+                    <td>{{ user['role'] }}</td>
+                    <td>
+                        <!-- Form for updating user role -->
+                        <form method="POST" action="{{ url_for('update_user', user_id=user['ID']) }}">
+                            <select name="role" class="form-select" aria-label="Change role">
+                                <option value="user" {% if user['role'] == 'user' %}selected{% endif %}>User</option>
+                                <option value="admin" {% if user['role'] == 'admin' %}selected{% endif %}>Admin</option>
+                                <option value="user_manager" {% if user['role'] == 'user_manager' %}selected{% endif %}>User Manager</option>
+                                <option value="session_manager" {% if user['role'] == 'session_manager' %}selected{% endif %}>Session Manager</option>
+                                <option value="debugger" {% if user['role'] == 'debugger' %}selected{% endif %}>Debugger</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary mt-2">Update Role</button>
+                        </form>
+
+                        <!-- Form for modifying user ID and password -->
+                        <form method="POST" action="{{ url_for('modify_user', user_id=user['ID']) }}" class="mt-2">
+                            <div class="mb-2">
+                                <label for="new_id_{{ user['ID'] }}">New User ID</label>
+                                <input type="text" class="form-control" id="new_id_{{ user['ID'] }}" name="new_id" placeholder="Enter new ID">
+                            </div>
+                            <div class="mb-2">
+                                <label for="new_password_{{ user['ID'] }}">New Password</label>
+                                <input type="password" class="form-control" id="new_password_{{ user['ID'] }}" name="new_password" placeholder="Enter new password">
+                            </div>
+                            <button type="submit" class="btn btn-warning">Update ID/Password</button>
+                        </form>
+
+                        <!-- Form for deleting user -->
+                        <form method="POST" action="{{ url_for('delete_user', user_id=user['ID']) }}" class="mt-2">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Add New User Section -->
+        <h4>Add New User</h4>
+        <form method="POST" action="{{ url_for('create_user') }}">
+            <div class="mb-3">
+                <label for="new_user_ID" class="form-label">User ID</label>
+                <input type="text" class="form-control" id="new_user_ID" name="ID" required>
+            </div>
+            <div class="mb-3">
+                <label for="new_user_password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="new_user_password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="new_user_role" class="form-label">Role</label>
+                <select class="form-select" id="new_user_role" name="role">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                    <option value="user_manager">User Manager</option>
+                    <option value="session_manager">Session Manager</option>
+                    <option value="debugger">Debugger</option>
+                </select>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="single_use_password" name="single_use_password">
+                <label class="form-check-label" for="single_use_password">Single Use Password</label>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Create User</button>
+        </form>
+        {% endif %}
+
+        <!-- Session Manager Section -->
+        {% if current_user.role == 'admin' or current_user.role == 'session_manager' %}
+        <h4 class="mt-5">Password Policy Settings</h4>
+        <form method="POST" action="{{ url_for('update_password_policy') }}">
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="enable_password_criteria" name="enable_password_criteria" {% if settings.get('password_criteria_enabled', True) %}checked{% endif %}>
+                    <label class="form-check-label" for="enable_password_criteria">Enable Password Criteria</label>
                 </div>
-                <div class="mb-3">
-                    <label for="new_user_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="new_user_password" name="password" required>
-                </div>
-                <div class="mb-3">
-                    <label for="new_user_role" class="form-label">Role</label>
-                    <select class="form-select" id="new_user_role" name="role">
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
+            </div>
+
+            <div class="mb-3">
+                <label for="password_expiry_months" class="form-label">Password Expiry Time</label>
+                <div class="d-flex">
+                    <select class="form-select me-2" id="password_expiry_months" name="expiry_months">
+                        {% for i in range(0, 12) %}
+                        <option value="{{ i }}" {% if expiry_months == i %}selected{% endif %}>{{ i }} Month(s)</option>
+                        {% endfor %}
+                    </select>
+                    <select class="form-select" id="password_expiry_days" name="expiry_days">
+                        {% for i in range(0, 31) %}
+                        <option value="{{ i }}" {% if expiry_days == i %}selected{% endif %}>{{ i }} Day(s)</option>
+                        {% endfor %}
                     </select>
                 </div>
-                <button type="submit" class="btn btn-success w-100">Create User</button>
-            </form>
+            </div>
 
-            <h4 class="mt-5">Password Policy Settings</h4>
-            <form method="POST" action="{{ url_for('update_password_policy') }}">
-                <div class="mb-3">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="enable_password_criteria" name="enable_password_criteria" {% if password_criteria_enabled %}checked{% endif %}>
-                        <label class="form-check-label" for="enable_password_criteria">Enable Password Criteria</label>
-                    </div>
+            <button type="submit" class="btn btn-primary w-100">Update Policy</button>
+        </form>
+
+        <h4 class="mt-5">Logging Settings</h4>
+        <form method="POST" action="{{ url_for('toggle_logging') }}">
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="enable_logging" name="enable_logging" {% if settings.get('logging_enabled', True) %}checked{% endif %}>
+                    <label class="form-check-label" for="enable_logging">Enable Logging</label>
                 </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Update Logging</button>
+        </form>
 
-                <div class="mb-3">
-                    <label for="password_expiry_months" class="form-label">Password Expiry Time</label>
-                    <div class="d-flex">
-                        <select class="form-select me-2" id="password_expiry_months" name="expiry_months">
-                            {% for i in range(0, 12) %}
-                            <option value="{{ i }}" {% if expiry_months == i %}selected{% endif %}>{{ i }} Month(s)</option>
-                            {% endfor %}
-                        </select>
-                        <select class="form-select" id="password_expiry_days" name="expiry_days">
-                            {% for i in range(0, 31) %}
-                            <option value="{{ i }}" {% if expiry_days == i %}selected{% endif %}>{{ i }} Day(s)</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
+        <h4 class="mt-5">Session Timeout Settings</h4>
+        <form method="POST" action="{{ url_for('admin_dashboard') }}">
+            <div class="mb-3">
+                <label for="session_timeout" class="form-label">Session Timeout (minutes)</label>
+                <input type="number" class="form-control" id="session_timeout" name="session_timeout" value="{{ settings.get('session_timeout', 10) }}">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Update Timeout</button>
+        </form>
+        {% endif %}
 
-                <button type="submit" class="btn btn-primary w-100">Update Policy</button>
-            </form>
-        </div>
+        <!-- Debugger Section -->
+        {% if current_user.role == 'admin' or current_user.role == 'debugger' %}
+        <h4 class="mt-5">Logs</h4>
+        <a href="{{ url_for('view_logs') }}" class="btn btn-secondary w-100">View Logs</a>
+        {% endif %}
     </div>
+</div>
 
-    <!-- No need to manually add token in headers since we use cookies -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("/admin/dashboard", {
-                method: "GET",
-                credentials: 'same-origin'  // This ensures the cookies are sent with the request
-            }).then(response => {
-                if (!response.ok) {
-                    window.location.href = "/error?error=Unauthorized Access";  // Redirect to error page on failure
-                }
-            }).catch(error => {
-                console.error("Error loading admin dashboard:", error);
-            });
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("/admin/dashboard", {
+            method: "GET",
+            credentials: 'same-origin'
+        }).then(response => {
+            if (!response.ok) {
+                window.location.href = "/error?error=Unauthorized Access";
+            }
+        }).catch(error => {
+            console.error("Error loading admin dashboard:", error);
         });
-    </script>
-
+    });
+</script>
 {% endblock %}

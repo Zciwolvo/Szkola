@@ -1,0 +1,57 @@
+{"user": "admin", "action": "login", "description": "admin has logged in succesfully", "timestamp": "2024-10-22 19:58:26.638999"}
+{"user": "admin", "action": "change_password", "description": "admin has changed password", "timestamp": "2024-10-22 19:58:36.987607"}
+{"user": "admin", "action": "update_user", "description": "admin has updated user user role", "timestamp": "2024-10-22 20:01:57.149109"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-22 20:02:36.489313"}
+{"user": "admin", "action": "update_user", "description": "admin has updated user user role", "timestamp": "2024-10-22 20:02:59.327708"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-22 20:03:55.890188"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-22 20:03:58.115639"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-22 20:05:55.940078"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-22 20:07:39.442276"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-22 20:07:43.040698"}
+{"user": "admin", "action": "login", "description": "admin has logged in succesfully", "timestamp": "2024-10-22 20:30:04.701561"}
+{"user": "admin", "action": "change_password", "description": "admin has changed password", "timestamp": "2024-10-22 20:30:32.538814"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-22 20:31:47.537478"}
+{"user": "admin", "action": "create_user", "description": "admin has created user igor", "timestamp": "2024-10-25 20:41:54.959031"}
+{"user": "admin", "action": "create_user", "description": "admin has created user aaa", "timestamp": "2024-10-25 20:43:58.056654"}
+{"user": "admin", "action": "update_user", "description": "admin has updated user igor role", "timestamp": "2024-10-25 20:44:11.207404"}
+{"user": "admin", "action": "update_session_timeout", "description": "Session timeout updated to 10 minutes", "timestamp": "2024-10-25 20:52:00.231618"}
+{"user": "admin", "action": "update_session_timeout", "description": "Session timeout updated to 100 minutes", "timestamp": "2024-10-25 20:52:02.911992"}
+{"user": "admin", "action": "update_session_timeout", "description": "Session timeout updated to 100 minutes", "timestamp": "2024-10-25 20:52:05.136739"}
+{"user": "admin", "action": "update_session_timeout", "description": "Session timeout updated to 1 minutes", "timestamp": "2024-10-25 20:52:07.037191"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-25 20:52:11.200970"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-25 20:54:57.198866"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-25 20:55:17.554988"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-25 20:55:21.709414"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to True", "timestamp": "2024-10-25 20:56:00.255302"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to False", "timestamp": "2024-10-25 20:59:15.301260"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to False", "timestamp": "2024-10-25 20:59:24.536872"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to False", "timestamp": "2024-10-25 20:59:28.915447"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to False", "timestamp": "2024-10-25 21:02:48.239917"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to False", "timestamp": "2024-10-25 21:03:37.043550"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to False", "timestamp": "2024-10-25 21:04:48.272264"}
+{"user": "admin", "action": "toggle_logging", "description": "Logging set to False", "timestamp": "2024-10-25 21:04:52.646929"}
+{"user": "admin", "action": "create_user", "description": "admin has toggled password policy", "timestamp": "2024-10-25 21:05:24.816577"}
+{"user": "admin", "action": "create_user", "description": "admin has toggled password policy", "timestamp": "2024-10-25 21:05:26.991119"}
+{"user": "admin", "action": "create_user", "description": "admin has toggled password policy", "timestamp": "2024-10-25 21:05:45.357243"}
+{"user": "admin", "action": "create_user", "description": "admin has toggled password policy", "timestamp": "2024-10-25 21:18:19.452592"}
+{"user": "admin", "action": "create_user", "description": "admin has toggled password policy", "timestamp": "2024-10-25 21:18:27.231847"}
+{"user": "admin", "action": "delete_user", "description": "admin has deleted user user", "timestamp": "2024-10-25 22:35:56.906381"}
+{"user": "admin", "action": "delete_user", "description": "admin has deleted user admin", "timestamp": "2024-10-25 22:36:00.471792"}
+{"user": "admin", "action": "create_user", "description": "admin has created user admin", "timestamp": "2024-10-25 22:36:06.986658"}
+{"user": "admin", "action": "delete_user", "description": "admin has deleted user admin", "timestamp": "2024-10-25 22:36:11.155711"}
+{"user": "admin", "action": "create_user", "description": "admin has created user Igor", "timestamp": "2024-10-25 23:04:34.370666"}
+{"user": "admin", "action": "create_user", "description": "admin has created user igor", "timestamp": "2024-10-25 23:10:57.355140"}
+{"user": "admin", "action": "create_user", "description": "admin has created user igor", "timestamp": "2024-10-25 23:15:13.237980"}
+{"user": "admin", "action": "create_user", "description": "Creating user failed because such user already exists", "timestamp": "2024-10-27 19:59:55.962588"}
+{"user": "admin", "action": "modify_user", "description": "admin has modified user igor", "timestamp": "2024-11-03 17:52:04.549799"}
+{"user": "admin", "action": "modify_user", "description": "admin has modified user igor2", "timestamp": "2024-11-03 17:52:07.971252"}
+{"user": "Unknown", "action": "admin/dashboard", "description": "Unauthorized access attept to user dashboard", "timestamp": "2024-11-03 18:02:47.476049"}
+{"user": "Unknown", "action": "admin/dashboard", "description": "Unauthorized access attept to user dashboard", "timestamp": "2024-11-03 18:03:14.297134"}
+{"user": "Unknown", "action": "admin/dashboard", "description": "Unauthorized access attept to user dashboard", "timestamp": "2024-11-03 18:04:55.482201"}
+{"user": "Unknown", "action": "admin/dashboard", "description": "Unauthorized access attept to user dashboard", "timestamp": "2024-11-03 18:05:23.388900"}
+{"user": "Unknown", "action": "admin/dashboard", "description": "Unauthorized access attept to user dashboard", "timestamp": "2024-11-03 18:08:30.249763"}
+{"user": "session_manager", "action": "change_password", "description": "session_manager has changed password", "timestamp": "2024-11-03 19:43:55.844806"}
+{"user": "session_manager", "action": "update_session_timeout", "description": "Session timeout updated to 10 minutes", "timestamp": "2024-11-03 19:44:28.518903"}
+{"user": "session_manager", "action": "update_session_timeout", "description": "Session timeout updated to 10 minutes", "timestamp": "2024-11-03 19:44:30.171129"}
+{"user": "user_manger", "action": "change_password", "description": "user_manger has changed password", "timestamp": "2024-11-03 19:45:11.317935"}
+{"user": "user_manager", "action": "change_password", "description": "user_manager has changed password", "timestamp": "2024-11-03 19:45:46.125448"}

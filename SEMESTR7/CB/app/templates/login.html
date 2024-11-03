@@ -27,6 +27,8 @@
           required
         />
       </div>
+      <div class="mb-3"></div>
+      <div id="equation" class="text-center mb-3"></div>
       <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
   </div>
@@ -64,56 +66,66 @@
 </div>
 
 <script>
-  document
-    .getElementById("login-form")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault();
+  // Generate random a and x for the equation and display it
+  const a = {{a}};
+  const x = {{x}};
+  document.getElementById("equation").textContent = `If new user solve the equation: exp(-${a} * ${x})`;
 
-      const userId = document.getElementById("ID").value;
-      const password = document.getElementById("password").value;
+  document.getElementById("login-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-      try {
-        const response = await fetch("/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ID: userId,
-            password: password,
-          }),
-        });
+    const userId = document.getElementById("ID").value;
+    const password = document.getElementById("password").value;
 
-        if (response.ok) {
-          const data = await response.json();
-          const token = data.token;
-          localStorage.setItem("token", token);
-          // Check if the user needs to change their password
-          if (data.change_password) {
-            // Redirect user to the change password page
-            window.location.href = "/change_password/" + userId;
-          } else {
-            // Redirect to admin or user dashboard based on the role
-            if (data.role === "admin") {
-              window.location.href = "/admin/dashboard";
-            } else {
-              window.location.href = "/user/dashboard";
-            }
-          }
+    try {
+      const response = await fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ID: userId,
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+        const role = data.role;
+
+        // Save token and role to localStorage
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role);
+
+        // Check if the user needs to change their password
+        if (data.change_password) {
+          // Redirect user to the change password page
+          window.location.href = "/change_password/" + userId;
         } else {
-          // Handle errors, e.g., invalid credentials
-          const errorData = await response.json();
-          document.getElementById("errorMessage").textContent =
-            errorData.error || "Invalid credentials";
-          new bootstrap.Modal(document.getElementById("errorModal")).show();
+          // Redirect to the correct dashboard based on the role
+          if (role === "admin" || role === "session_manager" || role === "user_manager" || role === "debugger") {
+            window.location.href = "/admin/dashboard";
+          } else {
+            window.location.href = "/user/dashboard";
+          }
         }
-      } catch (error) {
-        console.error("Error during login:", error);
-        document.getElementById("errorMessage").textContent =
-          "An unexpected error occurred. Please try again.";
+      } else if (response.status === 302) {
+        // Handle redirect
+        const redirectData = await response.json();
+        window.location.href = redirectData.redirect;
+      } else {
+        // Handle errors, e.g., invalid credentials
+        const errorData = await response.json();
+        document.getElementById("errorMessage").textContent = errorData.error || "Invalid credentials";
         new bootstrap.Modal(document.getElementById("errorModal")).show();
       }
-    });
+    } catch (error) {
+      console.error("Error during login:", error);
+      document.getElementById("errorMessage").textContent = "An unexpected error occurred. Please try again.";
+      new bootstrap.Modal(document.getElementById("errorModal")).show();
+    }
+  });
 </script>
 
 {% endblock %}
