@@ -5,6 +5,7 @@ import re
 import datetime
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
+import requests
 import math
 import random
 import time
@@ -510,9 +511,23 @@ def change_password(user_id):
     # If POST request, handle password change logic
     old_password = request.form.get('old_password')
     new_password = request.form.get('new_password')
+    recaptcha_response = request.form.get('g-recaptcha-response')  # Get reCAPTCHA response
+
+    # Verify reCAPTCHA response with Google API
+    secret_key = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+    recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify'
+    payload = {
+        'secret': secret_key,
+        'response': recaptcha_response
+    }
+    recaptcha_verification = requests.post(recaptcha_url, data=payload)
+    recaptcha_result = recaptcha_verification.json()
+
+    if not recaptcha_result.get('success'):
+        error_message = "reCAPTCHA verification failed. Please try again."
 
     # Verify old password if the user is not new
-    if not is_new_user:
+    if not error_message and not is_new_user:
         if user['passwords'] and not bcrypt.checkpw(old_password.encode('utf-8'), user['passwords'][-1].encode('utf-8')):
             error_message = "Old password is incorrect."
 

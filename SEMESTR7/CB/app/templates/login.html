@@ -65,65 +65,139 @@
   </div>
 </div>
 
+<div
+  class="modal fade"
+  id="captchaModal"
+  tabindex="-1"
+  aria-labelledby="captchaModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="captchaModalLabel">Security Check</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p id="captchaQuestion"></p>
+        <input
+          type="text"
+          class="form-control"
+          id="captchaAnswer"
+          placeholder="Your answer"
+        />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitCaptcha">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   // Generate random a and x for the equation and display it
   const a = {{a}};
   const x = {{x}};
   document.getElementById("equation").textContent = `If new user solve the equation: exp(-${a} * ${x})`;
 
+  // Sample questions and answers for CAPTCHA
+  const captchaQuestions = [
+    { question: "What is the capital of Great Britain?", answer: "London" },
+    { question: "What is 5 + 3?", answer: "8" },
+    { question: "What color is the sky on a clear day?", answer: "Blue" },
+    { question: "What is the square root of 16?", answer: "4" },
+    { question: "What is the capital of France?", answer: "Paris" },
+  ];
+
+  // Show CAPTCHA modal on form submission
   document.getElementById("login-form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const userId = document.getElementById("ID").value;
-    const password = document.getElementById("password").value;
+    // Generate random CAPTCHA question
+    const randomIndex = Math.floor(Math.random() * captchaQuestions.length);
+    const captcha = captchaQuestions[randomIndex];
+    sessionStorage.setItem("captchaAnswer", captcha.answer);
 
-    try {
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ID: userId,
-          password: password,
-        }),
-      });
+    // Display CAPTCHA modal
+    document.getElementById("captchaQuestion").textContent = captcha.question;
+    new bootstrap.Modal(document.getElementById("captchaModal")).show();
+  });
 
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        const role = data.role;
+  // Handle CAPTCHA submission
+  document.getElementById("submitCaptcha").addEventListener("click", async function () {
+    const userCaptchaAnswer = document.getElementById("captchaAnswer").value.trim();
+    const correctCaptchaAnswer = sessionStorage.getItem("captchaAnswer");
 
-        // Save token and role to localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("role", role);
+    if (userCaptchaAnswer.toLowerCase() === correctCaptchaAnswer.toLowerCase()) {
+      sessionStorage.removeItem("captchaAnswer");
+      document.getElementById("captchaModal").classList.remove("show");
 
-        // Check if the user needs to change their password
-        if (data.change_password) {
-          // Redirect user to the change password page
-          window.location.href = "/change_password/" + userId;
-        } else {
-          // Redirect to the correct dashboard based on the role
-          if (role === "admin" || role === "session_manager" || role === "user_manager" || role === "debugger") {
-            window.location.href = "/admin/dashboard";
+      // Proceed with login after CAPTCHA validation
+      const userId = document.getElementById("ID").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ID: userId,
+            password: password,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const token = data.token;
+          const role = data.role;
+
+          // Save token and role to localStorage
+          localStorage.setItem("token", token);
+          localStorage.setItem("role", role);
+
+          // Check if the user needs to change their password
+          if (data.change_password) {
+            window.location.href = "/change_password/" + userId;
           } else {
-            window.location.href = "/user/dashboard";
+            // Redirect to the appropriate dashboard
+            if (
+              role === "admin" ||
+              role === "session_manager" ||
+              role === "user_manager" ||
+              role === "debugger"
+            ) {
+              window.location.href = "/admin/dashboard";
+            } else {
+              window.location.href = "/user/dashboard";
+            }
           }
+        } else if (response.status === 302) {
+          // Handle redirect
+          const redirectData = await response.json();
+          window.location.href = redirectData.redirect;
+        } else {
+          // Handle errors, e.g., invalid credentials
+          const errorData = await response.json();
+          document.getElementById("errorMessage").textContent = errorData.error || "Invalid credentials";
+          new bootstrap.Modal(document.getElementById("errorModal")).show();
         }
-      } else if (response.status === 302) {
-        // Handle redirect
-        const redirectData = await response.json();
-        window.location.href = redirectData.redirect;
-      } else {
-        // Handle errors, e.g., invalid credentials
-        const errorData = await response.json();
-        document.getElementById("errorMessage").textContent = errorData.error || "Invalid credentials";
+      } catch (error) {
+        console.error("Error during login:", error);
+        document.getElementById("errorMessage").textContent =
+          "An unexpected error occurred. Please try again.";
         new bootstrap.Modal(document.getElementById("errorModal")).show();
       }
-    } catch (error) {
-      console.error("Error during login:", error);
-      document.getElementById("errorMessage").textContent = "An unexpected error occurred. Please try again.";
-      new bootstrap.Modal(document.getElementById("errorModal")).show();
+    } else {
+      alert("Incorrect CAPTCHA answer. Please try again.");
     }
   });
 </script>
