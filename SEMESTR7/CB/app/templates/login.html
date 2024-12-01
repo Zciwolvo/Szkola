@@ -107,7 +107,6 @@
   const x = {{x}};
   document.getElementById("equation").textContent = `If new user solve the equation: exp(-${a} * ${x})`;
 
-  // Sample questions and answers for CAPTCHA
   const captchaQuestions = [
     { question: "What is the capital of Great Britain?", answer: "London" },
     { question: "What is 5 + 3?", answer: "8" },
@@ -116,21 +115,17 @@
     { question: "What is the capital of France?", answer: "Paris" },
   ];
 
-  // Show CAPTCHA modal on form submission
   document.getElementById("login-form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Generate random CAPTCHA question
     const randomIndex = Math.floor(Math.random() * captchaQuestions.length);
     const captcha = captchaQuestions[randomIndex];
     sessionStorage.setItem("captchaAnswer", captcha.answer);
 
-    // Display CAPTCHA modal
     document.getElementById("captchaQuestion").textContent = captcha.question;
     new bootstrap.Modal(document.getElementById("captchaModal")).show();
   });
 
-  // Handle CAPTCHA submission
   document.getElementById("submitCaptcha").addEventListener("click", async function () {
     const userCaptchaAnswer = document.getElementById("captchaAnswer").value.trim();
     const correctCaptchaAnswer = sessionStorage.getItem("captchaAnswer");
@@ -139,7 +134,6 @@
       sessionStorage.removeItem("captchaAnswer");
       document.getElementById("captchaModal").classList.remove("show");
 
-      // Proceed with login after CAPTCHA validation
       const userId = document.getElementById("ID").value;
       const password = document.getElementById("password").value;
 

@@ -55,3 +55,12 @@
 {"user": "session_manager", "action": "update_session_timeout", "description": "Session timeout updated to 10 minutes", "timestamp": "2024-11-03 19:44:30.171129"}
 {"user": "user_manger", "action": "change_password", "description": "user_manger has changed password", "timestamp": "2024-11-03 19:45:11.317935"}
 {"user": "user_manager", "action": "change_password", "description": "user_manager has changed password", "timestamp": "2024-11-03 19:45:46.125448"}
+{"user": "admin", "action": "create_user", "description": "admin has created user 123", "timestamp": "2024-11-18 11:19:10.941252"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-11-18 11:52:50.551961"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-11-18 11:53:06.780128"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-11-18 11:58:05.370618"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-11-18 12:21:12.992812"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-11-18 12:23:51.242380"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-12-02 00:05:18.779480"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-12-02 00:14:05.696931"}
+{"user": "user", "action": "change_password", "description": "user has changed password", "timestamp": "2024-12-02 00:18:39.476552"}

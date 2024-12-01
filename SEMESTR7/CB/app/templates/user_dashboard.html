@@ -9,6 +9,42 @@ content %}
       class="btn btn-warning w-100"
       >Change Password</a
     >
+
+    <hr />
+
+    <h5 class="mt-4">Upload a File</h5>
+    <p>
+      Solve this cipher to upload larger files:
+      <strong>{{ ciphered_key }}</strong>
+    </p>
+    <form
+      action="{{ url_for('upload_file') }}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label for="file" class="form-label">Choose a file to upload:</label>
+        <input
+          type="file"
+          name="file"
+          id="file"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="secret_key" class="form-label"
+          >Provide Deciphered Key:</label
+        >
+        <input
+          type="text"
+          name="secret_key"
+          id="secret_key"
+          class="form-control"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Upload</button>
+    </form>
   </div>
 </div>
 

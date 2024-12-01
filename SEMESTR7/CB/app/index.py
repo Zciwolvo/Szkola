@@ -3,16 +3,19 @@ import os
 import bcrypt
 import re
 import datetime
-from flask import Flask, request, jsonify, render_template, redirect, url_for, session
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session, flash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 import requests
 import math
 import random
 import time
+from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+MAX_FILE_SIZE = 100 * 1024  # 100 KB
 
 # Configure your app
 app.config['secret'] = 'SECRET KEY'
@@ -70,7 +73,7 @@ def load_users():
             "ID": "user",
             "passwords": [bcrypt.hashpw(b"user", bcrypt.gensalt()).decode('utf-8')],
             "role": "user",
-            "new_user": True,
+            "new_user": False,
             "last_password_change": "2023-07-01",
             "force_password_change": False,
             "single_use_password": False
@@ -481,13 +484,17 @@ def user_dashboard():
     current_user = get_jwt_identity()
     
     if current_user['role'] != 'user':
-        log_entry(f'Unknown', "user/dashboard", f"Unauthorized access attept to user dashboard")
+        log_entry(f'Unknown', "user/dashboard", f"Unauthorized access attempt to user dashboard")
         return redirect(url_for('error_page', error='Unauthorized Access'))
+    
     user = get_user(current_user['ID'])
     if user['force_password_change'] or user['new_user']:
         return render_template('change_password.html', user_id=current_user['ID'])
-    # Pass the current_user information to the template
-    return render_template('user_dashboard.html', current_user=current_user)
+    
+    original_key = "UnlockKey123"
+    ciphered_key = caesar_cipher(original_key, 3)
+
+    return render_template('user_dashboard.html', current_user=current_user, ciphered_key=ciphered_key)
 
 @app.route('/change_password/<user_id>', methods=['GET', 'POST'])
 @jwt_required()
@@ -589,6 +596,72 @@ def logout():
     response = jsonify({"message": "Logout successful"})
     unset_jwt_cookies(response)  # Clear JWT token cookies
     return response
+
+def caesar_cipher(text, shift, encode=True):
+    result = ""
+    shift = shift if encode else -shift
+    for char in text:
+        if char.isalpha():
+            start = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - start + shift) % 26 + start)
+        else:
+            result += char
+    return result
+
+def generate_random_string(length=8):
+    import random
+    import string
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+@app.before_request
+def limit_file_size():
+    if request.endpoint == 'upload_file' and request.method == 'POST':
+        max_size = MAX_FILE_SIZE
+        secret_key = request.form.get('secret_key')
+        
+        if secret_key:
+            deciphered_key = caesar_cipher(secret_key, 3, encode=False)
+            if deciphered_key == "UnlockKey123":  # Replace with your key
+                max_size = MAX_FILE_SIZE
+
+        if request.content_length and request.content_length > max_size:
+            flash('File exceeds size limit.', 'danger')
+            return redirect(url_for('user_dashboard'))
+
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    secret_key = request.form.get('secret_key')
+    if secret_key:
+        deciphered_key = caesar_cipher(secret_key, 3, encode=False)
+        if deciphered_key != "UnlockKey123":  # Replace with your key
+            flash("Invalid secret key provided.", "danger")
+            return redirect(url_for('user_dashboard'))
+
+    uploaded_file = request.files.get('file')
+    if uploaded_file:
+        filename = secure_filename(uploaded_file.filename)
+        save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+        uploaded_file.save(save_path)
+        flash(f"File '{filename}' uploaded successfully!", 'success')
+        return redirect(url_for('read_file', filename=filename))
+
+    flash("No file selected for upload.", "danger")
+    return redirect(url_for('user_dashboard'))
+
+
+@app.route('/read/<filename>', methods=['GET'])
+def read_file(filename):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.exists(file_path):
+        flash("File not found.", "danger")
+        return redirect(url_for('user_dashboard'))
+    
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    return render_template('read_file.html', content=content, filename=filename)
+
 
 if __name__ == '__main__':
     load_users()  # Initialize/reset the database
