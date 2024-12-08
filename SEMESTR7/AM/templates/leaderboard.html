@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaderboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="container py-4">
+    <h2 class="text-center mb-4">Leaderboard</h2>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Elapsed Time (s)</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard">
+          {% for player, attempts in scores.items() %} {% for attempt_time, data
+          in attempts.items() %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ player }}</td>
+            <td>{{ data['score'] }}</td>
+            <td>
+              {{ data['elapsed_time'] if data['elapsed_time'] else "N/A" }}
+            </td>
+          </tr>
+          {% endfor %} {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center">
+      <button id="restart-game" class="btn btn-primary">Restart Game</button>
+    </div>
+
+    <script>
+      document.getElementById("restart-game").onclick = () => {
+        window.location.href = "/start_game"; // Restart game by redirecting to the game start
+      };
+    </script>
+  </body>
+</html>

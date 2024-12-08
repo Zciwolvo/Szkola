@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Route Finder</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="container py-4">
+    <h2 class="text-center mb-4">Route Finder</h2>
+
+    <button id="start-navigation" class="btn btn-primary w-100 mb-4">
+      Start Navigation
+    </button>
+    <button id="toggle-debug" class="btn btn-secondary w-100 mb-4">
+      Enable Debug Mode
+    </button>
+
+    <div id="map" class="rounded" style="height: 400px"></div>
+
+    <!-- Notification Modal -->
+    <div
+      class="modal fade"
+      id="notificationModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="notificationModalLabel">
+              Notification
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="notificationMessage"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="modal fade" id="quizModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="quizModalLabel">Quiz Time!</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="quizQuestion"></p>
+            <div id="quizOptions" class="mt-3"></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const map = L.map("map").setView([52.0, 19.0], 6);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(map);
+
+      const routeLayer = L.geoJSON().addTo(map);
+      const userMarker = L.marker([0, 0]).addTo(map);
+      let currentGoal = null;
+      let debugMode = false;
+
+      let simulatedLocation = { latitude: 0, longitude: 0 };
+      const watchers = [];
+
+      const originalWatchPosition = navigator.geolocation.watchPosition;
+      const originalClearWatch = navigator.geolocation.clearWatch;
+
+      let locationUpdateInterval = null;
+
+      const useSimulatedGeolocation = () => {
+        navigator.geolocation.watchPosition = (
+          successCallback,
+          errorCallback,
+          options
+        ) => {
+          const watcherId = watchers.length;
+          watchers.push(successCallback);
+          if (
+            simulatedLocation.latitude !== 0 &&
+            simulatedLocation.longitude !== 0
+          ) {
+            successCallback({ coords: simulatedLocation });
+          }
+          return watcherId;
+        };
+
+        navigator.geolocation.clearWatch = (id) => {
+          if (watchers[id]) {
+            watchers[id] = null;
+          }
+        };
+      };
+
+      const useOriginalGeolocation = () => {
+        navigator.geolocation.watchPosition = originalWatchPosition;
+        navigator.geolocation.clearWatch = originalClearWatch;
+      };
+
+      const triggerWatchers = () => {
+        watchers.forEach((callback) => {
+          if (callback) {
+            callback({ coords: simulatedLocation });
+          }
+        });
+      };
+
+      const updateLocationPeriodically = () => {
+        if (locationUpdateInterval) {
+          clearInterval(locationUpdateInterval);
+        }
+
+        locationUpdateInterval = setInterval(() => {
+          if (debugMode) {
+            triggerWatchers();
+          } else {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const { latitude, longitude } = position.coords;
+                userMarker.setLatLng([latitude, longitude]);
+                map.setView([latitude, longitude], 16);
+              },
+              (err) => {
+                console.error("Geolocation error:", err);
+              }
+            );
+          }
+        }, 5000);
+      };
+
+      function showNotification(message) {
+        document.getElementById("notificationMessage").textContent = message;
+        new bootstrap.Modal(document.getElementById("notificationModal"), {
+          backdrop: false,
+        }).show();
+      }
+
+      let quizInProgress = false;
+
+      async function showQuiz(quiz) {
+        quizInProgress = true; // Block further updates
+        document.getElementById("quizQuestion").textContent = quiz.question;
+        const optionsContainer = document.getElementById("quizOptions");
+        optionsContainer.innerHTML = "";
+
+        quiz.options.forEach((option, index) => {
+          const button = document.createElement("button");
+          button.className = "btn btn-outline-primary w-100 mb-2";
+          button.textContent = option;
+
+          button.onclick = async () => {
+            if (option === quiz.answer) {
+              alert("Correct!");
+              quizInProgress = false; // Allow location updates again
+              currentGoal = null; // Clear the goal
+              new bootstrap.Modal(document.getElementById("quizModal")).hide();
+              await fetchNewGoal(); // Fetch the next goal
+            } else {
+              alert("Try Again.");
+            }
+          };
+
+          optionsContainer.appendChild(button);
+        });
+
+        new bootstrap.Modal(document.getElementById("quizModal")).show();
+      }
+
+      async function fetchRoute(startLat, startLng, endLat, endLng) {
+        try {
+          const res = await fetch("/get_route", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              start_address: `${startLat},${startLng}`,
+              end_address: `${endLat},${endLng}`,
+            }),
+          });
+
+          if (res.ok) {
+            const routeCoordinates = await res.json(); // Expecting an array of [latitude, longitude]
+            routeLayer.clearLayers();
+
+            if (routeCoordinates.length) {
+              // Add route to the map
+              L.polyline(
+                routeCoordinates.map((coord) => [coord[1], coord[0]]), // LatLng format for Leaflet
+                { color: "blue" }
+              ).addTo(routeLayer);
+
+              // Adjust the map to fit the route bounds
+              map.fitBounds(routeLayer.getBounds());
+              showNotification("Route displayed on the map.");
+            } else {
+              showNotification("Route not found.");
+            }
+          } else {
+            showNotification("Failed to fetch route from server.");
+          }
+        } catch (err) {
+          console.error("Error fetching route:", err);
+          showNotification("An error occurred while fetching the route.");
+        }
+      }
+
+      async function fetchNewGoal() {
+        if (quizInProgress) return; // Prevent fetching a new goal during an active quiz
+
+        try {
+          const userLocation = userMarker.getLatLng();
+
+          if (!userLocation.lat || !userLocation.lng) {
+            showNotification(
+              "Unable to fetch your location. Please try again."
+            );
+            return;
+          }
+
+          const res = await fetch("/check_location", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              latitude: userLocation.lat,
+              longitude: userLocation.lng,
+            }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+
+            // Update the current goal
+            currentGoal = {
+              lat: data.latitude,
+              lng: data.longitude,
+              name: data.place_name,
+              description: data.description,
+              quiz: data.quiz,
+            };
+
+            // Calculate the distance to the new goal
+            const distance = calculateDistance(
+              { lat: userLocation.lat, lng: userLocation.lng },
+              { lat: data.latitude, lng: data.longitude }
+            );
+
+            if (distance < 20) {
+              // Display the quiz if user is near the goal
+              showNotification(
+                `You've reached: ${data.place_name}. Get ready for a quiz!`
+              );
+              showQuiz(data.quiz);
+            } else {
+              // Notify user about the new goal and fetch the route
+              showNotification(
+                `New Goal: ${data.place_name}. Start navigating!`
+              );
+              await fetchRoute(
+                userLocation.lat,
+                userLocation.lng,
+                data.latitude,
+                data.longitude
+              );
+            }
+          } else {
+            const errorData = await res.json();
+            if (errorData.message) {
+              showNotification(errorData.message); // Show specific server message
+            } else {
+              showNotification(
+                "No nearby locations found or all locations visited."
+              );
+            }
+          }
+        } catch (err) {
+          console.error("Error fetching nearest location:", err);
+          showNotification(
+            "An error occurred while fetching the next location. Please try again."
+          );
+        }
+      }
+
+      document.getElementById("toggle-debug").onclick = () => {
+        debugMode = !debugMode;
+        const button = document.getElementById("toggle-debug");
+        button.textContent = debugMode
+          ? "Disable Debug Mode"
+          : "Enable Debug Mode";
+
+        if (debugMode) {
+          useSimulatedGeolocation();
+          showNotification(
+            "Debug mode enabled. Click on the map to update the user location."
+          );
+        } else {
+          useOriginalGeolocation();
+          showNotification("Debug mode disabled. Using real geolocation.");
+        }
+
+        updateLocationPeriodically();
+      };
+
+      map.on("click", (e) => {
+        if (debugMode) {
+          const { lat, lng } = e.latlng;
+          simulatedLocation = { latitude: lat, longitude: lng };
+          userMarker.setLatLng([lat, lng]);
+          map.setView([lat, lng], 16);
+          showNotification(
+            `Debug: User location set to (${lat.toFixed(6)}, ${lng.toFixed(6)})`
+          );
+          triggerWatchers();
+          currentGoal = null;
+        }
+      });
+
+      document.getElementById("start-navigation").onclick = () => {
+        if (!navigator.geolocation) {
+          showNotification("Geolocation is not supported by your browser.");
+          return;
+        }
+
+        updateLocationPeriodically();
+
+        navigator.geolocation.watchPosition(
+          async (position) => {
+            if (quizInProgress) return; // Pause updates during a quiz
+
+            const { latitude, longitude } = position.coords;
+            userMarker.setLatLng([latitude, longitude]);
+            map.setView([latitude, longitude], 16);
+
+            if (!currentGoal) {
+              await fetchNewGoal(); // Fetch a new goal if there's no current goal
+            } else {
+              const distance = calculateDistance(
+                { lat: latitude, lng: longitude },
+                currentGoal
+              );
+
+              // Check if user is within 20 meters of the goal
+              if (distance < 20) {
+                if (!quizInProgress) {
+                  showQuiz(currentGoal.quiz); // Show the quiz when user is at the location
+                }
+              } else {
+                console.log(`Distance to goal: ${distance.toFixed(2)} meters.`);
+              }
+            }
+          },
+          (err) => console.error("Geolocation error:", err),
+          { enableHighAccuracy: true }
+        );
+      };
+
+      function calculateDistance(coord1, coord2) {
+        const toRad = (value) => (value * Math.PI) / 180;
+        const R = 6371e3; // Earth's radius in meters
+        const φ1 = toRad(coord1.lat);
+        const φ2 = toRad(coord2.lat);
+        const Δφ = toRad(coord2.lat - coord1.lat);
+        const Δλ = toRad(coord2.lng - coord1.lng);
+
+        const a =
+          Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+          Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      }
+    </script>
+  </body>
+</html>

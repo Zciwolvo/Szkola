@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Gliwice Radio Tower",
+    "description": "An iconic radio mast and historic site.",
+    "latitude": 50.305816,
+    "longitude": 18.662639,
+    "quiz": {
+      "question": "What is the height of the Gliwice Radio Tower?",
+      "options": ["110 m", "118 m", "130 m", "100 m"],
+      "answer": "118 m"
+    }
+  },
+  {
+    "name": "Gliwice Market Square",
+    "description": "A beautiful market square with historic buildings.",
+    "latitude": 50.294494,
+    "longitude": 18.67138,
+    "quiz": {
+      "question": "When was the Town Hall in Gliwice built?",
+      "options": [
+        "15th century",
+        "17th century",
+        "18th century",
+        "19th century"
+      ],
+      "answer": "15th century"
+    }
+  }
+]

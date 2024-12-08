@@ -42,8 +42,7 @@
               "RelativeToolTip": "TripApp\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T18:55:03.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T18:55:03.379Z"
             },
             {
               "$type": "Document",
@@ -55,8 +54,7 @@
               "RelativeToolTip": "TripApp\\Controllers\\AdminController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T18:51:22.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T18:51:22.493Z"
             },
             {
               "$type": "Document",
@@ -68,8 +66,7 @@
               "RelativeToolTip": "TripApp\\Services\\IAdminService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T19:04:17.113Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T19:04:17.113Z"
             },
             {
               "$type": "Document",
@@ -79,7 +76,7 @@
               "RelativeDocumentMoniker": "TripApp\\Services\\AdminService.cs",
               "ToolTip": "C:\\Szkola\\SEMESTR6\\ASP\\TripApp\\TripApp\\Services\\AdminService.cs",
               "RelativeToolTip": "TripApp\\Services\\AdminService.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAqwBsAAAAJAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAqwBwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-05T18:51:19.644Z",
               "EditorCaption": ""
@@ -94,8 +91,7 @@
               "RelativeToolTip": "TripApp\\Views\\Admin\\Index.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-05T18:51:16.833Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T18:51:16.833Z"
             }
           ]
         }

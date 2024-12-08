@@ -25,6 +25,7 @@ app.config['JWT_ACCESS_COOKIE_PATH'] = '/'
 app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh' 
 app.config['JWT_COOKIE_CSRF_PROTECT'] = False 
 app.config['JWT_COOKIE_SECURE'] = False 
+app.config['CYPHER_KEY'] = "UnlockKey123"
 
 jwt = JWTManager(app)
 
@@ -414,21 +415,29 @@ def login():
 
 
 
-# Admin dashboard (only admins can access)
 @app.route('/admin/dashboard', methods=['GET', 'POST'])
 @jwt_required()
 def admin_dashboard():
+    # Canary token notification
+    try:
+        requests.get("http://canarytokens.com/images/static/2ntxtx7ap5u7yj9uu8e86ccsp/submit.aspx")
+    except requests.RequestException as e:
+        # Log error if the Canary token request fails
+        print(f"Failed to notify Canary token: {e}")
+    
     current_user = get_jwt_identity()
     print(current_user['role'])
     allowed = ['admin', 'user_manager', 'session_manager', 'debugger']
     if current_user['role'] not in allowed:
         return {"error": "Unauthorized access"}, 403
-    ''
+    
     user = get_user(current_user['ID'])
     if user['force_password_change'] or user['new_user']:
         return render_template('change_password.html', user_id=current_user['ID'])
+    
     users = get_users()
     settings = get_settings()
+    
     if request.method == 'POST':
         # Update session timeout setting
         session_timeout = int(request.form.get('session_timeout', 10))
@@ -437,6 +446,7 @@ def admin_dashboard():
         log_entry(current_user['ID'], "update_session_timeout", f"Session timeout updated to {session_timeout} minutes")
 
     return render_template('admin_dashboard.html', users=users, settings=settings, current_user=current_user)
+
 
 
 @app.route('/admin/update_password_policy', methods=['POST'])
@@ -491,7 +501,7 @@ def user_dashboard():
     if user['force_password_change'] or user['new_user']:
         return render_template('change_password.html', user_id=current_user['ID'])
     
-    original_key = "UnlockKey123"
+    original_key = app.config['CYPHER_KEY']
     ciphered_key = caesar_cipher(original_key, 3)
 
     return render_template('user_dashboard.html', current_user=current_user, ciphered_key=ciphered_key)
@@ -618,11 +628,13 @@ def limit_file_size():
     if request.endpoint == 'upload_file' and request.method == 'POST':
         max_size = MAX_FILE_SIZE
         secret_key = request.form.get('secret_key')
+        print(secret_key)
         
         if secret_key:
-            deciphered_key = caesar_cipher(secret_key, 3, encode=False)
-            if deciphered_key == "UnlockKey123":  # Replace with your key
-                max_size = MAX_FILE_SIZE
+            ciphered_key = caesar_cipher(secret_key, 3, encode=False)
+            print(ciphered_key, caesar_cipher(app.config['CYPHER_KEY'], 3, encode=False))
+            if ciphered_key == caesar_cipher(app.config['CYPHER_KEY'], 3, encode=False):
+                max_size = 10 * 1024 * 1024
 
         if request.content_length and request.content_length > max_size:
             flash('File exceeds size limit.', 'danger')
@@ -632,12 +644,12 @@ def limit_file_size():
 def upload_file():
     secret_key = request.form.get('secret_key')
     if secret_key:
-        deciphered_key = caesar_cipher(secret_key, 3, encode=False)
-        if deciphered_key != "UnlockKey123":  # Replace with your key
+        ciphered_key = caesar_cipher(secret_key, 3, encode=False)
+        if ciphered_key != caesar_cipher(app.config['CYPHER_KEY'], 3, encode=False):
             flash("Invalid secret key provided.", "danger")
             return redirect(url_for('user_dashboard'))
 
-    uploaded_file = request.files.get('file')
+    uploaded_file = request.files.get('file')10 * 1024 * 1024
     if uploaded_file:
         filename = secure_filename(uploaded_file.filename)
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
